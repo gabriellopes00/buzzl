@@ -1,5 +1,20 @@
-{
-  "name": "Gabriel Luis Lopes",
-  "email": "gabriel@mal.com",
-  "cellphoneNumber": 11987654321
-}
+[
+  {
+    "id": "3b200101-e2po-4255-8ddd-4136c566a933",
+    "name": "Gabriel Luis Lopes",
+    "email": "gabriel@mail.com",
+    "createdAt": "2021-04-07T18:45:11.178Z"
+  },
+  {
+    "id": "9o204321-e2po-8888-8ddd-0006c566a933",
+    "name": "Carlos Victor da Silva",
+    "email": "carlosvictor@mail.com",
+    "createdAt": "2021-04-07T18:47:30.867Z"
+  },
+  {
+    "id": "3a270101-e0po-4200-0ddd-4136c006a900",
+    "name": "Chris Sousa",
+    "email": "chrissousa@mail.com",
+    "createdAt": "2021-04-07T18:49:00.296"
+  }
+]
