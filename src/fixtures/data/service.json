@@ -1,34 +1,38 @@
 [
   {
-    "id": "3b200101-e9ep-4255-8ass-4936c566a933",
+    "id": "3cff735f-71b0-4af1-a9ca-915a6bb6900b",
     "name": "Food delivery",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio illo, et consequatur laborum rerum voluptas cupiditate excepturi vitae similique iure minus repellendus quasi eveniet soluta in fugiat aliquam corrupti neque.",
-    "maintainer": "3b200101-e2po-4255-8ddd-4136c566a933",
+    "maintainer": "a5d673d8-12b4-4f4d-9fa1-a4a5397f312a",
     "isActive": true,
+    "apiKey": "_9se1hbc3n9:",
     "createdAt": "2021-04-07T18:52:21.195Z"
   },
   {
-    "id": "3b200333-e9ep-4277-4fds-1234c511b909",
+    "id": "21c4d138-e6ac-4ba7-a54f-ce0320968129",
     "name": "Cloud hosting provider",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio illo, et consequatur laborum rerum voluptas cupiditate excepturi vitae similique iure minus repellendus quasi eveniet soluta in fugiat aliquam corrupti neque.",
-    "maintainer": "3b200101-e2po-4255-8ddd-4136c566a933",
+    "maintainer": "a5d673d8-12b4-4f4d-9fa1-a4a5397f312a",
     "isActive": false,
-    "createdAt": "2021-04-07T18:57:01.605Z"
+    "apiKey": "_e3cgr1f7pg:",
+    "createdAt": "2021-04-08T17:30:03.938Z"
   },
   {
-    "id": "3b200444-e9ep-4665-3add-4936d576d355",
+    "id": "b2d1a23d-2c6e-48eb-89d3-f2ae1fbff83e",
     "name": "Courses platform",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio illo, et consequatur laborum rerum voluptas cupiditate excepturi vitae similique iure minus repellendus quasi eveniet soluta in fugiat aliquam corrupti neque.",
-    "maintainer": "9o204321-e2po-8888-8ddd-0006c566a933",
+    "maintainer": "f75209af-299f-4838-9e58-57da9d9a1955",
     "isActive": true,
+    "apiKey": "_2806nly5z2:",
     "createdAt": "2021-04-07T18:58:45.346Z"
   },
   {
-    "id": "3b200101-e9ep-4255-8ass-4936c566a933",
+    "id": "fa83d823-5545-4b60-804b-79ea5e60d884",
     "name": "Daily email newsletter",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio illo, et consequatur laborum rerum voluptas cupiditate excepturi vitae similique iure minus repellendus quasi eveniet soluta in fugiat aliquam corrupti neque.",
-    "maintainer": "3a270101-e0po-4200-0ddd-4136c006a900",
+    "maintainer": "cd793a13-533f-4c02-81e8-ac00076d2487",
     "isActive": true,
+    "apiKey": "_i94flazcmm:",
     "createdAt": "2021-04-07T18:58:33.475Z"
   }
 ]

@@ -1,20 +1,23 @@
 [
   {
-    "id": "3b200101-e2po-4255-8ddd-4136c566a933",
+    "id": "a5d673d8-12b4-4f4d-9fa1-a4a5397f312a",
     "name": "Gabriel Luis Lopes",
     "email": "gabriel@mail.com",
+    "password": "gabri@pass",
     "createdAt": "2021-04-07T18:45:11.178Z"
   },
   {
-    "id": "9o204321-e2po-8888-8ddd-0006c566a933",
+    "id": "f75209af-299f-4838-9e58-57da9d9a1955",
     "name": "Carlos Victor da Silva",
     "email": "carlosvictor@mail.com",
+    "password": "carlos@pass",
     "createdAt": "2021-04-07T18:47:30.867Z"
   },
   {
-    "id": "3a270101-e0po-4200-0ddd-4136c006a900",
+    "id": "cd793a13-533f-4c02-81e8-ac00076d2487",
     "name": "Chris Sousa",
     "email": "chrissousa@mail.com",
+    "password": "chris@pass",
     "createdAt": "2021-04-07T18:49:00.296"
   }
 ]
