@@ -7,7 +7,7 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/**/*.ts',
     '!<rootDir>/**/*.d.ts',
-    '!<rootDir>/**/main/*.ts',
+    '!<rootDir>/**/core/*.ts',
     '!<rootDir>/**/config/*.ts'
   ],
   testPathIgnorePatterns: ['<rootDir>/src/__tests__/mocks/'],

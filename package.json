@@ -5,8 +5,8 @@
   "main": "src/server.ts",
   "scripts": {
     "build": "rimraf dist/ && tsc -p tsconfig-build.json",
-    "start": "node dist/main/server.js",
-    "dev": "ts-node-dev  --respawn --transpile-only --ignore-watch node_modules --clear --exit-child --rs --no-notify src/main/server.ts",
+    "start": "node dist/core/server.js",
+    "dev": "ts-node-dev  --respawn --transpile-only --ignore-watch node_modules --clear --exit-child --rs --no-notify src/core/server.ts",
     "style": "prettier --check **/*.ts",
     "style:fix": "prettier --write **/*.ts",
     "lint": "eslint src tests --ext .ts",

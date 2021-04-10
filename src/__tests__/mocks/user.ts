@@ -1,7 +1,17 @@
 import { User } from '@/domain/models/user'
+import { UserParams } from '@/domain/usecases/add-user'
+import { MockUUIDGenerator } from './uuid-generator'
+
+const uuidGenerator = new MockUUIDGenerator()
 
 export const fakeUser: User = {
-  id: '55bc05b5-118c-4fa9-8b92-163348ea85ce',
+  id: uuidGenerator.generate(),
+  name: 'User Name',
+  email: 'user@mail.com',
+  password: 'userpass_'
+}
+
+export const fakeUserParams: UserParams = {
   name: 'User Name',
   email: 'user@mail.com',
   password: 'userpass_'
