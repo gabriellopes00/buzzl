@@ -10,6 +10,7 @@ module.exports = {
     '!<rootDir>/**/main/*.ts',
     '!<rootDir>/**/config/*.ts'
   ],
+  testPathIgnorePatterns: ['<rootDir>/src/__tests__/mocks/'],
   coverageDirectory: 'coverage/',
   coverageProvider: 'v8',
   clearMocks: true,
