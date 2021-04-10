@@ -9,6 +9,9 @@ export interface UserDataValidation {
 }
 
 export class UserValidation implements UserDataValidation {
+  /**
+   * Validate user name. Param must have more than 2 characters, and less than 255.
+   */
   validateName(name: string): boolean {
     if (!name || name.trim().length <= 2 || name.trim().length > 255) return false
     return true
@@ -33,7 +36,7 @@ export class UserValidation implements UserDataValidation {
   }
 
   validatePassword(pass: string): boolean {
-    return pass.length > 4
+    return pass?.length > 4
   }
 
   validate(data: User): boolean {

@@ -27,4 +27,15 @@ describe('User Validation', () => {
     isValid = sut.validateEmail('user@mail.com')
     expect(isValid).toBeTruthy()
   })
+
+  it('Should validate correctly an password', () => {
+    let isValid = sut.validatePassword('aaa')
+    expect(isValid).toBeFalsy()
+
+    isValid = sut.validatePassword(null)
+    expect(isValid).toBeFalsy()
+
+    isValid = sut.validatePassword('_userpass')
+    expect(isValid).toBeTruthy()
+  })
 })
