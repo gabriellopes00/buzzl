@@ -1,4 +1,5 @@
 import { UserValidation } from '@/implementation/validation/user'
+import { fakeUser } from '../mocks/user'
 
 describe('User Validation', () => {
   const sut = new UserValidation()
@@ -47,6 +48,25 @@ describe('User Validation', () => {
     expect(isValid).toBeFalsy()
 
     isValid = sut.validateId('bc7d7468-0fce-468c-8a02-587bc1eb9f77')
+    expect(isValid).toBeTruthy()
+  })
+
+  it('Should validate correctly all user data', () => {
+    let isValid = sut.validate({ name: 'User Name', id: null, email: null, password: '_userpass' })
+    expect(isValid).toBeFalsy()
+
+    isValid = sut.validate({
+      name: null,
+      id: 'bc7d7468-0fce-468c-8a02-587bc1eb9f77',
+      email: 'user@mail.com',
+      password: null
+    })
+    expect(isValid).toBeFalsy()
+
+    isValid = sut.validate({} as null)
+    expect(isValid).toBeFalsy()
+
+    isValid = sut.validate(fakeUser)
     expect(isValid).toBeTruthy()
   })
 })
