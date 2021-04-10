@@ -10,13 +10,16 @@ export interface UserDataValidation {
 
 export class UserValidation implements UserDataValidation {
   /**
-   * Validate user name. Param must have more than 2 characters, and less than 255.
+   * Param must be a string with more than 2 characters, and less than 255 to validate successfully.
    */
   validateName(name: string): boolean {
     if (!name || name.trim().length <= 2 || name.trim().length > 255) return false
     return true
   }
 
+  /**
+   * Param must be a string with less than 255, and must have "@" and "." with characters before them to validate successfully.
+   */
   validateEmail(email: string): boolean {
     const pattern = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
     if (!email || email.length > 256 || !pattern.test(email)) return false
@@ -30,15 +33,24 @@ export class UserValidation implements UserDataValidation {
     return true
   }
 
+  /**
+   * Param must be a valid UUID v4 to validate successfully.
+   */
   validateId(uuid: string): boolean {
     const pattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
     return pattern.test(uuid)
   }
 
+  /**
+   * Param must be a string with more than 4 characters.
+   */
   validatePassword(pass: string): boolean {
     return pass?.length > 4
   }
 
+  /**
+   * Param must be a object with all valid User's properties.
+   */
   validate(data: User): boolean {
     return !!(
       this.validateName(data.name) &&
