@@ -11,4 +11,15 @@ describe('AddUser Usecase', () => {
     await sut.add(fakeUser)
     expect(addFunc).toBeCalledWith(fakeUser)
   })
+
+  it('Should return a user data if UserRepository succeeds', async () => {
+    const data = await sut.add(fakeUser)
+    expect(data).toEqual(fakeUser)
+  })
+
+  it('Should pass long the error if UserRepository returns one', async () => {
+    mockUserRepository.add.mockRejectedValueOnce(new Error())
+    const error = sut.add(fakeUser)
+    await expect(error).rejects.toThrow()
+  })
 })
