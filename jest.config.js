@@ -8,6 +8,8 @@ module.exports = {
     '<rootDir>/**/*.ts',
     '!<rootDir>/**/*.d.ts',
     '!<rootDir>/**/core/*.ts',
+    '!<rootDir>/**/ports/*.ts',
+    '!<rootDir>/src/domain/**',
     '!<rootDir>/**/config/*.ts'
   ],
   testPathIgnorePatterns: ['<rootDir>/src/__tests__/mocks/'],
