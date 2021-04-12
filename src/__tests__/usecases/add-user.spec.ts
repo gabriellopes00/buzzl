@@ -1,4 +1,4 @@
-import { DbAddUser } from '@/implementation/usecases/add-user'
+import { DbAddUser } from '@/usecases/implementation/add-user'
 import { fakeUser, fakeUserParams } from '../mocks/user'
 import { MockUserRepository } from '../mocks/user-repository'
 import { MockUUIDGenerator } from '../mocks/uuid-generator'

@@ -1,4 +1,4 @@
-import { UserValidation } from '@/implementation/validation/user'
+import { UserValidation } from '@/usecases/validation/user'
 import { fakeUser } from '../mocks/user'
 
 describe('User Validation', () => {

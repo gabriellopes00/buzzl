@@ -1,4 +1,4 @@
-import { User } from '@/domain/models/user'
+import { User } from '@/domain/entities/user'
 
 export interface UserDataValidation {
   validateName(name: string): boolean

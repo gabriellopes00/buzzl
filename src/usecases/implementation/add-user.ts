@@ -1,7 +1,7 @@
-import { User } from '@/domain/models/user'
+import { User } from '@/domain/entities/user'
 import { AddUser, UserParams } from '@/domain/usecases/add-user'
-import { UserRepository } from '../interfaces/user-repository'
-import { UUIDGenerator } from '../interfaces/uuid-generator'
+import { UserRepository } from '../ports/user-repository'
+import { UUIDGenerator } from '../ports/uuid-generator'
 
 export class DbAddUser implements AddUser {
   constructor(

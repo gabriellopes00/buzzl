@@ -1,4 +1,4 @@
-import { UUIDGenerator } from '@/implementation/interfaces/uuid-generator'
+import { UUIDGenerator } from '@/usecases/ports/uuid-generator'
 
 export class MockUUIDGenerator implements UUIDGenerator {
   generate(): string {

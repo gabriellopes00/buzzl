@@ -1,4 +1,4 @@
-import { User } from '../models/user'
+import { User } from '../entities/user'
 
 export interface UserParams extends Omit<User, 'id'> {}
 

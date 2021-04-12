@@ -1,5 +1,5 @@
-import { User } from '@/domain/models/user'
-import { UserRepository } from '@/implementation/interfaces/user-repository'
+import { User } from '@/domain/entities/user'
+import { UserRepository } from '@/usecases/ports/user-repository'
 import { fakeUser } from './user'
 
 export class MockUserRepository implements UserRepository {

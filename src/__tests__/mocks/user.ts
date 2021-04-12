@@ -1,4 +1,4 @@
-import { User } from '@/domain/models/user'
+import { User } from '@/domain/entities/user'
 import { UserParams } from '@/domain/usecases/add-user'
 import { MockUUIDGenerator } from './uuid-generator'
 
