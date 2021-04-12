@@ -20,6 +20,7 @@ describe('AddUser Usecase', () => {
     it('Should call UserRepository with correct values', async () => {
       const addFunc = jest.spyOn(mockUserRepository, 'add')
       await sut.add(fakeUserParams)
+      // ensure UserRepository have been called with above generated UUID
       expect(addFunc).toHaveBeenCalledWith({ ...fakeUserParams, id: mockUUIDGenerator.generate() })
     })
 

@@ -29,12 +29,12 @@
     - customerEmail?
     - createdAt
 
-## NPS
+<!-- ## NPS
 
     - id
     - service (apiKey)
     - rating [1 - 10]
-    - createdAt
+    - createdAt -->
 
 # actions
 
@@ -48,15 +48,16 @@
 ## client
 
     - send a feedback via widget
-    - send it's NPS via widget
+    <!-- - send it's NPS via widget -->
 
 # components
 
 ## widget
 
-- two tabs (NPS and feedbacks)
+<!-- - two tabs (NPS and feedbacks) -->
+
 - submit button (enabled only with textarea or stars filed)
-  (nps) - 10 stars to fill
+  <!-- (nps) - 10 stars to fill -->
   (feedbacks) - issue, idea, complaint and other button - description textarea - user email input (optional)
 
 ## api (routes)
@@ -71,11 +72,11 @@
     - list all services by user (header: token(userId)) GET::/services/
     - list all service's feedbacks (header: token(userId)) GET::/services/:apiKey/feedbacks/
     (orderBy date; count types, percent by types, count all)
-    - list service's NPS (header: token(userId)) GET::/services/:apiKey/nps/
-    (orderBy date; count all; detractors; promoters; passives; level[greate, good , regular, bad]; nps)
+    <!-- - list service's NPS (header: token(userId)) GET::/services/:apiKey/nps/
+    (orderBy date; count all; detractors; promoters; passives; level[greate, good , regular, bad]; nps) -->
 
     - register a feedback (body: feedbackData, header: apiKey) POST::/feedbacks/ 204 [max 20 request per day]
-    - register a NPS (body: rating[1-10], header: apiKey) POST::/nps/ 204 [max 20 request per day]
+    <!-- - register a NPS (body: rating[1-10], header: apiKey) POST::/nps/ 204 [max 20 request per day] -->
 
 <!-- - list all feedbacks by adm (userId) (orderBy date; count types) -->
 
@@ -91,7 +92,7 @@
 
     - list feedbacks by service
     - feedback's chart
-    - show NPS info (detractors, passive, promoters, general nps, level) (maybe some chart too)
+    <!-- - show NPS info (detractors, passive, promoters, general nps, level) (maybe some chart too) -->
 
 # rules
 
