@@ -31,8 +31,10 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "module-alias": "^2.2.2",
+    "pg": "^8.5.1",
     "pino": "^6.11.1",
     "pino-pretty": "^4.6.0",
+    "typeorm": "^0.2.32",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
