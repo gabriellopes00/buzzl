@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A easy way to get and manage your services feedbacks and evaluations.",
   "homepage": "https://github.com/gabriellopes00/feedbackio-api#readme",
-  "main": "src/core/server.ts",
+  "main": "src/app/server.ts",
   "private": "true",
   "repository": {
     "type": "git",
@@ -14,14 +14,14 @@
     "email": "gabrielluislopes00@gmail.com",
     "url": "https://github.com/gabriellopes00"
   },
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/gabriellopes00/feedbackio-api/issues"
   },
   "scripts": {
-    "build": "rimraf dist/ && tsc -p tsconfig-build.json",
-    "start": "node dist/core/server.js",
-    "dev": "ts-node-dev  --respawn --transpile-only --ignore-watch node_modules --clear --exit-child --rs --no-notify src/core/server.ts",
+    "build": "sh ./scripts/build.sh",
+    "start": "node ./dist/src/app/server.js",
+    "dev": "ts-node-dev  --respawn --transpile-only --ignore-watch node_modules --clear --exit-child --rs --no-notify src/app/server.ts",
     "style": "prettier --check **/*.ts",
     "style:fix": "prettier --write **/*.ts",
     "lint": "eslint src tests --ext .ts",
@@ -67,10 +67,10 @@
     "typescript": "^4.1.3"
   },
   "engines": {
-    "node": "14",
-    "npm": "7"
+    "node": ">=14",
+    "npm": ">=7"
   },
   "_moduleAliases": {
-    "@": "dist/"
+    "@": "src/"
   }
 }

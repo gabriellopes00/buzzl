@@ -102,6 +102,7 @@
 - all IDs (except apiKey) will be UUIDs
 - each service has a maximum of 20 feedbacks and 20 for NPS request per day
 - if the client send a feedback with email, allow service manager to send a message to this email
+- if max requests is reached, cache all feedbacks by service, in the first requests, the others will use the cached data
 
 # tools and feats
 
@@ -129,6 +130,7 @@
 
 - project planing
 - project structure (clean architecture)
+- sh scripts
 - ci and cd skills
 - regexp
 - sql skills
