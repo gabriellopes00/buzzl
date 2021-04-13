@@ -143,3 +143,6 @@
 [] develop login and signup api
 [] configure api server
 [] start ci and cd
+
+# fixtures
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
