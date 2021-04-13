@@ -23,7 +23,7 @@
 ## feedbacks
 
     - id
-    - type ("COMMENT", "COMPLAINT", "IDEA" or "OTHER")
+    - type ("ISSUE", "IDEA" or "OTHER")
     - content
     - service (apiKey)
     - customerEmail?
@@ -61,6 +61,8 @@
   (feedbacks) - issue, idea, complaint and other button - description textarea - user email input (optional)
 
 ## api (routes)
+
+    - list all error logs (header: secret(env.APP_SECRET)) GET::/logs/errors
 
     - signup (body: userData) POST::/signup [return token(userId)]
     - login (body: email; password) POST::/login [return token(userId)]
@@ -125,8 +127,10 @@
 
 # learning...
 
-- project plannig
-- ci and cd skils
+- project planing
+- project structure (clean architecture)
+- ci and cd skills
+- regexp
 - sql skills
 - docker skills and management
 - graphql skills
@@ -145,4 +149,5 @@
 [] start ci and cd
 
 # fixtures
+
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
