@@ -1,8 +1,23 @@
 {
-  "name": "default-setup",
-  "version": "1.0.0",
-  "description": "My default node projects setup",
-  "main": "src/server.ts",
+  "name": "feedbackio-api",
+  "version": "0.0.1",
+  "description": "A easy way to get and manage your services feedbacks and evaluations.",
+  "homepage": "https://github.com/gabriellopes00/feedbackio-api#readme",
+  "main": "src/core/server.ts",
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabriellopes00/feedbackio-api.git"
+  },
+  "author": {
+    "name": "Gabriel Luis Lopes",
+    "email": "gabrielluislopes00@gmail.com",
+    "url": "https://github.com/gabriellopes00"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabriellopes00/feedbackio-api/issues"
+  },
   "scripts": {
     "build": "rimraf dist/ && tsc -p tsconfig-build.json",
     "start": "node dist/core/server.js",
@@ -18,16 +33,6 @@
     "test:func": "yarn test -c jest-functional-config.js",
     "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gabriellopes00/node-project-setup.git"
-  },
-  "author": "Gabriel Lopes",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gabriellopes00/node-project-setup/issues"
-  },
-  "homepage": "https://github.com/gabriellopes00/node-project-setup#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "module-alias": "^2.2.2",
@@ -62,7 +67,8 @@
     "typescript": "^4.1.3"
   },
   "engines": {
-    "node": "14"
+    "node": "14",
+    "npm": "7"
   },
   "_moduleAliases": {
     "@": "dist/"

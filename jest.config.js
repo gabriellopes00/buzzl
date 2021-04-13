@@ -12,7 +12,7 @@ module.exports = {
     '!<rootDir>/src/domain/**',
     '!<rootDir>/**/config/*.ts'
   ],
-  testPathIgnorePatterns: ['<rootDir>/src/__tests__/mocks/'],
+  testPathIgnorePatterns: ['<rootDir>/tests/unit/mocks/'],
   coverageDirectory: 'coverage/',
   coverageProvider: 'v8',
   clearMocks: true,
