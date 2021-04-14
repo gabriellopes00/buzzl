@@ -1,6 +1,9 @@
-# Feedbackio
+<h1>
+  Feedback.io
+  <img src="assets/favicon.svg" width="50"/>
+</h1>
 
-[license](https://www.apache.org/licenses/LICENSE-2.0g)
+### [Apache-2.0 License](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md)
 
 <p>
   <img src="https://cdn.svgporn.com/logos/typescript-icon.svg" alt="typescript" width="30" height="30"/>
