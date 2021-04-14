@@ -1,5 +1,5 @@
 import { User } from '@/domain/entities/user'
-import { UserParams } from '@/domain/usecases/add-user'
+import { UserParams } from '@/domain/usecases/user/add-user'
 import { MockUUIDGenerator } from './uuid-generator'
 
 const uuidGenerator = new MockUUIDGenerator()
