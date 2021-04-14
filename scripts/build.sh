@@ -21,26 +21,25 @@ copy() {
     cp ./package.json ./dist/package.json
     cp ./.env ./dist/.env
     cp ./yarn.lock ./dist/yarn.lock
+    cp ./scripts/run.sh ./dist/
 }
 
-install() {
-    cd ./dist
-    yarn install --production --frozen-lockfile
-    cd ..
-}
+# install() {
+#     cd ./dist
+#     yarn install --production --frozen-lockfile
+#     cd ..
+# }
 
-setup(){
-  echo "#!/usr/bin/env bash" > dist/run.sh
-  echo "" >> dist/run.sh
-  echo "node src/app/server.js" >> dist/run.sh
-}
+# setup(){
+#   echo "#!/usr/bin/env bash" > dist/run.sh
+#   echo "" >> dist/run.sh
+#   echo "node src/app/server.js" >> dist/run.sh
+# }
 
 compile() {
     clear
     build
     copy
-    install
-    setup
 }
 
 start() {

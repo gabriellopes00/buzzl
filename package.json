@@ -71,6 +71,6 @@
     "npm": ">=7"
   },
   "_moduleAliases": {
-    "@": "src/"
+    "@": "dist/src/"
   }
 }
