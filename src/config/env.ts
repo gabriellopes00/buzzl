@@ -4,7 +4,6 @@ const port = process.env.PORT
 const apiLogRequests = process.env.API_LOG_REQUESTS
 const apiLogErrors = process.env.API_LOG_ERRORS
 
-const dbType = process.env.DB_TYPE
 const dbPort = process.env.DB_PORT
 const dbUserName = process.env.DB_USER_NAME
 const dbPassword = process.env.DB_PASSWORD
@@ -25,7 +24,6 @@ export {
   apiLogRequests,
   dbHost,
   dbUserName,
-  dbType,
   dbPort,
   dbConnection,
   dbPassword,

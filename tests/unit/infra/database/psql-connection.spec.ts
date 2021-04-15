@@ -1,3 +1,4 @@
+import { dbConnection } from '@/config/env'
 import { ConnectionError } from '@/infra/database/helpers/errors/connection-error'
 import psqlConnection from '@/infra/database/helpers/psql-connection'
 
@@ -6,14 +7,14 @@ describe('PostgreSQL Connection Manager', () => {
 
   it('Should open, get and close a connection successfully', async () => {
     // connection error
-    // jest.spyOn(sut, 'connect').mockRejectedValueOnce(new Error())
-    // let error = sut.connect()
-    // await expect(error).rejects.toThrow()
+    jest.spyOn(sut, 'connect').mockRejectedValueOnce(new Error())
+    let error = sut.connect()
+    await expect(error).rejects.toThrow()
 
-    // // connection success
-    // await sut.connect()
-    // let connection = sut.getConnection()
-    // expect(connection.name).toEqual(dbConnection)
+    // connection success
+    await sut.connect()
+    const connection = sut.getConnection()
+    expect(connection.name).toEqual(dbConnection)
 
     // close success
     await sut.close()
@@ -21,7 +22,7 @@ describe('PostgreSQL Connection Manager', () => {
 
     // close error
     jest.spyOn(sut, 'close').mockRejectedValueOnce(new Error())
-    const error = sut.close()
+    error = sut.close()
     await expect(error).rejects.toThrow(Error)
   })
 })

@@ -1,3 +1,4 @@
+import { dbConnection, dbHost, dbName, dbPassword, dbPort, dbUserName } from '@/config/env'
 import { Connection, createConnection } from 'typeorm'
 import { ConnectionError } from './errors/connection-error'
 import { DbConnection } from './ports/db-connection'
@@ -7,7 +8,17 @@ class PsqlConnection implements DbConnection {
 
   async connect(): Promise<void> {
     try {
-      this.connection = await createConnection()
+      this.connection = await createConnection({
+        type: 'postgres',
+        name: dbConnection,
+        host: dbHost,
+        port: Number(dbPort),
+        username: dbUserName,
+        password: dbPassword,
+        database: dbName,
+        synchronize: false,
+        logging: false
+      })
     } catch (error) {
       this.connection = null
       throw new ConnectionError(error.message)

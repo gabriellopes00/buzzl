@@ -1,0 +1,11 @@
+{
+  "migrations": [
+    "./src/infra/database/migrations/*.ts"
+  ],
+  "entities": [
+    "./src/infra/database/models/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./src/infra/database/migrations"
+  }
+}
