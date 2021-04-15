@@ -26,6 +26,7 @@
     "style:fix": "prettier --write **/*.ts",
     "lint": "eslint src tests --ext .ts",
     "lint:fix": "eslint src tests --ext .ts --fix",
+    "orm": "tsnd node_modules/typeorm/cli.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:cache": "jest --clearCache",
     "test:ci": "yarn test --coverage",

@@ -6,7 +6,6 @@
     - name
     - email
     - password
-    - createdAt
 
 ## services
 
@@ -16,7 +15,6 @@
     - maintainer (userId)
     - isActive
     - apiKey (_:)
-    - createdAt
 
 <!-- - allowedURLs  https://dev.mysql.com/doc/refman/5.7/en/json.html -->
 
@@ -27,14 +25,13 @@
     - content
     - service (apiKey)
     - customerEmail?
-    - createdAt
 
 <!-- ## NPS
 
     - id
     - service (apiKey)
     - rating [1 - 10]
-    - createdAt -->
+     -->
 
 # actions
 
@@ -138,6 +135,7 @@
 - graphql skills
 - clean architecture, SOLID and clean code
 - data caching
+- decorator
 
 # tasks
 
