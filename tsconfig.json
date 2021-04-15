@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["ES6", "ES2020", "DOM"],
     "allowJs": true,
-    "outDir": "dist/src/",
+    "outDir": "dist/",
     "rootDir": ".",
     "sourceMap": true,
     "removeComments": true,

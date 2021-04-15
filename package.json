@@ -19,8 +19,8 @@
     "url": "https://github.com/gabriellopes00/feedbackio-api/issues"
   },
   "scripts": {
-    "build": "sh ./scripts/build.sh",
-    "start": "node ./dist/src/app/server.js",
+    "build": "rimraf dist/ && tsc -p tsconfig-build.json --skipLibCheck",
+    "start": "node dist/app/server.js",
     "dev": "ts-node-dev  --respawn --transpile-only --ignore-watch node_modules --clear --exit-child --rs --no-notify src/app/server.ts",
     "style": "prettier --check **/*.ts",
     "style:fix": "prettier --write **/*.ts",
@@ -71,6 +71,6 @@
     "npm": ">=7"
   },
   "_moduleAliases": {
-    "@": "dist/src/"
+    "@": "dist/"
   }
 }
