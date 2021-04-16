@@ -1,9 +1,9 @@
 import { User } from '@/domain/entities/user'
-import { Column, Entity } from 'typeorm'
+import { Column, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity()
 export class UserModel implements User {
-  @Column()
+  @PrimaryColumn()
   readonly id: string
 
   @Column()
