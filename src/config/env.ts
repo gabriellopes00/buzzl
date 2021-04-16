@@ -21,7 +21,7 @@ const tokenSecretKey = process.env.TOKEN_SECRET_KEY
 
 const nodeEnv = process.env.NODE_ENV
 
-console.log({
+export {
   port,
   apiLogErrors,
   apiLogRequests,
@@ -38,4 +38,4 @@ console.log({
   maxNPSRequests,
   tokenSecretKey,
   nodeEnv
-})
+}

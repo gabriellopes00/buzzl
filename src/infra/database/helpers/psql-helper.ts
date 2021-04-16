@@ -1,24 +1,12 @@
-import { dbConnection, dbHost, dbName, dbPassword, dbPort, dbUserName } from '@/config/env'
 import { Connection, createConnection } from 'typeorm'
 import { ConnectionError } from './errors/connection-error'
 import { DbConnection } from './ports/db-connection'
 
 class PsqlConnection implements DbConnection {
   private connection: Connection = null
-
   async connect(): Promise<void> {
     try {
-      this.connection = await createConnection({
-        type: 'postgres',
-        name: dbConnection,
-        host: dbHost,
-        port: Number(dbPort),
-        username: dbUserName,
-        password: dbPassword,
-        database: dbName,
-        synchronize: false,
-        logging: false
-      })
+      this.connection = await createConnection() // connection options in ormconfig.js
     } catch (error) {
       this.connection = null
       throw new ConnectionError(error.message)
@@ -44,3 +32,5 @@ class PsqlConnection implements DbConnection {
 }
 
 export default new PsqlConnection()
+
+export const tableNames = { user: 'user' }

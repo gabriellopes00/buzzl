@@ -1,8 +1,7 @@
-import { dbConnection } from '@/config/env'
 import { ConnectionError } from '@/infra/database/helpers/errors/connection-error'
-import psqlConnection from '@/infra/database/helpers/psql-connection'
+import psqlConnection from '@/infra/database/helpers/psql-helper'
 
-describe('PostgreSQL Connection Manager', () => {
+describe('PostgreSQL Helper', () => {
   const sut = psqlConnection
 
   it('Should open, get and close a connection successfully', async () => {
@@ -14,7 +13,7 @@ describe('PostgreSQL Connection Manager', () => {
     // connection success
     await sut.connect()
     const connection = sut.getConnection()
-    expect(connection.name).toEqual(dbConnection)
+    expect(connection.options.type).toEqual('postgres')
 
     // close success
     await sut.close()
