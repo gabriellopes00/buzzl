@@ -10,6 +10,7 @@ module.exports = {
     '!<rootDir>/**/app/*.ts',
     '!<rootDir>/**/ports/*.ts',
     '!<rootDir>/src/domain/**',
+    '!<rootDir>/**/migrations/*',
     '!<rootDir>/**/config/**'
   ],
   testPathIgnorePatterns: ['<rootDir>/tests/unit/mocks/'],
