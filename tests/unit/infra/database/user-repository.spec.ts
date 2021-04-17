@@ -1,7 +1,7 @@
 import { PsqlConnection } from '@/infra/database/helpers/psql-helper'
 import { PsqlUserRepository } from '@/infra/database/repositories/user-repository'
 import { getCustomRepository } from 'typeorm'
-import { fakeUser } from '../../../unit/mocks/user'
+import { fakeUser } from '../../mocks/user'
 
 describe('User Repository', () => {
   const psqlHelper = new PsqlConnection()
