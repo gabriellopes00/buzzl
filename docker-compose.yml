@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  postgresql:
+    container_name: feedbackio-db
+    image: postgres:13-alpine
+    restart: always
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - feedbackio
+    environment:
+      POSTGRES_USER: gabriellopes
+      POSTGRES_PASSWORD: feedbackiopsqldb
+      POSTGRES_DB: feedbackio
+
+  api:
+    container_name: feedbackio-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: feedbackio:0.1
+    restart: always
+    env_file: .env
+    ports:
+      # This maps port from .env on the host to same port number on the container.
+      - '$PORT:$PORT'
+    networks:
+      - feedbackio
+
+networks:
+  feedbackio:
+    driver: bridge
+
+volumes:
+  dbdata:
