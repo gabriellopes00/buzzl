@@ -1,6 +1,3 @@
-require('dotenv/config')
-require('module-alias/register')
-
 module.exports = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -12,9 +9,9 @@ module.exports = {
   logging: false,
 
   migrations: [process.env.MIGRATIONS_DIR],
-  entities: [process.env.ENTITIES_DIR],
+  entities: [__dirname + `/${process.env.ENTITIES}/infra/database/models/*{.ts,.js}`],
   cli: {
     migrationsDir: './src/infra/database/migrations/',
-    entitiesDir: './src/infra/database/entities/'
+    entitiesDir: './src/infra/database/models/'
   }
 }

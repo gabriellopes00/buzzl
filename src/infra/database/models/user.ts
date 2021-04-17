@@ -5,14 +5,14 @@ import { tableNames } from '../helpers/psql-helper'
 @Entity(tableNames.user)
 export class UserModel implements User {
   @PrimaryColumn()
-  readonly id: string
+  public id: string
 
   @Column()
-  name: string
+  public name: string
 
   @Column()
-  email: string
+  public email: string
 
   @Column()
-  password: string
+  public password: string
 }
