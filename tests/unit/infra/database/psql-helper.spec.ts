@@ -1,10 +1,13 @@
 import { ConnectionError } from '@/infra/database/helpers/errors/connection-error'
-import psqlConnection from '@/infra/database/helpers/psql-helper'
+import { PsqlConnection } from '@/infra/database/helpers/psql-helper'
 
 describe('PostgreSQL Helper', () => {
-  const sut = psqlConnection
+  const sut = new PsqlConnection()
 
   it('Should open, get and close a connection successfully', async () => {
+    // should throw with no connections
+    expect(() => sut.getConn()).toThrowError(ConnectionError)
+
     // connection error
     jest.spyOn(sut, 'connect').mockRejectedValueOnce(new Error())
     let error = sut.connect()
@@ -12,12 +15,11 @@ describe('PostgreSQL Helper', () => {
 
     // connection success
     await sut.connect()
-    const connection = sut.getConnection()
-    expect(connection.options.type).toEqual('postgres')
+    const connection = sut.getConn()
+    expect(connection.name).toEqual('default')
 
     // close success
     await sut.close()
-    expect(() => sut.getConnection()).toThrow(ConnectionError)
 
     // close error
     jest.spyOn(sut, 'close').mockRejectedValueOnce(new Error())

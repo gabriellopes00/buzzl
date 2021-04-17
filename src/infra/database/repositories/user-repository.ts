@@ -2,6 +2,9 @@ import { User } from '@/domain/entities/user'
 import { UserRepository } from '@/usecases/ports/user-repository'
 import { EntityRepository, Repository } from 'typeorm'
 import { UserModel } from '../models/user'
+/*
+ Custom repositories extends default typeorm repository methods such as delete(), findOne(), save()...
+ */
 
 @EntityRepository(UserModel)
 export class PsqlUserRepository extends Repository<UserModel> implements UserRepository {
