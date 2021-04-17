@@ -11,7 +11,7 @@ export class PsqlConnection implements DbConnection {
     }
   }
 
-  getConn(): Connection {
+  getConnection(): Connection {
     try {
       const connection = getConnection()
       return connection
@@ -22,7 +22,7 @@ export class PsqlConnection implements DbConnection {
 
   async close(): Promise<void> {
     try {
-      await this.getConn().close()
+      await this.getConnection().close()
     } catch (error) {
       throw new ConnectionError(error.message)
     }
