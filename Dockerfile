@@ -12,8 +12,8 @@ COPY assets/ ./assets/
 COPY dist/ ./dist/
 
 RUN npm install --production
-RUN npx typeorm migration:run
 
 EXPOSE 7719
 
+CMD [ "npx", "typeorm", "migration:run" ]
 ENTRYPOINT [ "npm", "start" ]

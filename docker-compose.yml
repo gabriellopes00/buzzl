@@ -9,12 +9,12 @@ services:
       - dbdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-    networks:
-      - feedbackio
     environment:
       POSTGRES_USER: gabriellopes
       POSTGRES_PASSWORD: feedbackiopsqldb
       POSTGRES_DB: feedbackio
+    networks:
+      - feedbackio
 
   api:
     container_name: feedbackio-api
@@ -24,6 +24,8 @@ services:
     image: feedbackio:0.1
     restart: always
     env_file: .env
+    depends_on:
+      - postgresql
     ports:
       # This maps port from .env on the host to same port number on the container.
       - '$PORT:$PORT'
