@@ -15,5 +15,4 @@ RUN npm install --production
 
 EXPOSE 7719
 
-CMD [ "npx", "typeorm", "migration:run" ]
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT npm run orm migration:run && npm start
