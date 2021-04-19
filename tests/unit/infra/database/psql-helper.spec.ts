@@ -6,7 +6,7 @@ describe('PostgreSQL Helper', () => {
 
   it('Should open, get and close a connection successfully', async () => {
     // should throw with no connections
-    expect(() => sut.getConn()).toThrowError(ConnectionError)
+    expect(() => sut.getConnection()).toThrowError(ConnectionError)
 
     // connection error
     jest.spyOn(sut, 'connect').mockRejectedValueOnce(new Error())
@@ -15,7 +15,7 @@ describe('PostgreSQL Helper', () => {
 
     // connection success
     await sut.connect()
-    const connection = sut.getConn()
+    const connection = sut.getConnection()
     expect(connection.name).toEqual('default')
 
     // close success

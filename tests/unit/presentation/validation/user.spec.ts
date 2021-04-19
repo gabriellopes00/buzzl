@@ -1,5 +1,5 @@
 import { UserValidation } from '@/presentation/validation/user'
-import { fakeUser } from '../mocks/user'
+import { fakeUser } from '../../mocks/user'
 
 describe('User Validation', () => {
   const sut = new UserValidation()
