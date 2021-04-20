@@ -1,7 +1,7 @@
 import { AddUserController } from '@/presentation/controllers/add-user'
-import { badRequest } from '@/presentation/helpers/http'
+import { badRequest, conflict, ok, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../mocks/add-user'
-import { fakeUserParams } from '../../mocks/user'
+import { fakeUser, fakeUserParams } from '../../mocks/user'
 import { MockValidator } from '../../mocks/validator'
 
 describe('Add User Controller', () => {
@@ -39,6 +39,23 @@ describe('Add User Controller', () => {
       mockValidator.validate.mockReturnValueOnce(new Error())
       await sut.handle(fakeUserParams)
       expect(add).not.toHaveBeenCalled()
+    })
+
+    it('Should return a 200 response with created user if addUser succeeds', async () => {
+      const response = await sut.handle(fakeUserParams)
+      expect(response).toEqual(ok(fakeUser))
+    })
+
+    it('Should return a 409 response if received email is already in use', async () => {
+      mockAddUser.add.mockResolvedValueOnce(new Error())
+      const response = await sut.handle(fakeUserParams)
+      expect(response).toEqual(conflict(new Error()))
+    })
+
+    it('Should return a 500 response if addUser throws', async () => {
+      mockAddUser.add.mockRejectedValueOnce(new Error())
+      const response = await sut.handle(fakeUserParams)
+      expect(response).toEqual(serverError(new Error()))
     })
   })
 })
