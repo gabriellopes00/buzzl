@@ -1,11 +1,5 @@
-<h1>
-  Feedback.io
-  <img src="assets/favicon.svg" width="50"/>
-</h1>
-
-##### Application hosted at _[heroku](https://www.heroku.com/)_.
-
-##### API url: _https://api-feedbackio.herokuapp.com_.
+<p align="center"> <img src="assets/logo.svg" width="200" /> </p>
+<h1 align="center"> Feedback.io </h1>
 
 ###### An API built with
 
@@ -18,15 +12,23 @@
   <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgresql" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
+  <img src="https://cdn.svgporn.com/logos/heroku-icon.svg" alt="heroku" height="30">
+  <img src="https://github.com/typeorm/typeorm/raw/master/resources/logo_big.png" alt="typeorm" height="30">
 </p>
 
-## About Feedback.io 📚
+##### Application hosted at _[heroku](https://www.heroku.com/)_.
 
-[Feedback.io](https://github.com/gabriellopes00/feedbackio-api/) was create to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, which will be able to receive feedbacks and rates from your customers. This will allow you calculate your services NPS and know how your customer are evaluating your services. A complete API is being built with this purpose. This is a open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL...
+##### API url: _https://api-feedbackio.herokuapp.com_.
+
+<h2> About Feedback.io 📚 </h2>
+
+<p>
+  Feedback.io was create to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, which will be able to receive feedbacks and rates from your customers. This will allow you calculate your services NPS and know how your customer are evaluating your services. A complete API is being built with this purpose. This is a open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL...
+</p>
 
 ## Api Structure
 
-![clean-architecture](https://github.com/gabriellopes00/feedbackio-api/blob/main/.github/assets/clean-architecture.jpg)
+![Clean Architecture Schema](.github/assets/clean-architecture.jpg)
 
 This project structure is inspired in clean architecture code structure, [by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The main purpose of clean architecture is creating a strong project structure, splitting all the application in layers. The best advantages of using it, is create a application independent of any frameworks, tool, database or technology, being easy to handle the code, create a new features, fix any issue, or change some framework, thanks to the adapters and ports.
 
@@ -36,7 +38,7 @@ This project structure is inspired in clean architecture code structure, [by Unc
 root
 ├── .github                 - Github setup files
 │     └── assets
-|     └── workflow
+│     └── workflow
 ├── assets                  - Project assets (images, logos...)
 ├── src                     - Application main code
 │    │── app                - Composition layer, entry point code
@@ -45,15 +47,12 @@ root
 │    │     └── entities
 │    │     └── usecases
 │    ├── infra              - External frameworks and libs implementation
+│    ├── presentation       - External api communication layer (controllers, presenters, validators)
 │    └── useCases           - Usecases implementation
 └─── tests                  - Components tests
       └── e2e
       └── unit
 ```
-
-<!-- ###### src code
-
-`src` folder contain all code of the application, and it is subdivided in layers. **_App_** folder, contain the main code of the application, here is mounted the server, and instantiated the entities and usecases. **_config_** folder, contain some global configuration files, such as logger setup, typescript path aliases setup, .env setup... In **_domain_** folder, following DDD, this domain folder contain all business rules of the application, here is only **defined** the entities and the usecases. **_usecases_** layer contain the usecases implementation, this layer will comunicante the application with external libraries and frameworks. And finally, **_infra_** folder, contain all the external libs implementation, all code which involve external tools must be inside here. -->
 
 ## Building and contributing 🛠
 

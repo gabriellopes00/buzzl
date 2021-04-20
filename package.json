@@ -32,7 +32,7 @@
     "test:cache": "jest --clearCache",
     "test:ci": "yarn test --coverage",
     "test:unit": "yarn test -c jest-unit-config.js",
-    "test:func": "yarn test -c jest-functional-config.js",
+    "test:e2e": "yarn test -c jest-e2e-config.js",
     "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info"
   },
   "dependencies": {

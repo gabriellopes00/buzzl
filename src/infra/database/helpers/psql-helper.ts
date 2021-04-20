@@ -5,7 +5,7 @@ import { DbConnection } from './ports/db-connection'
 export class PsqlConnection implements DbConnection {
   async connect(): Promise<void> {
     try {
-      await createConnection() // connection options in ormconfig.js
+      await createConnection() // connection options in <root>/ormconfig.js
     } catch (error) {
       throw new ConnectionError(error.message)
     }

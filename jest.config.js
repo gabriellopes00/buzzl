@@ -1,8 +1,7 @@
 const { resolve } = require('path')
-const root = resolve(__dirname)
 
 module.exports = {
-  rootDir: root,
+  rootDir: resolve(__dirname),
   testEnvironment: 'node',
   collectCoverageFrom: [
     '<rootDir>/**/*.ts',

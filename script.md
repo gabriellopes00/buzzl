@@ -12,9 +12,9 @@
     - id
     - name
     - description?
-    - maintainer (userId)
+    - maintainer (userEmail)
     - isActive
-    - apiKey (_:)
+    - apiKey (custom_id)
 
 <!-- - allowedURLs  https://dev.mysql.com/doc/refman/5.7/en/json.html -->
 
@@ -41,6 +41,7 @@
     - delete a service
     - suspend a service
     - update a service
+    - regenerate service apiKey
 
 ## client
 
@@ -66,7 +67,8 @@
 
     - create a service (body: serviceData, header: token(userId)) POST::/services/
     - delete a service (body: apiKey, header: token(userId)) DELETE::/services/
-    - suspend a service (body: serviceData apiKey, header: token(userId)) PATCH::/services/
+    - update a service (body: serviceData apiKey, header: token(userId)) PUT::/services/
+    - suspend or regenerate apiKey (body: {}, header: token(userId)) PATCH::/services/
 
     - list all services by user (header: token(userId)) GET::/services/
     - list all service's feedbacks (header: token(userId)) GET::/services/:apiKey/feedbacks/

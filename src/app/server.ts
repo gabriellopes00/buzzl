@@ -1,5 +1,5 @@
 import 'module-alias/register'
-import { port } from '@/config/env'
+import { PORT } from '@/config/env'
 import logger from '@/config/logger'
 import { getCustomRepository } from 'typeorm'
 import { PsqlConnection } from '../infra/database/helpers/psql-helper'
@@ -7,7 +7,7 @@ import { PsqlUserRepository } from '../infra/database/repositories/user-reposito
 import { DbAddUser } from '@/usecases/implementation/add-user'
 import { IDGenerator } from '@/infra/uuid-generator'
 
-logger.info(port)
+logger.info(PORT)
 ;(async () => {
   console.log('Starting process...')
   const psqlHelper = new PsqlConnection()
