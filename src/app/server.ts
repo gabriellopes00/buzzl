@@ -1,38 +1,46 @@
 import 'module-alias/register'
 import { PORT } from '@/config/env'
 import logger from '@/config/logger'
-import { getCustomRepository } from 'typeorm'
 import { PsqlConnection } from '../infra/database/helpers/psql-helper'
-import { PsqlUserRepository } from '../infra/database/repositories/user-repository'
-import { DbAddUser } from '@/usecases/implementation/add-user'
-import { IDGenerator } from '@/infra/uuid-generator'
-import { ValidatorCompositor } from '@/presentation/validation/compositor'
-import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
-import { UserValidator } from '@/presentation/validation/user'
-import { AddUserController } from '@/presentation/controllers/add-user'
-
-logger.info(PORT)
 ;(async () => {
-  console.log('Starting process...')
-  const psqlHelper = new PsqlConnection()
-  await psqlHelper.connect()
-  console.log('PG connected.')
+  try {
+    const psqlHelper = new PsqlConnection()
+    await psqlHelper.connect()
+    logger.info('PostgreSQL connected successfully')
 
-  const conn = psqlHelper.getConnection()
+    const app = (await import('./setup/app')).default
+    const server = app.listen(PORT, () => {
+      logger.info(`Server running at port ${PORT}`)
+    })
 
-  const usecase = new DbAddUser(new IDGenerator(), getCustomRepository(PsqlUserRepository))
-  const requiredFields = new RequiredFieldValidation(['name', 'email', 'password'])
-  const userValidation = new UserValidator()
-  const validation = new ValidatorCompositor([requiredFields, userValidation])
-  const controller = new AddUserController(validation, usecase)
-  const createdUser = await controller.handle({
-    name: 'Gabriel Lopes',
-    email: 'gabriel@mail.com',
-    password: 'mypass_'
-  })
-
-  console.log(createdUser)
-
-  await conn.close()
-  console.log('PG connection closed.')
+    /* eslint-disable*/
+    const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT']
+    /* eslint-disable */
+    for (const signal of exitSignals) {
+      process.on(signal, async () => {
+        try {
+          await psqlHelper.close()
+          server.close()
+          logger.info('Server stopped successfully')
+          process.exit(0)
+        } catch (error) {
+          logger.error(`App exited with error: ${error}`)
+          process.exit(1)
+        }
+      })
+    }
+  } catch (error) {
+    logger.error(error)
+    process.exit(1)
+  }
 })()
+
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(`App exiting due an unhandled promise: ${promise} and reason: ${reason}`)
+  throw reason
+})
+
+process.on('uncaughtException', error => {
+  logger.error(`App exiting due to an uncaught exception: ${error}`)
+  process.exit(0)
+})
