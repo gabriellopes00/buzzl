@@ -2,13 +2,15 @@ import 'module-alias/register'
 import { PORT } from '@/config/env'
 import logger from '@/config/logger'
 import { PsqlConnection } from '../infra/database/helpers/psql-helper'
+
+//
 ;(async () => {
   try {
     const psqlHelper = new PsqlConnection()
     await psqlHelper.connect()
     logger.info('PostgreSQL connected successfully')
 
-    const app = await (await import('./setup/app')).default
+    const app = (await import('./setup/app')).default
     const server = app.listen(PORT, () => {
       logger.info(`Server running at port ${PORT}`)
     })
