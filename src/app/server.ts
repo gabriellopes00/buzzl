@@ -8,7 +8,7 @@ import { PsqlConnection } from '../infra/database/helpers/psql-helper'
     await psqlHelper.connect()
     logger.info('PostgreSQL connected successfully')
 
-    const app = (await import('./setup/app')).default
+    const app = await (await import('./setup/app')).default
     const server = app.listen(PORT, () => {
       logger.info(`Server running at port ${PORT}`)
     })
