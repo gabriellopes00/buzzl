@@ -6,13 +6,13 @@ export const badRequest = (error: Error): HttpResponse => ({
   body: error
 })
 
-export const ok = <T = any>(data: T): HttpResponse => ({
+export const ok = (data: any): HttpResponse => ({
   code: 200,
   body: data
 })
 
 export const conflict = (error: Error): HttpResponse => ({
-  code: 400,
+  code: 409,
   body: error
 })
 
