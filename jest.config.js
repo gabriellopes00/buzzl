@@ -12,7 +12,7 @@ module.exports = {
     '!<rootDir>/**/migrations/**',
     '!<rootDir>/**/config/**'
   ],
-  testPathIgnorePatterns: ['<rootDir>/tests/unit/mocks/'],
+  testPathIgnorePatterns: ['<rootDir>/tests/unit/mocks/', '<rootDir>/tests/e2e/mocks/'],
   coverageDirectory: 'coverage/',
   coverageProvider: 'v8',
   clearMocks: true,

@@ -17,7 +17,6 @@ import { PsqlConnection } from '../infra/database/helpers/psql-helper'
 
     /* eslint-disable*/
     const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTERM', 'SIGQUIT']
-    /* eslint-disable */
     for (const signal of exitSignals) {
       process.on(signal, async () => {
         try {

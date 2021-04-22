@@ -1,6 +1,8 @@
 import { PsqlUserRepository } from '@/infra/database/repositories/user-repository'
-import { IDGenerator } from '@/infra/uuid-generator'
 import { getCustomRepository } from 'typeorm'
 
-export const idGenerator = new IDGenerator()
+import { IDGenerator } from '@/infra/uuid-generator'
+
 export const userRepository = getCustomRepository(PsqlUserRepository)
+
+export const idGenerator = new IDGenerator()

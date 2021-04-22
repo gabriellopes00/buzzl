@@ -1,4 +1,4 @@
-<p align="center"> <img src="assets/logo.svg" width="200" /> </p>
+<p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
 <h1 align="center"> Feedback.io </h1>
 
 ###### An API built with
@@ -23,7 +23,7 @@
 <h2> About Feedback.io 📚 </h2>
 
 <p>
-  Feedback.io was create to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, which will be able to receive feedbacks and rates from your customers. This will allow you calculate your services NPS and know how your customer are evaluating your services. A complete API is being built with this purpose. This is a open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL...
+  Feedback.io is being built to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, which will be able to receive feedbacks and rates from your customers. This will allow you have a contact with customers feedbacks, which can be a ISSUE, an IDEA, or OTHERS, and calculate your services NPS, knowing how your customers are evaluating your services. This is an open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL...
 </p>
 
 ## Api Structure
@@ -42,6 +42,10 @@ root
 ├── assets                  - Project assets (images, logos...)
 ├── src                     - Application main code
 │    │── app                - Composition layer, entry point code
+│    │    └── routes        - routes files
+│    │    └── setup         - server config (middlewares, cors, body-parser)
+│    │    └── builds        - classes instances
+│    │    └── adapters      - components adapters
 │    ├── config             - Some global config files (.env, path alias, logger)
 │    ├── domain             - Business rules definition
 │    │     └── entities
