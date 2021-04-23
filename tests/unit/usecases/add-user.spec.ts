@@ -1,5 +1,6 @@
 import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { DbAddUser } from '@/usecases/implementation/add-user'
+import { MockHashGenerator } from '../mocks/hash-generator'
 import { fakeUser, fakeUserParams } from '../mocks/user'
 import { MockUserRepository } from '../mocks/user-repository'
 import { MockUUIDGenerator } from '../mocks/uuid-generator'
@@ -7,7 +8,8 @@ import { MockUUIDGenerator } from '../mocks/uuid-generator'
 describe('AddUser Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>
-  const sut = new DbAddUser(mockUUIDGenerator, mockUserRepository)
+  const mockHashGenerator = new MockHashGenerator() as jest.Mocked<MockHashGenerator>
+  const sut = new DbAddUser(mockUserRepository, mockUUIDGenerator, mockHashGenerator)
 
   describe('UUID Generator', () => {
     it('Should call UUIDGenerator once before user registration', async () => {
@@ -20,6 +22,26 @@ describe('AddUser Usecase', () => {
       const generateCall = generate.mock.invocationCallOrder[0]
       const addCall = add.mock.invocationCallOrder[0]
       expect(generateCall).toBeLessThan(addCall)
+    })
+  })
+
+  describe('Hash Generator', () => {
+    it('Should call hash generator once before calls addUser repository', async () => {
+      const hash = jest.spyOn(mockHashGenerator, 'hash')
+      const add = jest.spyOn(mockUserRepository, 'add')
+      await sut.add(fakeUserParams)
+      expect(hash).toHaveBeenCalled()
+
+      // ensure user password be hashed *before* calling user registration method
+      const hashCall = hash.mock.invocationCallOrder[0]
+      const addCall = add.mock.invocationCallOrder[0]
+      expect(hashCall).toBeLessThan(addCall)
+    })
+
+    it('Should throw if hash generator throws', async () => {
+      mockHashGenerator.hash.mockRejectedValueOnce(new Error())
+      const error = sut.add(fakeUserParams)
+      await expect(error).rejects.toThrow()
     })
   })
 
@@ -48,8 +70,13 @@ describe('AddUser Usecase', () => {
       it('Should call user registration with correct values', async () => {
         const add = jest.spyOn(mockUserRepository, 'add')
         await sut.add(fakeUserParams)
-        // ensure UserRepository have been called with above generated UUID
-        expect(add).toHaveBeenCalledWith({ ...fakeUserParams, id: mockUUIDGenerator.generate() })
+        const hashPass = await mockHashGenerator.hash(fakeUserParams.password)
+        // ensure UserRepository have been called with above generated UUID and hashed password
+        expect(add).toHaveBeenCalledWith({
+          ...fakeUserParams,
+          id: mockUUIDGenerator.generate(),
+          password: hashPass
+        })
       })
 
       it('Should not call user registration if its email is already registered', async () => {
