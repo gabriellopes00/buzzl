@@ -1,5 +1,6 @@
 import { User } from '@/domain/entities/user'
 import { UserRepository } from '@/usecases/ports/user-repository'
+import { MockHasher } from './hasher'
 import { fakeUser } from './user'
 
 /*
@@ -7,12 +8,18 @@ import { fakeUser } from './user'
   If there is a need to change this value, the methods must be mocked with the different wanted value.
 */
 
+const mockHasher = new MockHasher()
+
 export class MockUserRepository implements UserRepository {
   async add(data: User): Promise<User> {
-    return fakeUser
+    return { ...fakeUser, password: await mockHasher.generate('') }
   }
 
   async exists(email: string): Promise<boolean> {
     return false
+  }
+
+  async findOne(email: string): Promise<User> {
+    return { ...fakeUser, password: await mockHasher.generate('') }
   }
 }

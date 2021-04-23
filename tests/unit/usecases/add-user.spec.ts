@@ -88,7 +88,7 @@ describe('AddUser Usecase', () => {
 
       it('Should return a user data if its registration succeeds', async () => {
         const data = await sut.add(fakeUserParams)
-        expect(data).toEqual(fakeUser)
+        expect(data).toEqual({ ...fakeUser, password: await mockHasher.generate('') })
       })
 
       it('Should pass long the error if UserRepository returns one', async () => {

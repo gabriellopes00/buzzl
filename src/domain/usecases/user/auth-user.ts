@@ -1,3 +1,4 @@
+import { UnmatchedPasswordError } from '../errors/user/unmatched-password'
 import { UnregisteredEmailError } from '../errors/user/unregistered-email'
 
 export interface AuthParams {
@@ -6,5 +7,5 @@ export interface AuthParams {
 }
 
 export interface AuthUser {
-  auth(data: AuthParams): Promise<string | UnregisteredEmailError>
+  auth(data: AuthParams): Promise<string | UnregisteredEmailError | UnmatchedPasswordError>
 }
