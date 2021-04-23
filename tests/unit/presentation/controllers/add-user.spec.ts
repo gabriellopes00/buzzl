@@ -1,4 +1,4 @@
-import { AddUserController } from '@/presentation/controllers/add-user'
+import { AddUserController, AddUserResponse } from '@/presentation/controllers/add-user'
 import { badRequest, conflict, ok, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../mocks/add-user'
 import { fakeUser, fakeUserParams } from '../../mocks/user'
@@ -43,7 +43,13 @@ describe('Add User Controller', () => {
 
     it('Should return a 200 response with created user if addUser succeeds', async () => {
       const response = await sut.handle(fakeUserParams)
-      expect(response).toEqual(ok(fakeUser))
+      const { id, name, email } = fakeUser
+      expect(response).toEqual(
+        ok<AddUserResponse>({
+          user: { id, email, name },
+          token: ''
+        })
+      )
     })
 
     it('Should return a 409 response if received email is already in use', async () => {

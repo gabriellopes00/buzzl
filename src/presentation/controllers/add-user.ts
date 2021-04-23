@@ -4,6 +4,15 @@ import { Controller } from '../ports/controllers'
 import { HttpResponse } from '../ports/http'
 import { Validator } from '../ports/validator'
 
+export interface AddUserResponse {
+  user: {
+    id: string
+    name: string
+    email: string
+  }
+  token: string
+}
+
 export class AddUserController implements Controller {
   constructor(private readonly validator: Validator, private readonly addUser: AddUser) {}
 
@@ -15,7 +24,11 @@ export class AddUserController implements Controller {
       const result = await this.addUser.add(params)
       if (result instanceof Error) return conflict(result)
 
-      return ok(result)
+      const { id, name, email } = result
+      return ok<AddUserResponse>({
+        user: { id, name, email },
+        token: ''
+      })
     } catch (error) {
       return serverError(error)
     }
