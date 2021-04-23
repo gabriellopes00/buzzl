@@ -19,9 +19,13 @@ export class UserAuthenticator implements AuthUser {
     const existingUser = await this.userRepository.findOne(email)
     if (!existingUser) return new UnregisteredEmailError(email)
 
-    const validPassword = await this.hashComparer.compare(password, existingUser.password)
-    if (!validPassword) return new UnmatchedPasswordError(email)
+    const matchedPassword = await this.hashComparer.compare(password, existingUser.password)
+    if (!matchedPassword) return new UnmatchedPasswordError(email)
 
-    return null
+    const token = await this.encrypter.encrypt(existingUser.id)
+
+    await this.accessTokenRepository.add(token, email)
+
+    return token
   }
 }
