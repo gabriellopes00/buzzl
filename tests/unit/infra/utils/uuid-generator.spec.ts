@@ -1,4 +1,4 @@
-import { IDGenerator } from '@/infra/uuid-generator'
+import { IDGenerator } from '@/infra/utils/uuid-generator'
 
 describe('UUID Generator', () => {
   const sut = new IDGenerator()
