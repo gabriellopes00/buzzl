@@ -1,4 +1,5 @@
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
+import { AuthUser } from '@/domain/usecases/user/auth-user'
 import { badRequest, conflict, ok, serverError } from '../helpers/http'
 import { Controller } from '../ports/controllers'
 import { HttpResponse } from '../ports/http'
@@ -14,7 +15,11 @@ export interface AddUserResponse {
 }
 
 export class AddUserController implements Controller {
-  constructor(private readonly validator: Validator, private readonly addUser: AddUser) {}
+  constructor(
+    private readonly validator: Validator,
+    private readonly addUser: AddUser,
+    private readonly authenticator: AuthUser
+  ) {}
 
   async handle(params: UserParams): Promise<HttpResponse> {
     try {
@@ -24,11 +29,11 @@ export class AddUserController implements Controller {
       const result = await this.addUser.add(params)
       if (result instanceof Error) return conflict(result)
 
-      const { id, name, email } = result
-      return ok<AddUserResponse>({
-        user: { id, name, email },
-        token: ''
-      })
+      const { id, name, email, password } = result
+
+      const token = (await this.authenticator.auth({ email, password })) as string
+
+      return ok<AddUserResponse>({ user: { id, name, email }, token })
     } catch (error) {
       return serverError(error)
     }
