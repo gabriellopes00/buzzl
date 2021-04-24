@@ -1,5 +1,6 @@
 #custom
 *.pem
+*.key*
 
 # Logs
 logs

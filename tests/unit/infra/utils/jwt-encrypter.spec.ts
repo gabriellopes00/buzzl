@@ -21,8 +21,7 @@ describe('Jwt Encrypter', () => {
       const sign = jest.spyOn(jwt, 'sign')
       await sut.encrypt({ payload: 'any_value' })
       expect(sign).toHaveBeenCalledWith({ payload: 'any_value' }, TOKEN_PRIVATE_KEY, {
-        algorithm: 'RS256',
-        expiresIn: TOKEN_DURATION
+        expiresIn: 60 * 15
       })
     })
 

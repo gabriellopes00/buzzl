@@ -19,7 +19,7 @@ export class MockUserRepository implements UserRepository {
     return false
   }
 
-  async findOne(email: string): Promise<User> {
+  async findByEmail(email: string): Promise<User> {
     return { ...fakeUser, password: await mockHasher.generate('') }
   }
 }

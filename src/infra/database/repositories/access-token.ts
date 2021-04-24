@@ -1,7 +1,8 @@
 import { AccessTokenRepository } from '@/usecases/ports/access-token-repository'
+import fs from 'fs'
 
-export class MockAccessTokenRepository implements AccessTokenRepository {
+export class TokenRepository implements AccessTokenRepository {
   async add(token: string, userEmail: string): Promise<void> {
-
+    fs.appendFileSync('./db.txt', `${token}-${userEmail},`)
   }
 }

@@ -70,7 +70,7 @@ describe('Add User Controller', () => {
       expect(response).toEqual(
         ok<AddUserResponse>({
           user: { id, email, name },
-          token: await new MockEncrypter().encrypt('')
+          accessToken: await new MockEncrypter().encrypt('')
         })
       )
     })
