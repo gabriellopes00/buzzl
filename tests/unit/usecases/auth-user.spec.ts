@@ -71,7 +71,7 @@ describe('User Authenticator', () => {
     it('Should call encrypter with correct id', async () => {
       const encrypt = jest.spyOn(mockEncrypter, 'encrypt')
       await sut.auth(fakeAuthParams)
-      expect(encrypt).toHaveBeenCalledWith(fakeUser.id)
+      expect(encrypt).toHaveBeenCalledWith({ id: fakeUser.id })
     })
 
     it('Should return a token on success', async () => {

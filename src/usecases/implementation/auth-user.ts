@@ -22,7 +22,7 @@ export class UserAuthenticator implements AuthUser {
     const matchedPassword = await this.hashComparer.compare(password, existingUser.password)
     if (!matchedPassword) return new UnmatchedPasswordError(email)
 
-    const token = await this.encrypter.encrypt(existingUser.id)
+    const token = await this.encrypter.encrypt({ id: existingUser.id })
 
     await this.accessTokenRepository.add(token, email)
 

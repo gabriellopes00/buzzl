@@ -70,6 +70,13 @@ or
 git clone git@github.com:gabriellopes00/feedbackio-api.git
 ```
 
+###### Generating RSA key pair
+
+```bash
+openssl genrsa -out <private_key_name>.pem 1024 &&
+openssl rsa -pubout -in <private_key_name>.pem -out <public_key_name>.pem
+```
+
 ###### Running with Docker
 
 ```docker
