@@ -18,4 +18,9 @@ export class PsqlUserRepository extends Repository<UserModel> implements UserRep
     const user = await this.findOne({ email })
     return !!user
   }
+
+  public async findByEmail(email: string): Promise<User> {
+    const user = await this.findOne({ email })
+    return user
+  }
 }

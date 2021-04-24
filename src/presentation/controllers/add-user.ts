@@ -11,7 +11,7 @@ export interface AddUserResponse {
     name: string
     email: string
   }
-  token: string
+  accessToken: string
 }
 
 export class AddUserController implements Controller {
@@ -29,12 +29,13 @@ export class AddUserController implements Controller {
       const result = await this.addUser.add(params)
       if (result instanceof Error) return conflict(result)
 
-      const { id, name, email, password } = result
+      const { id, name, email } = result
 
-      const token = (await this.authenticator.auth({ email, password })) as string
+      const token = (await this.authenticator.auth({ email, password: params.password })) as string
 
-      return ok<AddUserResponse>({ user: { id, name, email }, token })
+      return ok<AddUserResponse>({ user: { id, name, email }, accessToken: token })
     } catch (error) {
+      console.log(error)
       return serverError(error)
     }
   }
