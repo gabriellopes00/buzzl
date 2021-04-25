@@ -129,6 +129,7 @@
 
 - project planing
 - project structure (clean architecture)
+- rsa keys (cryptography)
 - sh scripts
 - ci and cd skills
 - regexp
@@ -144,8 +145,8 @@
 [x] create project on heroku
 [x] create project on vercel
 [x] organize github repositories
-[] create docker environment
-[] create domain data
+[x] create docker environment
+[x] create domain data
 [] develop login and signup api
 [] configure api server
 [] start ci and cd

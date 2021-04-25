@@ -6,9 +6,7 @@ LABEL manteiner="gabriellopes" version="0.0.1" description="Feedback.io api dock
 COPY package*.json .
 RUN npm install --production
 
-COPY ormconfig.js .
-COPY .env .
-COPY dist/ ./dist/
+COPY . .
 
 EXPOSE 7719
 
