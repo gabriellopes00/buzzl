@@ -1,6 +1,13 @@
 <p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
 <h1 align="center"> Feedback.io </h1>
 
+#### Turn Language
+<p>
+  <a href="https://github.com/gabriellopes00/feedbackio-api/blob/main/README.md" alt="turn lenguage">
+    <img src="./.github/assets/flag-brasil.png" alt="flag-brasil" min-width="50px" max-width="50px" width="50px" alt="turn lenguage portugues">
+  </a>
+</p>
+
 ###### An API built with
 
 <p>
@@ -107,7 +114,32 @@ Following the standard of the [Conventional Commits](https://www.conventionalcom
 - _**docs** commits(amount)_ ❯ `git shortlog -s --grep docs`
 - _**build** commits(amount)_ ❯ `git shortlog -s --grep build`
 
-## License ✒
+## 🤝 Contributors
+
+We thank the following people who contributed to this project:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/gabriellopes00">
+        <img src="https://avatars.githubusercontent.com/u/69465943?v=4" width="100px;" alt="Photo of Gabriel Lopes no GitHub"/><br>
+        <sub>
+          <b>Gabriel Lopes</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/MatheusFC2">
+        <img src="https://avatars.githubusercontent.com/u/69259671?v=4" width="100px;" alt="Photo of Matheus Campos"/><br>
+        <sub>
+          <b>Matheus Campos</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## License ⚖
 
 This project uses [Apache 2](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, read to know more about permissions and copyright.
 
