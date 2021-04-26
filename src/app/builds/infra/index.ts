@@ -2,10 +2,10 @@ import { PsqlUserRepository } from '@/infra/database/repositories/user-repositor
 import { getCustomRepository } from 'typeorm'
 
 import { IDGenerator } from '@/infra/utils/uuid-generator'
-import { BcryptHasher } from '@/infra/utils/bcrypt-hasher'
+import { Argon2Hasher } from '@/infra/utils/argon2-hasher'
 
 export const userRepository = getCustomRepository(PsqlUserRepository)
 
 export const idGenerator = new IDGenerator()
 
-export const hashGenerator = new BcryptHasher()
+export const hashGenerator = new Argon2Hasher()
