@@ -6,11 +6,11 @@ module.exports = {
 
   migrations: [
     __dirname +
-      `/${process.env.NODE_ENV === 'dev' ? 'src' : 'dist'}/infra/database/migrations/*{.ts,.js}`
+      `/${process.env.NODE_ENV === 'prod' ? 'dist' : 'src'}/infra/database/migrations/*{.ts,.js}`
   ],
   entities: [
     __dirname +
-      `/${process.env.NODE_ENV === 'dev' ? 'src' : 'dist'}/infra/database/models/*{.ts,.js}`
+      `/${process.env.NODE_ENV === 'prod' ? 'dist' : 'src'}/infra/database/models/*{.ts,.js}`
   ],
   cli: {
     migrationsDir: './src/infra/database/migrations/',

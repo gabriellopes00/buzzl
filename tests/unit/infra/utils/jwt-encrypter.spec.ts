@@ -1,4 +1,4 @@
-import { TOKEN_DURATION, TOKEN_PRIVATE_KEY } from '@/config/env'
+import { TOKEN_EXPIRATION, TOKEN_PRIVATE_KEY } from '@/config/env'
 import { JWTEncrypter } from '@/infra/utils/jwt-encrypter'
 import jwt from 'jsonwebtoken'
 
@@ -14,7 +14,7 @@ jest.mock('jsonwebtoken', () => ({
 
 describe('Jwt Encrypter', () => {
   const mockJwt = jwt as jest.Mocked<typeof jwt>
-  const sut = new JWTEncrypter(TOKEN_PRIVATE_KEY, TOKEN_DURATION)
+  const sut = new JWTEncrypter(TOKEN_PRIVATE_KEY, TOKEN_EXPIRATION)
 
   describe('Encrypter', () => {
     it('Should call sign with correct values', async () => {
@@ -22,7 +22,7 @@ describe('Jwt Encrypter', () => {
       await sut.encrypt({ payload: 'any_value' })
       expect(sign).toHaveBeenCalledWith({ payload: 'any_value' }, TOKEN_PRIVATE_KEY, {
         algorithm: 'RS256',
-        expiresIn: 60 * 15
+        expiresIn: TOKEN_EXPIRATION
       })
     })
 

@@ -9,6 +9,6 @@ export const {
   MAX_NPS_REQUESTS,
   TOKEN_PRIVATE_KEY,
   TOKEN_PUBLIC_KEY,
-  TOKEN_DURATION,
+  TOKEN_EXPIRATION,
   NODE_ENV
 } = process.env

@@ -10,7 +10,7 @@ import { UserAuthenticator } from '@/usecases/implementation/auth-user'
 import { Argon2Hasher } from '@/infra/utils/argon2-hasher'
 import { TokenRepository } from '@/infra/database/repositories/access-token'
 import { JWTEncrypter } from '@/infra/utils/jwt-encrypter'
-import { TOKEN_DURATION, TOKEN_PRIVATE_KEY } from '@/config/env'
+import { TOKEN_EXPIRATION, TOKEN_PRIVATE_KEY } from '@/config/env'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
 const userValidator = new UserValidator()
@@ -19,7 +19,7 @@ const validator = new ValidatorCompositor([requiredFieldsValidation, userValidat
 const dbAddUser = new DbAddUser(userRepository, idGenerator, hashGenerator)
 
 const hasher = new Argon2Hasher()
-const jwtEncrypter = new JWTEncrypter(TOKEN_PRIVATE_KEY, TOKEN_DURATION)
+const jwtEncrypter = new JWTEncrypter(TOKEN_PRIVATE_KEY, TOKEN_EXPIRATION)
 const repo = new TokenRepository()
 export const authenticator = new UserAuthenticator(userRepository, hasher, jwtEncrypter, repo)
 
