@@ -1,5 +1,7 @@
 import { ConnectionError } from '@/infra/database/helpers/errors/connection-error'
 import { PsqlConnection } from '@/infra/database/helpers/psql-helper'
+import { resolve } from 'path'
+import { createConnection } from 'typeorm'
 
 describe('PostgreSQL Helper', () => {
   const sut = new PsqlConnection()
@@ -14,6 +16,9 @@ describe('PostgreSQL Helper', () => {
     await expect(error).rejects.toThrow()
 
     // connection success
+    jest.spyOn(sut, 'connect').mockImplementationOnce(async () => {
+      await createConnection({ type: 'sqlite', database: resolve(__dirname, 'fake_db.sqlite') })
+    })
     await sut.connect()
     const connection = sut.getConnection()
     expect(connection.name).toEqual('default')

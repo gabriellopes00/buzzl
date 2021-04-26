@@ -8,6 +8,7 @@
   <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="nodejs" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="graphql" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/socket.io.svg" alt="socket.io" width="30" height="30"/>
+  <img src="https://jwt.io/img/pic_logo.svg" alt="jwt" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/docker-icon.svg" alt="docker" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgresql" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
@@ -57,6 +58,11 @@ root
       └── e2e
       └── unit
 ```
+
+#### Security 🔒
+
+Users password are hashed with [Argon2](https://github.com/P-H-C/phc-winner-argon2) hash algorithm, winner of the [Password Hashing Competition (PHC)](https://www.password-hashing.net/), the most recommended and secure hashing algorithm option.
+Authentications tokens are generated using [JWT](https://jwt.io/), web most used tool to generate authentication tokens, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys and RS256 asymmetric cryptography algorithm.
 
 ## Building and contributing 🛠
 

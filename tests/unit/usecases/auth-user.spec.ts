@@ -19,7 +19,7 @@ describe('User Authenticator', () => {
     mockAccessTokenRepository
   )
 
-  describe('User Repository', async () => {
+  describe('User Repository', () => {
     it('Should call userRepository findByEmail with correct email once before hashComparer', async () => {
       const find = jest.spyOn(mockUserRepository, 'findByEmail')
       const compare = jest.spyOn(mockHasher, 'compare')
@@ -44,7 +44,7 @@ describe('User Authenticator', () => {
     })
   })
 
-  describe('Hasher', async () => {
+  describe('Hasher', () => {
     it('Should not be called if userRepository does not found a user with received email', async () => {
       mockUserRepository.findByEmail.mockResolvedValueOnce(null)
       const compare = jest.spyOn(mockHasher, 'compare')
@@ -67,7 +67,7 @@ describe('User Authenticator', () => {
     })
   })
 
-  describe('Encrypter', async () => {
+  describe('Encrypter', () => {
     it('Should call encrypter with correct id', async () => {
       const encrypt = jest.spyOn(mockEncrypter, 'encrypt')
       await sut.auth(fakeAuthParams)
@@ -80,7 +80,7 @@ describe('User Authenticator', () => {
     })
   })
 
-  describe('Access Token Repository', async () => {
+  describe('Access Token Repository', () => {
     it('Should call accessToken repository with correct values', async () => {
       const add = jest.spyOn(mockAccessTokenRepository, 'add')
       await sut.auth(fakeAuthParams)
