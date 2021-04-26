@@ -13,7 +13,7 @@
     - name
     - description?
     - maintainer (userEmail)
-    - isActive
+    - status (isActive)
     - apiKey (custom_id)
 
 <!-- - allowedURLs  https://dev.mysql.com/doc/refman/5.7/en/json.html -->
@@ -50,50 +50,55 @@
 
 # components
 
-## widget
+<!-- ## widget -->
 
 <!-- - two tabs (NPS and feedbacks) -->
 
-- submit button (enabled only with textarea or stars filed)
+<!-- - submit button (enabled only with textarea or stars filed) -->
   <!-- (nps) - 10 stars to fill -->
-  (feedbacks) - issue, idea, complaint and other button - description textarea - user email input (optional)
+  <!-- (feedbacks) - issue, idea, complaint and other button - description textarea - user email input (optional) -->
 
 ## api (routes)
 
     - list all error logs (header: secret(env.APP_SECRET)) GET::/logs/errors
 
-    - signup (body: userData) POST::/signup [return token(userId)]
+    - signup (body: userData) POST::/signup [return user data token(userId)]
     - login (body: email; password) POST::/login [return token(userId)]
 
     - create a service (body: serviceData, header: token(userId)) POST::/services/
     - delete a service (body: apiKey, header: token(userId)) DELETE::/services/
-    - update a service (body: serviceData apiKey, header: token(userId)) PUT::/services/
-    - suspend or regenerate apiKey (body: {}, header: token(userId)) PATCH::/services/
+    - update a service (body: newServiceData, header: token(userId)) PUT::/services/
+    - suspend a service (body: {apiKey}, header: token(userId)) PATCH::/services/status
+    - regenerate apiKey (body: {currentApiKey}, header: token(userId)) PATCH::/services/api_key
 
     - list all services by user (header: token(userId)) GET::/services/
-    - list all service's feedbacks (header: token(userId)) GET::/services/:apiKey/feedbacks/
+    - list all service's feedbacks (body: {apiKey} header: token(userId)) GET::/services/feedbacks/
     (orderBy date; count types, percent by types, count all)
-    <!-- - list service's NPS (header: token(userId)) GET::/services/:apiKey/nps/
+    - list all user's feedbacks (body: {userEmail} header: token(userId)) GET::/users/feedbacks/
+    (orderBy date; count types, percent by types, count all)
+
+<!-- - list service's NPS (header: token(userId)) GET::/services/:apiKey/nps/
     (orderBy date; count all; detractors; promoters; passives; level[greate, good , regular, bad]; nps) -->
 
     - register a feedback (body: feedbackData, header: apiKey) POST::/feedbacks/ 204 [max 20 request per day]
-    <!-- - register a NPS (body: rating[1-10], header: apiKey) POST::/nps/ 204 [max 20 request per day] -->
+
+<!-- - register a NPS (body: rating[1-10], header: apiKey) POST::/nps/ 204 [max 20 request per day] -->
 
 <!-- - list all feedbacks by adm (userId) (orderBy date; count types) -->
 
-## page
+<!-- ## page -->
 
-### dashboard
+<!-- ### dashboard -->
 
-    - list all services by user (orderBy date; count types, percent by types, count all)
+<!-- - list all services by user (orderBy date; count types, percent by types, count all) -->
 
 <!-- - average of NPS feebacks -->
 
-### service page
+<!-- ### service page -->
 
-    - list feedbacks by service
-    - feedback's chart
-    <!-- - show NPS info (detractors, passive, promoters, general nps, level) (maybe some chart too) -->
+<!-- - list feedbacks by service -->
+<!-- - feedback's chart -->
+<!-- - show NPS info (detractors, passive, promoters, general nps, level) (maybe some chart too) -->
 
 # rules
 
@@ -102,6 +107,7 @@
 - each service has a maximum of 20 feedbacks and 20 for NPS request per day
 - if the client send a feedback with email, allow service manager to send a message to this email
 - if max requests is reached, cache all feedbacks by service, in the first requests, the others will use the cached data
+- when a service is updated, is not available update maintainer email, this data is only updated if mainer updates its own email
 
 # tools and feats
 
@@ -124,12 +130,13 @@
 - create a react component, and share it via npm
 - create plans to increase feedbacks limits
 - use web sockets to list new feedbacks in real time (graphQL)
+- update user data and recover password
 
 # learning...
 
 - project planing
 - project structure (clean architecture)
-- rsa keys (cryptography)
+- rsa keys (cryptography) and jwt tokens
 - sh scripts
 - ci and cd skills
 - regexp
