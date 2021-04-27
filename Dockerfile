@@ -6,7 +6,7 @@ LABEL version="0.0.1"
 LABEL description="Feedback.io api docker image"
 LABEL url="https://api-feedbackio.herokuapp.com"
 
-COPY package*.json .
+COPY package.json .
 RUN npm install --production
 
 COPY . .

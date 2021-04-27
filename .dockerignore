@@ -3,3 +3,4 @@
 !.env
 !dist/
 !ormconfig.js
+!package.json

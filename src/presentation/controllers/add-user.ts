@@ -35,7 +35,6 @@ export class AddUserController implements Controller {
 
       return ok<AddUserResponse>({ user: { id, name, email }, accessToken: token })
     } catch (error) {
-      console.log(error)
       return serverError(error)
     }
   }
