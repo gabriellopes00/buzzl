@@ -1,13 +1,13 @@
 import 'module-alias/register'
 import { PORT } from '@/config/env'
 import logger from '@/config/logger'
-import { PsqlConnection } from '../infra/database/helpers/psql-helper'
+import { PgConnection } from '../infra/database/helpers/pg-helper'
 
 //
 ;(async () => {
   try {
-    const psqlHelper = new PsqlConnection()
-    await psqlHelper.connect()
+    const pgHelper = new PgConnection()
+    await pgHelper.connect()
     logger.info('PostgreSQL connected successfully')
 
     const app = (await import('./setup/app')).default
@@ -20,7 +20,7 @@ import { PsqlConnection } from '../infra/database/helpers/psql-helper'
     for (const signal of exitSignals) {
       process.on(signal, async () => {
         try {
-          await psqlHelper.close()
+          await pgHelper.close()
           server.close()
           logger.info('Server stopped successfully')
           process.exit(0)

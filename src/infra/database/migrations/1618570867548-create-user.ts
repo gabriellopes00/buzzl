@@ -1,5 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
-import { tableNames } from '../helpers/psql-helper'
+import { tableNames } from '../helpers/pg-helper'
 
 export class createUser1618570867548 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

@@ -1,10 +1,10 @@
 import { ConnectionError } from '@/infra/database/helpers/errors/connection-error'
-import { PsqlConnection } from '@/infra/database/helpers/psql-helper'
+import { PgConnection } from '@/infra/database/helpers/pg-helper'
 import { resolve } from 'path'
 import { createConnection } from 'typeorm'
 
 describe('PostgreSQL Helper', () => {
-  const sut = new PsqlConnection()
+  const sut = new PgConnection()
 
   it('Should open, get and close a connection successfully', async () => {
     // should throw with no connections

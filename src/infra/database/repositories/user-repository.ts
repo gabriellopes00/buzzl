@@ -8,7 +8,7 @@ import { UserModel } from '../models/user'
  */
 
 @EntityRepository(UserModel)
-export class PsqlUserRepository extends Repository<UserModel> implements UserRepository {
+export class PgUserRepository extends Repository<UserModel> implements UserRepository {
   public async add(data: User): Promise<User> {
     const user = this.create(data)
     await this.save(user)

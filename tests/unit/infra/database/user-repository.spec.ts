@@ -1,12 +1,12 @@
-import { PsqlConnection } from '@/infra/database/helpers/psql-helper'
-import { PsqlUserRepository } from '@/infra/database/repositories/user-repository'
+import { PgConnection } from '@/infra/database/helpers/pg-helper'
+import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { resolve } from 'path'
 import { createConnection, getCustomRepository } from 'typeorm'
 import { fakeUser } from '../../mocks/user'
 
-describe('User Repository', () => {
-  const psqlHelper = new PsqlConnection()
-  jest.spyOn(psqlHelper, 'connect').mockImplementationOnce(async () => {
+describe('Pg User Repository', () => {
+  const pgHelper = new PgConnection()
+  jest.spyOn(pgHelper, 'connect').mockImplementationOnce(async () => {
     await createConnection({
       type: 'sqlite',
       database: resolve(__dirname, 'fake_db.sqlite'),
@@ -14,13 +14,13 @@ describe('User Repository', () => {
     })
   })
 
-  beforeAll(async () => await psqlHelper.connect())
-  afterAll(async () => await psqlHelper.close())
-  beforeEach(() => getCustomRepository(PsqlUserRepository).delete({}))
+  beforeAll(async () => await pgHelper.connect())
+  afterAll(async () => await pgHelper.close())
+  beforeEach(() => getCustomRepository(PgUserRepository).delete({}))
 
   describe('Add User', () => {
     it('Should add a store a user data on success', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       const user = await sut.add(fakeUser)
 
       const data = await sut.findOne({ id: fakeUser.id }) // native typeorm repository method
@@ -28,7 +28,7 @@ describe('User Repository', () => {
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'add').mockRejectedValueOnce(new Error())
 
       const error = sut.add(fakeUser)
@@ -38,7 +38,7 @@ describe('User Repository', () => {
 
   describe('Existing User', () => {
     it('Should return true if there is a user registered with received email', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       const user = sut.create({ ...fakeUser })
       await sut.save(user) // native typeorm repository method
 
@@ -47,13 +47,13 @@ describe('User Repository', () => {
     })
 
     it('Should return false if there is no user registered with received email', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       const existing = await sut.exists('unregisred@mail.com')
       expect(existing).toBeFalsy()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
 
       const error = sut.exists(fakeUser.email)
@@ -63,7 +63,7 @@ describe('User Repository', () => {
 
   describe('Find By Email', () => {
     it('Should return a user if it is found by email', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       const user = sut.create({ ...fakeUser })
       await sut.save(user)
 
@@ -72,14 +72,14 @@ describe('User Repository', () => {
     })
 
     it('Should return null if no user is found', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
 
       const userFound = await sut.findByEmail('unregistered@mail.com')
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PsqlUserRepository)
+      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'findByEmail').mockRejectedValueOnce(new Error())
 
       const error = sut.findByEmail(fakeUser.email)
