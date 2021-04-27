@@ -60,4 +60,30 @@ describe('User Repository', () => {
       await expect(error).rejects.toThrow()
     })
   })
+
+  describe('Find By Email', () => {
+    it('Should return a user if it is found by email', async () => {
+      const sut = getCustomRepository(PsqlUserRepository)
+      const user = sut.create({ ...fakeUser })
+      await sut.save(user)
+
+      const userFound = await sut.findByEmail(user.email)
+      expect(userFound.id).toEqual(user.id)
+    })
+
+    it('Should return null if no user is found', async () => {
+      const sut = getCustomRepository(PsqlUserRepository)
+
+      const userFound = await sut.findByEmail('unregistered@mail.com')
+      expect(userFound).toBeNull()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      const sut = getCustomRepository(PsqlUserRepository)
+      jest.spyOn(sut, 'findByEmail').mockRejectedValueOnce(new Error())
+
+      const error = sut.findByEmail(fakeUser.email)
+      await expect(error).rejects.toThrow()
+    })
+  })
 })
