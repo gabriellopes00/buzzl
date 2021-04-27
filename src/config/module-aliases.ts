@@ -1,6 +1,6 @@
 import { resolve, join } from 'path'
-import moduleAlias from 'module-alias'
+import { addAliases } from 'module-alias'
 
-moduleAlias.addAliases({
+addAliases({
   '@': join(resolve(__dirname, '..', '..'), 'src')
 })

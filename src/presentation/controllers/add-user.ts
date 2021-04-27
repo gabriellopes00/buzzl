@@ -1,3 +1,4 @@
+import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
 import { AuthUser } from '@/domain/usecases/user/auth-user'
 import { badRequest, conflict, ok, serverError } from '../helpers/http'
@@ -27,7 +28,7 @@ export class AddUserController implements Controller {
       if (error) return badRequest(error)
 
       const result = await this.addUser.add(params)
-      if (result instanceof Error) return conflict(result)
+      if (result instanceof ExistingEmailError) return conflict(result)
 
       const { id, name, email } = result
 

@@ -1,10 +1,10 @@
+import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { AddUserController, AddUserResponse } from '@/presentation/controllers/add-user'
 import { badRequest, conflict, ok, serverError } from '@/presentation/helpers/http'
-import { MockAuthenticator } from '../../mocks/user-authenticator'
 import { MockAddUser } from '../../mocks/add-user'
 import { fakeAuthParams, fakeUser, fakeUserParams } from '../../mocks/user'
+import { MockAuthenticator } from '../../mocks/user-authenticator'
 import { MockValidator } from '../../mocks/validator'
-import { MockEncrypter } from '../../mocks/encrypter'
 
 describe('Add User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
@@ -45,9 +45,9 @@ describe('Add User Controller', () => {
     })
 
     it('Should return a 409 response if received email is already in use', async () => {
-      mockAddUser.add.mockResolvedValueOnce(new Error())
+      mockAddUser.add.mockResolvedValueOnce(new ExistingEmailError('any@mail.com'))
       const response = await sut.handle(fakeUserParams)
-      expect(response).toEqual(conflict(new Error()))
+      expect(response).toEqual(conflict(new ExistingEmailError('any@mail.com')))
     })
 
     it('Should return a 500 response if addUser throws', async () => {
@@ -57,7 +57,7 @@ describe('Add User Controller', () => {
     })
   })
 
-  describe('Authenticator', () => {
+  describe('Authentication', () => {
     it('Should call authenticator with correct values', async () => {
       const auth = jest.spyOn(mockAuthenticator, 'auth')
       await sut.handle(fakeUserParams)
@@ -68,10 +68,7 @@ describe('Add User Controller', () => {
       const response = await sut.handle(fakeUserParams)
       const { id, name, email } = fakeUser
       expect(response).toEqual(
-        ok<AddUserResponse>({
-          user: { id, email, name },
-          accessToken: await new MockEncrypter().encrypt('')
-        })
+        ok<AddUserResponse>({ user: { id, email, name }, accessToken: expect.any(String) })
       )
     })
 
