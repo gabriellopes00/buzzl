@@ -1,7 +1,6 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
 import { UserAuthenticator } from '@/usecases/implementation/auth-user'
-import { MockAccessTokenRepository } from '../mocks/access-token-repository'
 import { MockEncrypter } from '../mocks/encrypter'
 import { MockHasher } from '../mocks/hasher'
 import { fakeAuthParams, fakeUser } from '../mocks/user'
@@ -11,13 +10,7 @@ describe('User Authenticator', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>
   const mockHasher = new MockHasher() as jest.Mocked<MockHasher>
   const mockEncrypter = new MockEncrypter() as jest.Mocked<MockEncrypter>
-  const mockAccessTokenRepository = new MockAccessTokenRepository() as jest.Mocked<MockAccessTokenRepository>
-  const sut = new UserAuthenticator(
-    mockUserRepository,
-    mockHasher,
-    mockEncrypter,
-    mockAccessTokenRepository
-  )
+  const sut = new UserAuthenticator(mockUserRepository, mockHasher, mockEncrypter)
 
   describe('User Repository', () => {
     it('Should call userRepository findByEmail with correct email once before hashComparer', async () => {
@@ -77,14 +70,6 @@ describe('User Authenticator', () => {
     it('Should return a token on success', async () => {
       const token = await sut.auth(fakeAuthParams)
       expect(token).toEqual(await mockEncrypter.encrypt(''))
-    })
-  })
-
-  describe('Access Token Repository', () => {
-    it('Should call accessToken repository with correct values', async () => {
-      const add = jest.spyOn(mockAccessTokenRepository, 'add')
-      await sut.auth(fakeAuthParams)
-      expect(add).toHaveBeenCalledWith(await mockEncrypter.encrypt(''), fakeUser.email)
     })
   })
 })
