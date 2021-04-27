@@ -25,7 +25,7 @@ describe('User Validation', () => {
   })
 
   it('Should validate correctly an password', () => {
-    let isValid = sut.validate({ ...fakeUserParams, password: 'pass' })
+    let isValid = sut.validate({ ...fakeUserParams, password: 'pas' })
     expect(isValid).toEqual(new InvalidParamError('password'))
 
     isValid = sut.validate({ ...fakeUserParams, password: null })

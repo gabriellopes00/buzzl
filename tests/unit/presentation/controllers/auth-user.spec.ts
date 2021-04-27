@@ -1,5 +1,7 @@
+import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
 import { AuthUserController, AuthUserResponse } from '@/presentation/controllers/auth-user'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { fakeAuthParams } from '../../mocks/user'
 import { MockAuthenticator } from '../../mocks/user-authenticator'
 import { MockValidator } from '../../mocks/validator'
@@ -45,6 +47,18 @@ describe('Auth User Controller', () => {
       expect(response).toEqual(
         ok<AuthUserResponse>({ accessToken: expect.any(String) })
       )
+    })
+
+    it('Should return a 400 if received email is not registered', async () => {
+      mockAuthenticator.auth.mockResolvedValueOnce(new UnregisteredEmailError('any@mail.com'))
+      const response = await sut.handle(fakeAuthParams)
+      expect(response).toEqual(badRequest(new UnregisteredEmailError('any@mail.com')))
+    })
+
+    it('Should return a 401 if received unmatched password for respective email', async () => {
+      mockAuthenticator.auth.mockResolvedValueOnce(new UnmatchedPasswordError('any@mail.com'))
+      const response = await sut.handle(fakeAuthParams)
+      expect(response).toEqual(unauthorized(new UnmatchedPasswordError('any@mail.com').message))
     })
 
     it('Should return a 500 response if authenticator throws', async () => {
