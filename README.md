@@ -122,7 +122,7 @@ Following the standard of the [Conventional Commits](https://www.conventionalcom
 
 ## License ✒
 
-This project uses [Apache 2](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, read to know more about permissions and copyright.
+This project uses [gpl-3.0](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, which allows anyone modify, distribute and use in many different ways the project. However there are many conditions, such as **License and copyright notice**, **State changes**, **Disclose source** and **Use the same license**. Read complete license to know more about permissions and copyright.
 
 ## Contact 📱
 
