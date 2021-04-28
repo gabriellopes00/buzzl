@@ -62,7 +62,11 @@ root
 #### Security 🔒
 
 Users password are hashed with [Argon2](https://github.com/P-H-C/phc-winner-argon2) hash algorithm, winner of the [Password Hashing Competition (PHC)](https://www.password-hashing.net/), the most recommended and secure hashing algorithm option.
-Authentications tokens are generated using [JWT](https://jwt.io/), web most used tool to generate authentication tokens, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys and RS256 asymmetric cryptography algorithm.
+Authentications tokens are generated using [JWT](https://jwt.io/), web most used tool to generate authentication tokens, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys and RS256 asymmetric cryptography algorithm, increasing token's authenticity.
+
+#### Logs 📜
+
+All controllers unexpected errors are stored in the database, becoming available for future analysis and corrections. Having a console available, the errors and the requests data can be logged on console, for faster viewing while running the application.
 
 ## Building and contributing 🛠
 
@@ -101,8 +105,8 @@ npm run start
 
 - _**All**_ ❯ `yarn test`
 - _**Coverage**_ ❯ `yarn test:ci`
-- _**Unit**(.spec)_ ❯ `yarn test:unit`
-- _**e2e**(.test)_ ❯ `yarn test:e2e`
+- _**Unit**_ ❯ `yarn test:unit`
+- _**e2e**_ ❯ `yarn test:e2e`
 
 ###### Linting (eslint and prettier) 🎭
 

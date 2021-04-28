@@ -13,6 +13,7 @@ module.exports = {
     '!<rootDir>/**/config/**'
   ],
   testPathIgnorePatterns: ['<rootDir>/tests/unit/mocks/', '<rootDir>/tests/e2e/mocks/'],
+  testMatch: [__dirname + '/tests/**/*.test.ts'],
   coverageDirectory: 'coverage/',
   coverageProvider: 'v8',
   clearMocks: true,

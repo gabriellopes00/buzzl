@@ -154,7 +154,7 @@
 [x] organize github repositories
 [x] create docker environment
 [x] create domain data
-[] develop login and signup api
+[x] develop login and signup api
 [] configure api server
 [] start ci and cd
 
