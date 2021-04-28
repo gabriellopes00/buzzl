@@ -10,4 +10,6 @@ export default (app: Express): void => {
       ;(await import(`../routes/${file}`)).default(router)
     }
   })
+
+  app.use((req, res, next) => res.status(404).json({ message: 'Endpoint not found.' }))
 }
