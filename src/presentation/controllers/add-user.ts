@@ -2,7 +2,7 @@ import logger from '@/config/logger'
 import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
 import { AuthUser } from '@/domain/usecases/user/auth-user'
-import { badRequest, conflict, ok, serverError } from '../helpers/http'
+import { badRequest, conflict, created, serverError } from '../helpers/http'
 import { Controller } from '../ports/controllers'
 import { HttpResponse } from '../ports/http'
 import { Validator } from '../ports/validator'
@@ -35,7 +35,7 @@ export class AddUserController implements Controller {
 
       const token = (await this.authenticator.auth({ email, password: params.password })) as string
 
-      return ok<AddUserResponse>({ user: { id, name, email }, accessToken: token })
+      return created<AddUserResponse>({ user: { id, name, email }, accessToken: token })
     } catch (error) {
       logger.error(error)
       return serverError(error)

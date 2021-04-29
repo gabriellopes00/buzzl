@@ -36,3 +36,14 @@ In computer science, cryptography refers to secure information and communication
 - keys pair
 - ssh
 - jwt
+
+# Tools
+
+`ssh-keygem` => key pair generator default standard is generating a RSA key with 2048 bits (`-b 4096` generates 4096 bits keys)
+`ssh-copy-id username@remote_host` => copy the public key to a remote server
+the command below copy the key to a remote server too
+
+```bash
+cat ~/.ssh/id_rsa.pub | ssh username@remote_host "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+
+```

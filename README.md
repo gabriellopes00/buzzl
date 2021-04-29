@@ -40,7 +40,6 @@ root
 ├── .github                 - Github setup files
 │     └── assets
 │     └── workflow
-├── assets                  - Project assets (images, logos...)
 ├── src                     - Application main code
 │    │── app                - Composition layer, entry point code
 │    │    └── routes        - routes files
@@ -51,9 +50,9 @@ root
 │    ├── domain             - Business rules definition
 │    │     └── entities
 │    │     └── usecases
-│    ├── infra              - External frameworks and libs implementation
-│    ├── presentation       - External api communication layer (controllers, presenters, validators)
-│    └── useCases           - Usecases implementation
+│    ├── infra              - External frameworks and libs implementation (orm, encrypter)
+│    ├── presentation       - External api communication layer (controllers, validators)
+│    └── usecases           - Usecases implementation
 └─── tests                  - Components tests
       └── e2e
       └── unit

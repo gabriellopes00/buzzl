@@ -1,6 +1,6 @@
 import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { AddUserController, AddUserResponse } from '@/presentation/controllers/add-user'
-import { badRequest, conflict, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../mocks/add-user'
 import { fakeAuthParams, fakeUser, fakeUserParams } from '../../mocks/user'
 import { MockAuthenticator } from '../../mocks/user-authenticator'
@@ -64,11 +64,11 @@ describe('Add User Controller', () => {
       expect(auth).toHaveBeenCalledWith(fakeAuthParams)
     })
 
-    it('Should return a 200 response with created and authenticated user data', async () => {
+    it('Should return a 201 response with created and authenticated user data', async () => {
       const response = await sut.handle(fakeUserParams)
       const { id, name, email } = fakeUser
       expect(response).toEqual(
-        ok<AddUserResponse>({ user: { id, email, name }, accessToken: expect.any(String) })
+        created<AddUserResponse>({ user: { id, email, name }, accessToken: expect.any(String) })
       )
     })
 
