@@ -1,8 +1,10 @@
 <p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
 <h1 align="center"> Feedback.io </h1>
 
-![Feedback.io workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/workflow.yml/badge.svg)
+[![Workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/workflow.yml/badge.svg)](https://github.com/gabriellopes00/feedbackio-api/actions)
 [![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/feedbackio-api/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/feedbackio-api?branch=main)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![Stars](https://img.shields.io/github/stars/gabriellopes00/feedbackio-api.svg)
 
 ###### An API built with
 
