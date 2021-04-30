@@ -155,7 +155,7 @@
 [x] create docker environment
 [x] create domain data
 [x] develop login and signup api
-[] configure api server
+[x] configure api server
 [] start ci and cd
 
 # fixtures

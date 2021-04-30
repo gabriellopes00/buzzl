@@ -4,7 +4,7 @@ WORKDIR /usr/src/feedbackio/
 LABEL manteiner="gabrielluislopes00@gmail.com" version="0.0.1" description="Feedback.io api docker image" url="https://api-feedbackio.herokuapp.com"
 
 COPY package.json .
-RUN npm install --production
+RUN npm install --production --frozen-lockfile
 
 COPY . .
 

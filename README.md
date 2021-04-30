@@ -1,6 +1,9 @@
 <p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
 <h1 align="center"> Feedback.io </h1>
 
+![Feedback.io workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/workflow.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/feedbackio-api/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/feedbackio-api?branch=main)
+
 ###### An API built with
 
 <p>
@@ -14,6 +17,7 @@
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
   <img src="https://cdn.svgporn.com/logos/heroku-icon.svg" alt="heroku" height="30">
+  <img src="https://coveralls.io/favicon.png" alt="coveralls" height="30">
   <img src="https://github.com/typeorm/typeorm/raw/master/resources/logo_big.png" alt="typeorm" height="30">
 </p>
 
