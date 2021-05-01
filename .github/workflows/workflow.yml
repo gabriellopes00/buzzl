@@ -70,8 +70,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.APP_NAME}}
           branch: 'main'
-        env:
-          DB_URL: ${{secrets.DB_URL}}
-          TOKEN_EXPIRATION: ${{secrets.TOKEN_EXPIRATION}}
-          TOKEN_PRIVATE_KEY: ${{secrets.TOKEN_PRIVATE_KEY}}
-          TOKEN_PUBLIC_KEY: ${{secrets.TOKEN_PUBLIC_KEY}}

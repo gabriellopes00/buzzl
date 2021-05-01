@@ -1,4 +1,3 @@
-import logger from '@/config/logger'
 import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
 import { AuthUser } from '@/domain/usecases/user/auth-user'
@@ -37,8 +36,6 @@ export class AddUserController implements Controller {
 
       return created<AddUserResponse>({ user: { id, name, email }, accessToken: token })
     } catch (error) {
-      logger.error(error)
-
       return serverError(error)
     }
   }
