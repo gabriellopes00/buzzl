@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_email: 'gabrielluislopes00@gmail.com'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'api-feedbackio'
+          branch: 'main'
+        env:
+          DB_URL: ${{secrets.DB_URL}}
+          TOKEN_EXPIRATION: ${{secrets.TOKEN_EXPIRATION}}
+          TOKEN_PRIVATE_KEY: ${{secrets.TOKEN_PRIVATE_KEY}}
+          TOKEN_PUBLIC_KEY: ${{secrets.TOKEN_PUBLIC_KEY}}

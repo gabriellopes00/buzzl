@@ -1,4 +1,4 @@
-name: Feedback.io Workflow
+name: Workflow
 
 on:
   push:
@@ -37,7 +37,8 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        if: steps.yarn-cache.outputs.cache-hit != 'true' # cache setup
+        run: yarn install --prefer-offline --frozen-lockfile
 
       - name: Run linting
         run: yarn lint
@@ -55,19 +56,5 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
 
-      # - name: Build application
-      #   run: yarn build
-
-      # - name: Heroku deploy
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_email: 'gabrielluislopes00@gmail.com'
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: 'api-feedbackio'
-      #     branch: 'main'
-      #     remote_branch: 'main'
-      #   env:
-      #     DB_URL: ${{secrets.DB_URL}}
-      #     TOKEN_EXPIRATION: ${{secrets.TOKEN_EXPIRATION}}
-      #     TOKEN_PRIVATE_KEY: ${{secrets.TOKEN_PRIVATE_KEY}}
-      #     TOKEN_PUBLIC_KEY: ${{secrets.TOKEN_PUBLIC_KEY}}
+      - name: Build application
+        run: yarn build

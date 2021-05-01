@@ -1,4 +1,3 @@
-import logger from '@/config/logger'
 import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
 import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
@@ -26,7 +25,6 @@ export class AuthUserController implements Controller {
 
       return ok<AuthUserResponse>({ accessToken: authResult })
     } catch (error) {
-      logger.error(error)
       return serverError(error)
     }
   }
