@@ -3,8 +3,10 @@
 
 [![Workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/workflow.yml/badge.svg)](https://github.com/gabriellopes00/feedbackio-api/actions)
 [![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/feedbackio-api/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/feedbackio-api?branch=main)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md)
 ![Stars](https://img.shields.io/github/stars/gabriellopes00/feedbackio-api.svg)
+[![Maintainer](https://img.shields.io/badge/maintainer-gabriellopes00-yellow)](https://github.com/gabriellopes00)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/gabriellopes00/feedbackio-api)
 
 ###### An API built with
 
@@ -25,7 +27,7 @@
 
 ##### Application hosted at _[heroku](https://www.heroku.com/)_.
 
-##### API url: _https://api-feedbackio.herokuapp.com_.
+##### API url: _https://feedbackio-api.herokuapp.com_.
 
 <h2> About Feedback.io 📚 </h2>
 
