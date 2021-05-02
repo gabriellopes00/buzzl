@@ -1,10 +1,10 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
 import { UserAuthenticator } from '@/usecases/implementation/auth-user'
-import { MockEncrypter } from '../mocks/encrypter'
-import { MockHasher } from '../mocks/hasher'
-import { fakeAuthParams, fakeUser } from '../mocks/user'
-import { MockUserRepository } from '../mocks/user-repository'
+import { MockEncrypter } from '../../mocks/encrypter'
+import { MockHasher } from '../../mocks/hasher'
+import { fakeAuthParams, fakeUser } from '../../mocks/user'
+import { MockUserRepository } from '../../mocks/user-repository'
 
 describe('User Authenticator', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

@@ -2,9 +2,9 @@ import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-
 import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
 import { AuthUserController, AuthUserResponse } from '@/presentation/controllers/auth-user'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { fakeAuthParams } from '../../mocks/user'
-import { MockAuthenticator } from '../../mocks/user-authenticator'
-import { MockValidator } from '../../mocks/validator'
+import { fakeAuthParams } from '../../../mocks/user'
+import { MockAuthenticator } from '../../../mocks/user-authenticator'
+import { MockValidator } from '../../../mocks/validator'
 
 describe('Auth User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

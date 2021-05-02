@@ -17,7 +17,10 @@ describe('PostgreSQL Helper', () => {
 
     // connection success
     jest.spyOn(sut, 'connect').mockImplementationOnce(async () => {
-      await createConnection({ type: 'sqlite', database: resolve(__dirname, 'fake_db.sqlite') })
+      await createConnection({
+        type: 'sqlite',
+        database: resolve(__dirname, '..', '..', '..', 'mocks', 'fake_db.sqlite')
+      })
     })
     await sut.connect()
     const connection = sut.getConnection()

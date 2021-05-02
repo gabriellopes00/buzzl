@@ -1,35 +1,46 @@
-// import { PgConnection } from '@/infra/database/helpers/pg-helper'
-// import app from '@/app/setup/app'
-// import { fakeUserParams } from '../unit/mocks/user'
-// import supertest from 'supertest'
-// import { resolve } from 'path'
-// import { createConnection } from 'typeorm'
+import { PgConnection } from '@/infra/database/helpers/pg-helper'
+import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { resolve } from 'path'
+import supertest from 'supertest'
+import { createConnection } from 'typeorm'
+import { fakeUserParams } from '../mocks/user'
 
 describe('Add User Route', () => {
-  // const request = supertest(app)
-  // const pgHelper = new PgConnection()
+  const pgHelper = new PgConnection()
 
-  // jest.spyOn(pgHelper, 'connect').mockImplementationOnce(async () => {
-  //   await createConnection({
-  //     type: 'sqlite',
-  //     database: resolve(__dirname, '..', '..', 'unit', 'infra', 'database', 'fake_db.sqlite')
-  //   })
-  // })
+  beforeAll(async () => {
+    jest.spyOn(pgHelper, 'connect').mockImplementationOnce(async () => {
+      await createConnection({
+        type: 'sqlite',
+        database: resolve(__dirname, '..', 'mocks', 'fake_db.sqlite'),
+        entities: [resolve(__dirname, '../../src/infra/database/models/*.ts')]
+      })
+    })
+    await pgHelper.connect()
+  })
+  afterAll(async () => await pgHelper.close())
+  beforeEach(() => pgHelper.getConnection().getCustomRepository(PgUserRepository).delete({}))
 
-  // beforeAll(async () => await pgHelper.connect())
-  // afterAll(async () => await pgHelper.close())
+  it('Should create a user and return 201 on success', async () => {
+    const app = (await import('@/app/setup/app')).default
+    const request = supertest(app)
+    const response = await request.post('/signup').send(fakeUserParams)
+    expect(response.status).toBe(201)
+  })
 
-  // it('Should create a user and return 201 on success', async () => {
-  //   const response = await request.post('/signup/').send(fakeUserParams)
-  //   expect(response.status).toBe(201)
-  // })
+  it('Should return 400 if receive an invalid request', async () => {
+    const app = (await import('@/app/setup/app')).default
+    const request = supertest(app)
+    app.post('/signup', (req, res) => res.send())
+    await request.post('/signup').send({ name: 'User', email: 'user@mail.com' }).expect(400)
+  })
 
-  // it('Should return 400 if receive an invalid request', async () => {
-  //   app.post('/signup', (req, res) => res.send())
-  //   await request.post('/signup').send({ name: 'user', email: 'user@mail.com' }).expect(400)
-  // })
+  it('Should return 409 if receive an already registered email', async () => {
+    const app = (await import('@/app/setup/app')).default
+    const request = supertest(app)
 
-  it('', () => {
-    expect(1).toBe(1)
+    app.post('/signup', (req, res) => res.send())
+    await request.post('/signup').send(fakeUserParams)
+    await request.post('/signup').send(fakeUserParams).expect(409)
   })
 })

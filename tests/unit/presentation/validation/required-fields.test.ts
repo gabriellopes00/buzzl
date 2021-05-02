@@ -1,6 +1,6 @@
 import { MissingParamError } from '@/presentation/errors/missing-param-error'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
-import { fakeUserParams } from '../../mocks/user'
+import { fakeUserParams } from '../../../mocks/user'
 
 describe('Required Fields Validation', () => {
   const sut = new RequiredFieldValidation(['name', 'email', 'password'])
