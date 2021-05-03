@@ -7,6 +7,7 @@ import { RequiredFieldValidation } from '@/presentation/validation/required-fiel
 import { DbAddUser } from '@/usecases/implementation/add-user'
 import { hashGenerator, idGenerator, userRepository } from '../infra'
 import { authenticator } from '../usecases/authenticator'
+import { makeController } from './factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
 const nameValidator = new NameValidator()
@@ -21,4 +22,6 @@ const validator = new ValidatorCompositor([
 
 const dbAddUser = new DbAddUser(userRepository, idGenerator, hashGenerator)
 
-export const addUserController = new AddUserController(validator, dbAddUser, authenticator)
+export const addUserController = makeController(
+  new AddUserController(validator, dbAddUser, authenticator)
+)

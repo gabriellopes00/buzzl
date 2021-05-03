@@ -178,3 +178,57 @@ for (let index = 0; index < 599; index++) if (!pattern.test(asdf())) console.log
 // const pattern = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9A-F]{12}$/i
 // console.log(pattern.test('fa99c520-352a-4b8f-9f13-754a1da8ab3c'))
 ```
+
+```ts
+import { appendFile } from 'fs'
+
+interface ResponseHttp {
+  code: number
+  body: Error
+}
+
+interface Controller {
+  handle(request: any): Promise<ResponseHttp>
+}
+
+class Logger {
+  public async log(payload: Error): Promise<void> {
+    return await new Promise((resolve, rejects) => {
+      appendFile('./logs.txt', `${payload.stack} \n`, () => console.log('payload stored'))
+    })
+  }
+}
+
+function logger() {
+  return (target: Object, key: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value
+    descriptor.value = async function (...args) {
+      const result: ResponseHttp = await originalMethod.apply(this, args)
+      if (result.body) {
+        const log = new Logger()
+        log.log(result.body)
+        console.log(result.body.stack + 'from decorator')
+      }
+      return result
+    }
+  }
+}
+
+class ExampleController implements Controller {
+  public async handle(request: any): Promise<ResponseHttp> {
+    try {
+      console.log('controller handle called')
+      throw new Error('new test decorator log Errors')
+      return { code: 200, body: request }
+    } catch (error) {
+      console.log(error + 'from controller')
+      return { code: 500, body: error }
+    }
+  }
+}
+
+;(async () => {
+  const controller = new ExampleController()
+  const response = await controller.handle('payload')
+})()
+```
