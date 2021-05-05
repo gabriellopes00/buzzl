@@ -4,8 +4,7 @@ import Router from './routes'
 
 const app = express()
 
-;(() => {
-  Middlewares(app)
-  Router(app)
-})()
+Middlewares(app)
+Router(app)
+
 export default app

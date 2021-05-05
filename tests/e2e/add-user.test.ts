@@ -5,6 +5,16 @@ import supertest from 'supertest'
 import { createConnection } from 'typeorm'
 import { fakeUserParams } from '../mocks/user'
 
+jest.mock('jsonwebtoken', () => ({
+  async sign(): Promise<string> {
+    return 'token'
+  },
+
+  async verify(): Promise<string> {
+    return 'payload'
+  }
+}))
+
 describe('Add User Route', () => {
   const pgHelper = new PgConnection()
 
@@ -31,7 +41,6 @@ describe('Add User Route', () => {
   it('Should return 400 if receive an invalid request', async () => {
     const app = (await import('@/app/setup/app')).default
     const request = supertest(app)
-    app.post('/signup', (req, res) => res.send())
     await request.post('/signup').send({ name: 'User', email: 'user@mail.com' }).expect(400)
   })
 
@@ -39,7 +48,6 @@ describe('Add User Route', () => {
     const app = (await import('@/app/setup/app')).default
     const request = supertest(app)
 
-    app.post('/signup', (req, res) => res.send())
     await request.post('/signup').send(fakeUserParams)
     await request.post('/signup').send(fakeUserParams).expect(409)
   })
