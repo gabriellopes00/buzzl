@@ -18,8 +18,8 @@ export class ControllerDecorator implements Controller {
 
   private logError(error: Error): void {
     appendFileSync(
-      resolve(__dirname, '..', '..', '..', 'logs', 'error.log'),
-      `\n[${new Date().toISOString()}] ${error.stack}\n`
+      resolve(__dirname, '..', '..', '..', 'etc', 'logs', 'internal-errors.log'),
+      `[${new Date().toISOString()}] ${error.stack}\n\n`
     )
   }
 }
