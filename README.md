@@ -75,9 +75,9 @@ Authentications tokens are generated using [JWT](https://jwt.io/), web most used
 
 All controllers unexpected errors are stored in the database, becoming available for future analysis and corrections. Having a console available, the errors and the requests data can be logged on console, for faster viewing while running the application.
 
-## Building and contributing 🛠
+## Building and running 🛠
 
-To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker. After run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_**, filling all the properties in the file with your information.
+To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_**, filling all the properties in the file with your information. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` after each line.
 
 ###### Cloning Repository
 
@@ -90,6 +90,8 @@ git clone git@github.com:gabriellopes00/feedbackio-api.git
 ###### Generating RSA key pair
 
 ```bash
+npm run gen:key:pair
+or
 openssl genrsa -out <private_key_name>.pem 1024 &&
 openssl rsa -pubout -in <private_key_name>.pem -out <public_key_name>.pem
 ```

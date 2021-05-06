@@ -28,6 +28,7 @@
     "lint:fix": "eslint src tests --ext .ts --fix",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "orm": "node ./node_modules/typeorm/cli.js",
+    "gen:key:pair": "openssl genrsa -out private_key.pem 1024 && openssl rsa -pubout -in private_key.pem -out public_key.pem",
     "test": "jest --passWithNoTests --noStackTrace --runInBand --no-cache",
     "test:ci": "yarn test --coverage",
     "test:unit": "yarn test -c jest-unit-config.js",
@@ -47,6 +48,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "0x": "^4.10.2",
     "@types/express": "^4.17.11",
     "@types/express-pino-logger": "^4.0.2",
     "@types/jest": "^26.0.20",
@@ -58,6 +60,8 @@
     "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "autocannon": "^7.2.0",
+    "clinic": "^8.0.1",
     "coveralls": "^3.1.0",
     "eslint": "^7.12.1",
     "eslint-config-standard": "^16.0.2",
