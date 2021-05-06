@@ -49,13 +49,19 @@ jobs:
         env:
           NODE_ENV: 'test'
 
+      - name: Build application
+        run: yarn build
+
       - name: Get tests coverage with Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
 
-      - name: Build application
-        run: yarn build
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
     needs: build

@@ -13,8 +13,7 @@ export class PgConnection implements DbConnection {
 
   getConnection(): Connection {
     try {
-      const connection = getConnection()
-      return connection
+      return getConnection()
     } catch (error) {
       throw new ConnectionError(error.message)
     }

@@ -7,12 +7,10 @@ export class Argon2Hasher implements Hasher {
   private readonly salt = randomBytes(12)
 
   async generate(payload: string): Promise<string> {
-    const hashPayload = await hash(payload, { salt: this.salt })
-    return hashPayload
+    return await hash(payload, { salt: this.salt })
   }
 
-  async compare(payload: string, hash: string): Promise<boolean> {
-    const isValidHash = await verify(hash, payload, { salt: this.salt })
-    return isValidHash
+  async compare(payload: string, payloadHash: string): Promise<boolean> {
+    return await verify(payloadHash, payload, { salt: this.salt })
   }
 }
