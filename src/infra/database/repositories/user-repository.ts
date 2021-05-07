@@ -3,10 +3,6 @@ import { UserRepository } from '@/usecases/ports/user-repository'
 import { EntityRepository, Repository } from 'typeorm'
 import { UserModel } from '../models/user'
 
-/*
- Custom repositories extends default typeorm repository methods such as delete(), findOne(), save()...
- */
-
 @EntityRepository(UserModel)
 export class PgUserRepository extends Repository<UserModel> implements UserRepository {
   public async add(data: User): Promise<User> {

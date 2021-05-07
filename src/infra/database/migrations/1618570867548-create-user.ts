@@ -1,11 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
-import { tableNames } from '../helpers/pg-helper'
 
 export class createUser1618570867548 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: tableNames.user,
+        name: 'user',
         columns: [
           { name: 'id', type: 'varchar', isNullable: false, isUnique: true, isPrimary: true },
           { name: 'name', type: 'varchar', isNullable: false },
@@ -19,6 +18,6 @@ export class createUser1618570867548 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable(tableNames.user, true)
+    await queryRunner.dropTable('user', true)
   }
 }

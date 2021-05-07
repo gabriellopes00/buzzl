@@ -1,12 +1,11 @@
-import { PgConnection } from '@/infra/database/helpers/pg-helper'
+import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { resolve } from 'path'
 import { createConnection, getCustomRepository } from 'typeorm'
 import { fakeUser } from '../../../mocks/user'
 
 describe('Pg User Repository', () => {
-  const pgHelper = new PgConnection()
-  jest.spyOn(pgHelper, 'connect').mockImplementationOnce(async () => {
+  jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {
     await createConnection({
       type: 'sqlite',
       database: resolve(__dirname, '..', '..', '..', 'mocks', 'fake_db.sqlite'),
@@ -14,8 +13,8 @@ describe('Pg User Repository', () => {
     })
   })
 
-  beforeAll(async () => await pgHelper.connect())
-  afterAll(async () => await pgHelper.close())
+  beforeAll(async () => await pgConnectionHelper.connect())
+  afterAll(async () => await pgConnectionHelper.close())
   beforeEach(() => getCustomRepository(PgUserRepository).delete({}))
 
   describe('Add User', () => {

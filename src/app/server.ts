@@ -1,28 +1,14 @@
 import 'module-alias/register'
 import 'dotenv/config'
 
+import pgConnectionHelper from '@/infra/database/pg-helper'
 import logger from '@/app/config/logger'
-import { PgConnection } from '../infra/database/helpers/pg-helper'
-
-// export const {
-//   PORT,
-//   API_LOG_ERRORS,
-//   API_LOG_REQUESTS,
-//   DB_URL,
-//   MAX_FEEDBACK_REQUESTS,
-//   MAX_NPS_REQUESTS,
-//   TOKEN_PRIVATE_KEY,
-//   TOKEN_PUBLIC_KEY,
-//   TOKEN_EXPIRATION,
-//   NODE_ENV
-// } = process.env
 
 //
 ;(async () => {
   const { PORT } = process.env
   try {
-    const pgHelper = new PgConnection()
-    await pgHelper.connect()
+    await pgConnectionHelper.connect()
     logger.info('PostgreSQL connected successfully')
 
     const app = (await import('./setup/app')).default
@@ -35,7 +21,7 @@ import { PgConnection } from '../infra/database/helpers/pg-helper'
     for (const signal of exitSignals) {
       process.on(signal, async () => {
         try {
-          await pgHelper.close()
+          await pgConnectionHelper.close()
           server.close()
           logger.info('Server stopped successfully')
           process.exit(0)

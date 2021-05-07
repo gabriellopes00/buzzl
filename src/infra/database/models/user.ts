@@ -1,8 +1,7 @@
 import { User } from '@/domain/entities/user'
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
-import { tableNames } from '../helpers/pg-helper'
 
-@Entity(tableNames.user)
+@Entity('user')
 export class UserModel implements User {
   @PrimaryColumn()
   public id: string

@@ -1,4 +1,4 @@
-import { PgConnection } from '@/infra/database/helpers/pg-helper'
+import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { resolve } from 'path'
 import supertest from 'supertest'
@@ -16,20 +16,20 @@ jest.mock('jsonwebtoken', () => ({
 }))
 
 describe('Add User Route', () => {
-  const pgHelper = new PgConnection()
-
   beforeAll(async () => {
-    jest.spyOn(pgHelper, 'connect').mockImplementationOnce(async () => {
+    jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {
       await createConnection({
         type: 'sqlite',
         database: resolve(__dirname, '..', 'mocks', 'fake_db.sqlite'),
         entities: [resolve(__dirname, '../../src/infra/database/models/*.ts')]
       })
     })
-    await pgHelper.connect()
+    await pgConnectionHelper.connect()
   })
-  afterAll(async () => await pgHelper.close())
-  beforeEach(() => pgHelper.getConnection().getCustomRepository(PgUserRepository).delete({}))
+  afterAll(async () => await pgConnectionHelper.close())
+  beforeEach(() =>
+    pgConnectionHelper.getConnection().getCustomRepository(PgUserRepository).delete({})
+  )
 
   it('Should create a user and return 201 on success', async () => {
     const app = (await import('@/app/setup/app')).default

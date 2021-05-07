@@ -4,6 +4,8 @@ import pinoLogger from '../config/logger'
 
 export const bodyParser = json()
 
+export const logger = expressPino({ logger: pinoLogger })
+
 export const contentType = (_: Request, res: Response, next: NextFunction) => {
   res.type('json')
   next()
@@ -23,5 +25,3 @@ export const noCache = (_: Request, res: Response, next: NextFunction) => {
   res.set('surrogate-control', 'no-store')
   next()
 }
-
-export const logger = expressPino({ logger: pinoLogger })

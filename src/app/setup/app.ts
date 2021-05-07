@@ -1,6 +1,6 @@
 import express from 'express'
 import userRoutes from '../routes/user'
-import { bodyParser, contentType, logger, noCache, cors } from './middlewares'
+import { bodyParser, contentType, cors, logger, noCache } from './middlewares'
 
 const app = express()
 

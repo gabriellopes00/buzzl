@@ -48,23 +48,25 @@ This project structure is inspired in clean architecture code structure, [by Unc
 
 ```
 root
-├── .github                 → Github setup files
+├── .github                 → Github files
 │     └── assets
 │     └── workflow
 ├── src                     → Application main code
 │    │── app                → Composition layer, entry point code
-│    │    └── routes        → routes files
-│    │    └── setup         → server config (middlewares, cors, body→parser)
-│    │    └── builds        → classes instances
 │    │    └── adapters      → components adapters
-│    ├── config             → Some global config files (.env, path alias, logger)
+│    │    └── builds        → classes instances
+│    │    └── config        → global config such as path aliases and logger
+│    │    └── decorators    → decorators
+│    │    └── routes        → routes files
+│    │    └── setup         → server config (middlewares, cors, body-parser)
+│    │    └── server.ts     → server entry point
 │    ├── domain             → Business rules definition
 │    │     └── entities
 │    │     └── usecases
 │    ├── infra              → External frameworks and libs implementation (orm, encrypter)
 │    ├── presentation       → External api communication layer (controllers, validators)
 │    └── usecases           → Usecases implementation
-└─── tests                  → Components tests
+└─── tests                  → Application tests
       └── e2e
       └── unit
 ```
@@ -80,7 +82,7 @@ All controllers unexpected errors are stored in the database, becoming available
 
 ## Building and running 🛠
 
-To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_**, filling all the properties in the file with your information. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` after each line.
+To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_**, filling all the properties in the file with your information. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` and no spaces after each line.
 
 ###### Cloning Repository
 
