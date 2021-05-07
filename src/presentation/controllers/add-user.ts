@@ -1,4 +1,4 @@
-import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
+import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
 import { AuthUser } from '@/domain/usecases/user/auth-user'
 import { badRequest, conflict, created, serverError } from '../helpers/http'

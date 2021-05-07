@@ -1,10 +1,10 @@
 import express from 'express'
-import Middlewares from './middlewares'
-import Router from './routes'
+import userRoutes from '../routes/user'
+import { bodyParser, contentType, logger, noCache, cors } from './middlewares'
 
 const app = express()
 
-Middlewares(app)
-Router(app)
+app.use([bodyParser, contentType, noCache, logger, cors])
+app.use([userRoutes])
 
 export default app

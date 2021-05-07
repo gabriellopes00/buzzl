@@ -1,5 +1,5 @@
-import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
-import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
+import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
 import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
 import { MockEncrypter } from './encrypter'
 

@@ -131,6 +131,7 @@
 - create plans to increase feedbacks limits
 - use web sockets to list new feedbacks in real time (graphQL)
 - update user data and recover password
+- survey system (when user send its email with feedback, ask "would you like receive emails with surveys ?")
 
 # learning...
 

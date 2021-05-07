@@ -48,23 +48,23 @@ This project structure is inspired in clean architecture code structure, [by Unc
 
 ```
 root
-├── .github                 - Github setup files
+├── .github                 → Github setup files
 │     └── assets
 │     └── workflow
-├── src                     - Application main code
-│    │── app                - Composition layer, entry point code
-│    │    └── routes        - routes files
-│    │    └── setup         - server config (middlewares, cors, body-parser)
-│    │    └── builds        - classes instances
-│    │    └── adapters      - components adapters
-│    ├── config             - Some global config files (.env, path alias, logger)
-│    ├── domain             - Business rules definition
+├── src                     → Application main code
+│    │── app                → Composition layer, entry point code
+│    │    └── routes        → routes files
+│    │    └── setup         → server config (middlewares, cors, body→parser)
+│    │    └── builds        → classes instances
+│    │    └── adapters      → components adapters
+│    ├── config             → Some global config files (.env, path alias, logger)
+│    ├── domain             → Business rules definition
 │    │     └── entities
 │    │     └── usecases
-│    ├── infra              - External frameworks and libs implementation (orm, encrypter)
-│    ├── presentation       - External api communication layer (controllers, validators)
-│    └── usecases           - Usecases implementation
-└─── tests                  - Components tests
+│    ├── infra              → External frameworks and libs implementation (orm, encrypter)
+│    ├── presentation       → External api communication layer (controllers, validators)
+│    └── usecases           → Usecases implementation
+└─── tests                  → Components tests
       └── e2e
       └── unit
 ```

@@ -1,4 +1,4 @@
-import { DbAddService } from '@/usecases/implementation/add-service'
+import { DbAddService } from '@/usecases/implementation/service/add-service'
 import { MockServiceRepository } from '../../mocks/service-repository'
 import { MockApiKeyGenerator } from '../../mocks/api-key-generator'
 import { MockUUIDGenerator } from '../../mocks/uuid-generator'

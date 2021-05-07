@@ -1,9 +1,9 @@
 import { User } from '@/domain/entities/user'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
-import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
-import { UserRepository } from '../ports/user-repository'
-import { UUIDGenerator } from '../ports/uuid-generator'
-import { Hasher } from '../ports/hasher'
+import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
+import { UserRepository } from '../../ports/user-repository'
+import { UUIDGenerator } from '../../ports/uuid-generator'
+import { Hasher } from '../../ports/hasher'
 
 export class DbAddUser implements AddUser {
   constructor(

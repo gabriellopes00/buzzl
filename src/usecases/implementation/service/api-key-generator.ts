@@ -1,4 +1,4 @@
-import { ApiKeyGenerator } from '@/domain/usecases/service/api-key-generator'
+import { ApiKeyGenerator } from '../../ports/api-key-generator'
 
 export class ServiceApiKeyGenerator implements ApiKeyGenerator {
   generate(): string {

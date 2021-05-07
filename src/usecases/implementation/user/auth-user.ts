@@ -1,9 +1,9 @@
-import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
-import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
+import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
 import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
-import { Encrypter } from '../ports/encrypter'
-import { Hasher } from '../ports/hasher'
-import { UserRepository } from '../ports/user-repository'
+import { Encrypter } from '../../ports/encrypter'
+import { Hasher } from '../../ports/hasher'
+import { UserRepository } from '../../ports/user-repository'
 
 export class UserAuthenticator implements AuthUser {
   constructor(

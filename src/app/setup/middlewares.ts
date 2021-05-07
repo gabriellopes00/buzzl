@@ -1,21 +1,22 @@
-import { NODE_ENV } from '@/config/env'
-import logger from '@/config/logger'
-import { Express, json, NextFunction, Request, Response } from 'express'
+import { json, NextFunction, Request, Response } from 'express'
 import expressPino from 'express-pino-logger'
+import pinoLogger from '../config/logger'
 
-const contentType = (_: Request, res: Response, next: NextFunction) => {
+export const bodyParser = json()
+
+export const contentType = (_: Request, res: Response, next: NextFunction) => {
   res.type('json')
   next()
 }
 
-const cors = (_: Request, res: Response, next: NextFunction) => {
+export const cors = (_: Request, res: Response, next: NextFunction) => {
   res.set('access-control-allow-origin', '*')
   res.set('access-control-allow-methods', '*')
   res.set('access-control-allow-headers', '*')
   next()
 }
 
-const noCache = (_: Request, res: Response, next: NextFunction) => {
+export const noCache = (_: Request, res: Response, next: NextFunction) => {
   res.set('cache-control', 'no-store, no-cache, must-revalidate, proxy-revalidate')
   res.set('pragma', 'no-cache')
   res.set('expires', '0')
@@ -23,10 +24,4 @@ const noCache = (_: Request, res: Response, next: NextFunction) => {
   next()
 }
 
-export default (app: Express): void => {
-  app.use(cors)
-  app.use(json())
-  app.use(noCache)
-  app.use(contentType)
-  NODE_ENV !== 'test' && app.use(expressPino({ logger }))
-}
+export const logger = expressPino({ logger: pinoLogger })

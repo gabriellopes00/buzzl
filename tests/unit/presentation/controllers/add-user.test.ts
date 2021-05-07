@@ -1,4 +1,4 @@
-import { ExistingEmailError } from '@/domain/usecases/errors/user/existing-email'
+import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
 import { AddUserController, AddUserResponse } from '@/presentation/controllers/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../../mocks/add-user'

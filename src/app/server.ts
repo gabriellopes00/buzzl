@@ -1,10 +1,25 @@
 import 'module-alias/register'
-import { PORT } from '@/config/env'
-import logger from '@/config/logger'
+import 'dotenv/config'
+
+import logger from '@/app/config/logger'
 import { PgConnection } from '../infra/database/helpers/pg-helper'
+
+// export const {
+//   PORT,
+//   API_LOG_ERRORS,
+//   API_LOG_REQUESTS,
+//   DB_URL,
+//   MAX_FEEDBACK_REQUESTS,
+//   MAX_NPS_REQUESTS,
+//   TOKEN_PRIVATE_KEY,
+//   TOKEN_PUBLIC_KEY,
+//   TOKEN_EXPIRATION,
+//   NODE_ENV
+// } = process.env
 
 //
 ;(async () => {
+  const { PORT } = process.env
   try {
     const pgHelper = new PgConnection()
     await pgHelper.connect()

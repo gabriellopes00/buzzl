@@ -1,4 +1,4 @@
-import { ServiceApiKeyGenerator } from '@/usecases/implementation/api-key-generator'
+import { ServiceApiKeyGenerator } from '@/usecases/implementation/service/api-key-generator'
 
 describe('Api Key Generator', () => {
   const sut = new ServiceApiKeyGenerator()

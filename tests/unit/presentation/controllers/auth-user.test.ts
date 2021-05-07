@@ -1,5 +1,5 @@
-import { UnmatchedPasswordError } from '@/domain/usecases/errors/user/unmatched-password'
-import { UnregisteredEmailError } from '@/domain/usecases/errors/user/unregistered-email'
+import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
 import { AuthUserController, AuthUserResponse } from '@/presentation/controllers/auth-user'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { fakeAuthParams } from '../../../mocks/user'

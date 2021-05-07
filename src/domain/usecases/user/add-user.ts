@@ -1,5 +1,5 @@
 import { User } from '../../entities/user'
-import { ExistingEmailError } from '../errors/user/existing-email'
+import { ExistingEmailError } from './errors/existing-email'
 
 export interface UserParams extends Omit<User, 'id'> {}
 

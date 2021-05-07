@@ -1,5 +1,5 @@
-import { UnmatchedPasswordError } from '../errors/user/unmatched-password'
-import { UnregisteredEmailError } from '../errors/user/unregistered-email'
+import { UnmatchedPasswordError } from './errors/unmatched-password'
+import { UnregisteredEmailError } from './errors/unregistered-email'
 
 export interface AuthParams {
   email: string
