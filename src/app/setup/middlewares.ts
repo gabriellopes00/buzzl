@@ -1,9 +1,11 @@
 import { json, NextFunction, Request, Response } from 'express'
+import helmet from 'helmet'
 import expressPino from 'express-pino-logger'
 import pinoLogger from '../config/logger'
 
+// helmet helps setting some headers which make the api security stronger
+export const secureHeaders = helmet()
 export const bodyParser = json()
-
 export const logger = expressPino({ logger: pinoLogger })
 
 export const contentType = (_: Request, res: Response, next: NextFunction) => {
