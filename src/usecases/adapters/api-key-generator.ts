@@ -1,4 +1,4 @@
-import { ApiKeyGenerator } from '../../ports/api-key-generator'
+import { ApiKeyGenerator } from '../ports/api-key-generator'
 
 export class ServiceApiKeyGenerator implements ApiKeyGenerator {
   generate(): string {
@@ -11,10 +11,3 @@ export class ServiceApiKeyGenerator implements ApiKeyGenerator {
     return apiKey
   }
 }
-
-// const asdf = new ServiceApiKeyGenerator()
-
-// const pattern = /^\_[a-z0-9]{29}$/i
-// for (let index = 0; index < 999; index++)
-//   if (!pattern.test(asdf.generate())) console.log(asdf.generate().length)
-// console.log(asdf.generate())
