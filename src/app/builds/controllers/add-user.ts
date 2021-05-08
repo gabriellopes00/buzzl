@@ -1,3 +1,6 @@
+import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { Argon2Hasher } from '@/infra/utils/argon2-hasher'
+import { IDGenerator } from '@/infra/utils/uuid-generator'
 import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
@@ -5,7 +8,7 @@ import { NameValidator } from '@/presentation/validation/name-validator'
 import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddUser } from '@/usecases/implementation/user/add-user'
-import { hashGenerator, idGenerator, userRepository } from '../infra'
+import { getCustomRepository } from 'typeorm'
 import { authenticator } from '../usecases/authenticator'
 import { makeController } from './factory'
 
@@ -20,7 +23,11 @@ const validator = new ValidatorCompositor([
   passValidator
 ])
 
-const dbAddUser = new DbAddUser(userRepository, idGenerator, hashGenerator)
+const dbAddUser = new DbAddUser(
+  getCustomRepository(PgUserRepository),
+  new IDGenerator(),
+  new Argon2Hasher()
+)
 
 export const addUserController = makeController(
   new AddUserController(validator, dbAddUser, authenticator)
