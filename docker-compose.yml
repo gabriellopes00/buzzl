@@ -10,9 +10,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_USER: gabriellopes
-      POSTGRES_PASSWORD: feedbackiopsqldb
-      POSTGRES_DB: feedbackio
+      POSTGRES_USER: feedbackio
+      POSTGRES_PASSWORD: feedbackiopg
+      POSTGRES_DB: feedbackiodb
     networks:
       - feedbackio
 
@@ -26,6 +26,8 @@ services:
     image: feedbackio:0.1
     restart: always
     env_file: .env
+    environment:
+      DATABASE_URL: postgres://feedbackio:feedbackiopg@postgresql:5432/feedbackiodb
     ports:
       # This maps port from .env on the host to same port number on the container.
       - '$PORT:$PORT'

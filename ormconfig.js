@@ -5,8 +5,8 @@ module.exports = {
   synchronize: false,
   logging: false,
 
-  migrations: [__dirname + '/dist/infra/database/migrations/*{.ts,.js}'],
-  entities: [__dirname + '/dist/infra/database/models/*{.ts,.js}'],
+  migrations: [__dirname + '/dist/infra/database/migrations/*.js'],
+  entities: [__dirname + '/dist/infra/database/models/*.js'],
   cli: {
     migrationsDir: './src/infra/database/migrations/',
     entitiesDir: './src/infra/database/models/'
