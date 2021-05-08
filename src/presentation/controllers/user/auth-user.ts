@@ -1,10 +1,10 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
 import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
-import { badRequest, ok, serverError, unauthorized } from '../helpers/http'
-import { Controller } from '../ports/controllers'
-import { HttpResponse } from '../ports/http'
-import { Validator } from '../ports/validator'
+import { badRequest, ok, serverError, unauthorized } from '../../helpers/http'
+import { Controller } from '../../ports/controllers'
+import { HttpResponse } from '../../ports/http'
+import { Validator } from '../../ports/validator'
 
 export interface AuthUserResponse {
   accessToken: string

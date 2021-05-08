@@ -1,8 +1,8 @@
 import { DbAddService } from '@/usecases/implementation/service/add-service'
-import { MockServiceRepository } from '../../mocks/service-repository'
 import { MockApiKeyGenerator } from '../../mocks/api-key-generator'
+import { addServiceDto, fakeService } from '../../mocks/service'
+import { MockServiceRepository } from '../../mocks/service-repository'
 import { MockUUIDGenerator } from '../../mocks/uuid-generator'
-import { fakeService, fakeServiceParams } from '../../mocks/service'
 
 describe('Add Service Usecase', () => {
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>
@@ -43,7 +43,7 @@ describe('Add Service Usecase', () => {
 
     it('Should call service repository add method with correct values', async () => {
       const add = jest.spyOn(mockServiceRepository, 'add')
-      await sut.add(fakeServiceParams)
+      await sut.add(addServiceDto)
       expect(add).toHaveBeenCalledWith({
         id: mockUUIDGenerator.generate(),
         apiKey: mockApiKeyGenerator.generate(),
@@ -53,13 +53,13 @@ describe('Add Service Usecase', () => {
     })
 
     it('Should return created service on success', async () => {
-      const result = await sut.add(fakeServiceParams)
+      const result = await sut.add(addServiceDto)
       expect(result).toEqual(fakeService)
     })
 
     it('Should throws if repository add method throws', async () => {
       mockServiceRepository.add.mockRejectedValueOnce(new Error())
-      const error = sut.add(fakeServiceParams)
+      const error = sut.add(addServiceDto)
       await expect(error).rejects.toThrow()
     })
   })

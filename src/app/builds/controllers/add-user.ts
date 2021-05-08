@@ -1,4 +1,4 @@
-import { AddUserController } from '@/presentation/controllers/add-user'
+import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { NameValidator } from '@/presentation/validation/name-validator'

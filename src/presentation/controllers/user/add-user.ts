@@ -1,10 +1,10 @@
 import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
 import { AuthUser } from '@/domain/usecases/user/auth-user'
-import { badRequest, conflict, created, serverError } from '../helpers/http'
-import { Controller } from '../ports/controllers'
-import { HttpResponse } from '../ports/http'
-import { Validator } from '../ports/validator'
+import { badRequest, conflict, created, serverError } from '../../helpers/http'
+import { Controller } from '../../ports/controllers'
+import { HttpResponse } from '../../ports/http'
+import { Validator } from '../../ports/validator'
 
 export interface AddUserResponse {
   user: {

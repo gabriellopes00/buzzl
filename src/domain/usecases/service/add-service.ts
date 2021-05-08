@@ -1,7 +1,7 @@
 import { Service } from '../../entities/service'
 
-export interface ServiceParams extends Omit<Service, 'id' | 'apiKey' | 'isActive'> {}
+export interface ServiceParams extends Pick<Service, 'name' | 'description'> {}
 
 export interface AddService {
-  add(data: Service): Promise<Service>
+  add(data: ServiceParams): Promise<Service>
 }
