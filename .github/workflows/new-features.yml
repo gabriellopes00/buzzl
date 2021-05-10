@@ -7,7 +7,7 @@ on:
       - 'refactor/**'
 
 jobs:
-  build:
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -46,7 +46,7 @@ jobs:
         run: yarn style
 
       - name: Run tests
-        run: yarn test:ci
+        run: yarn test
         env:
           NODE_ENV: 'test'
 
