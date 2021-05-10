@@ -3,7 +3,7 @@ import { Controller } from '@/presentation/ports/controllers'
 
 export const routerAdapter = (controller: Controller) => {
   return async (req: Request, res: Response) => {
-    const data = { ...req.body }
+    const data = { ...req.body, ...req.headers }
     const response = await controller.handle(data)
 
     if (response.code >= 200 && response.code <= 299) res.status(response.code).json(response.body)

@@ -9,7 +9,7 @@ import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddUser } from '@/usecases/implementation/user/add-user'
 import { getCustomRepository } from 'typeorm'
-import { authenticator } from '../usecases/authenticator'
+import { signIn } from '../usecases/sign-in'
 import { makeController } from './factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
@@ -29,6 +29,4 @@ const dbAddUser = new DbAddUser(
   new Argon2Hasher()
 )
 
-export const addUserController = makeController(
-  new AddUserController(validator, dbAddUser, authenticator)
-)
+export const addUserController = makeController(new AddUserController(validator, dbAddUser, signIn))

@@ -6,7 +6,7 @@ import { getCustomRepository } from 'typeorm'
 
 const { TOKEN_PRIVATE_KEY, TOKEN_PUBLIC_KEY, TOKEN_EXPIRATION } = process.env
 
-export const authenticator = new UserSignIn(
+export const signIn = new UserSignIn(
   getCustomRepository(PgUserRepository),
   new Argon2Hasher(),
   new JWTEncrypter(TOKEN_PRIVATE_KEY, TOKEN_PUBLIC_KEY, TOKEN_EXPIRATION)
