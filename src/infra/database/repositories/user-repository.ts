@@ -20,4 +20,9 @@ export class PgUserRepository extends Repository<UserModel> implements UserRepos
     const user = await this.findOne({ email })
     return user || null
   }
+
+  public async findById(id: string): Promise<User> {
+    const user = await this.findOne({ id })
+    return user || null
+  }
 }

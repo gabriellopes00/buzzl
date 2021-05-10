@@ -1,10 +1,12 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
-import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
+import { SignIn, SignInParams } from '@/domain/usecases/user/sign-in'
 import { MockEncrypter } from './encrypter'
 
-export class MockAuthenticator implements AuthUser {
-  async auth(data: AuthParams): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> {
+export class MockSignIn implements SignIn {
+  async sign(
+    data: SignInParams
+  ): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> {
     return new MockEncrypter().encrypt('')
   }
 }

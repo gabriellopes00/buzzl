@@ -1,6 +1,6 @@
 import { User } from '@/domain/entities/user'
 import { UserParams } from '@/domain/usecases/user/add-user'
-import { AuthParams } from '@/domain/usecases/user/auth-user'
+import { SignInParams } from '@/domain/usecases/user/sign-in'
 import { MockUUIDGenerator } from './uuid-generator'
 
 const uuidGenerator = new MockUUIDGenerator()
@@ -12,7 +12,7 @@ export const fakeUser: User = {
   password: 'userpass_'
 }
 
-export const fakeAuthParams: AuthParams = {
+export const fakeSignInParams: SignInParams = {
   email: 'user@mail.com',
   password: 'userpass_'
 }

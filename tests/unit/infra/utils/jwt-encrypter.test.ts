@@ -13,10 +13,11 @@ jest.mock('jsonwebtoken', () => ({
 
 describe('Jwt Encrypter', () => {
   const fakePrivateKey = 'private_key'
+  const fakePublicKey = 'public_key'
   const fakeExpiration = '15m'
 
   const mockJwt = jwt as jest.Mocked<typeof jwt>
-  const sut = new JWTEncrypter(fakePrivateKey, fakeExpiration)
+  const sut = new JWTEncrypter(fakePrivateKey, fakePublicKey, fakeExpiration)
 
   describe('Encrypter', () => {
     it('Should call sign with correct values', async () => {

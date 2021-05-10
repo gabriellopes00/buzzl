@@ -1,4 +1,4 @@
-import { AuthUserController } from '@/presentation/controllers/user/auth-user'
+import { SignInController } from '@/presentation/controllers/user/sign-in'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { PasswordValidator } from '@/presentation/validation/password-validator'
@@ -11,4 +11,4 @@ const passValidator = new PasswordValidator()
 const emailValidator = new EmailValidator()
 const validator = new ValidatorCompositor([requiredFieldsValidation, emailValidator, passValidator])
 
-export const authUserController = makeController(new AuthUserController(validator, authenticator))
+export const signInController = makeController(new SignInController(validator, authenticator))

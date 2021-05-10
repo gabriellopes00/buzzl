@@ -1,6 +1,6 @@
-import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
 import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
-import { AuthUser } from '@/domain/usecases/user/auth-user'
+import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
+import { SignIn } from '@/domain/usecases/user/sign-in'
 import { badRequest, conflict, created, serverError } from '../../helpers/http'
 import { Controller } from '../../ports/controllers'
 import { HttpResponse } from '../../ports/http'
@@ -19,7 +19,7 @@ export class AddUserController implements Controller {
   constructor(
     private readonly validator: Validator,
     private readonly addUser: AddUser,
-    private readonly authenticator: AuthUser
+    private readonly signIn: SignIn
   ) {}
 
   async handle(params: UserParams): Promise<HttpResponse> {
@@ -32,7 +32,7 @@ export class AddUserController implements Controller {
 
       const { id, name, email } = result
 
-      const token = (await this.authenticator.auth({ email, password: params.password })) as string
+      const token = (await this.signIn.sign({ email, password: params.password })) as string
 
       return created<AddUserResponse>({ user: { id, name, email }, accessToken: token })
     } catch (error) {

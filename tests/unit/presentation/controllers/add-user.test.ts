@@ -2,15 +2,15 @@ import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email
 import { AddUserController, AddUserResponse } from '@/presentation/controllers/user/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../../mocks/add-user'
-import { fakeAuthParams, fakeUser, fakeUserParams } from '../../../mocks/user'
-import { MockAuthenticator } from '../../../mocks/user-authenticator'
+import { fakeSignInParams, fakeUser, fakeUserParams } from '../../../mocks/user'
+import { MockSignIn } from '../../../mocks/sign-in'
 import { MockValidator } from '../../../mocks/validator'
 
 describe('Add User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
   const mockAddUser = new MockAddUser() as jest.Mocked<MockAddUser>
-  const mockAuthenticator = new MockAuthenticator() as jest.Mocked<MockAuthenticator>
-  const sut = new AddUserController(mockValidator, mockAddUser, mockAuthenticator)
+  const mockSignIn = new MockSignIn() as jest.Mocked<MockSignIn>
+  const sut = new AddUserController(mockValidator, mockAddUser, mockSignIn)
 
   describe('Validation', () => {
     it('Should call validator with received request data', async () => {
@@ -57,14 +57,14 @@ describe('Add User Controller', () => {
     })
   })
 
-  describe('Authentication', () => {
-    it('Should call authenticator with correct values', async () => {
-      const auth = jest.spyOn(mockAuthenticator, 'auth')
+  describe('Sign In', () => {
+    it('Should call sign in with correct values', async () => {
+      const signin = jest.spyOn(mockSignIn, 'sign')
       await sut.handle(fakeUserParams)
-      expect(auth).toHaveBeenCalledWith(fakeAuthParams)
+      expect(signin).toHaveBeenCalledWith(fakeSignInParams)
     })
 
-    it('Should return a 201 response with created and authenticated user data', async () => {
+    it('Should return a 201 response with created and signed in user data', async () => {
       const response = await sut.handle(fakeUserParams)
       const { id, name, email } = fakeUser
       expect(response).toEqual(
@@ -73,7 +73,7 @@ describe('Add User Controller', () => {
     })
 
     it('Should return a 500 response if addUser throws', async () => {
-      mockAuthenticator.auth.mockRejectedValueOnce(new Error())
+      mockSignIn.sign.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeUserParams)
       expect(response).toEqual(serverError(new Error()))
     })

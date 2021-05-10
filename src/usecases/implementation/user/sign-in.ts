@@ -1,18 +1,20 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
-import { AuthParams, AuthUser } from '@/domain/usecases/user/auth-user'
+import { SignInParams, SignIn } from '@/domain/usecases/user/sign-in'
 import { Encrypter } from '../../ports/encrypter'
 import { Hasher } from '../../ports/hasher'
 import { UserRepository } from '../../ports/user-repository'
 
-export class UserAuthenticator implements AuthUser {
+export class UserSignIn implements SignIn {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly hashComparer: Hasher,
     private readonly encrypter: Encrypter
   ) {}
 
-  async auth(data: AuthParams): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> {
+  async sign(
+    data: SignInParams
+  ): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> {
     const { email, password } = data
     const existingUser = await this.userRepository.findByEmail(email)
     if (!existingUser) return new UnregisteredEmailError(email)

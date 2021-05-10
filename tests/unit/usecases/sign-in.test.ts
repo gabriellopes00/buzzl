@@ -1,23 +1,23 @@
 import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
-import { UserAuthenticator } from '@/usecases/implementation/user/auth-user'
+import { UserSignIn } from '@/usecases/implementation/user/sign-in'
 import { MockEncrypter } from '../../mocks/encrypter'
 import { MockHasher } from '../../mocks/hasher'
-import { fakeAuthParams, fakeUser } from '../../mocks/user'
+import { fakeSignInParams, fakeUser } from '../../mocks/user'
 import { MockUserRepository } from '../../mocks/user-repository'
 
 describe('User Authenticator', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>
   const mockHasher = new MockHasher() as jest.Mocked<MockHasher>
   const mockEncrypter = new MockEncrypter() as jest.Mocked<MockEncrypter>
-  const sut = new UserAuthenticator(mockUserRepository, mockHasher, mockEncrypter)
+  const sut = new UserSignIn(mockUserRepository, mockHasher, mockEncrypter)
 
   describe('User Repository', () => {
     it('Should call userRepository findByEmail with correct email once before hashComparer', async () => {
       const find = jest.spyOn(mockUserRepository, 'findByEmail')
       const compare = jest.spyOn(mockHasher, 'compare')
-      await sut.auth(fakeAuthParams)
-      expect(find).toHaveBeenCalledWith(fakeAuthParams.email)
+      await sut.sign(fakeSignInParams)
+      expect(find).toHaveBeenCalledWith(fakeSignInParams.email)
 
       const findCall = find.mock.invocationCallOrder[0]
       const compareCall = compare.mock.invocationCallOrder[0]
@@ -26,13 +26,13 @@ describe('User Authenticator', () => {
 
     it('Should return a UnregisteredEmail error if received email is not registered', async () => {
       mockUserRepository.findByEmail.mockResolvedValueOnce(null)
-      const result = await sut.auth(fakeAuthParams)
-      expect(result).toEqual(new UnregisteredEmailError(fakeAuthParams.email))
+      const result = await sut.sign(fakeSignInParams)
+      expect(result).toEqual(new UnregisteredEmailError(fakeSignInParams.email))
     })
 
     it('Should throws if userRepository throws', async () => {
       mockUserRepository.findByEmail.mockRejectedValueOnce(new Error())
-      const error = sut.auth(fakeAuthParams)
+      const error = sut.sign(fakeSignInParams)
       await expect(error).rejects.toThrow()
     })
   })
@@ -41,34 +41,34 @@ describe('User Authenticator', () => {
     it('Should not be called if userRepository does not found a user with received email', async () => {
       mockUserRepository.findByEmail.mockResolvedValueOnce(null)
       const compare = jest.spyOn(mockHasher, 'compare')
-      await sut.auth(fakeAuthParams)
+      await sut.sign(fakeSignInParams)
       expect(compare).not.toHaveBeenCalled()
     })
 
     it('Should call hash comparer with received password', async () => {
       const compare = jest.spyOn(mockHasher, 'compare')
-      await sut.auth(fakeAuthParams)
+      await sut.sign(fakeSignInParams)
 
       const hash = await mockHasher.generate('')
-      expect(compare).toHaveBeenCalledWith(fakeAuthParams.password, hash)
+      expect(compare).toHaveBeenCalledWith(fakeSignInParams.password, hash)
     })
 
     it('Should return an UnmatchedPasswordError if received an incorrect password', async () => {
       mockHasher.compare.mockResolvedValueOnce(false)
-      const error = await sut.auth(fakeAuthParams)
-      expect(error).toEqual(new UnmatchedPasswordError(fakeAuthParams.email))
+      const error = await sut.sign(fakeSignInParams)
+      expect(error).toEqual(new UnmatchedPasswordError(fakeSignInParams.email))
     })
   })
 
   describe('Encrypter', () => {
     it('Should call encrypter with correct id', async () => {
       const encrypt = jest.spyOn(mockEncrypter, 'encrypt')
-      await sut.auth(fakeAuthParams)
+      await sut.sign(fakeSignInParams)
       expect(encrypt).toHaveBeenCalledWith({ id: fakeUser.id })
     })
 
     it('Should return a token on success', async () => {
-      const token = await sut.auth(fakeAuthParams)
+      const token = await sut.sign(fakeSignInParams)
       expect(token).toEqual(await mockEncrypter.encrypt(''))
     })
   })

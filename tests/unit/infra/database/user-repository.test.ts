@@ -85,4 +85,30 @@ describe('Pg User Repository', () => {
       await expect(error).rejects.toThrow()
     })
   })
+
+  describe('Find By Id', () => {
+    it('Should return a user if it is found by id', async () => {
+      const sut = getCustomRepository(PgUserRepository)
+      const user = sut.create({ ...fakeUser })
+      await sut.save(user)
+
+      const userFound = await sut.findById(user.id)
+      expect(userFound.id).toEqual(user.id)
+    })
+
+    it('Should return null if no user is found', async () => {
+      const sut = getCustomRepository(PgUserRepository)
+
+      const userFound = await sut.findById('invalid_id')
+      expect(userFound).toBeNull()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      const sut = getCustomRepository(PgUserRepository)
+      jest.spyOn(sut, 'findById').mockRejectedValueOnce(new Error())
+
+      const error = sut.findById(fakeUser.id)
+      await expect(error).rejects.toThrow()
+    })
+  })
 })
