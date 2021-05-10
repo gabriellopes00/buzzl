@@ -1,5 +1,8 @@
+import 'module-alias/register'
+import 'dotenv/config'
+
 import { Encrypter } from '@/usecases/ports/encrypter'
-import { sign, verify } from 'jsonwebtoken'
+import { JsonWebTokenError, sign, verify } from 'jsonwebtoken'
 
 export class JWTEncrypter implements Encrypter {
   constructor(
@@ -16,6 +19,11 @@ export class JWTEncrypter implements Encrypter {
   }
 
   async decrypt(token: string): Promise<Object> {
-    return verify(token, this.publicKey, { algorithms: ['RS256'] })
+    try {
+      return verify(token, this.publicKey, { algorithms: ['RS256'] })
+    } catch (error) {
+      if (error instanceof JsonWebTokenError) return null
+      else throw error
+    }
   }
 }
