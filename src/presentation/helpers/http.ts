@@ -31,3 +31,8 @@ export const serverError = (error: Error): HttpResponse => ({
   code: 500,
   body: new ServerError(error.stack)
 })
+
+export const forbidden = (error: Error): HttpResponse => ({
+  code: 403,
+  body: error
+})
