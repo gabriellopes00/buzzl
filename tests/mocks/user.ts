@@ -17,6 +17,8 @@ export const fakeSignInParams: SignInParams = {
   password: 'userpass_'
 }
 
+export const fakeAuthParam = 'auth_token'
+
 export const fakeUserParams: UserParams = {
   name: 'User Name',
   email: 'user@mail.com',
