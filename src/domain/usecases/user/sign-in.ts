@@ -1,11 +1,11 @@
 import { UnmatchedPasswordError } from './errors/unmatched-password'
 import { UnregisteredEmailError } from './errors/unregistered-email'
 
-export interface AuthParams {
+export interface SignInParams {
   email: string
   password: string
 }
 
-export interface AuthUser {
-  auth(data: AuthParams): Promise<string | UnregisteredEmailError | UnmatchedPasswordError>
+export interface SignIn {
+  sign(data: SignInParams): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> // signin token signature
 }
