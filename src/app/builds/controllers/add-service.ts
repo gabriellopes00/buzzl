@@ -4,8 +4,8 @@ import { AddServiceController } from '@/presentation/controllers/service/add-ser
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { NameValidator } from '@/presentation/validation/name-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
-import { ServiceApiKeyGenerator } from '@/usecases/adapters/api-key-generator'
-import { DbAddService } from '@/usecases/implementation/service/add-service'
+import { ServiceAPIKeyGenerator } from '@/infra/utils/api-key-generator'
+import { DbAddService } from '@/usecases/service/add-service'
 import { getCustomRepository } from 'typeorm'
 import { makeController } from './factory'
 
@@ -15,7 +15,7 @@ const validator = new ValidatorCompositor([requiredFieldsValidation, nameValidat
 
 const dbAddService = new DbAddService(
   new IDGenerator(),
-  new ServiceApiKeyGenerator(),
+  new ServiceAPIKeyGenerator(),
   getCustomRepository(PgServiceRepository)
 )
 

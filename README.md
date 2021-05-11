@@ -44,6 +44,8 @@
 
 This project structure is inspired in clean architecture code structure, [by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The main purpose of clean architecture is creating a strong project structure, splitting all the application in layers. The best advantages of using it, is create a application independent of any frameworks, tool, database or technology, being easy to handle the code, create a new features, fix any issue, or change some framework, thanks to the adapters and ports.
 
+![Clean Architecture Cone](.github/assets/clean-architecture-cone.jpg)
+
 #### Folders 🗂
 
 ```
