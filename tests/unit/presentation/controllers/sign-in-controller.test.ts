@@ -1,6 +1,6 @@
-import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
-import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
-import { AuthUserController, AuthUserResponse } from '@/presentation/controllers/user/sign-in'
+import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
+import { SignInController, SignInResponse } from '@/presentation/controllers/user/sign-in'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { fakeSignInParams } from '../../../mocks/user'
 import { MockSignIn } from '../../../mocks/sign-in'
@@ -9,7 +9,7 @@ import { MockValidator } from '../../../mocks/validator'
 describe('Sign In User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
   const mockSignIn = new MockSignIn() as jest.Mocked<MockSignIn>
-  const sut = new AuthUserController(mockValidator, mockSignIn)
+  const sut = new SignInController(mockValidator, mockSignIn)
 
   describe('Validation', () => {
     it('Should call validator with received request data', async () => {
@@ -45,7 +45,7 @@ describe('Sign In User Controller', () => {
     it('Should return a 200 response with created and signed in user data', async () => {
       const response = await sut.handle(fakeSignInParams)
       expect(response).toEqual(
-        ok<AuthUserResponse>({ accessToken: expect.any(String) })
+        ok<SignInResponse>({ accessToken: expect.any(String) })
       )
     })
 

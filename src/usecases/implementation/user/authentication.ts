@@ -1,5 +1,5 @@
-import { User } from '@/domain/entities/user'
-import { Authentication } from '@/domain/usecases/user/authentication'
+import { User } from '@/domain/user/user'
+import { Authentication } from '@/domain/user/authentication'
 import { Encrypter } from '../../ports/encrypter'
 import { UserRepository } from '../../ports/user-repository'
 

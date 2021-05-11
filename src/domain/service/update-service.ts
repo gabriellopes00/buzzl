@@ -1,4 +1,4 @@
-import { Service } from '../../entities/service'
+import { Service } from './service'
 
 export interface UpdateService {
   update(serviceId: string, newData: Service | boolean): Promise<Service>

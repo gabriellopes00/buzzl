@@ -1,6 +1,6 @@
-import { UnmatchedPasswordError } from '@/domain/usecases/user/errors/unmatched-password'
-import { UnregisteredEmailError } from '@/domain/usecases/user/errors/unregistered-email'
-import { SignIn, SignInParams } from '@/domain/usecases/user/sign-in'
+import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
+import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
+import { SignIn, SignInParams } from '@/domain/user/sign-in'
 import { MockEncrypter } from './encrypter'
 
 export class MockSignIn implements SignIn {

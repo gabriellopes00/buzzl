@@ -1,5 +1,5 @@
-import { Service } from '@/domain/entities/service'
-import { AddService, ServiceParams } from '@/domain/usecases/service/add-service'
+import { Service } from '@/domain/service/service'
+import { AddService, ServiceParams } from '@/domain/service/add-service'
 import { ApiKeyGenerator } from '@/usecases/ports/api-key-generator'
 import { ServiceRepository } from '../../ports/service-repository'
 import { UUIDGenerator } from '../../ports/uuid-generator'

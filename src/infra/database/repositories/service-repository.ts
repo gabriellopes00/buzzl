@@ -1,4 +1,4 @@
-import { Service } from '@/domain/entities/service'
+import { Service } from '@/domain/service/service'
 import { ServiceRepository } from '@/usecases/ports/service-repository'
 import { EntityRepository, Repository } from 'typeorm'
 import { ServiceModel } from '../models/service'

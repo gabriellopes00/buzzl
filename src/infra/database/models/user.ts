@@ -1,4 +1,4 @@
-import { User } from '@/domain/entities/user'
+import { User } from '@/domain/user/user'
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
 @Entity('user')

@@ -1,4 +1,4 @@
-import { Service } from '@/domain/entities/service'
+import { Service } from '@/domain/service/service'
 
 export interface ServiceRepository {
   add(data: Service): Promise<Service>

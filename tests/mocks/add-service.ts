@@ -1,5 +1,5 @@
-import { Service } from '@/domain/entities/service'
-import { AddService, ServiceParams } from '@/domain/usecases/service/add-service'
+import { Service } from '@/domain/service/service'
+import { AddService, ServiceParams } from '@/domain/service/add-service'
 import { fakeService } from './service'
 
 export class MockAddService implements AddService {

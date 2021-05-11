@@ -1,6 +1,6 @@
-import { User } from '@/domain/entities/user'
-import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
-import { AddUser, UserParams } from '@/domain/usecases/user/add-user'
+import { User } from '@/domain/user/user'
+import { ExistingEmailError } from '@/domain/user/errors/existing-email'
+import { AddUser, UserParams } from '@/domain/user/add-user'
 import { fakeUser } from './user'
 
 export class MockAddUser implements AddUser {

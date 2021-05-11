@@ -1,4 +1,4 @@
-import { User } from '@/domain/entities/user'
+import { User } from '@/domain/user/user'
 import { UserRepository } from '@/usecases/ports/user-repository'
 import { MockHasher } from './hasher'
 import { fakeUser } from './user'

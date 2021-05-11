@@ -1,4 +1,4 @@
-import { Service } from '@/domain/entities/service'
+import { Service } from '@/domain/service/service'
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { UserModel } from './user'
 

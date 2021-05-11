@@ -1,4 +1,4 @@
-import { ExistingEmailError } from '@/domain/usecases/user/errors/existing-email'
+import { ExistingEmailError } from '@/domain/user/errors/existing-email'
 import { DbAddUser } from '@/usecases/implementation/user/add-user'
 import { MockHasher } from '../../mocks/hasher'
 import { fakeUser, fakeUserParams } from '../../mocks/user'

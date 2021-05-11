@@ -1,4 +1,4 @@
-import { AddService } from '@/domain/usecases/service/add-service'
+import { AddService } from '@/domain/service/add-service'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { Controller } from '@/presentation/ports/controllers'
 import { HttpResponse } from '@/presentation/ports/http'

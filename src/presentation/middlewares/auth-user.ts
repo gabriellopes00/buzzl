@@ -1,4 +1,4 @@
-import { Authentication } from '@/domain/usecases/user/authentication'
+import { Authentication } from '@/domain/user/authentication'
 import { UnauthorizedError } from '../errors/unauthorized'
 import { forbidden, ok, serverError } from '../helpers/http'
 import { HttpResponse } from '../ports/http'

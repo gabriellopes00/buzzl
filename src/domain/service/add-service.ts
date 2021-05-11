@@ -1,4 +1,4 @@
-import { Service } from '../../entities/service'
+import { Service } from './service'
 
 export interface ServiceParams extends Pick<Service, 'name' | 'description' | 'maintainer'> {}
 
