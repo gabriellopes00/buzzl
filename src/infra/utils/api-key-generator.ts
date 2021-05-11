@@ -1,6 +1,6 @@
-import { ApiKeyGenerator } from '../ports/api-key-generator'
+import { APIKeyGenerator } from '../../usecases/ports/api-key-generator'
 
-export class ServiceApiKeyGenerator implements ApiKeyGenerator {
+export class ServiceAPIKeyGenerator implements APIKeyGenerator {
   generate(): string {
     const characters = '0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ'
     const length = 29 // total length = 30

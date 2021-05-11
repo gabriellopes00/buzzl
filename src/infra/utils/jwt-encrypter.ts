@@ -1,6 +1,3 @@
-import 'module-alias/register'
-import 'dotenv/config'
-
 import { Encrypter } from '@/usecases/ports/encrypter'
 import { JsonWebTokenError, sign, verify } from 'jsonwebtoken'
 

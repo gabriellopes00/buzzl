@@ -1,6 +1,6 @@
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { JWTEncrypter } from '@/infra/utils/jwt-encrypter'
-import { UserAuthentication } from '@/usecases/implementation/user/authentication'
+import { UserAuthentication } from '@/usecases/user/authentication'
 import { getCustomRepository } from 'typeorm'
 
 const { TOKEN_PRIVATE_KEY, TOKEN_PUBLIC_KEY, TOKEN_EXPIRATION } = process.env

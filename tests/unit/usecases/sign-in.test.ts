@@ -1,6 +1,6 @@
 import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
-import { UserSignIn } from '@/usecases/implementation/user/sign-in'
+import { UserSignIn } from '@/usecases/user/sign-in'
 import { MockEncrypter } from '../../mocks/encrypter'
 import { MockHasher } from '../../mocks/hasher'
 import { fakeSignInParams, fakeUser } from '../../mocks/user'

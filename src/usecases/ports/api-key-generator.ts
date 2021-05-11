@@ -1,3 +1,3 @@
-export interface ApiKeyGenerator {
+export interface APIKeyGenerator {
   generate(): string
 }

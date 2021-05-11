@@ -1,4 +1,4 @@
-import { UserAuthentication } from '@/usecases/implementation/user/authentication'
+import { UserAuthentication } from '@/usecases/user/authentication'
 import { MockEncrypter } from '../../mocks/encrypter'
 import { fakeAuthParam } from '../../mocks/user'
 import { MockUserRepository } from '../../mocks/user-repository'

@@ -1,7 +1,7 @@
-import { User } from '@/domain/user/user'
 import { Authentication } from '@/domain/user/authentication'
-import { Encrypter } from '../../ports/encrypter'
-import { UserRepository } from '../../ports/user-repository'
+import { User } from '@/domain/user/user'
+import { Encrypter } from '../ports/encrypter'
+import { UserRepository } from '../ports/user-repository'
 
 export interface UserTokenPayload {
   id: string

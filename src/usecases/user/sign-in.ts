@@ -1,9 +1,9 @@
 import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
-import { SignInParams, SignIn } from '@/domain/user/sign-in'
-import { Encrypter } from '../../ports/encrypter'
-import { Hasher } from '../../ports/hasher'
-import { UserRepository } from '../../ports/user-repository'
+import { SignIn, SignInParams } from '@/domain/user/sign-in'
+import { Encrypter } from '../ports/encrypter'
+import { Hasher } from '../ports/hasher'
+import { UserRepository } from '../ports/user-repository'
 
 export class UserSignIn implements SignIn {
   constructor(

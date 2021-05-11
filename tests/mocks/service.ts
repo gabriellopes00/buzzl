@@ -1,11 +1,11 @@
 import { Service } from '@/domain/service/service'
 import { ServiceParams } from '@/domain/service/add-service'
-import { MockApiKeyGenerator } from './api-key-generator'
+import { MockAPIKeyGenerator } from './api-key-generator'
 import { fakeUser } from './user'
 import { MockUUIDGenerator } from './uuid-generator'
 
 const uuidGenerator = new MockUUIDGenerator()
-const apiKeyGenerator = new MockApiKeyGenerator()
+const apiKeyGenerator = new MockAPIKeyGenerator()
 
 export const fakeService: Service = {
   id: uuidGenerator.generate(),

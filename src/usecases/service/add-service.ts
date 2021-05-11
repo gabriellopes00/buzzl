@@ -1,13 +1,13 @@
 import { Service } from '@/domain/service/service'
 import { AddService, ServiceParams } from '@/domain/service/add-service'
-import { ApiKeyGenerator } from '@/usecases/ports/api-key-generator'
-import { ServiceRepository } from '../../ports/service-repository'
-import { UUIDGenerator } from '../../ports/uuid-generator'
+import { APIKeyGenerator } from '../ports/api-key-generator'
+import { ServiceRepository } from '../ports/service-repository'
+import { UUIDGenerator } from '../ports/uuid-generator'
 
 export class DbAddService implements AddService {
   constructor(
     private readonly uuidGenerator: UUIDGenerator,
-    private readonly apiKeyGenerator: ApiKeyGenerator,
+    private readonly apiKeyGenerator: APIKeyGenerator,
     private readonly serviceRepository: ServiceRepository
   ) {}
 

@@ -1,14 +1,14 @@
-import { DbAddService } from '@/usecases/implementation/service/add-service'
-import { MockApiKeyGenerator } from '../../mocks/api-key-generator'
+import { DbAddService } from '@/usecases/service/add-service'
+import { MockAPIKeyGenerator } from '../../mocks/api-key-generator'
 import { addServiceDto, fakeService } from '../../mocks/service'
 import { MockServiceRepository } from '../../mocks/service-repository'
 import { MockUUIDGenerator } from '../../mocks/uuid-generator'
 
 describe('Add Service Usecase', () => {
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>
-  const mockApiKeyGenerator = new MockApiKeyGenerator() as jest.Mocked<MockApiKeyGenerator>
+  const mockAPIKeyGenerator = new MockAPIKeyGenerator() as jest.Mocked<MockAPIKeyGenerator>
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>
-  const sut = new DbAddService(mockUUIDGenerator, mockApiKeyGenerator, mockServiceRepository)
+  const sut = new DbAddService(mockUUIDGenerator, mockAPIKeyGenerator, mockServiceRepository)
 
   describe('UUID Generator', () => {
     it('Should call UUIDGenerator once before generate api key', async () => {
@@ -20,7 +20,7 @@ describe('Add Service Usecase', () => {
 
   describe('Api Key Generator', () => {
     it('Should call api key generator once before service registration', async () => {
-      const generate = jest.spyOn(mockApiKeyGenerator, 'generate')
+      const generate = jest.spyOn(mockAPIKeyGenerator, 'generate')
       await sut.add(null)
       expect(generate).toHaveBeenCalled()
     })
@@ -29,7 +29,7 @@ describe('Add Service Usecase', () => {
   describe('Service Repository', () => {
     it('Should call uuid generator and api key generator before call service repository', async () => {
       const generateUUID = jest.spyOn(mockUUIDGenerator, 'generate')
-      const generateKey = jest.spyOn(mockApiKeyGenerator, 'generate')
+      const generateKey = jest.spyOn(mockAPIKeyGenerator, 'generate')
       const add = jest.spyOn(mockServiceRepository, 'add')
       await sut.add(null)
 
@@ -46,7 +46,7 @@ describe('Add Service Usecase', () => {
       await sut.add(addServiceDto)
       expect(add).toHaveBeenCalledWith({
         id: mockUUIDGenerator.generate(),
-        apiKey: mockApiKeyGenerator.generate(),
+        apiKey: mockAPIKeyGenerator.generate(),
         ...fakeService,
         isActive: true
       })

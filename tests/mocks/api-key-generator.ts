@@ -1,6 +1,6 @@
-import { ApiKeyGenerator } from '@/usecases/ports/api-key-generator'
+import { APIKeyGenerator } from '@/usecases/ports/api-key-generator'
 
-export class MockApiKeyGenerator implements ApiKeyGenerator {
+export class MockAPIKeyGenerator implements APIKeyGenerator {
   generate(): string {
     return '_cbvTX7PjT15'
   }

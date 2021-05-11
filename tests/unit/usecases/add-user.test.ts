@@ -1,5 +1,5 @@
 import { ExistingEmailError } from '@/domain/user/errors/existing-email'
-import { DbAddUser } from '@/usecases/implementation/user/add-user'
+import { DbAddUser } from '@/usecases/user/add-user'
 import { MockHasher } from '../../mocks/hasher'
 import { fakeUser, fakeUserParams } from '../../mocks/user'
 import { MockUserRepository } from '../../mocks/user-repository'

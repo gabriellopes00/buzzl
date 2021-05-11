@@ -1,7 +1,7 @@
-import { ServiceApiKeyGenerator } from '@/usecases/adapters/api-key-generator'
+import { ServiceAPIKeyGenerator } from '@/infra/utils/api-key-generator'
 
 describe('Api Key Generator', () => {
-  const sut = new ServiceApiKeyGenerator()
+  const sut = new ServiceAPIKeyGenerator()
 
   it('Should generate a valid api key', () => {
     const apiKey = sut.generate()
