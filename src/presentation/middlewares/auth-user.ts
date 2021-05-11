@@ -5,7 +5,9 @@ import { HttpResponse } from '../ports/http'
 import { Middleware } from '../ports/middleware'
 
 export interface AuthUserRequest {
-  accessToken?: string
+  headers: {
+    accessToken?: string
+  }
 }
 
 export class AuthUserMiddleware implements Middleware {
@@ -13,10 +15,10 @@ export class AuthUserMiddleware implements Middleware {
 
   public async handle(request: AuthUserRequest): Promise<HttpResponse> {
     try {
-      if (!request?.accessToken) {
+      if (!request?.headers?.accessToken) {
         return forbidden(new ForbiddenError('Authentication token required'))
       }
-      const { accessToken } = request
+      const { accessToken } = request.headers
       const authResult = await this.authenticator.auth(accessToken)
       if (authResult === null) return unauthorized('Invalid authentication token')
 

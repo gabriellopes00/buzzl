@@ -7,13 +7,13 @@ describe('Auth User Middleware', () => {
   const mockAuthenticator = new MockAuthentication() as jest.Mocked<MockAuthentication>
   const sut = new AuthUserMiddleware(mockAuthenticator)
 
-  const fakeParams: AuthUserRequest = { accessToken: 'access_token' }
+  const fakeParams: AuthUserRequest = { headers: { accessToken: 'access_token' } }
 
   describe('Authenticator', () => {
     it('Should call authentication with correct values', async () => {
       const auth = jest.spyOn(mockAuthenticator, 'auth')
       await sut.handle(fakeParams)
-      expect(auth).toHaveBeenCalledWith(fakeParams.accessToken)
+      expect(auth).toHaveBeenCalledWith(fakeParams.headers.accessToken)
     })
 
     it('Should return a 200 response with decrypted payload data', async () => {
@@ -28,7 +28,7 @@ describe('Auth User Middleware', () => {
 
     it('Should return a 401 response if receive an invalid access token', async () => {
       mockAuthenticator.auth.mockResolvedValueOnce(null)
-      const response = await sut.handle({ accessToken: 'invalid_token' })
+      const response = await sut.handle(fakeParams)
       expect(response).toEqual(unauthorized('Invalid authentication token'))
     })
 
