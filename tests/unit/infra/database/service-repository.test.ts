@@ -33,7 +33,10 @@ describe('Pg Service Repository', () => {
     })
 
     it('Should not add a store a service if there is no respective maintainer', async () => {
-      const service = getCustomRepository(PgServiceRepository).add(fakeService)
+      const service = getCustomRepository(PgServiceRepository).add({
+        ...fakeService,
+        maintainer: null
+      })
       await expect(service).rejects.toThrow()
     })
 

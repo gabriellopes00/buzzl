@@ -1,5 +1,5 @@
-import { UnauthorizedError } from '@/presentation/errors/unauthorized'
-import { forbidden, ok, serverError } from '@/presentation/helpers/http'
+import { ForbiddenError } from '@/presentation/errors/forbidden'
+import { forbidden, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { AuthUserMiddleware, AuthUserRequest } from '@/presentation/middlewares/auth-user'
 import { MockAuthentication } from '../../../mocks/auth-user'
 
@@ -23,7 +23,13 @@ describe('Auth User Middleware', () => {
 
     it('Should return a 403 response if is missing access token', async () => {
       const response = await sut.handle(null)
-      expect(response).toEqual(forbidden(new UnauthorizedError('Missing authentication token')))
+      expect(response).toEqual(forbidden(new ForbiddenError('Authentication token required')))
+    })
+
+    it('Should return a 401 response if receive an invalid access token', async () => {
+      mockAuthenticator.auth.mockResolvedValueOnce(null)
+      const response = await sut.handle({ accessToken: 'invalid_token' })
+      expect(response).toEqual(unauthorized('Invalid authentication token'))
     })
 
     it('Should return a 500 response if authentication throws', async () => {

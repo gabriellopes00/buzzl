@@ -20,7 +20,7 @@ describe('User Authentication', () => {
       expect(payload).toEqual(await mockUserRepository.findById(''))
     })
 
-    it('Should return null if receive an invalid token', async () => {
+    it('Should return null if receive an invalid or expired token', async () => {
       mockEncrypter.decrypt.mockResolvedValueOnce(null)
       const payload = await sut.auth(fakeAuthParam)
       expect(payload).toBeNull()

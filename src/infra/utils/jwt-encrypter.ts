@@ -1,5 +1,5 @@
 import { Encrypter } from '@/usecases/ports/encrypter'
-import { JsonWebTokenError, sign, verify } from 'jsonwebtoken'
+import { JsonWebTokenError, sign, TokenExpiredError, verify } from 'jsonwebtoken'
 
 export class JWTEncrypter implements Encrypter {
   constructor(
@@ -20,6 +20,7 @@ export class JWTEncrypter implements Encrypter {
       return verify(token, this.publicKey, { algorithms: ['RS256'] })
     } catch (error) {
       if (error instanceof JsonWebTokenError) return null
+      else if (error instanceof TokenExpiredError) return null
       else throw error
     }
   }

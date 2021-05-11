@@ -55,10 +55,20 @@ describe('Jwt Encrypter', () => {
       expect(value).toBe('payload')
     })
 
-    // test('Should return null if receive a invalid token', async () => {
-    //   mockJwt.verify.mockRejectedValueOnce(new JsonWebTokenError('') as never)
-    //   const value = await sut.decrypt('invalid_token')
-    //   expect(value).toBeNull()
+    // it('Should return null if receive an expired token', async () => {
+    //   mockJwt.verify.mockImplementationOnce(async () => {
+    //     throw new TokenExpiredError('expired token', new Date())
+    //   })
+    //   const error = await sut.decrypt('any_token')
+    //   expect(error).toBeNull()
+    // })
+
+    // it('Should return null if receive an invalid token', async () => {
+    //   mockJwt.verify.mockImplementationOnce(async () => {
+    //     throw new JsonWebTokenError('invalid token')
+    //   })
+    //   const error = sut.decrypt('any_token')
+    //   await expect(error).rejects.toThrow()
     // })
 
     test('Should throw if verify throws', async () => {

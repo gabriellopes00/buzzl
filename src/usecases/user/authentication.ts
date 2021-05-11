@@ -15,7 +15,7 @@ export class UserAuthentication implements Authentication {
 
   public async auth(token: string): Promise<User> {
     const payload = (await this.encrypter.decrypt(token)) as UserTokenPayload
-    if (payload === null) return null
+    if (!payload) return null
 
     const user = await this.userRepository.findById(payload.id)
     return user
