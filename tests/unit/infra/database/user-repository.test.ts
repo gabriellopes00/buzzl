@@ -1,7 +1,8 @@
+import { UserModel } from '@/infra/database/models/user'
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { resolve } from 'path'
-import { createConnection, getCustomRepository } from 'typeorm'
+import { createConnection, getRepository } from 'typeorm'
 import { fakeUser } from '../../../mocks/user'
 
 describe('Pg User Repository', () => {
@@ -13,23 +14,21 @@ describe('Pg User Repository', () => {
     })
   })
 
+  const sut = new PgUserRepository()
+
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  beforeEach(() => getCustomRepository(PgUserRepository).delete({}))
+  beforeEach(() => getRepository(UserModel).delete({}))
 
   describe('Add User', () => {
     it('Should add a store a user data on success', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       const user = await sut.add(fakeUser)
-
-      const data = await sut.findOne({ id: fakeUser.id }) // native typeorm repository method
+      const data = await getRepository(UserModel).findOne({ id: fakeUser.id })
       expect(data.id).toEqual(user.id)
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'add').mockRejectedValueOnce(new Error())
-
       const error = sut.add(fakeUser)
       await expect(error).rejects.toThrow()
     })
@@ -37,24 +36,19 @@ describe('Pg User Repository', () => {
 
   describe('Existing User', () => {
     it('Should return true if there is a user registered with received email', async () => {
-      const sut = getCustomRepository(PgUserRepository)
-      const user = sut.create({ ...fakeUser })
-      await sut.save(user) // native typeorm repository method
-
+      const user = getRepository(UserModel).create({ ...fakeUser })
+      await getRepository(UserModel).save(user)
       const existing = await sut.exists(user.email)
       expect(existing).toBeTruthy()
     })
 
     it('Should return false if there is no user registered with received email', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       const existing = await sut.exists('unregisred@mail.com')
       expect(existing).toBeFalsy()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
-
       const error = sut.exists(fakeUser.email)
       await expect(error).rejects.toThrow()
     })
@@ -62,25 +56,19 @@ describe('Pg User Repository', () => {
 
   describe('Find By Email', () => {
     it('Should return a user if it is found by email', async () => {
-      const sut = getCustomRepository(PgUserRepository)
-      const user = sut.create({ ...fakeUser })
-      await sut.save(user)
-
+      const user = getRepository(UserModel).create({ ...fakeUser })
+      await getRepository(UserModel).save(user)
       const userFound = await sut.findByEmail(user.email)
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const sut = getCustomRepository(PgUserRepository)
-
       const userFound = await sut.findByEmail('unregistered@mail.com')
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'findByEmail').mockRejectedValueOnce(new Error())
-
       const error = sut.findByEmail(fakeUser.email)
       await expect(error).rejects.toThrow()
     })
@@ -88,25 +76,19 @@ describe('Pg User Repository', () => {
 
   describe('Find By Id', () => {
     it('Should return a user if it is found by id', async () => {
-      const sut = getCustomRepository(PgUserRepository)
-      const user = sut.create({ ...fakeUser })
-      await sut.save(user)
-
+      const user = getRepository(UserModel).create({ ...fakeUser })
+      await getRepository(UserModel).save(user)
       const userFound = await sut.findById(user.id)
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const sut = getCustomRepository(PgUserRepository)
-
       const userFound = await sut.findById('invalid_id')
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      const sut = getCustomRepository(PgUserRepository)
       jest.spyOn(sut, 'findById').mockRejectedValueOnce(new Error())
-
       const error = sut.findById(fakeUser.id)
       await expect(error).rejects.toThrow()
     })

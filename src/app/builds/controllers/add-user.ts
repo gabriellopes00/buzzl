@@ -8,7 +8,6 @@ import { NameValidator } from '@/presentation/validation/name-validator'
 import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddUser } from '@/usecases/user/add-user'
-import { getCustomRepository } from 'typeorm'
 import { signIn } from '../usecases/sign-in'
 import { makeController } from './factory'
 
@@ -23,10 +22,5 @@ const validator = new ValidatorCompositor([
   passValidator
 ])
 
-const dbAddUser = new DbAddUser(
-  getCustomRepository(PgUserRepository),
-  new IDGenerator(),
-  new Argon2Hasher()
-)
-
+const dbAddUser = new DbAddUser(new PgUserRepository(), new IDGenerator(), new Argon2Hasher())
 export const addUserController = makeController(new AddUserController(validator, dbAddUser, signIn))

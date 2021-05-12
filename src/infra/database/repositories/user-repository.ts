@@ -1,28 +1,31 @@
 import { User } from '@/domain/user/user'
 import { UserRepository } from '@/usecases/ports/user-repository'
-import { EntityRepository, Repository } from 'typeorm'
+import { getRepository } from 'typeorm'
 import { UserModel } from '../models/user'
 
-@EntityRepository(UserModel)
-export class PgUserRepository extends Repository<UserModel> implements UserRepository {
+export class PgUserRepository implements UserRepository {
   public async add(data: User): Promise<User> {
-    const user = this.create(data)
-    await this.save(user)
+    const repository = getRepository(UserModel)
+    const user = repository.create(data)
+    await repository.save(user)
     return user
   }
 
   public async exists(email: string): Promise<boolean> {
-    const user = await this.findOne({ email })
+    const repository = getRepository(UserModel)
+    const user = await repository.findOne({ email })
     return !!user
   }
 
   public async findByEmail(email: string): Promise<User> {
-    const user = await this.findOne({ email })
+    const repository = getRepository(UserModel)
+    const user = await repository.findOne({ email })
     return user || null
   }
 
   public async findById(id: string): Promise<User> {
-    const user = await this.findOne({ id })
+    const repository = getRepository(UserModel)
+    const user = await repository.findOne({ id })
     return user || null
   }
 }
