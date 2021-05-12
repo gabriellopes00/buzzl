@@ -1,0 +1,8 @@
+[2021-05-12T13:48:39.580Z] QueryFailedError: null value in column "maintainer" of relation "service" violates not-null constraint
+    at new QueryFailedError (/media/gabriellopes/HD/drive/www/feedbackio/api/node_modules/typeorm/error/QueryFailedError.js:12:28)
+    at PostgresQueryRunner.<anonymous> (/media/gabriellopes/HD/drive/www/feedbackio/api/node_modules/typeorm/driver/postgres/PostgresQueryRunner.js:248:31)
+    at step (/media/gabriellopes/HD/drive/www/feedbackio/api/node_modules/typeorm/node_modules/tslib/tslib.js:143:27)
+    at Object.throw (/media/gabriellopes/HD/drive/www/feedbackio/api/node_modules/typeorm/node_modules/tslib/tslib.js:124:57)
+    at rejected (/media/gabriellopes/HD/drive/www/feedbackio/api/node_modules/typeorm/node_modules/tslib/tslib.js:115:69)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+
