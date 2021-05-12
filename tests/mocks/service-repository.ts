@@ -11,4 +11,10 @@ export class MockServiceRepository implements ServiceRepository {
   async add(data: Service): Promise<Service> {
     return fakeService
   }
+
+  async exists(by: { id?: string; apiKey?: string }): Promise<boolean> {
+    return true
+  }
+
+  async delete(by: { id?: string; apiKey?: string }): Promise<void> {}
 }

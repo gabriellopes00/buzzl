@@ -1,3 +1,5 @@
+import { UnregisteredApiKeyError } from './errors/unregistered-api-key'
+
 export interface DeleteService {
-  delete(serviceId: string): Promise<boolean>
+  delete(apiKey: string): Promise<void | UnregisteredApiKeyError>
 }
