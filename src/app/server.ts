@@ -3,6 +3,7 @@ import 'dotenv/config'
 
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import logger from '@/app/config/logger'
+import app from './setup/app'
 
 //
 ;(async () => {
@@ -11,7 +12,6 @@ import logger from '@/app/config/logger'
     await pgConnectionHelper.connect()
     logger.info('PostgreSQL connected successfully')
 
-    const app = (await import('./setup/app')).default
     const server = app.listen(PORT, () => {
       logger.info('Server started successfully')
     })
