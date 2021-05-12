@@ -1,5 +1,13 @@
 import { Service } from '@/domain/service/service'
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  UpdateDateColumn
+} from 'typeorm'
 import { UserModel } from './user'
 
 @Entity('service')
@@ -28,4 +36,7 @@ export class ServiceModel implements Service {
 
   @CreateDateColumn()
   public created_at: Date
+
+  @UpdateDateColumn()
+  public updated_at: Date
 }

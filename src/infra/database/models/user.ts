@@ -1,5 +1,5 @@
 import { User } from '@/domain/user/user'
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 
 @Entity('user')
 export class UserModel implements User {
@@ -17,4 +17,7 @@ export class UserModel implements User {
 
   @CreateDateColumn()
   public created_at: Date
+
+  @UpdateDateColumn()
+  public updated_at: Date
 }
