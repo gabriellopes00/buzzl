@@ -20,7 +20,7 @@ services:
     container_name: pgadmin
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@mail.com
+      PGADMIN_DEFAULT_EMAIL: feedbackioadmin@mail.com
       PGADMIN_DEFAULT_PASSWORD: feedbackiopgadmin
     ports:
       - 5050:80

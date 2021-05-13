@@ -1,10 +1,10 @@
-import { ControllerDecorator } from '@/app/decorators/controller-decorator'
+import { LogDecorator } from '@/app/decorators/log-decorator'
 import { Controller } from '@/presentation/ports/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
 
-describe('Controller Decorator', () => {
+describe('Log Decorator', () => {
   class MockController implements Controller {
     async handle(request: any): Promise<HttpResponse> {
       return { body: new Error('fake_error'), code: 500 }
@@ -12,7 +12,7 @@ describe('Controller Decorator', () => {
   }
 
   const mockController = new MockController()
-  const mockDecorator = new ControllerDecorator(mockController)
+  const mockDecorator = new LogDecorator(mockController)
   beforeEach(() =>
     writeFileSync(resolve(__dirname, '..', '..', '..', 'etc', 'logs', 'internal-errors.log'), '')
   )

@@ -1,4 +1,5 @@
-import { ControllerDecorator } from '@/app/decorators/controller-decorator'
+import { LogDecorator } from '@/app/decorators/log-decorator'
 import { Controller } from '@/presentation/ports/controllers'
+import { Middleware } from '@/presentation/ports/middleware'
 
-export const makeController = (controller: Controller) => new ControllerDecorator(controller)
+export const makeDecorator = (handler: Controller | Middleware) => new LogDecorator(handler)

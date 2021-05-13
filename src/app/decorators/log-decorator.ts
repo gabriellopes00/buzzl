@@ -1,13 +1,14 @@
 import { Controller } from '@/presentation/ports/controllers'
+import { Middleware } from '@/presentation/ports/middleware'
 import { appendFileSync } from 'fs'
 import { resolve } from 'path'
 import { HttpResponse } from '../../presentation/ports/http'
 
-export class ControllerDecorator implements Controller {
-  constructor(private readonly controller: Controller) {}
+export class LogDecorator implements Controller, Middleware {
+  constructor(private readonly handler: Controller | Middleware) {}
 
   public async handle(request: any): Promise<HttpResponse> {
-    const response = await this.controller.handle(request)
+    const response = await this.handler.handle(request)
     try {
       if (response.code === 500) this.logError(response.body)
       return response

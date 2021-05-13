@@ -6,7 +6,7 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { NameValidator } from '@/presentation/validation/name-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddService } from '@/usecases/service/add-service'
-import { makeController } from './factory'
+import { makeDecorator } from './factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name'])
 const nameValidator = new NameValidator()
@@ -18,6 +18,4 @@ const dbAddService = new DbAddService(
   new PgServiceRepository()
 )
 
-export const addServiceController = makeController(
-  new AddServiceController(validator, dbAddService)
-)
+export const addServiceController = makeDecorator(new AddServiceController(validator, dbAddService))

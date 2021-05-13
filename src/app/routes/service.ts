@@ -1,15 +1,13 @@
-import { AuthUserMiddleware } from '@/presentation/middlewares/auth-user'
 import { Router } from 'express'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
 import { addServiceController } from '../builds/controllers/add-service'
 import { deleteServiceController } from '../builds/controllers/delete-service'
-import { authentication } from '../builds/usecases/authentication'
+import { authMiddleware } from '../builds/middlewares/auth-user'
 
 const router = Router()
-const authMiddleware = middlewareAdapter(new AuthUserMiddleware(authentication))
 
-router.post('/service', authMiddleware, routerAdapter(addServiceController))
-router.delete('/service', authMiddleware, routerAdapter(deleteServiceController))
+router.post('/service', middlewareAdapter(authMiddleware), routerAdapter(addServiceController))
+router.delete('/service', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
 
 export default router

@@ -19,7 +19,9 @@ export class AuthUserMiddleware implements Middleware {
       }
       const { accessToken } = request
       const authResult = await this.authenticator.auth(accessToken)
-      if (authResult === null) { return unauthorized(new UnauthorizedError('Invalid authentication token')) }
+      if (authResult === null) {
+        return unauthorized(new UnauthorizedError('Invalid authentication token'))
+      }
 
       return ok({ userId: authResult.id })
     } catch (error) {
