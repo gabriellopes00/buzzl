@@ -1,7 +1,7 @@
 import { AddServiceController } from '@/presentation/controllers/service/add-service'
-import { badRequest, serverError } from '@/presentation/helpers/http'
+import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { MockAddService } from '../../../mocks/add-service'
-import { fakeServiceParams } from '../../../mocks/service'
+import { fakeService, fakeServiceParams } from '../../../mocks/service'
 import { MockValidator } from '../../../mocks/validator'
 
 describe('Add Service Controller', () => {
@@ -22,6 +22,14 @@ describe('Add Service Controller', () => {
       expect(response).toEqual(badRequest(new Error()))
     })
 
+    it('Should return an 500 response if validation throws', async () => {
+      mockValidator.validate.mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const response = await sut.handle(fakeServiceParams)
+      expect(response).toEqual(serverError(new Error()))
+    })
+
     it('Should call validator before call addService usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
       const add = jest.spyOn(mockAddService, 'add')
@@ -35,10 +43,15 @@ describe('Add Service Controller', () => {
 
   describe('AddService Usecase', () => {
     it('Should not call addService usecase if validation fails', async () => {
-      const add = jest.spyOn(mockAddService, 'add')
       mockValidator.validate.mockReturnValueOnce(new Error())
+      const add = jest.spyOn(mockAddService, 'add')
       await sut.handle(fakeServiceParams)
       expect(add).not.toHaveBeenCalled()
+    })
+
+    it('Should return 201 response on success', async () => {
+      const response = await sut.handle(fakeServiceParams)
+      expect(response).toEqual(created(fakeService))
     })
 
     it('Should return a 500 response if addService throws', async () => {

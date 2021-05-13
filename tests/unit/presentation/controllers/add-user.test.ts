@@ -25,6 +25,14 @@ describe('Add User Controller', () => {
       expect(response).toEqual(badRequest(new Error()))
     })
 
+    it('Should return a 500 response if validator throws', async () => {
+      mockValidator.validate.mockImplementationOnce(() => {
+        throw new Error('')
+      })
+      const response = await sut.handle(fakeUserParams)
+      expect(response).toEqual(serverError(new Error()))
+    })
+
     it('Should call validator before call addUser usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
       const add = jest.spyOn(mockAddUser, 'add')
@@ -72,7 +80,7 @@ describe('Add User Controller', () => {
       )
     })
 
-    it('Should return a 500 response if addUser throws', async () => {
+    it('Should return a 500 response if signIn throws', async () => {
       mockSignIn.sign.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeUserParams)
       expect(response).toEqual(serverError(new Error()))

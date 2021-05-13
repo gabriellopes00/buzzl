@@ -24,6 +24,14 @@ describe('Sign In User Controller', () => {
       expect(response).toEqual(badRequest(new Error()))
     })
 
+    it('Should return a 500 response if signin throws', async () => {
+      mockValidator.validate.mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const response = await sut.handle(fakeSignInParams)
+      expect(response).toEqual(serverError(new Error()))
+    })
+
     it('Should call validator before call signin usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
       const signin = jest.spyOn(mockSignIn, 'sign')

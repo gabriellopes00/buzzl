@@ -26,6 +26,14 @@ describe('Delete Service Controller', () => {
       expect(response).toEqual(badRequest(new Error()))
     })
 
+    it('Should return a 500 response if validation throws', async () => {
+      mockValidator.validate.mockImplementationOnce(() => {
+        throw new Error()
+      })
+      const response = await sut.handle(fakeParams)
+      expect(response).toEqual(serverError(new Error()))
+    })
+
     it('Should call validator before call deleteService usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
       const del = jest.spyOn(mockDeleteService, 'delete')
