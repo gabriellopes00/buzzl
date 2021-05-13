@@ -51,7 +51,7 @@ describe('AddUser Usecase', () => {
         const exists = jest.spyOn(mockUserRepository, 'exists')
         const add = jest.spyOn(mockUserRepository, 'add')
         await sut.add(fakeUserParams)
-        expect(exists).toHaveBeenCalledWith(fakeUserParams.email)
+        expect(exists).toHaveBeenCalledWith({ email: fakeUserParams.email })
 
         // ensure email verification is done *before* user registration
         const existsCall = exists.mock.invocationCallOrder[0]

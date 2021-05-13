@@ -1,7 +1,7 @@
 <p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
 <h1 align="center"> Feedback.io </h1>
 
-[![Workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/workflow.yml/badge.svg)](https://github.com/gabriellopes00/feedbackio-api/actions)
+[![Main Workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/main.yml)
 [![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/feedbackio-api/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/feedbackio-api?branch=main)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md)
 ![Stars](https://img.shields.io/github/stars/gabriellopes00/feedbackio-api.svg)
@@ -55,16 +55,8 @@ root
 │     └── workflow
 ├── src                     → Application main code
 │    │── app                → Composition layer, entry point code
-│    │    └── adapters      → components adapters
-│    │    └── builds        → classes instances
-│    │    └── config        → global config such as path aliases and logger
-│    │    └── decorators    → decorators
-│    │    └── routes        → routes files
-│    │    └── setup         → server config (middlewares, cors, body-parser)
-│    │    └── server.ts     → server entry point
-│    ├── domain             → Business rules definition
-│    │     └── entities
-│    │     └── usecases
+│    │    └── server.ts     → Server entry point
+│    ├── domain             → Business rules and entities definition
 │    ├── infra              → External frameworks and libs implementation (orm, encrypter)
 │    ├── presentation       → External api communication layer (controllers, validators)
 │    └── usecases           → Usecases implementation

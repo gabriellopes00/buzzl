@@ -15,15 +15,11 @@ export class MockUserRepository implements UserRepository {
     return { ...fakeUser, password: await mockHasher.generate('') }
   }
 
-  async exists(email: string): Promise<boolean> {
+  async exists(criteria: { id?: string; email?: string }): Promise<boolean> {
     return false
   }
 
-  async findByEmail(email: string): Promise<User> {
-    return { ...fakeUser, password: await mockHasher.generate('') }
-  }
-
-  async findById(id: string): Promise<User> {
+  async findBy(criteria: { id?: string; email?: string }): Promise<User> {
     return { ...fakeUser, password: await mockHasher.generate('') }
   }
 }

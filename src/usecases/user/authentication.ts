@@ -1,11 +1,7 @@
-import { Authentication } from '@/domain/user/authentication'
+import { Authentication, UserTokenPayload } from '@/domain/user/authentication'
 import { User } from '@/domain/user/user'
 import { Encrypter } from '../ports/encrypter'
 import { UserRepository } from '../ports/user-repository'
-
-export interface UserTokenPayload {
-  id: string
-}
 
 export class UserAuthentication implements Authentication {
   constructor(
@@ -17,7 +13,7 @@ export class UserAuthentication implements Authentication {
     const payload = (await this.encrypter.decrypt(token)) as UserTokenPayload
     if (!payload) return null
 
-    const user = await this.userRepository.findById(payload.id)
+    const user = await this.userRepository.findBy({ id: payload.id })
     return user
   }
 }

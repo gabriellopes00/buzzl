@@ -38,18 +38,18 @@ describe('Pg User Repository', () => {
     it('Should return true if there is a user registered with received email', async () => {
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
-      const existing = await sut.exists(user.email)
+      const existing = await sut.exists({ email: user.email })
       expect(existing).toBeTruthy()
     })
 
     it('Should return false if there is no user registered with received email', async () => {
-      const existing = await sut.exists('unregisred@mail.com')
+      const existing = await sut.exists({ email: 'unregisred@mail.com' })
       expect(existing).toBeFalsy()
     })
 
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
-      const error = sut.exists(fakeUser.email)
+      const error = sut.exists({ email: fakeUser.email })
       await expect(error).rejects.toThrow()
     })
   })
@@ -58,18 +58,18 @@ describe('Pg User Repository', () => {
     it('Should return a user if it is found by email', async () => {
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
-      const userFound = await sut.findByEmail(user.email)
+      const userFound = await sut.findBy({ email: user.email })
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const userFound = await sut.findByEmail('unregistered@mail.com')
+      const userFound = await sut.findBy({ email: 'unregistered@mail.com' })
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findByEmail').mockRejectedValueOnce(new Error())
-      const error = sut.findByEmail(fakeUser.email)
+      jest.spyOn(sut, 'findBy').mockRejectedValueOnce(new Error())
+      const error = sut.findBy({ email: fakeUser.email })
       await expect(error).rejects.toThrow()
     })
   })
@@ -78,18 +78,18 @@ describe('Pg User Repository', () => {
     it('Should return a user if it is found by id', async () => {
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
-      const userFound = await sut.findById(user.id)
+      const userFound = await sut.findBy({ id: user.id })
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const userFound = await sut.findById('invalid_id')
+      const userFound = await sut.findBy({ id: 'invalid_id' })
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findById').mockRejectedValueOnce(new Error())
-      const error = sut.findById(fakeUser.id)
+      jest.spyOn(sut, 'findBy').mockRejectedValueOnce(new Error())
+      const error = sut.findBy({ id: fakeUser.id })
       await expect(error).rejects.toThrow()
     })
   })

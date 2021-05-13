@@ -13,11 +13,12 @@ export class DbAddUser implements AddUser {
   ) {}
 
   public async add(data: UserParams): Promise<User | ExistingEmailError> {
-    const existingEmail = await this.userRepository.exists(data.email)
-    if (existingEmail) return new ExistingEmailError(data.email)
+    const { email, password } = data
+    const existingEmail = await this.userRepository.exists({ email })
+    if (existingEmail) return new ExistingEmailError(email)
 
     const uuid = this.uuidGenerator.generate()
-    const hashPassword = await this.hasher.generate(data.password)
+    const hashPassword = await this.hasher.generate(password)
 
     const user = await this.userRepository.add({ ...data, id: uuid, password: hashPassword })
     return user

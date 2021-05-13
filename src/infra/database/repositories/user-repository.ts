@@ -6,26 +6,20 @@ import { UserModel } from '../models/user'
 export class PgUserRepository implements UserRepository {
   public async add(data: User): Promise<User> {
     const repository = getRepository(UserModel)
-    const user = repository.create(data)
-    await repository.save(user)
-    return user
+    return await repository.save(repository.create(data))
   }
 
-  public async exists(email: string): Promise<boolean> {
+  public async exists(criteria: { id?: string; email?: string }): Promise<boolean> {
     const repository = getRepository(UserModel)
-    const user = await repository.findOne({ email })
-    return !!user
+    const { id, email } = criteria
+    if (id) return !!(await repository.findOne({ where: { id } }))
+    else if (email) return !!(await repository.findOne({ where: { email } }))
   }
 
-  public async findByEmail(email: string): Promise<User> {
+  public async findBy(criteria: { id?: string; email?: string }): Promise<User> {
     const repository = getRepository(UserModel)
-    const user = await repository.findOne({ email })
-    return user || null
-  }
-
-  public async findById(id: string): Promise<User> {
-    const repository = getRepository(UserModel)
-    const user = await repository.findOne({ id })
-    return user || null
+    const { id, email } = criteria
+    if (id) return (await repository.findOne({ where: { id } })) || null
+    else if (email) return (await repository.findOne({ where: { email } })) || null
   }
 }
