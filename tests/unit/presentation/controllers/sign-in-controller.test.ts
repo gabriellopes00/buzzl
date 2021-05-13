@@ -1,9 +1,9 @@
 import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
-import { SignInController, SignInResponse } from '@/presentation/controllers/user/sign-in'
+import { SignInController } from '@/presentation/controllers/user/sign-in'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { fakeSignInParams } from '../../../mocks/user'
 import { MockSignIn } from '../../../mocks/sign-in'
+import { fakeSignInParams } from '../../../mocks/user'
 import { MockValidator } from '../../../mocks/validator'
 
 describe('Sign In User Controller', () => {
@@ -52,9 +52,7 @@ describe('Sign In User Controller', () => {
 
     it('Should return a 200 response with created and signed in user data', async () => {
       const response = await sut.handle(fakeSignInParams)
-      expect(response).toEqual(
-        ok<SignInResponse>({ accessToken: expect.any(String) })
-      )
+      expect(response).toEqual(ok({ accessToken: expect.any(String) }))
     })
 
     it('Should return a 400 if received email is not registered', async () => {
@@ -66,7 +64,7 @@ describe('Sign In User Controller', () => {
     it('Should return a 401 if received unmatched password for respective email', async () => {
       mockSignIn.sign.mockResolvedValueOnce(new UnmatchedPasswordError('any@mail.com'))
       const response = await sut.handle(fakeSignInParams)
-      expect(response).toEqual(unauthorized(new UnmatchedPasswordError('any@mail.com').message))
+      expect(response).toEqual(unauthorized(new UnmatchedPasswordError('any@mail.com')))
     })
 
     it('Should return a 500 response if signin throws', async () => {

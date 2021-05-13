@@ -1,14 +1,13 @@
 import { ServerError } from '../errors/server-error'
-import { UnauthorizedError } from '../errors/unauthorized'
 import { HttpResponse } from '../ports/http'
 
-export const badRequest = (error: Error): HttpResponse => ({
-  code: 400,
-  body: error
+export const ok = (data: any): HttpResponse => ({
+  code: 200,
+  body: data
 })
 
-export const ok = <T = any>(data: T): HttpResponse => ({
-  code: 200,
+export const created = (data: any): HttpResponse => ({
+  code: 201,
   body: data
 })
 
@@ -17,9 +16,9 @@ export const noContent = (): HttpResponse => ({
   body: null
 })
 
-export const created = <T = any>(data: T): HttpResponse => ({
-  code: 201,
-  body: data
+export const badRequest = (error: Error): HttpResponse => ({
+  code: 400,
+  body: error
 })
 
 export const conflict = (error: Error): HttpResponse => ({
@@ -27,17 +26,17 @@ export const conflict = (error: Error): HttpResponse => ({
   body: error
 })
 
-export const unauthorized = (message?: string): HttpResponse => ({
+export const unauthorized = (error: Error): HttpResponse => ({
   code: 401,
-  body: new UnauthorizedError(message)
-})
-
-export const serverError = (error: Error): HttpResponse => ({
-  code: 500,
-  body: new ServerError(error.stack)
+  body: error
 })
 
 export const forbidden = (error: Error): HttpResponse => ({
   code: 403,
   body: error
+})
+
+export const serverError = (error: Error): HttpResponse => ({
+  code: 500,
+  body: new ServerError(error.stack)
 })

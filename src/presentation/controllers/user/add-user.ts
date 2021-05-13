@@ -31,10 +31,9 @@ export class AddUserController implements Controller {
       if (result instanceof ExistingEmailError) return conflict(result)
 
       const { id, name, email } = result
-
       const token = (await this.signIn.sign({ email, password: params.password })) as string
 
-      return created<AddUserResponse>({ user: { id, name, email }, accessToken: token })
+      return created({ user: { id, name, email }, accessToken: token })
     } catch (error) {
       return serverError(error)
     }

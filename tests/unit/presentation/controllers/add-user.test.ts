@@ -1,9 +1,9 @@
 import { ExistingEmailError } from '@/domain/user/errors/existing-email'
-import { AddUserController, AddUserResponse } from '@/presentation/controllers/user/add-user'
+import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockAddUser } from '../../../mocks/add-user'
-import { fakeSignInParams, fakeUser, fakeUserParams } from '../../../mocks/user'
 import { MockSignIn } from '../../../mocks/sign-in'
+import { fakeSignInParams, fakeUser, fakeUserParams } from '../../../mocks/user'
 import { MockValidator } from '../../../mocks/validator'
 
 describe('Add User Controller', () => {
@@ -76,7 +76,7 @@ describe('Add User Controller', () => {
       const response = await sut.handle(fakeUserParams)
       const { id, name, email } = fakeUser
       expect(response).toEqual(
-        created<AddUserResponse>({ user: { id, email, name }, accessToken: expect.any(String) })
+        created({ user: { id, email, name }, accessToken: expect.any(String) })
       )
     })
 

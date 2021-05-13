@@ -21,9 +21,9 @@ export class SignInController implements Controller {
       const signResult = await this.signIn.sign(params)
 
       if (signResult instanceof UnregisteredEmailError) return badRequest(signResult)
-      else if (signResult instanceof UnmatchedPasswordError) return unauthorized(signResult.message)
+      else if (signResult instanceof UnmatchedPasswordError) return unauthorized(signResult)
 
-      return ok<SignInResponse>({ accessToken: signResult })
+      return ok({ accessToken: signResult })
     } catch (error) {
       return serverError(error)
     }
