@@ -12,6 +12,11 @@ export const ok = <T = any>(data: T): HttpResponse => ({
   body: data
 })
 
+export const noContent = (): HttpResponse => ({
+  code: 204,
+  body: null
+})
+
 export const created = <T = any>(data: T): HttpResponse => ({
   code: 201,
   body: data
