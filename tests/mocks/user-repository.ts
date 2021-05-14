@@ -19,7 +19,9 @@ export class MockUserRepository implements UserRepository {
     return false
   }
 
-  async findBy(criteria: { id?: string; email?: string }): Promise<User> {
+  async findOne(criteria: { id?: string; email?: string }): Promise<User> {
     return { ...fakeUser, password: await mockHasher.generate('') }
   }
+
+  async delete(criteria: { id?: string; email?: string }): Promise<void> {}
 }
