@@ -1,30 +1,37 @@
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { DbDeleteService } from '@/usecases/service/delete-service'
 import { fakeService } from '../../mocks/service'
+import { fakeUser } from '../../mocks/user'
 import { MockServiceRepository } from '../../mocks/service-repository'
+import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 
 describe('Delete Service Usecase', () => {
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>
   const sut = new DbDeleteService(mockServiceRepository)
-  const fakeApiKey = fakeService.apiKey
+  const fakeParams = { apiKey: fakeService.apiKey, userId: fakeUser.id }
 
   describe('Service Repository', () => {
-    describe('Find existing service', () => {
-      it('Should call service repository exists method with correct value', async () => {
-        const exists = jest.spyOn(mockServiceRepository, 'exists')
-        await sut.delete(fakeApiKey)
-        expect(exists).toHaveBeenCalledWith({ apiKey: fakeApiKey })
+    describe('Find for a service with its respective maintainer data', () => {
+      it('Should call service repository find method with correct value', async () => {
+        const exists = jest.spyOn(mockServiceRepository, 'findOneJoinMaintainer')
+        await sut.delete(fakeParams)
+        expect(exists).toHaveBeenCalledWith({ apiKey: fakeParams.apiKey })
       })
 
       it('Should return an UnregisteredApiKeyError if no services are found', async () => {
-        mockServiceRepository.exists.mockResolvedValueOnce(false)
-        const error = await sut.delete(fakeApiKey)
+        mockServiceRepository.findOneJoinMaintainer.mockResolvedValueOnce(null)
+        const error = await sut.delete(fakeParams)
         expect(error).toBeInstanceOf(UnregisteredApiKeyError)
       })
 
+      it('Should return an UnauthorizedMaintainerError if received user id is different of service maintainer', async () => {
+        const error = await sut.delete({ ...fakeParams, userId: 'invalid_user_id' })
+        expect(error).toBeInstanceOf(UnauthorizedMaintainerError)
+      })
+
       it('Should throw if service repository exists method throws', async () => {
-        mockServiceRepository.exists.mockRejectedValueOnce(new Error())
-        const error = sut.delete(fakeApiKey)
+        mockServiceRepository.findOneJoinMaintainer.mockRejectedValueOnce(new Error())
+        const error = sut.delete(fakeParams)
         await expect(error).rejects.toThrow()
       })
     })
@@ -32,18 +39,18 @@ describe('Delete Service Usecase', () => {
     describe('Delete Service', () => {
       it('Should call service repository delete method with correct values', async () => {
         const del = jest.spyOn(mockServiceRepository, 'delete')
-        await sut.delete(fakeApiKey)
-        expect(del).toHaveBeenCalledWith({ apiKey: fakeApiKey })
+        await sut.delete(fakeParams)
+        expect(del).toHaveBeenCalledWith({ apiKey: fakeParams.apiKey })
       })
 
       it('Should return void on success', async () => {
-        const result = await sut.delete(fakeApiKey)
+        const result = await sut.delete(fakeParams)
         expect(result).toBeUndefined() // void return
       })
 
       it('Should throws if repository add method throws', async () => {
         mockServiceRepository.delete.mockRejectedValueOnce(new Error())
-        const error = sut.delete(fakeApiKey)
+        const error = sut.delete(fakeParams)
         await expect(error).rejects.toThrow()
       })
     })

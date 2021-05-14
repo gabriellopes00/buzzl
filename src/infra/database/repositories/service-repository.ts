@@ -14,27 +14,21 @@ export class PgServiceRepository implements ServiceRepository {
     apiKey?: string
   }): Promise<ServiceJoinMaintainer> {
     const repository = getRepository(ServiceModel)
-    // if (id) {
-    //   console.log(id)
-    //   console.log(
-    //     await repository.findOne({
-    //       where: { id },
-    //       join: { alias: 'maintainer', innerJoinAndSelect: { maintainer: '' } }
-    //     })
-    //   )
-    // }
-    console.log(
-      // await repository
-      //   .createQueryBuilder('service')
-      //   // .innerJoinAndSelect('service.maintainer', 'user.id')
-      //   .where('service.id = :id', { id: '00add28c-9f40-4123-a2f8-0e0bcfce5e1e' })
-      //   .getOne()
-      await repository.query(
-        'select service.name, service.id, service."apiKey",  maintainer.email as maintaineremail,maintainer.name as maintianername from "service" as service join "user" as maintainer on maintainer.id = service.maintainer      where service.id = \'00add28c-9f40-4123-a2f8-0e0bcfce5e1e\';'
-      )
-    )
-    return null
-    // else if (apiKey) return !!(await repository.findOne({ where: { apiKey: apiKey } }))
+    const { id, apiKey } = criteria
+
+    const data = await repository
+      .createQueryBuilder('service')
+      .innerJoinAndSelect('service.user', 'user')
+      .where('service.id = :id', { id })
+      .orWhere('service.apiKey = :apiKey', { apiKey })
+      .getOne()
+
+    if (!data) return null
+    else {
+      const user = data.user
+      delete data.user
+      return { ...data, maintainer: user } // normalized data
+    }
   }
 
   public async delete(criteria: { id?: string; apiKey?: string }): Promise<void> {

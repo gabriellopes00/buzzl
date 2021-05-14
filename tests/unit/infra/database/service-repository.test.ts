@@ -21,8 +21,8 @@ describe('Pg Service Repository', () => {
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
   beforeEach(() => {
-    getRepository(ServiceModel).delete({})
     getRepository(UserModel).delete({})
+    getRepository(ServiceModel).delete({})
   })
 
   describe('Add Service', () => {
@@ -90,37 +90,37 @@ describe('Pg Service Repository', () => {
     })
   })
 
-  describe('Find for existing service', () => {
-    it('Should return true if found a service by apiKey', async () => {
-      await getRepository(UserModel).save(fakeUser)
+  describe('Find service', () => {
+    it('Should return the correct data if found a service by apiKey', async () => {
+      const { email } = await getRepository(UserModel).save(fakeUser)
       const { apiKey } = await sut.add(fakeService)
-      const existingService = await sut.exists({ apiKey })
-      expect(existingService).toBeTruthy()
+      const service = await sut.findOneJoinMaintainer({ apiKey })
+      expect(service.apiKey).toEqual(apiKey)
+      expect(service.maintainer.email).toEqual(email)
     })
 
-    it('Should return true if found a service by id', async () => {
-      await getRepository(UserModel).save(fakeUser)
+    it('Should return the correct data if found a service by id', async () => {
+      const { email } = await getRepository(UserModel).save(fakeUser)
       const { id } = await sut.add(fakeService)
-      const existingService = await sut.exists({ id })
-      expect(existingService).toBeTruthy()
+      const service = await sut.findOneJoinMaintainer({ id })
+      expect(service.id).toEqual(id)
+      expect(service.maintainer.email).toEqual(email)
     })
 
-    it('Should return false if not found a service by id', async () => {
+    it('Should return null if not found a service by id', async () => {
       await getRepository(UserModel).save(fakeUser)
-      const { id } = await sut.add(fakeService)
-      const existingService = await sut.exists({ id })
-      expect(existingService).toBeTruthy()
+      const existingService = await sut.findOneJoinMaintainer({ id: 'nonexisting_id' })
+      expect(existingService).toBeNull()
     })
 
     it('Should return false if not found a service by apiKey', async () => {
       await getRepository(UserModel).save(fakeUser)
-      const { apiKey } = await sut.add(fakeService)
-      const existingService = await sut.exists({ apiKey })
-      expect(existingService).toBeTruthy()
+      const existingService = await sut.findOneJoinMaintainer({ apiKey: 'nonexisting_apiKey' })
+      expect(existingService).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
+      jest.spyOn(sut, 'findOneJoinMaintainer').mockRejectedValueOnce(new Error())
       const error = sut.add(null)
       await expect(error).rejects.toThrow()
     })

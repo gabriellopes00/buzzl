@@ -1,6 +1,7 @@
 import { Service } from '@/domain/service/service'
-import { ServiceRepository } from '@/usecases/ports/service-repository'
+import { ServiceJoinMaintainer, ServiceRepository } from '@/usecases/ports/service-repository'
 import { fakeService } from './service'
+import { fakeUser } from './user'
 
 /*
   Mock methods and classes always return expect value to make test pass.
@@ -12,8 +13,11 @@ export class MockServiceRepository implements ServiceRepository {
     return fakeService
   }
 
-  async exists(by: { id?: string; apiKey?: string }): Promise<boolean> {
-    return true
+  async findOneJoinMaintainer(criteria: {
+    id?: string
+    apiKey?: string
+  }): Promise<ServiceJoinMaintainer> {
+    return { ...fakeService, maintainer: fakeUser }
   }
 
   async delete(by: { id?: string; apiKey?: string }): Promise<void> {}
