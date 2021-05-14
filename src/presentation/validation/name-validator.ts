@@ -9,7 +9,7 @@ export class NameValidator implements Validator {
     }
     return new InvalidParamError(
       'name',
-      'Names must contain more than 2 characters and less than 255.'
+      'Names must contain more than 2 characters and less than 255'
     )
   }
 }

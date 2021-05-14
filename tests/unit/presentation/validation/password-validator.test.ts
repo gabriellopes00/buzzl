@@ -3,7 +3,7 @@ import { PasswordValidator } from '@/presentation/validation/password-validator'
 
 describe('Password Validation', () => {
   const sut = new PasswordValidator()
-  const error = new InvalidParamError('password', 'Passwords must contain more than 3 characters.')
+  const error = new InvalidParamError('password', 'Passwords must contain more than 3 characters')
 
   it('Should return an error if password is too short', () => {
     const isValid = sut.validate({ password: 'pas' })

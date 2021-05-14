@@ -5,7 +5,7 @@ describe('Name Validation', () => {
   const sut = new NameValidator()
   const error = new InvalidParamError(
     'name',
-    'Names must contain more than 2 characters and less than 255.'
+    'Names must contain more than 2 characters and less than 255'
   )
 
   it('Should return an error if name too short', () => {

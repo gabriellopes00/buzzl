@@ -17,8 +17,8 @@ export class EmailValidator implements Validator {
         if (domain.every(part => part.length <= 63)) return null
       }
 
-      return new InvalidParamError('email', 'Emails must be in valid format.')
+      return new InvalidParamError('email', 'Emails must be in valid format')
     }
-    return new InvalidParamError('email', 'Emails must be in valid format.')
+    return new InvalidParamError('email', 'Emails must be in valid format')
   }
 }

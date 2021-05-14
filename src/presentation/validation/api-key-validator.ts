@@ -8,6 +8,6 @@ export class ApiKeyValidator implements Validator {
       if (pattern.test(input.apiKey)) return null
     }
 
-    return new InvalidParamError('apiKey', 'Invalid api key format.')
+    return new InvalidParamError('apiKey', 'Invalid api key format')
   }
 }

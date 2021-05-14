@@ -14,7 +14,7 @@ export class DbDeleteService implements DeleteService {
 
     if (!existingService) return new UnregisteredApiKeyError(apiKey)
     else if (existingService.maintainer.id !== userId) {
-      return new UnauthorizedMaintainerError(apiKey, userId)
+      return new UnauthorizedMaintainerError(apiKey, existingService.maintainer.email)
     }
 
     await this.serviceRepository.delete({ apiKey })

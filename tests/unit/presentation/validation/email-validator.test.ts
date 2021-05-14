@@ -3,7 +3,7 @@ import { EmailValidator } from '@/presentation/validation/email-validator'
 
 describe('Email Validation', () => {
   const sut = new EmailValidator()
-  const error = new InvalidParamError('email', 'Emails must be in valid format.')
+  const error = new InvalidParamError('email', 'Emails must be in valid format')
 
   it('Should return an error if email is missing `@`', () => {
     const isValid = sut.validate({ email: 'invalidmail.com' })

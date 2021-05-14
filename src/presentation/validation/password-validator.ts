@@ -7,6 +7,6 @@ export class PasswordValidator implements Validator {
       if (input.password.length >= 4) return null
     }
 
-    return new InvalidParamError('password', 'Passwords must contain more than 3 characters.')
+    return new InvalidParamError('password', 'Passwords must contain more than 3 characters')
   }
 }

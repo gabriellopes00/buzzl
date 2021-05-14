@@ -3,7 +3,7 @@ import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 
 describe('ApiKey Validation', () => {
   const sut = new ApiKeyValidator()
-  const error = new InvalidParamError('apiKey', 'Invalid api key format.')
+  const error = new InvalidParamError('apiKey', 'Invalid api key format')
 
   it('Should return an error if apiKey is too short', () => {
     const isValid = sut.validate({ apiKey: 'invalid_key' })
