@@ -16,10 +16,17 @@ export class PgUserRepository implements UserRepository {
     else if (email) return !!(await repository.findOne({ where: { email } }))
   }
 
-  public async findBy(criteria: { id?: string; email?: string }): Promise<User> {
+  public async findOne(criteria: { id?: string; email?: string }): Promise<User> {
     const repository = getRepository(UserModel)
     const { id, email } = criteria
     if (id) return (await repository.findOne({ where: { id } })) || null
     else if (email) return (await repository.findOne({ where: { email } })) || null
+  }
+
+  public async delete(criteria: { id?: string; email?: string }): Promise<void> {
+    const repository = getRepository(UserModel)
+    const { id, email } = criteria
+    if (id) await repository.delete({ id })
+    else if (email) await repository.delete({ email })
   }
 }

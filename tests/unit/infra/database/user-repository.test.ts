@@ -58,18 +58,18 @@ describe('Pg User Repository', () => {
     it('Should return a user if it is found by email', async () => {
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
-      const userFound = await sut.findBy({ email: user.email })
+      const userFound = await sut.findOne({ email: user.email })
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const userFound = await sut.findBy({ email: 'unregistered@mail.com' })
+      const userFound = await sut.findOne({ email: 'unregistered@mail.com' })
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findBy').mockRejectedValueOnce(new Error())
-      const error = sut.findBy({ email: fakeUser.email })
+      jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
+      const error = sut.findOne({ email: fakeUser.email })
       await expect(error).rejects.toThrow()
     })
   })
@@ -78,18 +78,42 @@ describe('Pg User Repository', () => {
     it('Should return a user if it is found by id', async () => {
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
-      const userFound = await sut.findBy({ id: user.id })
+      const userFound = await sut.findOne({ id: user.id })
       expect(userFound.id).toEqual(user.id)
     })
 
     it('Should return null if no user is found', async () => {
-      const userFound = await sut.findBy({ id: 'invalid_id' })
+      const userFound = await sut.findOne({ id: 'invalid_id' })
       expect(userFound).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findBy').mockRejectedValueOnce(new Error())
-      const error = sut.findBy({ id: fakeUser.id })
+      jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
+      const error = sut.findOne({ id: fakeUser.id })
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Delete User', () => {
+    it('Should delete a user by email on success', async () => {
+      const { email } = await getRepository(UserModel).save(fakeUser)
+      await getRepository(UserModel).findOneOrFail({ email })
+
+      await sut.delete({ email })
+      await expect(getRepository(UserModel).findOneOrFail({ email })).rejects.toThrow()
+    })
+
+    it('Should delete a user by id on success', async () => {
+      const { id } = await getRepository(UserModel).save(fakeUser)
+      await getRepository(UserModel).findOneOrFail({ id })
+
+      await sut.delete({ id })
+      await expect(getRepository(UserModel).findOneOrFail({ id })).rejects.toThrow()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'delete').mockRejectedValueOnce(new Error())
+      const error = sut.delete({ email: fakeUser.email })
       await expect(error).rejects.toThrow()
     })
   })
