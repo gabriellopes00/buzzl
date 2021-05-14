@@ -1,6 +1,9 @@
-import { DeleteService } from '@/domain/service/delete-service'
+import { DeleteService, DeleteServiceParams } from '@/domain/service/delete-service'
+import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 
 export class MockDeleteService implements DeleteService {
-  async delete(apiKey: string): Promise<void | UnregisteredApiKeyError> {}
+  async delete(
+    data: DeleteServiceParams
+  ): Promise<void | UnregisteredApiKeyError | UnauthorizedMaintainerError> {}
 }

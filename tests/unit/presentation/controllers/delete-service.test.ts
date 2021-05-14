@@ -1,17 +1,26 @@
+import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import {
   DeleteServiceController,
   DeleteServiceParams
 } from '@/presentation/controllers/service/delete-service'
-import { badRequest, conflict, noContent, serverError } from '@/presentation/helpers/http'
+import {
+  badRequest,
+  conflict,
+  noContent,
+  serverError,
+  unauthorized
+} from '@/presentation/helpers/http'
 import { MockDeleteService } from '../../../mocks/delete-service'
+import { fakeService } from '../../../mocks/service'
+import { fakeUser } from '../../../mocks/user'
 import { MockValidator } from '../../../mocks/validator'
 
 describe('Delete Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
   const mockDeleteService = new MockDeleteService() as jest.Mocked<MockDeleteService>
   const sut = new DeleteServiceController(mockValidator, mockDeleteService)
-  const fakeParams: DeleteServiceParams = { apiKey: '_cbvTX7PjT15' }
+  const fakeParams: DeleteServiceParams = { apiKey: fakeService.apiKey, userId: fakeUser.id }
 
   describe('Validation', () => {
     it('Should call validator with received request data', async () => {
@@ -57,6 +66,12 @@ describe('Delete Service Controller', () => {
       mockDeleteService.delete.mockResolvedValueOnce(new UnregisteredApiKeyError(''))
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(conflict(new UnregisteredApiKeyError('')))
+    })
+
+    it('Should return 401 if receive request from invalid maintainer', async () => {
+      mockDeleteService.delete.mockResolvedValueOnce(new UnauthorizedMaintainerError('', ''))
+      const response = await sut.handle(fakeParams)
+      expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('', '')))
     })
 
     it('Should return 204 on success', async () => {
