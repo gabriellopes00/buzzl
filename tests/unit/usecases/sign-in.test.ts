@@ -13,8 +13,8 @@ describe('User Authenticator', () => {
   const sut = new UserSignIn(mockUserRepository, mockHasher, mockEncrypter)
 
   describe('User Repository', () => {
-    it('Should call userRepository findByEmail with correct email once before hashComparer', async () => {
-      const find = jest.spyOn(mockUserRepository, 'findBy')
+    it('Should call userRepository findOneEmail with correct email once before hashComparer', async () => {
+      const find = jest.spyOn(mockUserRepository, 'findOne')
       const compare = jest.spyOn(mockHasher, 'compare')
       await sut.sign(fakeSignInParams)
       expect(find).toHaveBeenCalledWith({ email: fakeSignInParams.email })
@@ -25,13 +25,13 @@ describe('User Authenticator', () => {
     })
 
     it('Should return a UnregisteredEmail error if received email is not registered', async () => {
-      mockUserRepository.findBy.mockResolvedValueOnce(null)
+      mockUserRepository.findOne.mockResolvedValueOnce(null)
       const result = await sut.sign(fakeSignInParams)
       expect(result).toEqual(new UnregisteredEmailError(fakeSignInParams.email))
     })
 
     it('Should throws if userRepository throws', async () => {
-      mockUserRepository.findBy.mockRejectedValueOnce(new Error())
+      mockUserRepository.findOne.mockRejectedValueOnce(new Error())
       const error = sut.sign(fakeSignInParams)
       await expect(error).rejects.toThrow()
     })
@@ -39,7 +39,7 @@ describe('User Authenticator', () => {
 
   describe('Hasher', () => {
     it('Should not be called if userRepository does not found a user with received email', async () => {
-      mockUserRepository.findBy.mockResolvedValueOnce(null)
+      mockUserRepository.findOne.mockResolvedValueOnce(null)
       const compare = jest.spyOn(mockHasher, 'compare')
       await sut.sign(fakeSignInParams)
       expect(compare).not.toHaveBeenCalled()

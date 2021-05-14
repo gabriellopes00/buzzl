@@ -13,7 +13,7 @@ export class UserAuthentication implements Authentication {
     const payload = (await this.encrypter.decrypt(token)) as UserTokenPayload
     if (!payload) return null
 
-    const user = await this.userRepository.findBy({ id: payload.id })
+    const user = await this.userRepository.findOne({ id: payload.id })
     return user
   }
 }

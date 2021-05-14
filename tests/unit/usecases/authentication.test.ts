@@ -17,7 +17,7 @@ describe('User Authentication', () => {
 
     it('Should return a payload on success', async () => {
       const payload = await sut.auth(fakeAuthParam)
-      expect(payload).toEqual(await mockUserRepository.findBy({}))
+      expect(payload).toEqual(await mockUserRepository.findOne({}))
     })
 
     it('Should return null if receive an invalid or expired token', async () => {
@@ -36,17 +36,17 @@ describe('User Authentication', () => {
   describe('User Repository', () => {
     it('Should return a user if found one with decrypted id', async () => {
       const user = await sut.auth(fakeAuthParam)
-      expect(user).toEqual(await mockUserRepository.findBy({ id: user.id }))
+      expect(user).toEqual(await mockUserRepository.findOne({ id: user.id }))
     })
 
     it('Should not return a user if found one with decrypted id', async () => {
-      jest.spyOn(mockUserRepository, 'findBy').mockResolvedValueOnce(null)
+      jest.spyOn(mockUserRepository, 'findOne').mockResolvedValueOnce(null)
       const result = await sut.auth(fakeAuthParam)
       expect(result).toBeNull()
     })
 
     it('Should throws if userRepository throws', async () => {
-      jest.spyOn(mockUserRepository, 'findBy').mockRejectedValueOnce(new Error())
+      jest.spyOn(mockUserRepository, 'findOne').mockRejectedValueOnce(new Error())
       const error = sut.auth(fakeAuthParam)
       await expect(error).rejects.toThrow()
     })

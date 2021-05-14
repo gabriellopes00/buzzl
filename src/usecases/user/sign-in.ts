@@ -16,7 +16,7 @@ export class UserSignIn implements SignIn {
     data: SignInParams
   ): Promise<string | UnregisteredEmailError | UnmatchedPasswordError> {
     const { email, password } = data
-    const existingUser = await this.userRepository.findBy({ email })
+    const existingUser = await this.userRepository.findOne({ email })
     if (!existingUser) return new UnregisteredEmailError(email)
 
     const matchedPassword = await this.hashComparer.compare(password, existingUser.password)
