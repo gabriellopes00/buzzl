@@ -1,0 +1,24 @@
+[2021-05-14T17:50:38.283Z] JsonWebTokenError: secret or public key must be provided
+    at D:\drive\www\feedbackio\api\node_modules\jsonwebtoken\verify.js:106:19
+    at getSecret (D:\drive\www\feedbackio\api\node_modules\jsonwebtoken\verify.js:90:14)
+    at Object.module.exports [as verify] (D:\drive\www\feedbackio\api\node_modules\jsonwebtoken\verify.js:94:10)
+    at JWTEncrypter.decrypt (D:\drive\www\feedbackio\api\dist\infra\utils\jwt-encrypter.js:19:35)
+    at UserAuthentication.auth (D:\drive\www\feedbackio\api\dist\usecases\user\authentication.js:10:47)
+    at AuthUserMiddleware.handle (D:\drive\www\feedbackio\api\dist\presentation\middlewares\auth-user.js:17:57)
+    at LogDecorator.handle (D:\drive\www\feedbackio\api\dist\app\decorators\log-decorator.js:11:45)
+    at D:\drive\www\feedbackio\api\dist\app\adapters\express-middlewares.js:6:43
+    at Layer.handle [as handle_request] (D:\drive\www\feedbackio\api\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\drive\www\feedbackio\api\node_modules\express\lib\router\route.js:137:13)
+
+[2021-05-14T17:51:30.330Z] JsonWebTokenError: invalid token
+    at Object.module.exports [as verify] (D:\drive\www\feedbackio\api\node_modules\jsonwebtoken\verify.js:75:17)
+    at JWTEncrypter.decrypt (D:\drive\www\feedbackio\api\dist\infra\utils\jwt-encrypter.js:19:35)
+    at UserAuthentication.auth (D:\drive\www\feedbackio\api\dist\usecases\user\authentication.js:10:47)
+    at AuthUserMiddleware.handle (D:\drive\www\feedbackio\api\dist\presentation\middlewares\auth-user.js:17:57)
+    at LogDecorator.handle (D:\drive\www\feedbackio\api\dist\app\decorators\log-decorator.js:11:45)
+    at D:\drive\www\feedbackio\api\dist\app\adapters\express-middlewares.js:6:43
+    at Layer.handle [as handle_request] (D:\drive\www\feedbackio\api\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\drive\www\feedbackio\api\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (D:\drive\www\feedbackio\api\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (D:\drive\www\feedbackio\api\node_modules\express\lib\router\layer.js:95:5)
+

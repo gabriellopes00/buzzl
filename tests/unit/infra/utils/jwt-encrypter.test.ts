@@ -55,21 +55,21 @@ describe('Jwt Encrypter', () => {
       expect(value).toBe('payload')
     })
 
-    // it('Should return null if receive an expired token', async () => {
-    //   mockJwt.verify.mockImplementationOnce(async () => {
-    //     throw new TokenExpiredError('expired token', new Date())
-    //   })
-    //   const error = await sut.decrypt('any_token')
-    //   expect(error).toBeNull()
-    // })
+    it('Should return null if receive an expired token', async () => {
+      mockJwt.verify.mockImplementationOnce(() => {
+        throw new Error('jwt expired')
+      })
+      const error = await sut.decrypt('any_token')
+      expect(error).toBeNull()
+    })
 
-    // it('Should return null if receive an invalid token', async () => {
-    //   mockJwt.verify.mockImplementationOnce(async () => {
-    //     throw new JsonWebTokenError('invalid token')
-    //   })
-    //   const error = sut.decrypt('any_token')
-    //   await expect(error).rejects.toThrow()
-    // })
+    it('Should return null if receive an invalid token', async () => {
+      mockJwt.verify.mockImplementationOnce(() => {
+        throw new Error('invalid token')
+      })
+      const response = await sut.decrypt('any_token')
+      expect(response).toBeNull()
+    })
 
     test('Should throw if verify throws', async () => {
       mockJwt.verify.mockRejectedValueOnce(new Error() as never)

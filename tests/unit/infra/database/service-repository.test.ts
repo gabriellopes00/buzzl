@@ -20,7 +20,7 @@ describe('Pg Service Repository', () => {
 
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  beforeEach(() => {
+  afterEach(() => {
     getRepository(UserModel).delete({})
     getRepository(ServiceModel).delete({})
   })

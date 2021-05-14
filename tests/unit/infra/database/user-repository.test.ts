@@ -18,7 +18,7 @@ describe('Pg User Repository', () => {
 
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  beforeEach(() => getRepository(UserModel).delete({}))
+  afterEach(() => getRepository(UserModel).delete({}))
 
   describe('Add User', () => {
     it('Should add a store a user data on success', async () => {
