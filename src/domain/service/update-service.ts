@@ -6,6 +6,6 @@ export interface UpdateService {
   update(
     apiKey: string,
     userId: string,
-    newData: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>>
+    newData: Partial<Pick<Service, 'name' | 'description' | 'isActive'>>
   ): Promise<Service | UnregisteredApiKeyError | UnauthorizedMaintainerError>
 }

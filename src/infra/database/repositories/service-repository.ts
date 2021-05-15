@@ -38,4 +38,9 @@ export class PgServiceRepository implements ServiceRepository {
     if (id) await repository.delete({ id })
     else if (apiKey) await repository.delete({ apiKey })
   }
+
+  public async update(data: Service): Promise<Service> {
+    const repository = getRepository(ServiceModel)
+    return await repository.save(data)
+  }
 }

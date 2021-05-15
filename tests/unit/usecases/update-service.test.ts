@@ -10,11 +10,12 @@ describe('Update Service Usecase', () => {
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>
   const sut = new DbUpdateService(mockServiceRepository)
 
-  const fakeData: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>> = {
+  const newData: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>> = {
     name: 'New Service',
     description: 'New Service Updated',
     isActive: false
   }
+  const fakeData: Service = { ...fakeService, ...newData }
 
   describe('Service Repository', () => {
     describe('Find Service', () => {
@@ -56,7 +57,7 @@ describe('Update Service Usecase', () => {
       it('Should call service repository update method with correct values', async () => {
         const update = jest.spyOn(mockServiceRepository, 'update')
         await sut.update(fakeService.apiKey, fakeUser.id, fakeData)
-        expect(update).toHaveBeenCalledWith({ apiKey: fakeService.apiKey }, fakeData)
+        expect(update).toHaveBeenCalledWith(fakeData)
       })
 
       it('Should return updated service on success', async () => {

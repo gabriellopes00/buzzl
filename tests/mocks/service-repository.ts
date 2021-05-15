@@ -13,10 +13,7 @@ export class MockServiceRepository implements ServiceRepository {
     return fakeService
   }
 
-  async update(
-    criteria: { id?: string; apiKey?: string },
-    data: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>>
-  ): Promise<Service> {
+  async update(data: Service): Promise<Service> {
     return fakeService
   }
 

@@ -1,3 +1,4 @@
+import { Service } from '@/domain/service/service'
 import { ServiceModel } from '@/infra/database/models/service'
 import { UserModel } from '@/infra/database/models/user'
 import pgConnectionHelper from '@/infra/database/pg-helper'
@@ -122,6 +123,33 @@ describe('Pg Service Repository', () => {
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'findOneJoinMaintainer').mockRejectedValueOnce(new Error())
       const error = sut.add(null)
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Update service', () => {
+    const newData: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>> = {
+      name: 'New Service',
+      description: 'New Service Updated',
+      isActive: false
+    }
+    const fakeData: Service = { ...fakeService, ...newData }
+
+    it('Should update a service by id on success', async () => {
+      await getRepository(UserModel).save(fakeUser)
+      const service = await sut.add(fakeService)
+
+      const { name } = await getRepository(ServiceModel).findOne({ id: service.id })
+      expect(name).toEqual(service.name)
+
+      await sut.update(fakeData)
+      const newName = await (await getRepository(ServiceModel).findOne({ id: fakeService.id })).name
+      expect(newName).toEqual(fakeData.name)
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'update').mockRejectedValueOnce(new Error())
+      const error = sut.update(null)
       await expect(error).rejects.toThrow()
     })
   })

@@ -10,7 +10,7 @@ export class DbUpdateService implements UpdateService {
   public async update(
     apiKey: string,
     userId: string,
-    newData: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>>
+    newData: Partial<Pick<Service, 'name' | 'description' | 'isActive'>>
   ): Promise<Service | UnregisteredApiKeyError | UnauthorizedMaintainerError> {
     const service = await this.serviceRepository.findOneJoinMaintainer({ apiKey })
 
@@ -19,6 +19,7 @@ export class DbUpdateService implements UpdateService {
       return new UnauthorizedMaintainerError(apiKey, service.maintainer.email)
     }
 
-    return await this.serviceRepository.update({ apiKey }, newData)
+    const normalizedData: Service = { ...service, maintainer: service.maintainer.id, ...newData }
+    return await this.serviceRepository.update(normalizedData)
   }
 }
