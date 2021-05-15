@@ -73,9 +73,9 @@ describe('Update Service Controller', () => {
     })
 
     it('Should return 401 if receive request fom an unauthorized maintainer', async () => {
-      mockUpdateService.update.mockResolvedValueOnce(new UnauthorizedMaintainerError('', ''))
+      mockUpdateService.update.mockResolvedValueOnce(new UnauthorizedMaintainerError(''))
       const response = await sut.handle(fakeParams)
-      expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('', '')))
+      expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('')))
     })
 
     it('Should return a 500 response if addService throws', async () => {

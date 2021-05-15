@@ -16,7 +16,7 @@ export class DbUpdateService implements UpdateService {
 
     if (!service) return new UnregisteredApiKeyError(apiKey)
     else if (service.maintainer.id !== userId) {
-      return new UnauthorizedMaintainerError(apiKey, service.maintainer.email)
+      return new UnauthorizedMaintainerError(apiKey)
     }
 
     const normalizedData: Service = { ...service, maintainer: service.maintainer.id, ...newData }

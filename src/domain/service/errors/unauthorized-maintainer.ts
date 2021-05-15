@@ -1,6 +1,6 @@
 export class UnauthorizedMaintainerError extends Error {
-  constructor(apiKey: string, maintainerEmail: string) {
-    super(`Key service: ${apiKey} is not maintained by ${maintainerEmail}`)
+  constructor(apiKey: string) {
+    super(`Maintainer access denied for key service: ${apiKey}`)
     this.name = 'UnauthorizedMaintainerError'
   }
 }

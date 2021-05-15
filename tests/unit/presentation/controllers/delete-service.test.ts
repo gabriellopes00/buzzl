@@ -69,9 +69,9 @@ describe('Delete Service Controller', () => {
     })
 
     it('Should return 401 if receive request from invalid maintainer', async () => {
-      mockDeleteService.delete.mockResolvedValueOnce(new UnauthorizedMaintainerError('', ''))
+      mockDeleteService.delete.mockResolvedValueOnce(new UnauthorizedMaintainerError(''))
       const response = await sut.handle(fakeParams)
-      expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('', '')))
+      expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('')))
     })
 
     it('Should return 204 on success', async () => {
