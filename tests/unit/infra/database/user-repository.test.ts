@@ -18,10 +18,10 @@ describe('Pg User Repository', () => {
 
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  afterEach(() => getRepository(UserModel).delete({}))
 
   describe('Add User', () => {
     it('Should add a store a user data on success', async () => {
+      getRepository(UserModel).delete({})
       const user = await sut.add(fakeUser)
       const data = await getRepository(UserModel).findOne({ id: fakeUser.id })
       expect(data.id).toEqual(user.id)
@@ -36,6 +36,7 @@ describe('Pg User Repository', () => {
 
   describe('Existing User', () => {
     it('Should return true if there is a user registered with received email', async () => {
+      getRepository(UserModel).delete({})
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
       const existing = await sut.exists({ email: user.email })
@@ -56,6 +57,7 @@ describe('Pg User Repository', () => {
 
   describe('Find By Email', () => {
     it('Should return a user if it is found by email', async () => {
+      getRepository(UserModel).delete({})
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
       const userFound = await sut.findOne({ email: user.email })
@@ -76,6 +78,7 @@ describe('Pg User Repository', () => {
 
   describe('Find By Id', () => {
     it('Should return a user if it is found by id', async () => {
+      getRepository(UserModel).delete({})
       const user = getRepository(UserModel).create({ ...fakeUser })
       await getRepository(UserModel).save(user)
       const userFound = await sut.findOne({ id: user.id })
@@ -96,6 +99,7 @@ describe('Pg User Repository', () => {
 
   describe('Delete User', () => {
     it('Should delete a user by email on success', async () => {
+      getRepository(UserModel).delete({})
       const { email } = await getRepository(UserModel).save(fakeUser)
       await getRepository(UserModel).findOneOrFail({ email })
 
@@ -104,6 +108,7 @@ describe('Pg User Repository', () => {
     })
 
     it('Should delete a user by id on success', async () => {
+      getRepository(UserModel).delete({})
       const { id } = await getRepository(UserModel).save(fakeUser)
       await getRepository(UserModel).findOneOrFail({ id })
 

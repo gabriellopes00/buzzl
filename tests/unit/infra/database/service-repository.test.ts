@@ -21,13 +21,11 @@ describe('Pg Service Repository', () => {
 
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  afterEach(() => {
-    getRepository(UserModel).delete({})
-    getRepository(ServiceModel).delete({})
-  })
+  afterEach(() => getRepository(ServiceModel).delete({}))
 
   describe('Add Service', () => {
     it('Should store a service data on success', async () => {
+      getRepository(UserModel).delete({})
       await getRepository(UserModel).save(fakeUser)
       const service = await sut.add(fakeService)
       const data = await getRepository(ServiceModel).findOne({ id: fakeService.id })
