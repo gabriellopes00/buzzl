@@ -13,6 +13,13 @@ export class MockServiceRepository implements ServiceRepository {
     return fakeService
   }
 
+  async update(
+    criteria: { id?: string; apiKey?: string },
+    data: Partial<Omit<Service, 'id' | 'apiKey' | 'maintainer'>>
+  ): Promise<Service> {
+    return fakeService
+  }
+
   async findOneJoinMaintainer(criteria: {
     id?: string
     apiKey?: string
