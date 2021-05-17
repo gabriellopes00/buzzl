@@ -71,6 +71,14 @@ describe('Jwt Encrypter', () => {
       expect(response).toBeNull()
     })
 
+    it('Should return null if receive an invalid token', async () => {
+      mockJwt.verify.mockImplementationOnce(() => {
+        throw new Error('invalid signature')
+      })
+      const response = await sut.decrypt('any_token')
+      expect(response).toBeNull()
+    })
+
     test('Should throw if verify throws', async () => {
       mockJwt.verify.mockImplementationOnce(() => {
         throw new Error()

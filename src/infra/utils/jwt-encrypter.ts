@@ -19,9 +19,14 @@ export class JWTEncrypter implements Encrypter {
     try {
       return verify(token, this.publicKey, { algorithms: ['RS256'] })
     } catch (error) {
-      if (error.message === 'invalid token') return null
-      else if (error.message === 'jwt expired') return null
-      else throw error
+      const { message } = error
+      if (
+        message === 'invalid token' ||
+        message === 'jwt expired' ||
+        message === 'invalid signature'
+      ) {
+        return null
+      } else throw error
     }
   }
 }
