@@ -1,6 +1,6 @@
 {
   "name": "feedbackio-api",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A easy way to get and manage your services feedbacks and evaluations.",
   "homepage": "https://github.com/gabriellopes00/feedbackio-api#readme",
   "main": "src/app/server.ts",

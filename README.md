@@ -7,6 +7,7 @@
 ![Stars](https://img.shields.io/github/stars/gabriellopes00/feedbackio-api.svg)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/gabriellopes00/feedbackio-api)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=ncloc)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=security_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
