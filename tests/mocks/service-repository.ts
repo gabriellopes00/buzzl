@@ -13,6 +13,10 @@ export class MockServiceRepository implements ServiceRepository {
     return fakeService
   }
 
+  async findAll(criteria?: { maintainer?: string }): Promise<Service[]> {
+    return [fakeService]
+  }
+
   async update(data: Service): Promise<Service> {
     return fakeService
   }

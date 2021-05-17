@@ -8,6 +8,7 @@ export interface ServiceJoinMaintainer extends Omit<Service, 'maintainer'> {
 export interface ServiceRepository {
   add(data: Service): Promise<Service>
   findOneJoinMaintainer(criteria: { id?: string; apiKey?: string }): Promise<ServiceJoinMaintainer>
+  findAll(criteria?: { maintainer?: string }): Promise<Service[]>
   delete(criteria: { id?: string; apiKey?: string }): Promise<void>
   update(data: Service): Promise<Service>
 }
