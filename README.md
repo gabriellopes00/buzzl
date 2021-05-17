@@ -15,12 +15,14 @@
 
 <p>
   <img src="https://cdn.svgporn.com/logos/typescript-icon.svg" alt="typescript" width="30" height="30"/>
+  <img src="https://cdn.svgporn.com/logos/javascript.svg" alt="javascript" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="nodejs" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="graphql" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/socket.io.svg" alt="socket.io" width="30" height="30"/>
   <img src="https://jwt.io/img/pic_logo.svg" alt="jwt" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/docker-icon.svg" alt="docker" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgresql" width="30" height="30"/>
+  <img src="https://cdn.svgporn.com/logos/redis.svg" alt="redis" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
   <img src="https://cdn.svgporn.com/logos/heroku-icon.svg" alt="heroku" height="30">
@@ -35,18 +37,19 @@
 <h2> About Feedback.io 📚 </h2>
 
 <p>
-  Feedback.io is being built to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, which will be able to receive feedbacks and rates from your customers. This will allow you have a contact with customers feedbacks, which can be a ISSUE, an IDEA, or OTHERS, and calculate your services NPS, knowing how your customers are evaluating your services. This is an open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL...
+  Feedback.io is being built to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, that will be able to receive feedbacks and rates from your customers. This will allow you have a contact with customers feedbacks, which can be a ISSUE, an IDEA, or OTHERS, and calculate your services NPS, knowing how your customers are evaluating your services. This is an open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL, Redis...
 </p>
 
 ## Api Structure
 
 ![Clean Architecture Schema](.github/assets/clean-architecture.jpg)
 
-This project structure is inspired in clean architecture code structure, [by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The main purpose of clean architecture is creating a strong project structure, splitting all the application in layers. The best advantages of using it, is create a application independent of any frameworks, tool, database or technology, being easy to handle the code, create a new features, fix any issue, or change some framework, thanks to the adapters and ports.
+This project structure is inspired in clean architecture code structure, [by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The main purpose of clean architecture, hexagonal architecture, and others softwares architecture structure, is creating a **_strong_**, **_readable_**, **_understandable_** and **_maintainable_** project code, splitting all the application code in layers, each one with their own responsibilities and characteristics. The best advantage of using it, is create a application independent of any frameworks, tool, database or technology _(infra layer)_, being easy to handle the code, create a new features, fix any issue, or change some framework, becoming less vulnerable to changes to frameworks and libs, thanks to the adapters and ports technique, that make this frameworks being just a part of the software, and uncoupling them to the domain business rules.
 
 ![Clean Architecture Cone](.github/assets/clean-architecture-cone.jpg)
+As is shown in the images, the ideia is that external layers can know internal layers, but **never** the opposite, because a framework, for example, can know the entity, to execute specific tasks. But domain is totally independent of external libs, so it never know each lib or framework is persisting the data for example.
 
-#### Folders 🗂
+#### Folders Structure 🗂
 
 ```
 root
@@ -54,29 +57,29 @@ root
 │     └── assets
 │     └── workflow
 ├── src                     → Application main code
-│    │── app                → Composition layer, entry point code
+│    │── app                → Composition layer, entry point code, server setup...
 │    │    └── server.ts     → Server entry point
 │    ├── domain             → Business rules and entities definition
-│    ├── infra              → External frameworks and libs implementation (orm, encrypter)
+│    ├── infra              → External frameworks and libs ports implementation (orm, encrypter)
 │    ├── presentation       → External api communication layer (controllers, validators)
 │    └── usecases           → Usecases implementation
-└─── tests                  → Application tests
+└─── tests                  → Application tests code
       └── e2e
       └── unit
 ```
 
 #### Security 🔒
 
-Users password are hashed with [Argon2](https://github.com/P-H-C/phc-winner-argon2) hash algorithm, winner of the [Password Hashing Competition (PHC)](https://www.password-hashing.net/), the most recommended and secure hashing algorithm option.
-Authentications tokens are generated using [JWT](https://jwt.io/), web most used tool to generate authentication tokens, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys and RS256 asymmetric cryptography algorithm, increasing token's authenticity.
+Users password are hashed with [Argon2](https://github.com/P-H-C/phc-winner-argon2) hasher, winner of the [Password Hashing Competition (PHC)](https://www.password-hashing.net/), the most recommended and secure hashing algorithm option.
+Authentications tokens are generated using [JWT](https://jwt.io/), most used tool to generate authentication tokens for web applications, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys using RS256 asymmetric cryptography algorithm, increasing token's authenticity.
 
 #### Logs 📜
 
-All controllers unexpected errors are stored in the database, becoming available for future analysis and corrections. Having a console available, the errors and the requests data can be logged on console, for faster viewing while running the application.
+All controllers, middlewares, usecases and frameworks unexpected errors are stored in a log file, becoming available for future analysis and corrections.
 
 ## Building and running 🛠
 
-To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_**, filling all the properties in the file with your information. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` and no spaces after each line.
+To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker and docker-compose. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_** only, filling all the properties in the file with your information _(api port, db credentials...)_. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` and _no spaces_ after each line.
 
 ###### Cloning Repository
 
@@ -97,7 +100,7 @@ openssl rsa -pubout -in <private_key_name>.pem -out <public_key_name>.pem
 
 ###### Running with Docker
 
-```docker
+```bash
 docker-compose up
 ```
 
@@ -134,7 +137,7 @@ Following the standard of the [Conventional Commits](https://www.conventionalcom
 
 ## License ✒
 
-This project uses [gpl-3.0](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, which allows anyone modify, distribute and use in many different ways the project. However there are many conditions, such as **License and copyright notice**, **State changes**, **Disclose source** and **Use the same license**. Read complete license to know more about permissions and copyright.
+This project uses [GPL-3.0](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, which allows anyone modify, distribute and use the application code in many different ways. However there are many conditions, such as **License and copyright notice**, **State changes**, **Disclose source** and **Use the same license**. [Read complete license](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) to know more about permissions and copyright.
 
 ## Contact 📱
 
