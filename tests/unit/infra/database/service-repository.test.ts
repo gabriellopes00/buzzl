@@ -89,7 +89,7 @@ describe('Pg Service Repository', () => {
     })
   })
 
-  describe('Find service', () => {
+  describe('Find One service', () => {
     it('Should return the correct data if found a service by apiKey', async () => {
       const { email } = await getRepository(UserModel).save(fakeUser)
       const { apiKey } = await sut.add(fakeService)
@@ -148,6 +148,50 @@ describe('Pg Service Repository', () => {
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'update').mockRejectedValueOnce(new Error())
       const error = sut.update(null)
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Find All services', () => {
+    it('Should return all services found if does not receive any criteria', async () => {
+      await getRepository(UserModel).save(fakeUser)
+      const service = await sut.add(fakeService)
+      const services = await sut.findAll()
+      expect(services).toEqual([service])
+    })
+
+    it('Should return null if does not found any service without any criteria', async () => {
+      const services = await sut.findAll()
+      expect(services).toBeNull()
+    })
+
+    it('Should return all services found if receive maintainer as criteria', async () => {
+      await getRepository(UserModel).save(fakeUser)
+      await sut.add(fakeService)
+
+      const { id } = await getRepository(UserModel).save({
+        ...fakeUser,
+        email: 'another@mail.com',
+        id: 'b6dea341-cdfc-4595-9ef8-acc01d0f8dbd'
+      })
+      const service = await getRepository(ServiceModel).save({
+        ...fakeService,
+        id: '489fa72e-6db9-427a-88c4-30323bd7a409',
+        name: 'exclusive service',
+        maintainer: id
+      })
+      const services = await sut.findAll({ maintainer: id })
+      expect(services).toEqual([service])
+    })
+
+    it('Should return null if does not found any service with maintainer as criteria', async () => {
+      const services = await sut.findAll({ maintainer: fakeUser.id })
+      expect(services).toBeNull()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'findAll').mockRejectedValueOnce(new Error())
+      const error = sut.findAll()
       await expect(error).rejects.toThrow()
     })
   })

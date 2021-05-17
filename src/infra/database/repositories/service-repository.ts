@@ -43,4 +43,17 @@ export class PgServiceRepository implements ServiceRepository {
     const repository = getRepository(ServiceModel)
     return await repository.save(data)
   }
+
+  public async findAll(criteria?: { maintainer?: string }): Promise<Service[]> {
+    const repository = getRepository(ServiceModel)
+    if (criteria && criteria.maintainer) {
+      const services = await repository.find({ maintainer: criteria.maintainer })
+      if (services.length > 0) return services
+      else return null
+    } else {
+      const services = await repository.find()
+      if (services.length > 0) return services
+      else return null
+    }
+  }
 }
