@@ -1,3 +1,4 @@
+import { UnauthorizedUserDeletionError } from '@/domain/user/errors/unauthorized-deletion'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { DbDeleteUser } from '@/usecases/user/delete-user'
 import { fakeUser, fakeUserParams } from '../../mocks/user'
@@ -24,7 +25,12 @@ describe('Delete Service Usecase', () => {
       it('Should return an error if received an unregistered email', async () => {
         mockUserRepository.findOne.mockResolvedValueOnce(null)
         const error = await sut.delete(fakeUser.email, fakeUser.id)
-        expect(error).toEqual(new UnregisteredEmailError(fakeUserParams.email))
+        expect(error).toBeInstanceOf(UnregisteredEmailError)
+      })
+
+      it('Should return an error if received deletion request from an unauthorized user', async () => {
+        const error = await sut.delete(fakeUser.email, 'invalid_id')
+        expect(error).toBeInstanceOf(UnauthorizedUserDeletionError)
       })
 
       it('Should throws if user repository throws', async () => {

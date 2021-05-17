@@ -72,7 +72,9 @@ describe('Jwt Encrypter', () => {
     })
 
     test('Should throw if verify throws', async () => {
-      mockJwt.verify.mockRejectedValueOnce(new Error() as never)
+      mockJwt.verify.mockImplementationOnce(() => {
+        throw new Error()
+      })
       const error = sut.decrypt('any_token')
       await expect(error).rejects.toThrow()
     })

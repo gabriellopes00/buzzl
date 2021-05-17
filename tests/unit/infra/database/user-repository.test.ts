@@ -48,6 +48,19 @@ describe('Pg User Repository', () => {
       expect(existing).toBeFalsy()
     })
 
+    it('Should return true if there is a user registered with received id', async () => {
+      getRepository(UserModel).delete({})
+      const user = getRepository(UserModel).create({ ...fakeUser })
+      await getRepository(UserModel).save(user)
+      const existing = await sut.exists({ id: user.id })
+      expect(existing).toBeTruthy()
+    })
+
+    it('Should return false if there is no user registered with received id', async () => {
+      const existing = await sut.exists({ id: 'unregisred@mail.com' })
+      expect(existing).toBeFalsy()
+    })
+
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
       const error = sut.exists({ email: fakeUser.email })
