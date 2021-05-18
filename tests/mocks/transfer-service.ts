@@ -1,11 +1,11 @@
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { Service } from '@/domain/service/service'
-import { TransferServiceMaintainer } from '@/domain/service/transfer-maintainer'
+import { TransferService } from '@/domain/service/transfer-service'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { fakeService } from './service'
 
-export class MockTransferMaintainer implements TransferServiceMaintainer {
+export class MockTransferService implements TransferService {
   public async transfer(
     apiKey: string,
     currentMaintainerId: string,

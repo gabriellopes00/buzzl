@@ -4,7 +4,7 @@ import { routerAdapter } from '../adapters/express-router'
 import { addServiceController } from '../builds/controllers/add-service'
 import { deleteServiceController } from '../builds/controllers/delete-service'
 import { listServiceByUserController } from '../builds/controllers/list-service-by-user'
-import { transferMaintainerController } from '../builds/controllers/transfer-service-maintainer'
+import { transferServiceController } from '../builds/controllers/transfer-service'
 import { updateServiceController } from '../builds/controllers/update-service'
 import { authMiddleware } from '../builds/middlewares/auth-user'
 
@@ -14,9 +14,9 @@ router.post('/service', middlewareAdapter(authMiddleware), routerAdapter(addServ
 router.put('/service', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
 router.delete('/service', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
 router.patch(
-  '/transfer/service',
+  '/service/transfer',
   middlewareAdapter(authMiddleware),
-  routerAdapter(transferMaintainerController)
+  routerAdapter(transferServiceController)
 )
 router.get(
   '/service',

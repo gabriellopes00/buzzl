@@ -1,25 +1,25 @@
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
-import { TransferServiceMaintainer } from '@/domain/service/transfer-maintainer'
+import { TransferService } from '@/domain/service/transfer-service'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { Controller } from '@/presentation/ports/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 
-export interface TransferMaintainerParams {
+export interface TransferServiceParams {
   apiKey: string
   userId: string
   newMaintainerEmail: string
 }
 
-export class TransferMaintainerController implements Controller {
+export class TransferServiceController implements Controller {
   constructor(
     private readonly validator: Validator,
-    private readonly transferMaintainer: TransferServiceMaintainer
+    private readonly transferMaintainer: TransferService
   ) {}
 
-  public async handle(request: TransferMaintainerParams): Promise<HttpResponse> {
+  public async handle(request: TransferServiceParams): Promise<HttpResponse> {
     try {
       const validationResult = this.validator.validate(request)
       if (validationResult instanceof Error) return badRequest(validationResult)

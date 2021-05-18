@@ -2,21 +2,21 @@ import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorize
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import {
-  TransferMaintainerController,
-  TransferMaintainerParams
-} from '@/presentation/controllers/service/transfer-service-maintainer'
+  TransferServiceController,
+  TransferServiceParams
+} from '@/presentation/controllers/service/transfer-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { MockTransferMaintainer } from '../../../mocks/transfer-service-maintainer'
+import { MockTransferService } from '../../../mocks/transfer-service'
 import { fakeService } from '../../../mocks/service'
 import { fakeUser } from '../../../mocks/user'
 import { MockValidator } from '../../../mocks/validator'
 
-describe('Transfer Service Maintainer Controller', () => {
+describe('Transfer Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
-  const mockTransferMaintainer = new MockTransferMaintainer() as jest.Mocked<MockTransferMaintainer>
-  const sut = new TransferMaintainerController(mockValidator, mockTransferMaintainer)
+  const mockTransferMaintainer = new MockTransferService() as jest.Mocked<MockTransferService>
+  const sut = new TransferServiceController(mockValidator, mockTransferMaintainer)
 
-  const fakeParams: TransferMaintainerParams = {
+  const fakeParams: TransferServiceParams = {
     apiKey: fakeService.apiKey,
     userId: fakeUser.id,
     newMaintainerEmail: 'new@maintainer.com'

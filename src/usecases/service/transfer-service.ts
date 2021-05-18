@@ -1,12 +1,12 @@
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { Service } from '@/domain/service/service'
-import { TransferServiceMaintainer } from '@/domain/service/transfer-maintainer'
+import { TransferService } from '@/domain/service/transfer-service'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { ServiceRepository } from '../ports/service-repository'
 import { UserRepository } from '../ports/user-repository'
 
-export class DbTransferMaintainer implements TransferServiceMaintainer {
+export class DbTransferService implements TransferService {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly serviceRepository: ServiceRepository

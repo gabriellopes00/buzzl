@@ -2,15 +2,15 @@ import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorize
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { User } from '@/domain/user/user'
-import { DbTransferMaintainer } from '@/usecases/service/transfer-maintainer'
+import { DbTransferService } from '@/usecases/service/transfer-service'
 import { fakeService } from '../../mocks/service'
 import { MockServiceRepository } from '../../mocks/service-repository'
 import { MockUserRepository } from '../../mocks/user-repository'
 
-describe('Transfer Service Maintainer Usecase', () => {
+describe('Transfer Service Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>
-  const sut = new DbTransferMaintainer(mockUserRepository, mockServiceRepository)
+  const sut = new DbTransferService(mockUserRepository, mockServiceRepository)
 
   const newMaintainer = { id: '12ec4cef-c474-450e-b719-b649fa12dc46', email: 'new@maintainer.com' }
 
