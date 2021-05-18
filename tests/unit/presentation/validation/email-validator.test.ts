@@ -29,4 +29,29 @@ describe('Email Validation', () => {
     const isValid = sut.validate({ email: 'valid@mail.com' })
     expect(isValid).toBeNull()
   })
+
+  it('Should return an error if email is missing `@`', () => {
+    const isValid = sut.validate({ newMaintainerEmail: 'invalidmail.com' })
+    expect(isValid).toEqual(error)
+  })
+
+  it('Should return an error if email is missing `.`', () => {
+    const isValid = sut.validate({ newMaintainerEmail: 'invalid@mail' })
+    expect(isValid).toEqual(error)
+  })
+
+  it('Should return an error if receive a null email', () => {
+    const isValid = sut.validate({ newMaintainerEmail: null })
+    expect(isValid).toEqual(error)
+  })
+
+  it('Should return an error if not receive an email', () => {
+    const isValid = sut.validate({})
+    expect(isValid).toEqual(error)
+  })
+
+  it('Should return null if receive a valid email', () => {
+    const isValid = sut.validate({ newMaintainerEmail: 'valid@mail.com' })
+    expect(isValid).toBeNull()
+  })
 })

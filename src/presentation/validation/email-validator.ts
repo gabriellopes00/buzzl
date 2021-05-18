@@ -3,8 +3,11 @@ import { Validator } from '../ports/validator'
 
 export class EmailValidator implements Validator {
   validate(input: any): Error {
-    if (input.email && typeof input.email === 'string') {
-      const email: string = input.email
+    if (
+      (input.email || typeof input.newMaintainerEmail) &&
+      (typeof input.email === 'string' || typeof input.newMaintainerEmail === 'string')
+    ) {
+      const email: string = input.email || input.newMaintainerEmail
       const pattern = /^[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
 
       if (email && email.length <= 256 && pattern.test(email)) return null
