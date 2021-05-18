@@ -13,7 +13,7 @@ router.post('/service', middlewareAdapter(authMiddleware), routerAdapter(addServ
 router.put('/service', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
 router.delete('/service', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
 router.get(
-  '/services',
+  '/service',
   middlewareAdapter(authMiddleware),
   routerAdapter(listServiceByUserController)
 )
