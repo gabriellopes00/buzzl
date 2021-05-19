@@ -1,5 +1,5 @@
 import { Encrypter } from '@/usecases/ports/encrypter'
-import { fakeUser } from './user'
+import { fakeUser } from '../user/user'
 
 export class MockEncrypter implements Encrypter {
   async encrypt(payload: string): Promise<string> {

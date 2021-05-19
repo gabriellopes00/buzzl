@@ -19,6 +19,7 @@ module.exports = {
   clearMocks: true,
   preset: 'ts-jest',
   moduleNameMapper: {
-    '@/(.*)': '<rootDir>/src/$1'
+    '@/(.*)': '<rootDir>/src/$1',
+    '@t/(.*)': '<rootDir>/tests/$1'
   }
 }

@@ -1,6 +1,6 @@
-import { MockValidator } from '../../../mocks/validator'
+import { MockValidator } from '@t/mocks/common/validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
-import { fakeUserParams } from '../../../mocks/user'
+import { fakeUserParams } from '@t/mocks/user/user'
 
 describe('Validator Compositor', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

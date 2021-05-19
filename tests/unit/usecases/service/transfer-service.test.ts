@@ -4,10 +4,10 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { User } from '@/domain/user/user'
 import { DbTransferService } from '@/usecases/service/transfer-service'
-import { fakeService } from '../../mocks/service'
-import { MockServiceRepository } from '../../mocks/service-repository'
-import { fakeUser } from '../../mocks/user'
-import { MockUserRepository } from '../../mocks/user-repository'
+import { fakeService } from '@t/mocks/service/service'
+import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { fakeUser } from '@t/mocks/user/user'
+import { MockUserRepository } from '@t/mocks/user/user-repository'
 
 describe('Transfer Service Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

@@ -1,7 +1,7 @@
 import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { SignIn, SignInParams } from '@/domain/user/sign-in'
-import { MockEncrypter } from './encrypter'
+import { MockEncrypter } from '../common/encrypter'
 
 export class MockSignIn implements SignIn {
   async sign(

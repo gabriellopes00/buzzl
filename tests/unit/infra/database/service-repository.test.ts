@@ -5,8 +5,8 @@ import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgServiceRepository } from '@/infra/database/repositories/service-repository'
 import { resolve } from 'path'
 import { createConnection, getRepository } from 'typeorm'
-import { fakeService } from '../../../mocks/service'
-import { fakeUser } from '../../../mocks/user'
+import { fakeService } from '@t/mocks/service/service'
+import { fakeUser } from '@t/mocks/user/user'
 
 describe('Pg Service Repository', () => {
   jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {
@@ -192,6 +192,40 @@ describe('Pg Service Repository', () => {
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'findAll').mockRejectedValueOnce(new Error())
       const error = sut.findAll()
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Existing Service', () => {
+    it('Should return true if there is a service registered with received id', async () => {
+      getRepository(ServiceModel).delete({})
+      const service = getRepository(ServiceModel).create({ ...fakeService })
+      await getRepository(ServiceModel).save(service)
+      const existing = await sut.exists({ id: service.id })
+      expect(existing).toBeTruthy()
+    })
+
+    it('Should return false if there is no service registered with received id', async () => {
+      const existing = await sut.exists({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
+      expect(existing).toBeFalsy()
+    })
+
+    it('Should return true if there is a service registered with received api key', async () => {
+      getRepository(ServiceModel).delete({})
+      const service = getRepository(ServiceModel).create({ ...fakeService })
+      await getRepository(ServiceModel).save(service)
+      const existing = await sut.exists({ id: service.id })
+      expect(existing).toBeTruthy()
+    })
+
+    it('Should return false if there is no service registered with received id', async () => {
+      const existing = await sut.exists({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
+      expect(existing).toBeFalsy()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
+      const error = sut.exists({ id: fakeService.id })
       await expect(error).rejects.toThrow()
     })
   })

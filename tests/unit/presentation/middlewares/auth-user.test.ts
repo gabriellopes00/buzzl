@@ -2,7 +2,7 @@ import { ForbiddenError } from '@/presentation/errors/forbidden'
 import { UnauthorizedError } from '@/presentation/errors/unauthorized'
 import { forbidden, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { AuthUserMiddleware, AuthUserRequest } from '@/presentation/middlewares/auth-user'
-import { MockAuthentication } from '../../../mocks/auth-user'
+import { MockAuthentication } from '@t/mocks/user/auth-user'
 
 describe('Auth User Middleware', () => {
   const mockAuthenticator = new MockAuthentication() as jest.Mocked<MockAuthentication>

@@ -8,9 +8,9 @@ import {
   serverError,
   unauthorized
 } from '@/presentation/helpers/http'
-import { MockDeleteUser } from '../../../mocks/delete-user'
-import { fakeUser } from '../../../mocks/user'
-import { MockValidator } from '../../../mocks/validator'
+import { MockDeleteUser } from '@t/mocks/user/delete-user'
+import { fakeUser } from '@t/mocks/user/user'
+import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Delete User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

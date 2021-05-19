@@ -1,8 +1,8 @@
 import { DbAddService } from '@/usecases/service/add-service'
-import { MockAPIKeyGenerator } from '../../mocks/api-key-generator'
-import { addServiceDto, fakeService } from '../../mocks/service'
-import { MockServiceRepository } from '../../mocks/service-repository'
-import { MockUUIDGenerator } from '../../mocks/uuid-generator'
+import { MockAPIKeyGenerator } from '@t/mocks/common/api-key-generator'
+import { addServiceDto, fakeService } from '@t/mocks/service/service'
+import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockUUIDGenerator } from '@t/mocks/common/uuid-generator'
 
 describe('Add Service Usecase', () => {
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>

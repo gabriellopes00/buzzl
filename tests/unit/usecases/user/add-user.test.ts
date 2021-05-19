@@ -1,9 +1,9 @@
 import { ExistingEmailError } from '@/domain/user/errors/existing-email'
 import { DbAddUser } from '@/usecases/user/add-user'
-import { MockHasher } from '../../mocks/hasher'
-import { fakeUser, fakeUserParams } from '../../mocks/user'
-import { MockUserRepository } from '../../mocks/user-repository'
-import { MockUUIDGenerator } from '../../mocks/uuid-generator'
+import { MockHasher } from '@t/mocks/common/hasher'
+import { fakeUser, fakeUserParams } from '@t/mocks/user/user'
+import { MockUserRepository } from '@t/mocks/user/user-repository'
+import { MockUUIDGenerator } from '@t/mocks/common/uuid-generator'
 
 describe('AddUser Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

@@ -3,9 +3,9 @@ import {
   ListServiceParams
 } from '@/presentation/controllers/service/list-service-by-user'
 import { noContent, ok, serverError } from '@/presentation/helpers/http'
-import { MockListServiceByUser } from '../../../mocks/list-service-by-user'
-import { fakeService } from '../../../mocks/service'
-import { fakeUser } from '../../../mocks/user'
+import { MockListServiceByUser } from '@t/mocks/service/list-service-by-user'
+import { fakeService } from '@t/mocks/service/service'
+import { fakeUser } from '@t/mocks/user/user'
 
 describe('List Service By User Controller', () => {
   const mockListService = new MockListServiceByUser() as jest.Mocked<MockListServiceByUser>

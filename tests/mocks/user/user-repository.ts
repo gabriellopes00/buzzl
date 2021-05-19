@@ -1,7 +1,7 @@
 import { User } from '@/domain/user/user'
 import { UserRepository } from '@/usecases/ports/user-repository'
-import { MockHasher } from './hasher'
-import { fakeUser } from './user'
+import { MockHasher } from '../common/hasher'
+import { fakeUser } from '../user/user'
 
 /*
   Mock methods and classes always return expect value to make test pass.

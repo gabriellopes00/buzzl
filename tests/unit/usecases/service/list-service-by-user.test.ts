@@ -1,7 +1,7 @@
 import { DbListServiceByUser } from '@/usecases/service/list-service-by-user'
-import { fakeService } from '../../mocks/service'
-import { MockServiceRepository } from '../../mocks/service-repository'
-import { fakeUser } from '../../mocks/user'
+import { fakeService } from '@t/mocks/service/service'
+import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { fakeUser } from '@t/mocks/user/user'
 
 describe('List Service By User Usecase', () => {
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>

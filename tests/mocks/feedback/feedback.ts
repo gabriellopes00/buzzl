@@ -1,7 +1,7 @@
 import { FeedbackParams } from '@/domain/feedback/add-feedback'
 import { Feedback, FeedbackCategory } from '@/domain/feedback/feedback'
-import { fakeService } from './service'
-import { MockUUIDGenerator } from './uuid-generator'
+import { fakeService } from '../service/service'
+import { MockUUIDGenerator } from '../common/uuid-generator'
 
 const uuidGenerator = new MockUUIDGenerator()
 

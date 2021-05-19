@@ -11,10 +11,10 @@ import {
   serverError,
   unauthorized
 } from '@/presentation/helpers/http'
-import { MockDeleteService } from '../../../mocks/delete-service'
-import { fakeService } from '../../../mocks/service'
-import { fakeUser } from '../../../mocks/user'
-import { MockValidator } from '../../../mocks/validator'
+import { MockDeleteService } from '@t/mocks/service/delete-service'
+import { fakeService } from '@t/mocks/service/service'
+import { fakeUser } from '@t/mocks/user/user'
+import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Delete Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

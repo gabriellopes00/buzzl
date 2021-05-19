@@ -6,10 +6,10 @@ import {
   TransferServiceParams
 } from '@/presentation/controllers/service/transfer-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { MockTransferService } from '../../../mocks/transfer-service'
-import { fakeService } from '../../../mocks/service'
-import { fakeUser } from '../../../mocks/user'
-import { MockValidator } from '../../../mocks/validator'
+import { MockTransferService } from '@t/mocks/service/transfer-service'
+import { fakeService } from '@t/mocks/service/service'
+import { fakeUser } from '@t/mocks/user/user'
+import { MockValidator } from '@t/mocks/common/validator'
 import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
 
 describe('Transfer Service Controller', () => {

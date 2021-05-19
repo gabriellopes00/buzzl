@@ -3,7 +3,7 @@ import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
 import { resolve } from 'path'
 import { createConnection, getRepository } from 'typeorm'
-import { fakeUser } from '../../../mocks/user'
+import { fakeUser } from '@t/mocks/user/user'
 
 describe('Pg User Repository', () => {
   jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {

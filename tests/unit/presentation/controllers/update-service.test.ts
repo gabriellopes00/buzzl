@@ -5,10 +5,10 @@ import {
   UpdateServiceParams
 } from '@/presentation/controllers/service/update-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { fakeService } from '../../../mocks/service'
-import { MockUpdateService } from '../../../mocks/update-service'
-import { fakeUser } from '../../../mocks/user'
-import { MockValidator } from '../../../mocks/validator'
+import { fakeService } from '@t/mocks/service/service'
+import { MockUpdateService } from '@t/mocks/service/update-service'
+import { fakeUser } from '@t/mocks/user/user'
+import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Update Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

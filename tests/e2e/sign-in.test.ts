@@ -4,7 +4,7 @@ import pgConnectionHelper from '@/infra/database/pg-helper'
 import { resolve } from 'path'
 import supertest from 'supertest'
 import { createConnection, getRepository } from 'typeorm'
-import { fakeSignInParams, fakeUserParams } from '../mocks/user'
+import { fakeSignInParams, fakeUserParams } from '@t/mocks/user/user'
 
 jest.mock('jsonwebtoken', () => ({
   async sign(): Promise<string> {

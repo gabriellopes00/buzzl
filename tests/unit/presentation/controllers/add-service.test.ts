@@ -1,8 +1,8 @@
 import { AddServiceController } from '@/presentation/controllers/service/add-service'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
-import { MockAddService } from '../../../mocks/add-service'
-import { fakeService, fakeServiceParams } from '../../../mocks/service'
-import { MockValidator } from '../../../mocks/validator'
+import { MockAddService } from '@t/mocks/service/add-service'
+import { fakeService, fakeServiceParams } from '@t/mocks/service/service'
+import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Add Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

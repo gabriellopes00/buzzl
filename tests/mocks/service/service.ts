@@ -1,8 +1,8 @@
 import { Service } from '@/domain/service/service'
 import { ServiceParams } from '@/domain/service/add-service'
-import { MockAPIKeyGenerator } from './api-key-generator'
-import { fakeUser } from './user'
-import { MockUUIDGenerator } from './uuid-generator'
+import { MockAPIKeyGenerator } from '../common/api-key-generator'
+import { fakeUser } from '../user/user'
+import { MockUUIDGenerator } from '../common/uuid-generator'
 
 const uuidGenerator = new MockUUIDGenerator()
 const apiKeyGenerator = new MockAPIKeyGenerator()

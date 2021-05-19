@@ -1,10 +1,10 @@
 import { ExistingEmailError } from '@/domain/user/errors/existing-email'
 import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
-import { MockAddUser } from '../../../mocks/add-user'
-import { MockSignIn } from '../../../mocks/sign-in'
-import { fakeSignInParams, fakeUser, fakeUserParams } from '../../../mocks/user'
-import { MockValidator } from '../../../mocks/validator'
+import { MockAddUser } from '@t/mocks/user/add-user'
+import { MockSignIn } from '@t/mocks/user/sign-in'
+import { fakeSignInParams, fakeUser, fakeUserParams } from '@t/mocks/user/user'
+import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Add User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>

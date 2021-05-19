@@ -1,9 +1,9 @@
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { DbAddFeedback } from '@/usecases/feedback/add-feedback'
-import { fakeFeedbackParams } from '../../../mocks/feedback'
-import { MockFeedbackRepository } from '../../../mocks/feedback-repository'
-import { MockServiceRepository } from '../../../mocks/service-repository'
-import { MockUUIDGenerator } from '../../../mocks/uuid-generator'
+import { fakeFeedbackParams } from '@t/mocks/feedback/feedback'
+import { MockFeedbackRepository } from '@t/mocks/feedback/feedback-repository'
+import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockUUIDGenerator } from '@t/mocks/common/uuid-generator'
 
 describe('Add Feedback Usecase', () => {
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>

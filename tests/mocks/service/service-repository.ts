@@ -1,7 +1,7 @@
 import { Service } from '@/domain/service/service'
 import { ServiceJoinMaintainer, ServiceRepository } from '@/usecases/ports/service-repository'
-import { fakeService } from './service'
-import { fakeUser } from './user'
+import { fakeService } from '../service/service'
+import { fakeUser } from '../user/user'
 
 /*
   Mock methods and classes always return expect value to make test pass.

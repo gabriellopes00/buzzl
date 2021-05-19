@@ -1,8 +1,8 @@
 import { UnauthorizedUserDeletionError } from '@/domain/user/errors/unauthorized-deletion'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { DbDeleteUser } from '@/usecases/user/delete-user'
-import { fakeUser, fakeUserParams } from '../../mocks/user'
-import { MockUserRepository } from '../../mocks/user-repository'
+import { fakeUser, fakeUserParams } from '@t/mocks/user/user'
+import { MockUserRepository } from '@t/mocks/user/user-repository'
 
 describe('Delete Service Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>
