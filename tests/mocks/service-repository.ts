@@ -29,4 +29,7 @@ export class MockServiceRepository implements ServiceRepository {
   }
 
   async delete(by: { id?: string; apiKey?: string }): Promise<void> {}
+  async exists(by: { id?: string; apiKey?: string }): Promise<boolean> {
+    return true
+  }
 }

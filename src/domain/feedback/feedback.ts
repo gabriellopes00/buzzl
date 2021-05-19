@@ -13,5 +13,6 @@ export interface Feedback {
   id: string
   category: FeedbackCategory
   service: string
-  clientEmail?: string
+  content: string
+  customerEmail?: string
 }
