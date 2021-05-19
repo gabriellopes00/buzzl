@@ -10,6 +10,7 @@ import { MockTransferService } from '../../../mocks/transfer-service'
 import { fakeService } from '../../../mocks/service'
 import { fakeUser } from '../../../mocks/user'
 import { MockValidator } from '../../../mocks/validator'
+import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
 
 describe('Transfer Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
@@ -79,6 +80,12 @@ describe('Transfer Service Controller', () => {
       mockTransferMaintainer.transfer.mockResolvedValueOnce(new UnregisteredEmailError(''))
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(conflict(new UnregisteredEmailError('')))
+    })
+
+    it('Should return 409 response if receive transfer request to the already current maintainer', async () => {
+      mockTransferMaintainer.transfer.mockResolvedValueOnce(new InvalidServiceTransferError('', ''))
+      const response = await sut.handle(fakeParams)
+      expect(response).toEqual(conflict(new InvalidServiceTransferError('', '')))
     })
 
     it('Should return 401 if receive request fom an unauthorized maintainer', async () => {

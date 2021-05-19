@@ -1,3 +1,4 @@
+import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
@@ -5,6 +6,7 @@ import { User } from '@/domain/user/user'
 import { DbTransferService } from '@/usecases/service/transfer-service'
 import { fakeService } from '../../mocks/service'
 import { MockServiceRepository } from '../../mocks/service-repository'
+import { fakeUser } from '../../mocks/user'
 import { MockUserRepository } from '../../mocks/user-repository'
 
 describe('Transfer Service Usecase', () => {
@@ -73,6 +75,11 @@ describe('Transfer Service Usecase', () => {
         expect(error).toBeInstanceOf(UnauthorizedMaintainerError)
       })
 
+      it('Should return an InvalidServiceTransfer if new maintainer is the current', async () => {
+        const error = await sut.transfer(fakeService.apiKey, fakeUser.id, newMaintainer.email)
+        expect(error).toBeInstanceOf(InvalidServiceTransferError)
+      })
+
       it('Should throws if repository findOneJoinMaintainer method throws', async () => {
         mockServiceRepository.findOneJoinMaintainer.mockRejectedValueOnce(new Error())
         const error = sut.transfer(fakeService.apiKey, fakeService.maintainer, newMaintainer.email)
@@ -110,7 +117,8 @@ describe('Transfer Service Usecase', () => {
 
       it('Should throws if repository update method throws', async () => {
         mockServiceRepository.update.mockRejectedValueOnce(new Error())
-        const error = sut.transfer(fakeService.apiKey, fakeService.maintainer, newMaintainer.email)
+        mockUserRepository.findOne.mockResolvedValueOnce({ ...newMaintainer } as User)
+        const error = sut.transfer(fakeService.apiKey, fakeUser.id, newMaintainer.email)
         await expect(error).rejects.toThrow()
       })
     })

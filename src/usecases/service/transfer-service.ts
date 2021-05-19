@@ -1,3 +1,4 @@
+import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { Service } from '@/domain/service/service'
@@ -21,8 +22,11 @@ export class DbTransferService implements TransferService {
     if (!newMaintainer) return new UnregisteredEmailError(newMaintainerEmail)
 
     const service = await this.serviceRepository.findOneJoinMaintainer({ apiKey })
-    if (!service) return new UnregisteredApiKeyError(apiKey)
-    else if (service.maintainer.id !== currentMaintainerId) {
+    if (!service) {
+      return new UnregisteredApiKeyError(apiKey)
+    } else if (newMaintainer.id === currentMaintainerId) {
+      return new InvalidServiceTransferError(apiKey, newMaintainerEmail)
+    } else if (service.maintainer.id !== currentMaintainerId) {
       return new UnauthorizedMaintainerError(apiKey)
     }
 
