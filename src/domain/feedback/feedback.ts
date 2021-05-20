@@ -2,7 +2,7 @@ export enum FeedbackCategory {
   // eslint-disable-next-line
   COMMENT = 'COMMENT',
   // eslint-disable-next-line
-  COMPLAINT = 'COMPLAINT',
+  ISSUE = 'ISSUE',
   // eslint-disable-next-line
   IDEA = 'IDEA',
   // eslint-disable-next-line

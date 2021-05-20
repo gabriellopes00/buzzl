@@ -132,7 +132,8 @@
 - use web sockets to list new feedbacks in real time (graphQL)
 - update user data and recover password
 - survey system (when user send its email with feedback, ask "would you like receive emails with surveys ?")
-- make returns an error if user try to transfer a service for itself
+  [x] make returns an error if user try to transfer a service for itself
+- ask to the customer if he wants store his email in the database, to receive future surveys about a survey
 
 # learning...
 

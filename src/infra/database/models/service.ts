@@ -31,7 +31,7 @@ export class ServiceModel implements Service {
   @Column()
   public isActive: boolean
 
-  @PrimaryColumn()
+  @Column({ unique: true })
   public apiKey: string
 
   @CreateDateColumn()
