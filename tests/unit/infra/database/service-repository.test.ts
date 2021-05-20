@@ -178,6 +178,7 @@ describe('Pg Service Repository', () => {
         ...fakeService,
         id: '489fa72e-6db9-427a-88c4-30323bd7a409',
         name: 'exclusive service',
+        apiKey: '_cbvTX7PjT15r',
         maintainer: id
       })
       const services = await sut.findAll({ maintainer: id })

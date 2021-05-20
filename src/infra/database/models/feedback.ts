@@ -1,4 +1,3 @@
-import { Feedback, FeedbackCategory } from '../../../domain/feedback/feedback'
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn
 } from 'typeorm'
+import { Feedback } from '../../../domain/feedback/feedback'
 import { ServiceModel } from './service'
 
 @Entity('service')
@@ -16,7 +16,7 @@ export class FeedbackModel implements Feedback {
   public id: string
 
   @Column({ enum: ['COMMENT', 'ISSUE', 'IDEA', 'OTHER'] })
-  public category: FeedbackCategory
+  public category: 'COMMENT' | 'ISSUE' | 'IDEA' | 'OTHER'
 
   @Column()
   public content: string
