@@ -1,7 +1,11 @@
 import { FeedbackModel } from '@/infra/database/models/feedback'
+import { ServiceModel } from '@/infra/database/models/service'
+import { UserModel } from '@/infra/database/models/user'
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgFeedbackRepository } from '@/infra/database/repositories/feedback-repository'
 import { fakeFeedback } from '@t/mocks/feedback/feedback'
+import { fakeService } from '@t/mocks/service/service'
+import { fakeUser } from '@t/mocks/user/user'
 import { resolve } from 'path'
 import { createConnection, getRepository } from 'typeorm'
 
@@ -21,17 +25,17 @@ describe('Pg Feedback Repository', () => {
   afterEach(() => getRepository(FeedbackModel).delete({}))
 
   describe('Add Feedback', () => {
-    // it('Should store a feedback data on success', async () => {
-    //   getRepository(UserModel).delete({})
-    //   getRepository(ServiceModel).delete({})
+    it('Should store a feedback data on success', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
 
-    //   await getRepository(UserModel).save(fakeUser)
-    //   await getRepository(ServiceModel).save(fakeService)
-    //   await sut.add(fakeFeedback)
+      await getRepository(UserModel).save(fakeUser)
+      await getRepository(ServiceModel).save(fakeService)
+      await sut.add(fakeFeedback)
 
-    //   const data = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
-    //   expect(data.id).toEqual(fakeFeedback.id)
-    // })
+      const data = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(data.id).toEqual(fakeFeedback.id)
+    })
 
     it('Should not add a store a feedback if there is no respective service', async () => {
       const feedback = new PgFeedbackRepository().add({ ...fakeFeedback, service: null })

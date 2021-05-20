@@ -10,7 +10,7 @@ import {
 import { Feedback } from '../../../domain/feedback/feedback'
 import { ServiceModel } from './service'
 
-@Entity('service')
+@Entity('feedback')
 export class FeedbackModel implements Feedback {
   @PrimaryColumn()
   public id: string
