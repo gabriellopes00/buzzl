@@ -1,7 +1,7 @@
 FROM node:14
 WORKDIR /usr/src/feedbackio/
 
-LABEL manteiner="gabrielluislopes00@gmail.com" version="1.7.0" description="Feedback.io api docker image" url="https://api-feedbackio.herokuapp.com"
+LABEL manteiner="gabrielluislopes00@gmail.com" version="1.8.0" description="Feedback.io api docker image" url="https://api-feedbackio.herokuapp.com"
 
 COPY package.json .
 RUN npm install --production --frozen-lockfile
