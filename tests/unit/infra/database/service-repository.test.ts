@@ -215,12 +215,12 @@ describe('Pg Service Repository', () => {
       getRepository(ServiceModel).delete({})
       const service = getRepository(ServiceModel).create({ ...fakeService })
       await getRepository(ServiceModel).save(service)
-      const existing = await sut.exists({ id: service.id })
+      const existing = await sut.exists({ apiKey: service.apiKey })
       expect(existing).toBeTruthy()
     })
 
-    it('Should return false if there is no service registered with received id', async () => {
-      const existing = await sut.exists({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
+    it('Should return false if there is no service registered with received api key', async () => {
+      const existing = await sut.exists({ apiKey: 'unregistered_key' })
       expect(existing).toBeFalsy()
     })
 

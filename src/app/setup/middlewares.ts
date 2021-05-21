@@ -8,8 +8,8 @@ export const secureHeaders = helmet()
 export const bodyParser = json()
 export const logger = expressPino({ logger: pinoLogger })
 export const rateLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 100, // max of 100 requests per IP in each 10 minutes
+  windowMs: 60 * 1000,
+  max: 50,
   headers: true,
   skipFailedRequests: true,
   message: 'Too many requests'
