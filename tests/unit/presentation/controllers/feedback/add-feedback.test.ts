@@ -1,3 +1,4 @@
+import { InactiveServiceError } from '@/domain/service/errors/inactive-service'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { AddFeedbackController } from '@/presentation/controllers/feedback/add-feedback'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
@@ -59,6 +60,12 @@ describe('Add Feedback Controller', () => {
       mockAddFeedback.add.mockResolvedValueOnce(new UnregisteredApiKeyError(''))
       const response = await sut.handle(fakeFeedbackParams)
       expect(response).toEqual(badRequest(new UnregisteredApiKeyError('')))
+    })
+
+    it('Should return 400 response if receive feedback service is not active', async () => {
+      mockAddFeedback.add.mockResolvedValueOnce(new InactiveServiceError(''))
+      const response = await sut.handle(fakeFeedbackParams)
+      expect(response).toEqual(badRequest(new InactiveServiceError('')))
     })
 
     it('Should return a 500 response if addService throws', async () => {
