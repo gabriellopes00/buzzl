@@ -6,8 +6,11 @@ export class ApiKeyValidator implements Validator {
     if (input.apiKey && typeof input.apiKey === 'string') {
       const pattern = /^_[a-z0-9A-Z]{29}$/
       if (pattern.test(input.apiKey)) return null
+    } else if (input.service && typeof input.service === 'string') {
+      const pattern = /^_[a-z0-9A-Z]{29}$/
+      if (pattern.test(input.service)) return null
     }
 
-    return new InvalidParamError('apiKey', 'Invalid api key format')
+    return new InvalidParamError('apiKey', 'Invalid service api key format')
   }
 }
