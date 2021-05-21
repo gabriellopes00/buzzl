@@ -24,4 +24,9 @@ export class MockUserRepository implements UserRepository {
   }
 
   async delete(criteria: { id?: string; email?: string }): Promise<void> {}
+
+  async update(criteria: { id?: string; email?: string }, data: User): Promise<User> {
+    const user = { ...fakeUser, password: await mockHasher.generate('') }
+    return { ...user, ...data }
+  }
 }
