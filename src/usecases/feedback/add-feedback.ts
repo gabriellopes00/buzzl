@@ -1,4 +1,5 @@
 import { AddFeedback, FeedbackParams } from '@/domain/feedback/add-feedback'
+import { InactiveServiceError } from '@/domain/service/errors/inactive-service'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { FeedbackRepository } from '../ports/feedback-repository'
 import { ServiceRepository } from '../ports/service-repository'
@@ -11,9 +12,12 @@ export class DbAddFeedback implements AddFeedback {
     private readonly feedbackRepository: FeedbackRepository
   ) {}
 
-  public async add(data: FeedbackParams): Promise<void | UnregisteredApiKeyError> {
-    const existingService = await this.serviceRepository.exists({ apiKey: data.service })
+  public async add(
+    data: FeedbackParams
+  ): Promise<void | UnregisteredApiKeyError | InactiveServiceError> {
+    const existingService = await this.serviceRepository.findOne({ apiKey: data.service })
     if (!existingService) return new UnregisteredApiKeyError(data.service)
+    else if (!existingService.isActive) return new InactiveServiceError(data.service)
 
     const id = this.uuidGenerator.generate()
     await this.feedbackRepository.add({ ...data, id })
