@@ -198,35 +198,35 @@ describe('Pg Service Repository', () => {
   })
 
   describe('Existing Service', () => {
-    it('Should return true if there is a service registered with received id', async () => {
+    it('Should return the data if found a service by id', async () => {
       getRepository(ServiceModel).delete({})
       const service = getRepository(ServiceModel).create({ ...fakeService })
       await getRepository(ServiceModel).save(service)
-      const existing = await sut.exists({ id: service.id })
-      expect(existing).toBeTruthy()
+      const existing = await sut.findOne({ id: service.id })
+      expect(existing.name).toEqual(fakeService.name)
     })
 
-    it('Should return false if there is no service registered with received id', async () => {
-      const existing = await sut.exists({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
-      expect(existing).toBeFalsy()
+    it('Should return null if there is no service with received id', async () => {
+      const existing = await sut.findOne({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
+      expect(existing).toBeNull()
     })
 
-    it('Should return true if there is a service registered with received api key', async () => {
+    it('Should return the data if found a service with received api key', async () => {
       getRepository(ServiceModel).delete({})
       const service = getRepository(ServiceModel).create({ ...fakeService })
       await getRepository(ServiceModel).save(service)
-      const existing = await sut.exists({ apiKey: service.apiKey })
-      expect(existing).toBeTruthy()
+      const existing = await sut.findOne({ apiKey: service.apiKey })
+      expect(existing.name).toEqual(fakeService.name)
     })
 
-    it('Should return false if there is no service registered with received api key', async () => {
-      const existing = await sut.exists({ apiKey: 'unregistered_key' })
-      expect(existing).toBeFalsy()
+    it('Should return null if there is no service with received api key', async () => {
+      const existing = await sut.findOne({ apiKey: 'unregistered_key' })
+      expect(existing).toBeNull()
     })
 
     it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
-      const error = sut.exists({ id: fakeService.id })
+      jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
+      const error = sut.findOne({ id: fakeService.id })
       await expect(error).rejects.toThrow()
     })
   })
