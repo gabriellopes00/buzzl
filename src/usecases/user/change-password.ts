@@ -1,14 +1,15 @@
 import { ChangePassParams, ChangePassword } from '@/domain/user/change-password'
 import { EqualPasswordError } from '@/domain/user/errors/equal-passwords'
 import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
-import { User } from '@/domain/user/user'
 import { Hasher } from '../ports/hasher'
 import { UserRepository } from '../ports/user-repository'
 
 export class DbChangePassword implements ChangePassword {
   constructor(private readonly userRepository: UserRepository, private readonly hasher: Hasher) {}
 
-  public async change(data: ChangePassParams): Promise<User | UnmatchedPasswordError> {
+  public async change(
+    data: ChangePassParams
+  ): Promise<UnmatchedPasswordError | EqualPasswordError> {
     const { currentPass, userId, newPass } = data
 
     const user = await this.userRepository.findOne({ id: userId })
@@ -17,6 +18,6 @@ export class DbChangePassword implements ChangePassword {
     else if (currentPass === newPass) return new EqualPasswordError()
 
     const newPassHash = await this.hasher.generate(newPass)
-    return await this.userRepository.update({ ...user, password: newPassHash })
+    await this.userRepository.update({ ...user, password: newPassHash })
   }
 }

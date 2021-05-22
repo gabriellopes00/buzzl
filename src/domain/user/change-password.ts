@@ -1,6 +1,5 @@
 import { EqualPasswordError } from './errors/equal-passwords'
 import { UnmatchedPasswordError } from './errors/unmatched-password'
-import { User } from './user'
 
 export interface ChangePassParams {
   userId: string
@@ -9,5 +8,5 @@ export interface ChangePassParams {
 }
 
 export interface ChangePassword {
-  change(data: ChangePassParams): Promise<User | UnmatchedPasswordError | EqualPasswordError>
+  change(data: ChangePassParams): Promise<void | UnmatchedPasswordError | EqualPasswordError>
 }
