@@ -85,4 +85,21 @@ describe('ChangeUserPass Usecase', () => {
       })
     })
   })
+
+  describe('Update an user', () => {
+    it('Should call user repository update method with correct values', async () => {
+      const update = jest.spyOn(mockUserRepository, 'update')
+      await sut.change({ userId: fakeUser.id, currentPass: fakeUser.id, newPass: 'pass' })
+      expect(update).toHaveBeenCalledWith({
+        ...fakeUser,
+        password: await mockHasher.generate('pass')
+      })
+    })
+
+    it('Should throw if user repository throws', async () => {
+      mockUserRepository.update.mockRejectedValueOnce(new Error())
+      const error = sut.change({ userId: fakeUser.id, currentPass: 'pass', newPass: '_newpass' })
+      await expect(error).rejects.toThrow()
+    })
+  })
 })

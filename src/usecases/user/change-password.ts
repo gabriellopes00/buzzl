@@ -17,6 +17,6 @@ export class DbChangePassword implements ChangePassword {
     else if (currentPass === newPass) return new EqualPasswordError()
 
     const newPassHash = await this.hasher.generate(newPass)
-    return await this.userRepository.update({ id: userId }, { ...user, password: newPassHash })
+    return await this.userRepository.update({ ...user, password: newPassHash })
   }
 }

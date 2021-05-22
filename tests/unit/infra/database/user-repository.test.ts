@@ -1,9 +1,10 @@
+import { User } from '@/domain/user/user'
 import { UserModel } from '@/infra/database/models/user'
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { fakeUser } from '@t/mocks/user/user'
 import { resolve } from 'path'
 import { createConnection, getRepository } from 'typeorm'
-import { fakeUser } from '@t/mocks/user/user'
 
 describe('Pg User Repository', () => {
   jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {
@@ -132,6 +133,27 @@ describe('Pg User Repository', () => {
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'delete').mockRejectedValueOnce(new Error())
       const error = sut.delete({ email: fakeUser.email })
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Update user', () => {
+    const newPass = '_newpass'
+    const fakeData: User = { ...fakeUser, password: newPass }
+
+    it('Should update a user on success', async () => {
+      await getRepository(UserModel).save(fakeUser)
+      const { name } = await getRepository(UserModel).findOne({ id: fakeUser.id })
+      expect(name).toEqual(fakeUser.name)
+
+      await sut.update(fakeData)
+      const newPass = (await getRepository(UserModel).findOne({ id: fakeUser.id })).password
+      expect(newPass).toEqual(fakeData.password)
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'update').mockRejectedValueOnce(new Error())
+      const error = sut.update(null)
       await expect(error).rejects.toThrow()
     })
   })

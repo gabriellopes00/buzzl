@@ -29,4 +29,9 @@ export class PgUserRepository implements UserRepository {
     if (id) await repository.delete({ id })
     else if (email) await repository.delete({ email })
   }
+
+  public async update(data: User): Promise<User> {
+    const repository = getRepository(UserModel)
+    return repository.save(data)
+  }
 }
