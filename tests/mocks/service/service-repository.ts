@@ -28,8 +28,12 @@ export class MockServiceRepository implements ServiceRepository {
     return { ...fakeService, maintainer: fakeUser }
   }
 
-  async delete(by: { id?: string; apiKey?: string }): Promise<void> {}
-  async findOne(by: { id?: string; apiKey?: string }): Promise<Service> {
+  async delete(criteria: { id?: string; apiKey?: string }): Promise<void> {}
+  async findOne(criteria: { id?: string; apiKey?: string }): Promise<Service> {
     return fakeService
+  }
+
+  async exists(criteria: { id?: string; apiKey?: string }): Promise<boolean> {
+    return true
   }
 }

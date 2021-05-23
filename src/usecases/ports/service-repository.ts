@@ -10,6 +10,7 @@ export interface ServiceRepository {
   findOneJoinMaintainer(criteria: { id?: string; apiKey?: string }): Promise<ServiceJoinMaintainer>
   findOne(criteria: { id?: string; apiKey?: string }): Promise<Service>
   findAll(criteria?: { maintainer?: string }): Promise<Service[]>
+  exists(criteria: { id?: string; apiKey?: string }): Promise<boolean>
   delete(criteria: { id?: string; apiKey?: string }): Promise<void>
   update(data: Service): Promise<Service>
 }
