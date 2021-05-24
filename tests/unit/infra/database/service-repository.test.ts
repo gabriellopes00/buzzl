@@ -89,7 +89,7 @@ describe('Pg Service Repository', () => {
     })
   })
 
-  describe('Find One service', () => {
+  describe('Find One service with maintainer data', () => {
     it('Should return the correct data if found a service by apiKey', async () => {
       const { email } = await getRepository(UserModel).save(fakeUser)
       const { apiKey } = await sut.add(fakeService)
@@ -197,7 +197,7 @@ describe('Pg Service Repository', () => {
     })
   })
 
-  describe('Existing Service', () => {
+  describe('Find One Service', () => {
     it('Should return the data if found a service by id', async () => {
       getRepository(ServiceModel).delete({})
       const service = getRepository(ServiceModel).create({ ...fakeService })
@@ -227,6 +227,40 @@ describe('Pg Service Repository', () => {
     it('Should throw if typeorm repository throws', async () => {
       jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
       const error = sut.findOne({ id: fakeService.id })
+      await expect(error).rejects.toThrow()
+    })
+  })
+
+  describe('Existing Service', () => {
+    it('Should return true if found a service by id', async () => {
+      getRepository(ServiceModel).delete({})
+      const service = getRepository(ServiceModel).create({ ...fakeService })
+      await getRepository(ServiceModel).save(service)
+      const existing = await sut.exists({ id: service.id })
+      expect(existing).toBeTruthy()
+    })
+
+    it('Should return false if there is no service with received id', async () => {
+      const existing = await sut.exists({ id: '179a0787-a48d-4251-81dc-c027ecd409d8' })
+      expect(existing).toBeFalsy()
+    })
+
+    it('Should return true if found a service with received api key', async () => {
+      getRepository(ServiceModel).delete({})
+      const service = getRepository(ServiceModel).create({ ...fakeService })
+      await getRepository(ServiceModel).save(service)
+      const existing = await sut.exists({ apiKey: service.apiKey })
+      expect(existing).toBeTruthy()
+    })
+
+    it('Should return false if there is no service with received api key', async () => {
+      const existing = await sut.findOne({ apiKey: 'unregistered_key' })
+      expect(existing).toBeFalsy()
+    })
+
+    it('Should throw if typeorm repository throws', async () => {
+      jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
+      const error = sut.exists({ id: fakeService.id })
       await expect(error).rejects.toThrow()
     })
   })

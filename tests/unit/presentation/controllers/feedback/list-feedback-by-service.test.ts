@@ -3,7 +3,7 @@ import {
   ListFeedbackByServiceController,
   ListFeedbackResponse
 } from '@/presentation/controllers/feedback/list-feedback-by-service'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, ok, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
 import { MockListFeedbackByService } from '@t/mocks/feedback/list-feedback-by-service'
 import { fakeService } from '@t/mocks/service/service'
@@ -55,7 +55,7 @@ describe('List Feedback By Service Controller', () => {
       expect(list).not.toHaveBeenCalled()
     })
 
-    it('Should return 204 response on success', async () => {
+    it('Should return 200 response on success', async () => {
       const response = await sut.handle(fakeRequest)
       const feedbacks = await mockListFeedback.list(fakeRequest.service)
 
@@ -83,6 +83,12 @@ describe('List Feedback By Service Controller', () => {
           feedbacks: feedbacks
         } as ListFeedbackResponse)
       )
+    })
+
+    it('Should return 200 response on success', async () => {
+      mockListFeedback.list.mockResolvedValueOnce(null)
+      const response = await sut.handle(fakeRequest)
+      expect(response).toEqual(noContent())
     })
 
     it('Should return 400 response if receive an unregistered api key', async () => {
