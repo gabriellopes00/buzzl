@@ -5,6 +5,13 @@ import { fakeFeedback } from './feedback'
 
 export class MockListFeedbackByService implements ListFeedbackByService {
   async list(service: string): Promise<Feedback[] | UnregisteredApiKeyError> {
-    return [fakeFeedback]
+    return [
+      { ...fakeFeedback, category: 'COMMENT' },
+      { ...fakeFeedback, category: 'COMMENT' },
+      { ...fakeFeedback, category: 'ISSUE' },
+      { ...fakeFeedback, category: 'ISSUE' },
+      { ...fakeFeedback, category: 'IDEA' },
+      { ...fakeFeedback, category: 'IDEA' }
+    ]
   }
 }
