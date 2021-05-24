@@ -8,4 +8,12 @@ export class PgFeedbackRepository implements FeedbackRepository {
     const repository = getRepository(FeedbackModel)
     await repository.save(repository.create(data))
   }
+
+  public async findAll(criteria?: { service: string }): Promise<Feedback[]> {
+    const repository = getRepository(FeedbackModel)
+    if (criteria.service) {
+      return await repository.find({ service: criteria.service })
+    }
+    return await repository.find()
+  }
 }

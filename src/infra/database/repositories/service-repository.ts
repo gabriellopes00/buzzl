@@ -63,4 +63,11 @@ export class PgServiceRepository implements ServiceRepository {
     if (id) return (await repository.findOne({ where: { id } })) || null
     else if (apiKey) return (await repository.findOne({ where: { apiKey } })) || null
   }
+
+  public async exists(criteria?: { id?: string; apiKey?: string }): Promise<boolean> {
+    const repository = getRepository(ServiceModel)
+    const { id, apiKey } = criteria
+    if (id) return !!(await repository.findOne({ where: { id } }))
+    else if (apiKey) return !!(await repository.findOne({ where: { apiKey } }))
+  }
 }

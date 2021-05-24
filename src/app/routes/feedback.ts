@@ -1,7 +1,10 @@
 import { Router } from 'express'
 import rateLimit from 'express-rate-limit'
+import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
 import { addFeedbackController } from '../builds/controllers/feedback/add-feedback'
+import { listFeedbackController } from '../builds/controllers/feedback/list-feedback-by-user'
+import { authMiddleware } from '../builds/middlewares/auth-user'
 
 const router = Router()
 
@@ -16,5 +19,6 @@ router.post(
   }),
   routerAdapter(addFeedbackController)
 )
+router.get('/feedback', middlewareAdapter(authMiddleware), routerAdapter(listFeedbackController))
 
 export default router
