@@ -1,7 +1,7 @@
 import { Feedback } from '@/domain/feedback/feedback'
 import { ListFeedbackByService } from '@/domain/feedback/list-feedback-by-service'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, noContent, ok, serverError } from '@/presentation/helpers/http'
 import { Controller } from '@/presentation/ports/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
@@ -35,6 +35,7 @@ export class ListFeedbackByServiceController implements Controller {
 
       const listResult = await this.listFeedback.list(request.service)
       if (listResult instanceof UnregisteredApiKeyError) return badRequest(listResult)
+      else if (listResult == null) return noContent()
 
       function count(arr: Feedback[], category: 'ISSUE' | 'OTHER' | 'IDEA' | 'COMMENT'): number {
         return arr.filter(f => f.category === category).length

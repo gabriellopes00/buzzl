@@ -48,4 +48,63 @@ describe('Pg Feedback Repository', () => {
       await expect(error).rejects.toThrow()
     })
   })
+
+  describe('List Feedback', () => {
+    it('Should return all feedbacks on success', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
+
+      await getRepository(UserModel).save(fakeUser)
+      await getRepository(ServiceModel).save(fakeService)
+      await getRepository(ServiceModel).save({ ...fakeService, id: 'd', apiKey: 'custom_service' })
+      await sut.add(fakeFeedback)
+      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'custom_service' })
+
+      const data = await sut.findAll()
+      expect(data).toEqual([
+        expect.objectContaining(fakeFeedback),
+        expect.objectContaining({
+          ...fakeFeedback,
+          id: 'id',
+          category: 'IDEA',
+          service: 'custom_service'
+        })
+      ])
+    })
+
+    it('Should return null if there is no feedback to received service', async () => {
+      getRepository(FeedbackModel).delete({})
+      const data = await sut.findAll()
+      expect(data).toBeNull()
+    })
+
+    it('Should return all feedbacks by service on success', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
+
+      await getRepository(UserModel).save(fakeUser)
+      await getRepository(ServiceModel).save(fakeService)
+      await getRepository(ServiceModel).save({ ...fakeService, id: 'd', apiKey: 'custom_service' })
+      await sut.add(fakeFeedback)
+      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'custom_service' })
+
+      const data = await sut.findAll({ service: 'custom_service' })
+      expect(data).toEqual([
+        expect.objectContaining({
+          ...fakeFeedback,
+          id: 'id',
+          category: 'IDEA',
+          service: 'custom_service'
+        })
+      ])
+    })
+
+    it('Should return null if there is no feedback to received service', async () => {
+      getRepository(FeedbackModel).delete({})
+      const data = await sut.findAll({ service: 'any_service' })
+      expect(data).toBeNull()
+    })
+  })
 })
