@@ -22,9 +22,7 @@ export class PgFeedbackRepository implements FeedbackRepository {
 
   public async delete(criteria: { id: string }): Promise<void | UnregisteredFeedbackError> {
     const repository = getRepository(FeedbackModel)
-    const feedback = await repository.findOne({ id: criteria.id })
-    if (!feedback) return new UnregisteredFeedbackError(criteria.id)
-    else await repository.delete({ id: criteria.id })
+    await repository.delete({ id: criteria.id })
   }
 
   public async findOne(criteria: { id: string }): Promise<Feedback> {
