@@ -46,9 +46,22 @@ describe('Delete Feedback Usecase', () => {
     })
 
     it('Should return an UnregisteredFeedbackError if receive one', async () => {
-      mockFeedbackRepository.delete.mockResolvedValue(new UnregisteredFeedbackError(''))
+      jest.spyOn(mockFeedbackRepository, 'findOne').mockResolvedValueOnce(null)
       const result = await sut.delete(fakeFeedback.id, fakeService.apiKey, fakeUser.id)
       expect(result).toBeInstanceOf(UnregisteredFeedbackError)
+    })
+
+    it('Should call feedback repository delete method with correct value', async () => {
+      const del = jest.spyOn(mockFeedbackRepository, 'delete')
+      await sut.delete(fakeFeedback.id, fakeService.apiKey, fakeUser.id)
+      expect(del).toHaveBeenCalledWith({ id: fakeFeedback.id })
+    })
+
+    it('Should not call feedback repository delete if there is no one', async () => {
+      jest.spyOn(mockFeedbackRepository, 'findOne').mockResolvedValueOnce(null)
+      const del = jest.spyOn(mockFeedbackRepository, 'delete')
+      await sut.delete(fakeFeedback.id, fakeService.apiKey, fakeUser.id)
+      expect(del).not.toHaveBeenCalledWith({ id: fakeFeedback.id })
     })
 
     it('Should throw if feedback repository throws', async () => {

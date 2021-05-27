@@ -9,5 +9,9 @@ export class MockFeedbackRepository implements FeedbackRepository {
     return [fakeFeedback]
   }
 
+  async findOne(criteria?: { id: string }): Promise<Feedback> {
+    return fakeFeedback
+  }
+
   async delete(criteria?: { id: string }): Promise<void | UnregisteredFeedbackError> {}
 }

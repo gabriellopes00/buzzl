@@ -22,9 +22,8 @@ export class DbDeleteFeedback implements DeleteFeedback {
     if (!service) return new UnregisteredApiKeyError(apiKey)
     else if (service.maintainer.id !== userId) return new UnauthorizedMaintainerError(userId)
 
-    const deletionResult = await this.feedbackRepository.delete({ id })
-    if (deletionResult instanceof UnregisteredFeedbackError) {
-      return new UnregisteredFeedbackError(id)
-    }
+    const feedback = await this.feedbackRepository.findOne({ id })
+    if (!feedback) return new UnregisteredFeedbackError(id)
+    await this.feedbackRepository.delete({ id })
   }
 }
