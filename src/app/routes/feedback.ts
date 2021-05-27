@@ -3,6 +3,7 @@ import rateLimit from 'express-rate-limit'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
 import { addFeedbackController } from '../builds/controllers/feedback/add-feedback'
+import { deleteFeedbackController } from '../builds/controllers/feedback/delete-feedback'
 import { listFeedbackController } from '../builds/controllers/feedback/list-feedback-by-user'
 import { authMiddleware } from '../builds/middlewares/auth-user'
 
@@ -20,5 +21,10 @@ router.post(
   routerAdapter(addFeedbackController)
 )
 router.get('/feedback', middlewareAdapter(authMiddleware), routerAdapter(listFeedbackController))
+router.delete(
+  '/feedback',
+  middlewareAdapter(authMiddleware),
+  routerAdapter(deleteFeedbackController)
+)
 
 export default router
