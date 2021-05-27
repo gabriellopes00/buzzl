@@ -41,12 +41,6 @@ describe('Pg Feedback Repository', () => {
       const feedback = new PgFeedbackRepository().add({ ...fakeFeedback, service: null })
       await expect(feedback).rejects.toThrow()
     })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'add').mockRejectedValueOnce(new Error())
-      const error = sut.add(null)
-      await expect(error).rejects.toThrow()
-    })
   })
 
   describe('List Feedback', () => {
@@ -104,6 +98,64 @@ describe('Pg Feedback Repository', () => {
     it('Should return null if there is no feedback to received service', async () => {
       getRepository(FeedbackModel).delete({})
       const data = await sut.findAll({ service: 'any_service' })
+      expect(data).toBeNull()
+    })
+  })
+
+  describe('Delete Feedback', () => {
+    it('Should remove a feedback if its service is removed', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
+
+      await getRepository(UserModel).save(fakeUser)
+      const serviceRepo = getRepository(ServiceModel)
+      await serviceRepo.save(fakeService)
+
+      await sut.add(fakeFeedback)
+      const { id } = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(id).toEqual(fakeFeedback.id)
+
+      serviceRepo.delete({ id: fakeService.id })
+      const notFound = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(notFound).toBeFalsy() // removed if service is removed (returns undefined)
+    })
+
+    it('Should delete a feedback by id on success', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
+
+      await getRepository(UserModel).save(fakeUser)
+      await getRepository(ServiceModel).save(fakeService)
+      const feedback = await getRepository(FeedbackModel).save(fakeFeedback)
+
+      const { id } = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(id).toEqual(feedback.id)
+
+      await sut.delete({ id })
+      const deleted = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(deleted).toBeFalsy()
+    })
+  })
+
+  describe('Find One Feedback', () => {
+    it('Should return one feedback on success', async () => {
+      getRepository(UserModel).delete({})
+      getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
+
+      await getRepository(UserModel).save(fakeUser)
+      await getRepository(ServiceModel).save(fakeService)
+      const { id } = await getRepository(FeedbackModel).save(fakeFeedback)
+
+      const data = await sut.findOne({ id })
+      expect(data).toEqual(expect.objectContaining(fakeFeedback))
+    })
+
+    it('Should return null if there is no feedback with received id', async () => {
+      getRepository(FeedbackModel).delete({})
+      const data = await sut.findOne({ id: fakeFeedback.id })
       expect(data).toBeNull()
     })
   })
