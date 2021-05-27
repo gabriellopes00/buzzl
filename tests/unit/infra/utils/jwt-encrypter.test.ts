@@ -57,34 +57,10 @@ describe('Jwt Encrypter', () => {
 
     it('Should return null if receive an expired token', async () => {
       mockJwt.verify.mockImplementationOnce(() => {
-        throw new Error('jwt expired')
+        throw new Error()
       })
       const error = await sut.decrypt('any_token')
       expect(error).toBeNull()
-    })
-
-    it('Should return null if receive an invalid token', async () => {
-      mockJwt.verify.mockImplementationOnce(() => {
-        throw new Error('invalid token')
-      })
-      const response = await sut.decrypt('any_token')
-      expect(response).toBeNull()
-    })
-
-    it('Should return null if receive an invalid token', async () => {
-      mockJwt.verify.mockImplementationOnce(() => {
-        throw new Error('invalid signature')
-      })
-      const response = await sut.decrypt('any_token')
-      expect(response).toBeNull()
-    })
-
-    test('Should throw if verify throws', async () => {
-      mockJwt.verify.mockImplementationOnce(() => {
-        throw new Error()
-      })
-      const error = sut.decrypt('any_token')
-      await expect(error).rejects.toThrow()
     })
   })
 })

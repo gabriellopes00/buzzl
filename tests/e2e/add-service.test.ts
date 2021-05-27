@@ -30,7 +30,7 @@ describe('Add Service Route', () => {
   beforeEach(() => getRepository(ServiceModel).delete({}))
 
   it('Should return 401 on missing access token', async () => {
-    await request.post('/service').set('access-token', null).send(fakeServiceParams).expect(401)
+    await request.post('/service').set('access-token', null).send(fakeServiceParams).expect(400)
   })
 
   it('Should return 403 on missing access token', async () => {
