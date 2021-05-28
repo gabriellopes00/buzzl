@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
-import { addUserController } from '../builds/controllers/add-user'
-import { deleteUserController } from '../builds/controllers/delete-user'
-import { signInController } from '../builds/controllers/sign-in'
+import { addUserController } from '../builds/controllers/user/add-user'
+import { deleteUserController } from '../builds/controllers/user/delete-user'
+import { signInController } from '../builds/controllers/user/sign-in'
 import { changePassController } from '../builds/controllers/user/change-password'
 import { authMiddleware } from '../builds/middlewares/auth-user'
 

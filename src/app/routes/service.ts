@@ -1,33 +1,29 @@
 import { Router } from 'express'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
-import { addServiceController } from '../builds/controllers/add-service'
-import { deleteServiceController } from '../builds/controllers/delete-service'
-import { listServiceByUserController } from '../builds/controllers/list-service-by-user'
+import { addServiceController } from '../builds/controllers/service/add-service'
+import { deleteServiceController } from '../builds/controllers/service/delete-service'
+import { listServiceByUserController } from '../builds/controllers/service/list-service-by-user'
 import { regenerateKeyController } from '../builds/controllers/service/regenerate-service-api-key'
-import { transferServiceController } from '../builds/controllers/transfer-service'
-import { updateServiceController } from '../builds/controllers/update-service'
+import { transferServiceController } from '../builds/controllers/service/transfer-service'
+import { updateServiceController } from '../builds/controllers/service/update-service'
 import { authMiddleware } from '../builds/middlewares/auth-user'
 
 const router = Router()
 
-router.post('/service', middlewareAdapter(authMiddleware), routerAdapter(addServiceController))
-router.put('/service', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
-router.delete('/service', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
+router.post('/', middlewareAdapter(authMiddleware), routerAdapter(addServiceController))
+router.put('/', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
+router.delete('/', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
+router.get('/', middlewareAdapter(authMiddleware), routerAdapter(listServiceByUserController))
 router.patch(
-  '/service/api-key/new',
+  '/api-key/new',
   middlewareAdapter(authMiddleware),
   routerAdapter(regenerateKeyController)
 )
 router.patch(
-  '/service/transfer',
+  '/transfer',
   middlewareAdapter(authMiddleware),
   routerAdapter(transferServiceController)
-)
-router.get(
-  '/service',
-  middlewareAdapter(authMiddleware),
-  routerAdapter(listServiceByUserController)
 )
 
 export default router

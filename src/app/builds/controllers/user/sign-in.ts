@@ -3,8 +3,8 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
-import { signIn } from '../usecases/sign-in'
-import { makeDecorator } from './factory'
+import { signIn } from '../../usecases/sign-in'
+import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['email', 'password'])
 const passValidator = new PasswordValidator()

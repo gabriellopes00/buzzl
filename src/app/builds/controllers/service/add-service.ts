@@ -6,7 +6,7 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { NameValidator } from '@/presentation/validation/name-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddService } from '@/usecases/service/add-service'
-import { makeDecorator } from './factory'
+import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name'])
 const nameValidator = new NameValidator()

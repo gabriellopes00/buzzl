@@ -8,8 +8,8 @@ import { NameValidator } from '@/presentation/validation/name-validator'
 import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddUser } from '@/usecases/user/add-user'
-import { signIn } from '../usecases/sign-in'
-import { makeDecorator } from './factory'
+import { signIn } from '../../usecases/sign-in'
+import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
 const nameValidator = new NameValidator()

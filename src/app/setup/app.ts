@@ -7,6 +7,9 @@ import { bodyParser, contentType, cors, noCache, rateLimiter, secureHeaders } fr
 const app = express()
 
 app.use([secureHeaders, bodyParser, contentType, noCache, cors, rateLimiter])
-app.use([userRoutes, serviceRoutes, feedbackRoutes])
+
+app.use(userRoutes)
+app.use('/service', serviceRoutes)
+app.use('/feedback', feedbackRoutes)
 
 export default app

@@ -4,7 +4,7 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbDeleteUser } from '@/usecases/user/delete-user'
-import { makeDecorator } from './factory'
+import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['email'])
 const emailValidator = new EmailValidator()

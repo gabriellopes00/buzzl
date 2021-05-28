@@ -9,22 +9,16 @@ import { authMiddleware } from '../builds/middlewares/auth-user'
 
 const router = Router()
 
-router.post(
-  '/feedback',
-  rateLimit({
-    windowMs: 60 * 60 * 1000 * 24,
-    max: 30,
-    headers: true,
-    skipFailedRequests: true,
-    message: 'Feedbacks limit reached'
-  }),
-  routerAdapter(addFeedbackController)
-)
-router.get('/feedback', middlewareAdapter(authMiddleware), routerAdapter(listFeedbackController))
-router.delete(
-  '/feedback',
-  middlewareAdapter(authMiddleware),
-  routerAdapter(deleteFeedbackController)
-)
+const rateLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000 * 24,
+  max: 30,
+  headers: true,
+  skipFailedRequests: true,
+  message: 'Feedbacks limit reached'
+})
+
+router.get('/', middlewareAdapter(authMiddleware), routerAdapter(listFeedbackController))
+router.delete('/', middlewareAdapter(authMiddleware), routerAdapter(deleteFeedbackController))
+router.post('/', rateLimiter, routerAdapter(addFeedbackController))
 
 export default router

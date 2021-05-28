@@ -4,7 +4,7 @@ import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbDeleteService } from '@/usecases/service/delete-service'
-import { makeDecorator } from './factory'
+import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['apiKey'])
 const apiKeyValidator = new ApiKeyValidator()
