@@ -27,12 +27,6 @@ describe('Pg User Repository', () => {
       const data = await getRepository(UserModel).findOne({ id: fakeUser.id })
       expect(data.id).toEqual(user.id)
     })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'add').mockRejectedValueOnce(new Error())
-      const error = sut.add(fakeUser)
-      await expect(error).rejects.toThrow()
-    })
   })
 
   describe('Existing User', () => {
@@ -61,12 +55,6 @@ describe('Pg User Repository', () => {
       const existing = await sut.exists({ id: 'unregisred@mail.com' })
       expect(existing).toBeFalsy()
     })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'exists').mockRejectedValueOnce(new Error())
-      const error = sut.exists({ email: fakeUser.email })
-      await expect(error).rejects.toThrow()
-    })
   })
 
   describe('Find By Email', () => {
@@ -82,12 +70,6 @@ describe('Pg User Repository', () => {
       const userFound = await sut.findOne({ email: 'unregistered@mail.com' })
       expect(userFound).toBeNull()
     })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
-      const error = sut.findOne({ email: fakeUser.email })
-      await expect(error).rejects.toThrow()
-    })
   })
 
   describe('Find By Id', () => {
@@ -102,12 +84,6 @@ describe('Pg User Repository', () => {
     it('Should return null if no user is found', async () => {
       const userFound = await sut.findOne({ id: 'invalid_id' })
       expect(userFound).toBeNull()
-    })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'findOne').mockRejectedValueOnce(new Error())
-      const error = sut.findOne({ id: fakeUser.id })
-      await expect(error).rejects.toThrow()
     })
   })
 
@@ -129,12 +105,6 @@ describe('Pg User Repository', () => {
       await sut.delete({ id })
       await expect(getRepository(UserModel).findOneOrFail({ id })).rejects.toThrow()
     })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'delete').mockRejectedValueOnce(new Error())
-      const error = sut.delete({ email: fakeUser.email })
-      await expect(error).rejects.toThrow()
-    })
   })
 
   describe('Update user', () => {
@@ -149,12 +119,6 @@ describe('Pg User Repository', () => {
       await sut.update(fakeData)
       const newPass = (await getRepository(UserModel).findOne({ id: fakeUser.id })).password
       expect(newPass).toEqual(fakeData.password)
-    })
-
-    it('Should throw if typeorm repository throws', async () => {
-      jest.spyOn(sut, 'update').mockRejectedValueOnce(new Error())
-      const error = sut.update(null)
-      await expect(error).rejects.toThrow()
     })
   })
 })

@@ -22,28 +22,28 @@ describe('Pg Feedback Repository', () => {
 
   beforeAll(async () => await pgConnectionHelper.connect())
   afterAll(async () => await pgConnectionHelper.close())
-  afterEach(() => getRepository(FeedbackModel).delete({}))
 
   describe('Add Feedback', () => {
-    it('Should store a feedback data on success', async () => {
+    it('Should store a feedback success', async () => {
       getRepository(UserModel).delete({})
       getRepository(ServiceModel).delete({})
+      getRepository(FeedbackModel).delete({})
 
       await getRepository(UserModel).save(fakeUser)
       await getRepository(ServiceModel).save(fakeService)
       await sut.add(fakeFeedback)
 
-      const data = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
-      expect(data.id).toEqual(fakeFeedback.id)
+      const { id } = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
+      expect(id).toEqual(fakeFeedback.id)
     })
 
     it('Should not add a store a feedback if there is no respective service', async () => {
-      const feedback = new PgFeedbackRepository().add({ ...fakeFeedback, service: null })
+      const feedback = sut.add({ ...fakeFeedback, service: null })
       await expect(feedback).rejects.toThrow()
     })
   })
 
-  describe('List Feedback', () => {
+  describe('List All Feedbacks', () => {
     it('Should return all feedbacks on success', async () => {
       getRepository(UserModel).delete({})
       getRepository(ServiceModel).delete({})
@@ -51,23 +51,19 @@ describe('Pg Feedback Repository', () => {
 
       await getRepository(UserModel).save(fakeUser)
       await getRepository(ServiceModel).save(fakeService)
-      await getRepository(ServiceModel).save({ ...fakeService, id: 'd', apiKey: 'custom_service' })
+      await getRepository(ServiceModel).save({ ...fakeService, id: 'id', apiKey: 'key' })
+
       await sut.add(fakeFeedback)
-      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'custom_service' })
+      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'key' })
 
       const data = await sut.findAll()
       expect(data).toEqual([
         expect.objectContaining(fakeFeedback),
-        expect.objectContaining({
-          ...fakeFeedback,
-          id: 'id',
-          category: 'IDEA',
-          service: 'custom_service'
-        })
+        expect.objectContaining({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'key' })
       ])
     })
 
-    it('Should return null if there is no feedback to received service', async () => {
+    it('Should return null if there is no feedbacks registered', async () => {
       getRepository(FeedbackModel).delete({})
       const data = await sut.findAll()
       expect(data).toBeNull()
@@ -80,22 +76,17 @@ describe('Pg Feedback Repository', () => {
 
       await getRepository(UserModel).save(fakeUser)
       await getRepository(ServiceModel).save(fakeService)
-      await getRepository(ServiceModel).save({ ...fakeService, id: 'd', apiKey: 'custom_service' })
+      await getRepository(ServiceModel).save({ ...fakeService, id: 'id', apiKey: 'any_key' })
       await sut.add(fakeFeedback)
-      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'custom_service' })
+      await sut.add({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'any_key' })
 
-      const data = await sut.findAll({ service: 'custom_service' })
+      const data = await sut.findAll({ service: 'any_key' })
       expect(data).toEqual([
-        expect.objectContaining({
-          ...fakeFeedback,
-          id: 'id',
-          category: 'IDEA',
-          service: 'custom_service'
-        })
+        expect.objectContaining({ ...fakeFeedback, id: 'id', category: 'IDEA', service: 'any_key' })
       ])
     })
 
-    it('Should return null if there is no feedback to received service', async () => {
+    it('Should return null if there is no feedback to received service key', async () => {
       getRepository(FeedbackModel).delete({})
       const data = await sut.findAll({ service: 'any_service' })
       expect(data).toBeNull()
@@ -103,24 +94,6 @@ describe('Pg Feedback Repository', () => {
   })
 
   describe('Delete Feedback', () => {
-    it('Should remove a feedback if its service is removed', async () => {
-      getRepository(UserModel).delete({})
-      getRepository(ServiceModel).delete({})
-      getRepository(FeedbackModel).delete({})
-
-      await getRepository(UserModel).save(fakeUser)
-      const serviceRepo = getRepository(ServiceModel)
-      await serviceRepo.save(fakeService)
-
-      await sut.add(fakeFeedback)
-      const { id } = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
-      expect(id).toEqual(fakeFeedback.id)
-
-      serviceRepo.delete({ id: fakeService.id })
-      const notFound = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
-      expect(notFound).toBeFalsy() // removed if service is removed (returns undefined)
-    })
-
     it('Should delete a feedback by id on success', async () => {
       getRepository(UserModel).delete({})
       getRepository(ServiceModel).delete({})
@@ -134,13 +107,14 @@ describe('Pg Feedback Repository', () => {
       expect(id).toEqual(feedback.id)
 
       await sut.delete({ id })
+
       const deleted = await getRepository(FeedbackModel).findOne({ id: fakeFeedback.id })
       expect(deleted).toBeFalsy()
     })
   })
 
   describe('Find One Feedback', () => {
-    it('Should return one feedback on success', async () => {
+    it('Should return one feedback by id on success', async () => {
       getRepository(UserModel).delete({})
       getRepository(ServiceModel).delete({})
       getRepository(FeedbackModel).delete({})

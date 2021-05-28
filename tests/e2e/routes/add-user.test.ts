@@ -23,8 +23,8 @@ describe('Add User Route', () => {
     jest.spyOn(pgConnectionHelper, 'connect').mockImplementationOnce(async () => {
       await createConnection({
         type: 'sqlite',
-        database: resolve(__dirname, '..', 'mocks', 'fake_db.sqlite'),
-        entities: [resolve(__dirname, '../../src/infra/database/models/*.ts')]
+        database: resolve(__dirname, '..', '..', 'mocks', 'fake_db.sqlite'),
+        entities: [resolve(__dirname, '../../../src/infra/database/models/*.ts')]
       })
     })
     await pgConnectionHelper.connect()

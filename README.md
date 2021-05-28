@@ -19,10 +19,9 @@
   <img src="https://cdn.svgporn.com/logos/javascript.svg" alt="javascript" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="nodejs" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="graphql" width="30" height="30"/>
-  <img src="https://cdn.svgporn.com/logos/socket.io.svg" alt="socket.io" width="30" height="30"/>
   <img src="https://jwt.io/img/pic_logo.svg" alt="jwt" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/docker-icon.svg" alt="docker" width="30" height="30"/>
-  <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgresql" width="30" height="30"/>
+  <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgres" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/redis.svg" alt="redis" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
@@ -48,6 +47,7 @@
 This project structure is inspired in clean architecture code structure, [by Uncle Bob](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). The main purpose of clean architecture, hexagonal architecture, and others softwares architecture structure, is creating a **_strong_**, **_readable_**, **_understandable_** and **_maintainable_** project code, splitting all the application code in layers, each one with their own responsibilities and characteristics. The best advantage of using it, is create a application independent of any frameworks, tool, database or technology _(infra layer)_, being easy to handle the code, create a new features, fix any issue, or change some framework, becoming less vulnerable to changes to frameworks and libs, thanks to the adapters and ports technique, that make this frameworks being just a part of the software, and uncoupling them to the domain business rules.
 
 ![Clean Architecture Cone](.github/assets/clean-architecture-cone.jpg)
+
 As is shown in the images, the ideia is that external layers can know internal layers, but **never** the opposite, because a framework, for example, can know the entity, to execute specific tasks. But domain is totally independent of external libs, so it never know each lib or framework is persisting the data for example.
 
 #### Folders Structure 🗂
