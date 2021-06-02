@@ -1,3 +1,3 @@
 export interface EmailProvider {
-  send: (from: string, to: string, subject: string, content: string) => Promise<void>
+  send: (from: string, to: string, subject: string, text: string, html: string) => Promise<void>
 }
