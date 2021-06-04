@@ -13,6 +13,7 @@ describe('Create Service Notification Mailing', () => {
       expect.any(String),
       'user@mail.com',
       expect.any(String),
+      expect.any(String),
       expect.any(String)
     )
   })
