@@ -15,12 +15,12 @@ router.post('/', middlewareAdapter(authMiddleware), routerAdapter(addServiceCont
 router.put('/', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
 router.delete('/', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
 router.get('/', middlewareAdapter(authMiddleware), routerAdapter(listServiceByUserController))
-router.patch(
+router.post(
   '/api-key/new',
   middlewareAdapter(authMiddleware),
   routerAdapter(regenerateKeyController)
 )
-router.patch(
+router.post(
   '/transfer',
   middlewareAdapter(authMiddleware),
   routerAdapter(transferServiceController)

@@ -12,10 +12,6 @@ const router = Router()
 router.post('/signup', routerAdapter(addUserController))
 router.post('/signin', routerAdapter(signInController))
 router.delete('/user', middlewareAdapter(authMiddleware), routerAdapter(deleteUserController))
-router.put(
-  '/user/update/password',
-  middlewareAdapter(authMiddleware),
-  routerAdapter(changePassController)
-)
+router.put('/user/password', middlewareAdapter(authMiddleware), routerAdapter(changePassController))
 
 export default router
