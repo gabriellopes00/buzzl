@@ -1,15 +1,13 @@
 import { AddServiceController } from '@/presentation/controllers/service/add-service'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockServiceNotification } from '@t/mocks/mail/create-service-notification'
 import { MockAddService } from '@t/mocks/service/add-service'
 import { fakeService, fakeServiceParams } from '@t/mocks/service/service'
 
 describe('Add Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
   const mockAddService = new MockAddService() as jest.Mocked<MockAddService>
-  const mockServiceNotification = new MockServiceNotification() as jest.Mocked<MockServiceNotification>
-  const sut = new AddServiceController(mockValidator, mockAddService, mockServiceNotification)
+  const sut = new AddServiceController(mockValidator, mockAddService)
 
   describe('Validation', () => {
     it('Should call validator with received request data', async () => {
@@ -60,21 +58,6 @@ describe('Add Service Controller', () => {
       mockAddService.add.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeServiceParams)
       expect(response).toEqual(serverError(new Error()))
-    })
-  })
-
-  describe('Send Email Notification', () => {
-    it('Should not call mail if validation fails', async () => {
-      mockValidator.validate.mockReturnValueOnce(new Error())
-      const send = jest.spyOn(mockServiceNotification, 'send')
-      await sut.handle(fakeServiceParams)
-      expect(send).not.toHaveBeenCalled()
-    })
-
-    it('Should not return a 500 response if mail throws', async () => {
-      mockServiceNotification.send.mockRejectedValueOnce(new Error())
-      const response = await sut.handle(fakeServiceParams)
-      expect(response).toEqual(created(fakeService))
     })
   })
 })

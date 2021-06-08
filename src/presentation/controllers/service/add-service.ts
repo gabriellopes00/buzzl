@@ -1,4 +1,3 @@
-import { CreateServiceNotification } from '@/domain/mail/create-service-notification'
 import { AddService } from '@/domain/service/add-service'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { Controller } from '@/presentation/ports/controllers'
@@ -12,11 +11,7 @@ export interface AddServiceParams {
 }
 
 export class AddServiceController implements Controller {
-  constructor(
-    private readonly validator: Validator,
-    private readonly addService: AddService,
-    private readonly mailer: CreateServiceNotification
-  ) {}
+  constructor(private readonly validator: Validator, private readonly addService: AddService) {}
 
   public async handle(request: AddServiceParams): Promise<HttpResponse> {
     try {
@@ -25,7 +20,6 @@ export class AddServiceController implements Controller {
 
       const { name, description } = request
       const service = await this.addService.add({ name, description, maintainer: request.userId })
-      this.mailer.send(service, 'asdf@mail.com')
       return created(service)
     } catch (error) {
       return serverError(error)
