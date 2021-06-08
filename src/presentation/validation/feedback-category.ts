@@ -3,10 +3,9 @@ import { Validator } from '../ports/validator'
 
 export class FeedbackCategoryValidator implements Validator {
   public validate(input: any): Error {
-    const { category } = input as { category: string }
     const error = new InvalidParamError('category', 'Invalid feedback category')
 
-    switch (category) {
+    switch (input.category) {
       case 'ISSUE':
         break
 
