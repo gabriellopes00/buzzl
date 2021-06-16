@@ -1,11 +1,11 @@
-import { CreateServiceNotification } from '@/domain/mail/create-service-notification'
 import { Service } from '@/domain/service/service'
-import { EmailProvider } from '../ports/email-provider'
+import { MailService } from '../ports/mail-service'
+import { EmailProvider } from './ports/email-provider'
 
-export class DbCreateServiceNotification implements CreateServiceNotification {
+export class Ser implements MailService {
   constructor(private readonly provider: EmailProvider) {}
 
-  public async send(data: Service, maintainerEmail: string): Promise<void> {
+  public async sendMail(data: Service, maintainerEmail: string): Promise<void> {
     await this.provider.send(
       'feedbackio@mail.com',
       maintainerEmail,

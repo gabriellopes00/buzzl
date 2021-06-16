@@ -1,4 +1,4 @@
-import { EmailProvider } from '@/usecases/ports/email-provider'
+import { EmailProvider } from '@/services/mail/ports/email-provider'
 import { createTestAccount, createTransport, Transporter } from 'nodemailer'
 
 export class NodemailerMailProvider implements EmailProvider {
