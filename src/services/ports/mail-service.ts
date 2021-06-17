@@ -1,3 +1,3 @@
 export interface MailService {
-  sendMail(data: any, args?: any): Promise<void>
+  sendMail(data: any): Promise<void>
 }
