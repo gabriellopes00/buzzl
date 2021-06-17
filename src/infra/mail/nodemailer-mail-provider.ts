@@ -1,4 +1,4 @@
-import { EmailProvider } from '@/services/mail/ports/email-provider'
+import { EmailProvider, MailProviderProps } from '@/services/mail/ports/email-provider'
 import { createTestAccount, createTransport, Transporter } from 'nodemailer'
 
 export class NodemailerMailProvider implements EmailProvider {
@@ -20,13 +20,13 @@ export class NodemailerMailProvider implements EmailProvider {
     })
   }
 
-  public async send(
-    from: string,
-    to: string,
-    subject: string,
-    text: string,
-    html: string
-  ): Promise<void> {
-    await this.client.sendMail({ from, to, subject, text, html })
+  public async send(props: MailProviderProps): Promise<void> {
+    await this.client.sendMail({
+      from: props.from,
+      to: props.to,
+      subject: props.subject,
+      text: props.subject,
+      html: props.html
+    })
   }
 }
