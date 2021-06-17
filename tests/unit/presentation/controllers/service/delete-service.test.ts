@@ -11,10 +11,10 @@ import {
   serverError,
   unauthorized
 } from '@/presentation/helpers/http'
+import { MockValidator } from '@t/mocks/common/validator'
 import { MockDeleteService } from '@t/mocks/service/delete-service'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
-import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Delete Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
@@ -23,10 +23,16 @@ describe('Delete Service Controller', () => {
   const fakeParams: DeleteServiceParams = { apiKey: fakeService.apiKey, userId: fakeUser.id }
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call deleteService usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const del = jest.spyOn(mockDeleteService, 'delete')
       await sut.handle(fakeParams)
+
       expect(validate).toHaveBeenCalledWith(fakeParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const delCall = del.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(delCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -41,16 +47,6 @@ describe('Delete Service Controller', () => {
       })
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))
-    })
-
-    it('Should call validator before call deleteService usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const del = jest.spyOn(mockDeleteService, 'delete')
-      await sut.handle(fakeParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const delCall = del.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(delCall)
     })
   })
 

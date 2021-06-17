@@ -2,9 +2,9 @@ import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { SignInController } from '@/presentation/controllers/user/sign-in'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
+import { MockValidator } from '@t/mocks/common/validator'
 import { MockSignIn } from '@t/mocks/user/sign-in'
 import { fakeSignInParams } from '@t/mocks/user/user'
-import { MockValidator } from '@t/mocks/common/validator'
 
 describe('Sign In User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
@@ -12,10 +12,16 @@ describe('Sign In User Controller', () => {
   const sut = new SignInController(mockValidator, mockSignIn)
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call signin usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const signin = jest.spyOn(mockSignIn, 'sign')
       await sut.handle(fakeSignInParams)
+
       expect(validate).toHaveBeenCalledWith(fakeSignInParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const signinCall = signin.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(signinCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -30,16 +36,6 @@ describe('Sign In User Controller', () => {
       })
       const response = await sut.handle(fakeSignInParams)
       expect(response).toEqual(serverError(new Error()))
-    })
-
-    it('Should call validator before call signin usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const signin = jest.spyOn(mockSignIn, 'sign')
-      await sut.handle(fakeSignInParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const signinCall = signin.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(signinCall)
     })
   })
 

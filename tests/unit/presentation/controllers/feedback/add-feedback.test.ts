@@ -12,10 +12,16 @@ describe('Add Feedback Controller', () => {
   const sut = new AddFeedbackController(mockValidator, mockAddFeedback)
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call addFeedback usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const add = jest.spyOn(mockAddFeedback, 'add')
       await sut.handle(fakeFeedbackParams)
+
       expect(validate).toHaveBeenCalledWith(fakeFeedbackParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const addCall = add.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(addCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -30,16 +36,6 @@ describe('Add Feedback Controller', () => {
       })
       const response = await sut.handle(fakeFeedbackParams)
       expect(response).toEqual(serverError(new Error()))
-    })
-
-    it('Should call validator before call addFeedback usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const add = jest.spyOn(mockAddFeedback, 'add')
-      await sut.handle(fakeFeedbackParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const addCall = add.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(addCall)
     })
   })
 

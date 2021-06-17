@@ -16,10 +16,16 @@ describe('List Feedback By Service Controller', () => {
   const fakeRequest = { service: fakeService.apiKey }
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call listFeedback usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const list = jest.spyOn(mockListFeedback, 'list')
       await sut.handle(fakeRequest)
+
       expect(validate).toHaveBeenCalledWith(fakeRequest)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const listCall = list.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(listCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -34,16 +40,6 @@ describe('List Feedback By Service Controller', () => {
       })
       const response = await sut.handle(fakeRequest)
       expect(response).toEqual(serverError(new Error()))
-    })
-
-    it('Should call validator before call listFeedback usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const list = jest.spyOn(mockListFeedback, 'list')
-      await sut.handle(fakeRequest)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const listCall = list.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(listCall)
     })
   })
 

@@ -15,10 +15,16 @@ describe('Regenerate Service Api Key Controller', () => {
   const fakeParams = { apiKey: fakeService.apiKey, userId: fakeUser.id }
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call regenerateKey usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const regenerate = jest.spyOn(mockRegenerateKey, 'regenerate')
       await sut.handle(fakeParams)
+
       expect(validate).toHaveBeenCalledWith(fakeParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const regenerateCall = regenerate.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(regenerateCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -34,19 +40,9 @@ describe('Regenerate Service Api Key Controller', () => {
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))
     })
-
-    it('Should call validator before call regenerateKey usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const regenerate = jest.spyOn(mockRegenerateKey, 'regenerate')
-      await sut.handle(fakeParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const regenerateCall = regenerate.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(regenerateCall)
-    })
   })
 
-  describe('Regenerate APi Key Usecase', () => {
+  describe('Regenerate API Key Usecase', () => {
     it('Should not call regenerateKey usecase if validation fails', async () => {
       mockValidator.validate.mockReturnValueOnce(new Error())
       const regenerate = jest.spyOn(mockRegenerateKey, 'regenerate')
@@ -71,7 +67,7 @@ describe('Regenerate Service Api Key Controller', () => {
       expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('')))
     })
 
-    it('Should return a 500 response if addService throws', async () => {
+    it('Should return a 500 response if regenerateApiKey throws', async () => {
       mockRegenerateKey.regenerate.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))

@@ -1,3 +1,4 @@
+import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
@@ -6,11 +7,10 @@ import {
   TransferServiceParams
 } from '@/presentation/controllers/service/transfer-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { MockTransferService } from '@t/mocks/service/transfer-service'
-import { fakeService } from '@t/mocks/service/service'
-import { fakeUser } from '@t/mocks/user/user'
 import { MockValidator } from '@t/mocks/common/validator'
-import { InvalidServiceTransferError } from '@/domain/service/errors/invalid-transfer'
+import { fakeService } from '@t/mocks/service/service'
+import { MockTransferService } from '@t/mocks/service/transfer-service'
+import { fakeUser } from '@t/mocks/user/user'
 
 describe('Transfer Service Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
@@ -24,10 +24,16 @@ describe('Transfer Service Controller', () => {
   }
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call transferService usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const transfer = jest.spyOn(mockTransferMaintainer, 'transfer')
       await sut.handle(fakeParams)
+
       expect(validate).toHaveBeenCalledWith(fakeParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const transferCall = transfer.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(transferCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -42,16 +48,6 @@ describe('Transfer Service Controller', () => {
       })
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))
-    })
-
-    it('Should call validator before call updateService usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const update = jest.spyOn(mockTransferMaintainer, 'transfer')
-      await sut.handle(fakeParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const addCall = update.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(addCall)
     })
   })
 
@@ -82,7 +78,7 @@ describe('Transfer Service Controller', () => {
       expect(response).toEqual(conflict(new UnregisteredEmailError('')))
     })
 
-    it('Should return 409 response if receive transfer request to the already current maintainer', async () => {
+    it('Should return 409 response if receive transfer request to the current maintainer', async () => {
       mockTransferMaintainer.transfer.mockResolvedValueOnce(new InvalidServiceTransferError('', ''))
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(conflict(new InvalidServiceTransferError('', '')))
@@ -94,7 +90,7 @@ describe('Transfer Service Controller', () => {
       expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('')))
     })
 
-    it('Should return a 500 response if addService throws', async () => {
+    it('Should return a 500 response if transferService throws', async () => {
       mockTransferMaintainer.transfer.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))

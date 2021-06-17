@@ -22,10 +22,16 @@ describe('Update Service Controller', () => {
   }
 
   describe('Validation', () => {
-    it('Should call validator with received request data', async () => {
+    it('Should call validator before call updateService usecase', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
+      const update = jest.spyOn(mockUpdateService, 'update')
       await sut.handle(fakeParams)
+
       expect(validate).toHaveBeenCalledWith(fakeParams)
+
+      const validateCall = validate.mock.invocationCallOrder[0]
+      const updateCall = update.mock.invocationCallOrder[0]
+      expect(validateCall).toBeLessThan(updateCall)
     })
 
     it('Should return an 400 response if validation fails', async () => {
@@ -41,20 +47,10 @@ describe('Update Service Controller', () => {
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))
     })
-
-    it('Should call validator before call updateService usecase', async () => {
-      const validate = jest.spyOn(mockValidator, 'validate')
-      const update = jest.spyOn(mockUpdateService, 'update')
-      await sut.handle(fakeParams)
-
-      const validateCall = validate.mock.invocationCallOrder[0]
-      const addCall = update.mock.invocationCallOrder[0]
-      expect(validateCall).toBeLessThan(addCall)
-    })
   })
 
-  describe('AddService Usecase', () => {
-    it('Should not call addService usecase if validation fails', async () => {
+  describe('UpdateService Usecase', () => {
+    it('Should not call updateService usecase if validation fails', async () => {
       mockValidator.validate.mockReturnValueOnce(new Error())
       const update = jest.spyOn(mockUpdateService, 'update')
       await sut.handle(fakeParams)
@@ -78,7 +74,7 @@ describe('Update Service Controller', () => {
       expect(response).toEqual(unauthorized(new UnauthorizedMaintainerError('')))
     })
 
-    it('Should return a 500 response if addService throws', async () => {
+    it('Should return a 500 response if updateService throws', async () => {
       mockUpdateService.update.mockRejectedValueOnce(new Error())
       const response = await sut.handle(fakeParams)
       expect(response).toEqual(serverError(new Error()))

@@ -15,7 +15,7 @@ describe('Add User Controller', () => {
   const sut = new AddUserController(mockValidator, mockAddUser, mockMailService, mockSignIn)
 
   describe('Validation', () => {
-    it('Should call validator before call addUser usecase', async () => {
+    it('Should call validator before call addUser usecase with correct values', async () => {
       const validate = jest.spyOn(mockValidator, 'validate')
       const add = jest.spyOn(mockAddUser, 'add')
       await sut.handle(fakeUserParams)
