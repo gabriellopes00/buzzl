@@ -9,7 +9,7 @@ import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { UserGreetingsMailService } from '@/services/mail/user-greetings'
 import { DbAddUser } from '@/usecases/user/add-user'
-import { nodemailerMailProvider } from '../../services/mail/nodemailer-provider'
+import { bullMailQueue } from '../../services/mail/mail-queue'
 import { signIn } from '../../usecases/sign-in'
 import { makeDecorator } from '../factory'
 
@@ -24,7 +24,7 @@ const validator = new ValidatorCompositor([
   passValidator
 ])
 
-const mailService = new UserGreetingsMailService(nodemailerMailProvider)
+const mailService = new UserGreetingsMailService(bullMailQueue)
 
 const dbAddUser = new DbAddUser(new PgUserRepository(), new IDGenerator(), new Argon2Hasher())
 export const addUserController = makeDecorator(

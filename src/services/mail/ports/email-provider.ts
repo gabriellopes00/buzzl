@@ -6,6 +6,6 @@ export interface MailProviderProps {
   html: string
 }
 
-export interface EmailProvider {
+export interface MailProvider {
   send: (props: MailProviderProps) => Promise<void>
 }

@@ -1,7 +1,7 @@
-import { EmailProvider, MailProviderProps } from '@/services/mail/ports/email-provider'
+import { MailProvider, MailProviderProps } from '@/services/mail/ports/email-provider'
 import { createTestAccount, createTransport, Transporter } from 'nodemailer'
 
-export class NodemailerMailProvider implements EmailProvider {
+export class NodemailerMailProvider implements MailProvider {
   private client: Transporter
 
   constructor(
