@@ -4,13 +4,19 @@ import { IDGenerator } from '@/infra/utils/uuid-generator'
 import { AddEvaluationController } from '@/presentation/controllers/evaluation/add-evaluation'
 import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
+import { RatingValidator } from '@/presentation/validation/rating-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddEvaluation } from '@/usecases/evaluation/add-evaluation'
 import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['rating', 'service'])
 const apiKeyValidator = new ApiKeyValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValidator])
+const ratingValidator = new RatingValidator()
+const validator = new ValidatorCompositor([
+  requiredFieldsValidation,
+  ratingValidator,
+  apiKeyValidator
+])
 
 const dbAddEvaluation = new DbAddEvaluation(
   new PgServiceRepository(),
