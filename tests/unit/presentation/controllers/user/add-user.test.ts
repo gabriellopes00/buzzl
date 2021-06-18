@@ -3,7 +3,6 @@ import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
 import { MockAddUser } from '@t/mocks/user/add-user'
-import { MockMailService } from '@t/mocks/user/mail-service'
 import { MockSignIn } from '@t/mocks/user/sign-in'
 import { fakeSignInParams, fakeUser, fakeUserParams } from '@t/mocks/user/user'
 
@@ -11,8 +10,8 @@ describe('Add User Controller', () => {
   const mockValidator = new MockValidator() as jest.Mocked<MockValidator>
   const mockAddUser = new MockAddUser() as jest.Mocked<MockAddUser>
   const mockSignIn = new MockSignIn() as jest.Mocked<MockSignIn>
-  const mockMailService = new MockMailService() as jest.Mocked<MockMailService>
-  const sut = new AddUserController(mockValidator, mockAddUser, mockMailService, mockSignIn)
+  // const mockMailService = new MockMailService() as jest.Mocked<MockMailService>
+  const sut = new AddUserController(mockValidator, mockAddUser, mockSignIn)
 
   describe('Validation', () => {
     it('Should call validator before call addUser usecase with correct values', async () => {
@@ -63,19 +62,19 @@ describe('Add User Controller', () => {
     })
   })
 
-  describe('Mail Service', () => {
-    it('Should call mail service with correct values', async () => {
-      const send = jest.spyOn(mockMailService, 'sendMail')
-      await sut.handle(fakeUserParams)
-      expect(send).toHaveBeenCalledWith({ name: fakeUserParams.name, email: fakeUserParams.email })
-    })
+  // describe('Mail Service', () => {
+  //   it('Should call mail service with correct values', async () => {
+  //     const send = jest.spyOn(mockMailService, 'sendMail')
+  //     await sut.handle(fakeUserParams)
+  //     expect(send).toHaveBeenCalledWith({ name: fakeUserParams.name, email: fakeUserParams.email })
+  //   })
 
-    it('Should throw if mail service throws', async () => {
-      mockMailService.sendMail.mockRejectedValueOnce(new Error())
-      const response = await sut.handle(fakeUserParams)
-      expect(response).toEqual(serverError(new Error()))
-    })
-  })
+  //   it('Should throw if mail service throws', async () => {
+  //     mockMailService.sendMail.mockRejectedValueOnce(new Error())
+  //     const response = await sut.handle(fakeUserParams)
+  //     expect(response).toEqual(serverError(new Error()))
+  //   })
+  // })
 
   describe('Sign In', () => {
     it('Should call sign in with correct values', async () => {

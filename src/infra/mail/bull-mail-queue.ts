@@ -6,12 +6,13 @@ export class BullMailQueue implements MailQueue {
   private queue: Queue<MailProviderProps>
   constructor(private readonly mailProvider: MailProvider) {
     this.queue = new BullQueue('mailQueue', {
-      redis: { host: process.env.CACHE_DB_HOST, port: Number(process.env.CACHE_DB_PORT) }
+      // redis: { host: process.env.CACHE_DB_HOST, port: Number(process.env.CACHE_DB_PORT) }
     })
   }
 
   public async push(data: any): Promise<any> {
     await this.queue.add(data)
+    await this.process()
   }
 
   public async process(): Promise<void> {
