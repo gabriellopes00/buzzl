@@ -31,7 +31,7 @@ describe('Add Evaluation Usecase', () => {
       expect(result).toBeInstanceOf(UnregisteredApiKeyError)
     })
 
-    it('Should return an InactiveServiceError if feedback service is not active', async () => {
+    it('Should return an InactiveServiceError if evaluation service is not active', async () => {
       mockServiceRepository.findOne.mockResolvedValueOnce({ ...fakeService, isActive: false })
       const result = await sut.add(fakeEvaluationParams)
       expect(result).toBeInstanceOf(InactiveServiceError)
@@ -45,12 +45,12 @@ describe('Add Evaluation Usecase', () => {
   })
 
   describe('UUID Generator', () => {
-    it('Should call uuid generator once with correct value before call feedback repository', async () => {
+    it('Should call uuid generator once with correct value before call evaluation repository', async () => {
       const generate = jest.spyOn(mockUUIDGenerator, 'generate')
       const add = jest.spyOn(mockEvaluationRepository, 'add')
       await sut.add(fakeEvaluationParams)
 
-      // ensure UUID be generated before call feedback repository
+      // ensure UUID be generated before call evaluation repository
       const generateUUIDCall = generate.mock.invocationCallOrder[0]
       const addCall = add.mock.invocationCallOrder[0]
       expect(generateUUIDCall).toBeLessThan(addCall)
@@ -66,7 +66,7 @@ describe('Add Evaluation Usecase', () => {
   })
 
   describe('Evaluation Repository', () => {
-    it('Should call feedback repository add with correct values', async () => {
+    it('Should call evaluation repository add with correct values', async () => {
       const add = jest.spyOn(mockEvaluationRepository, 'add')
       await sut.add(fakeEvaluationParams)
       expect(add).toHaveBeenCalledWith({
@@ -75,7 +75,7 @@ describe('Add Evaluation Usecase', () => {
       })
     })
 
-    it('Should throw if feedback repository throws', async () => {
+    it('Should throw if evaluation repository throws', async () => {
       mockEvaluationRepository.add.mockRejectedValueOnce(new Error())
       const error = sut.add(fakeEvaluationParams)
       await expect(error).rejects.toThrow()
