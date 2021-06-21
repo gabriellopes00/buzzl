@@ -1,13 +1,13 @@
 import { ListEvaluation } from '@/domain/evaluation/list-evaluation-by-service'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
-import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, forbidden, noContent, ok, serverError } from '@/presentation/helpers/http'
 import { Controller } from '@/presentation/ports/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 import { CalculateNPS } from '@/services/nps/calculate-nps'
 
-export class GetNPS implements Controller {
+export class GetNPSController implements Controller {
   constructor(
     private readonly validator: Validator,
     private readonly listEvaluation: ListEvaluation,
@@ -22,6 +22,7 @@ export class GetNPS implements Controller {
       const evaluations = await this.listEvaluation.list(request)
       if (evaluations instanceof UnregisteredApiKeyError) return badRequest(evaluations)
       else if (evaluations instanceof UnauthorizedMaintainerError) return forbidden(evaluations)
+      else if (evaluations === null) return noContent()
 
       const nps = await this.npsService.calculate(evaluations)
 

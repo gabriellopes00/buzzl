@@ -2,6 +2,7 @@ import { AddEvaluation, EvaluationParams } from '@/domain/evaluation/add-evaluat
 import { Evaluation } from '@/domain/evaluation/evaluation'
 import { ListEvaluation } from '@/domain/evaluation/list-evaluation-by-service'
 import { InactiveServiceError } from '@/domain/service/errors/inactive-service'
+import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { CalculateNPS, NPSData } from '@/services/nps/calculate-nps'
 import { fakeEvaluation } from './evaluation'
@@ -13,7 +14,10 @@ export class MockAddEvaluation implements AddEvaluation {
 }
 
 export class MockListEvaluation implements ListEvaluation {
-  public async list(service: string): Promise<Evaluation[] | UnregisteredApiKeyError> {
+  public async list(data: {
+    service: string
+    userId: string
+  }): Promise<Evaluation[] | UnregisteredApiKeyError | UnauthorizedMaintainerError> {
     return [fakeEvaluation]
   }
 }
