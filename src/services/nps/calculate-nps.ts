@@ -25,11 +25,11 @@ export class CalculateNPService implements CalculateNPS {
       else passives.push(evaluation)
     }
 
-    const percentDetractors = (evaluations.length / 100) * detractors.length
-    const percentPromoters = (evaluations.length / 100) * promoters.length
-    const percentPassives = (evaluations.length / 100) * passives.length
+    const percentDetractors = Number(((detractors.length * 100) / evaluations.length).toFixed(2))
+    const percentPromoters = Number(((promoters.length * 100) / evaluations.length).toFixed(2))
+    const percentPassives = Number(((passives.length * 100) / evaluations.length).toFixed(2))
 
-    const nps = percentPromoters - percentDetractors
+    const nps = Number((percentPromoters - percentDetractors).toFixed(2))
 
     let level: 'EXCELLENT' | 'GREAT' | 'GOOD' | 'BAD' = null
     if (nps >= 70) level = 'EXCELLENT'
