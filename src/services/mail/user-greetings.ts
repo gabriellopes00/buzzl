@@ -1,4 +1,4 @@
-import { MailService } from '../ports/mail-service'
+import { MailService } from './mail-service'
 import { MailQueue } from './ports/mail-queue'
 
 export class UserGreetingsMailService implements MailService {
