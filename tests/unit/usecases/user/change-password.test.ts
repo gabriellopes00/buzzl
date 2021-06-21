@@ -3,7 +3,7 @@ import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { DbChangePassword } from '@/usecases/user/change-password'
 import { MockHasher } from '@t/mocks/common/hasher'
 import { fakeUser } from '@t/mocks/user/user'
-import { MockUserRepository } from '@t/mocks/user/user-repository'
+import { MockUserRepository } from '@t/mocks/user/repository'
 
 describe('ChangeUserPass Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

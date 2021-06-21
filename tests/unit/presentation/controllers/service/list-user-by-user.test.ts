@@ -1,6 +1,6 @@
 import { ListServiceByUserController } from '@/presentation/controllers/service/list-service-by-user'
 import { noContent, ok, serverError } from '@/presentation/helpers/http'
-import { MockListServiceByUser } from '@t/mocks/service/list-service-by-user'
+import { MockListServiceByUser } from '@t/mocks/service/usecases'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
 

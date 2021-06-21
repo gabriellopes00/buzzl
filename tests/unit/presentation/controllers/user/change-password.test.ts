@@ -3,7 +3,7 @@ import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { ChangePassController } from '@/presentation/controllers/user/change-password'
 import { badRequest, conflict, noContent, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockChangePass } from '@t/mocks/user/change-password'
+import { MockChangePass } from '@t/mocks/user/usecases'
 import { fakeUser } from '@t/mocks/user/user'
 
 describe('Change Password Controller', () => {

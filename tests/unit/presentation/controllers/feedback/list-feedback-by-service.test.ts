@@ -5,7 +5,7 @@ import {
 } from '@/presentation/controllers/feedback/list-feedback-by-service'
 import { badRequest, noContent, ok, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockListFeedbackByService } from '@t/mocks/feedback/list-feedback-by-service'
+import { MockListFeedbackByService } from '@t/mocks/feedback/usecases'
 import { fakeService } from '@t/mocks/service/service'
 
 describe('List Feedback By Service Controller', () => {

@@ -1,7 +1,7 @@
 import { UserAuthentication } from '@/usecases/user/authentication'
 import { MockEncrypter } from '@t/mocks/common/encrypter'
 import { fakeAuthParam } from '@t/mocks/user/user'
-import { MockUserRepository } from '@t/mocks/user/user-repository'
+import { MockUserRepository } from '@t/mocks/user/repository'
 
 describe('User Authentication', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

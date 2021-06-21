@@ -1,7 +1,7 @@
 import { DbAddService } from '@/usecases/service/add-service'
 import { MockAPIKeyGenerator } from '@t/mocks/common/api-key-generator'
 import { addServiceDto, fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { MockUUIDGenerator } from '@t/mocks/common/uuid-generator'
 
 describe('Add Service Usecase', () => {

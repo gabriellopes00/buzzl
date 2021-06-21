@@ -2,8 +2,7 @@ import { ExistingEmailError } from '@/domain/user/errors/existing-email'
 import { AddUserController } from '@/presentation/controllers/user/add-user'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockAddUser } from '@t/mocks/user/add-user'
-import { MockSignIn } from '@t/mocks/user/sign-in'
+import { MockAddUser, MockSignIn } from '@t/mocks/user/usecases'
 import { fakeSignInParams, fakeUser, fakeUserParams } from '@t/mocks/user/user'
 
 describe('Add User Controller', () => {

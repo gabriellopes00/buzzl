@@ -9,7 +9,7 @@ import {
   unauthorized
 } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockDeleteUser } from '@t/mocks/user/delete-user'
+import { MockDeleteUser } from '@t/mocks/user/usecases'
 import { fakeUser } from '@t/mocks/user/user'
 
 describe('Delete User Controller', () => {

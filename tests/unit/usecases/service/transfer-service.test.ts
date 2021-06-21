@@ -5,9 +5,9 @@ import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { User } from '@/domain/user/user'
 import { DbTransferService } from '@/usecases/service/transfer-service'
 import { fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { fakeUser } from '@t/mocks/user/user'
-import { MockUserRepository } from '@t/mocks/user/user-repository'
+import { MockUserRepository } from '@t/mocks/user/repository'
 
 describe('Transfer Service Usecase', () => {
   const mockUserRepository = new MockUserRepository() as jest.Mocked<MockUserRepository>

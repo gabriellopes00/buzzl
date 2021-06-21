@@ -3,7 +3,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { AddEvaluationController } from '@/presentation/controllers/evaluation/add-evaluation'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockAddEvaluation } from '@t/mocks/evaluation/add-evaluation'
+import { MockAddEvaluation } from '@t/mocks/evaluation/usecases'
 import { fakeEvaluationParams } from '@t/mocks/evaluation/evaluation'
 
 describe('Add Evaluation Controller', () => {

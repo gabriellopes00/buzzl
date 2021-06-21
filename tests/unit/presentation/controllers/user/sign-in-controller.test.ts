@@ -3,7 +3,7 @@ import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { SignInController } from '@/presentation/controllers/user/sign-in'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockSignIn } from '@t/mocks/user/sign-in'
+import { MockSignIn } from '@t/mocks/user/usecases'
 import { fakeSignInParams } from '@t/mocks/user/user'
 
 describe('Sign In User Controller', () => {

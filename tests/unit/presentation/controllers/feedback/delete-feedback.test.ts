@@ -13,7 +13,7 @@ import {
   unauthorized
 } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockDeleteFeedback } from '@t/mocks/feedback/delete-feedback'
+import { MockDeleteFeedback } from '@t/mocks/feedback/usecases'
 import { fakeFeedback } from '@t/mocks/feedback/feedback'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'

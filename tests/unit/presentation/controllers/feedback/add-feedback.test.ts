@@ -3,7 +3,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { AddFeedbackController } from '@/presentation/controllers/feedback/add-feedback'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockAddFeedback } from '@t/mocks/feedback/add-feedback'
+import { MockAddFeedback } from '@t/mocks/feedback/usecases'
 import { fakeFeedbackParams } from '@t/mocks/feedback/feedback'
 
 describe('Add Feedback Controller', () => {

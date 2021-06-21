@@ -2,7 +2,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { DbDeleteService } from '@/usecases/service/delete-service'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 
 describe('Delete Service Usecase', () => {

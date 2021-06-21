@@ -1,7 +1,7 @@
 import { AddServiceController } from '@/presentation/controllers/service/add-service'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockAddService } from '@t/mocks/service/add-service'
+import { MockAddService } from '@t/mocks/service/usecases'
 import { fakeService, fakeServiceParams } from '@t/mocks/service/service'
 
 describe('Add Service Controller', () => {

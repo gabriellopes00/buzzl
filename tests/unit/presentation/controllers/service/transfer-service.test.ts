@@ -9,7 +9,7 @@ import {
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
 import { fakeService } from '@t/mocks/service/service'
-import { MockTransferService } from '@t/mocks/service/transfer-service'
+import { MockTransferService } from '@t/mocks/service/usecases'
 import { fakeUser } from '@t/mocks/user/user'
 
 describe('Transfer Service Controller', () => {

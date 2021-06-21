@@ -6,7 +6,7 @@ import {
 } from '@/presentation/controllers/service/update-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { fakeService } from '@t/mocks/service/service'
-import { MockUpdateService } from '@t/mocks/service/update-service'
+import { MockUpdateService } from '@t/mocks/service/usecases'
 import { fakeUser } from '@t/mocks/user/user'
 import { MockValidator } from '@t/mocks/common/validator'
 

@@ -3,7 +3,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { DbRegenerateServiceApiKey } from '@/usecases/service/regenerate-service-api-key'
 import { MockAPIKeyGenerator } from '@t/mocks/common/api-key-generator'
 import { fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { fakeUser } from '@t/mocks/user/user'
 
 describe('Regenerate Service Api Key', () => {

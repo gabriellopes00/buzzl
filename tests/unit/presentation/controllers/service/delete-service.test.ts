@@ -12,7 +12,7 @@ import {
   unauthorized
 } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockDeleteService } from '@t/mocks/service/delete-service'
+import { MockDeleteService } from '@t/mocks/service/usecases'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
 

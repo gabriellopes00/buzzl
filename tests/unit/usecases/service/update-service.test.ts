@@ -2,7 +2,7 @@ import { Service } from '@/domain/service/service'
 import { DbUpdateService } from '@/usecases/service/update-service'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorized-maintainer'
 

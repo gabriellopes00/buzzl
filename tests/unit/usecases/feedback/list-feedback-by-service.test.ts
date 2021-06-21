@@ -1,9 +1,9 @@
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { DbListFeedbackByService } from '@/usecases/feedback/list-feedback-by-service'
 import { fakeFeedback } from '@t/mocks/feedback/feedback'
-import { MockFeedbackRepository } from '@t/mocks/feedback/feedback-repository'
+import { MockFeedbackRepository } from '@t/mocks/feedback/repository'
 import { fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 
 describe('List Feedback By Service Usecase', () => {
   const mockServiceRepository = new MockServiceRepository() as jest.Mocked<MockServiceRepository>

@@ -3,7 +3,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { RegenerateApiKeyController } from '@/presentation/controllers/service/regenerate-service-api-key'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockRegenerateKey } from '@t/mocks/service/regenerate-api-key'
+import { MockRegenerateKey } from '@t/mocks/service/usecases'
 import { fakeService } from '@t/mocks/service/service'
 import { fakeUser } from '@t/mocks/user/user'
 

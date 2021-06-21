@@ -3,9 +3,9 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { DbAddEvaluation } from '@/usecases/evaluation/add-evaluation'
 import { MockUUIDGenerator } from '@t/mocks/common/uuid-generator'
 import { fakeEvaluationParams } from '@t/mocks/evaluation/evaluation'
-import { MockEvaluationRepository } from '@t/mocks/evaluation/evaluation-repository'
+import { MockEvaluationRepository } from '@t/mocks/evaluation/repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
 
 describe('Add Evaluation Usecase', () => {
   const mockUUIDGenerator = new MockUUIDGenerator() as jest.Mocked<MockUUIDGenerator>

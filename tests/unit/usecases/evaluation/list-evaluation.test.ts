@@ -2,9 +2,9 @@ import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorize
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { DbListEvaluationByService } from '@/usecases/evaluation/list-evaluation-by-service'
 import { fakeEvaluation } from '@t/mocks/evaluation/evaluation'
-import { MockEvaluationRepository } from '@t/mocks/evaluation/evaluation-repository'
+import { MockEvaluationRepository } from '@t/mocks/evaluation/repository'
 import { fakeService } from '@t/mocks/service/service'
-import { MockServiceRepository } from '@t/mocks/service/service-repository'
+import { MockServiceRepository } from '@t/mocks/service/repository'
 import { fakeUser } from '@t/mocks/user/user'
 
 describe('List Evaluation Usecase', () => {

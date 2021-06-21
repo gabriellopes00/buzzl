@@ -3,7 +3,7 @@ import { UnauthorizedError } from '@/presentation/errors/unauthorized'
 import { badRequest, forbidden, ok, serverError, unauthorized } from '@/presentation/helpers/http'
 import { AuthUserMiddleware, AuthUserRequest } from '@/presentation/middlewares/auth-user'
 import { MockValidator } from '@t/mocks/common/validator'
-import { MockAuthentication } from '@t/mocks/user/auth-user'
+import { MockAuthentication } from '@t/mocks/user/usecases'
 
 describe('Auth User Middleware', () => {
   const mockAuthenticator = new MockAuthentication() as jest.Mocked<MockAuthentication>
