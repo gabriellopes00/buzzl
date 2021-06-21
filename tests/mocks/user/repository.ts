@@ -1,0 +1,27 @@
+import { User } from '@/domain/user/user'
+import { UserRepository } from '@/usecases/ports/user-repository'
+import { MockHasher } from '../common/'
+import { fakeUser } from './user'
+
+const mockHasher = new MockHasher()
+
+export class MockUserRepository implements UserRepository {
+  async add(data: User): Promise<User> {
+    return { ...fakeUser, password: await mockHasher.generate('') }
+  }
+
+  async exists(criteria: { id?: string; email?: string }): Promise<boolean> {
+    return false
+  }
+
+  async findOne(criteria: { id?: string; email?: string }): Promise<User> {
+    return { ...fakeUser, password: await mockHasher.generate('') }
+  }
+
+  async delete(criteria: { id?: string; email?: string }): Promise<void> {}
+
+  async update(data: User): Promise<User> {
+    const user = { ...fakeUser, password: await mockHasher.generate('') }
+    return { ...user, ...data }
+  }
+}

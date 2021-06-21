@@ -1,8 +1,0 @@
-[2021-06-18T18:20:36.542Z] QueryFailedError: null value in column "category" of relation "feedback" violates not-null constraint
-    at new QueryFailedError (D:\drive\nodejs\www\feedbackio\api\node_modules\typeorm\error\QueryFailedError.js:12:28)
-    at PostgresQueryRunner.<anonymous> (D:\drive\nodejs\www\feedbackio\api\node_modules\typeorm\driver\postgres\PostgresQueryRunner.js:248:31)
-    at step (D:\drive\nodejs\www\feedbackio\api\node_modules\typeorm\node_modules\tslib\tslib.js:143:27)
-    at Object.throw (D:\drive\nodejs\www\feedbackio\api\node_modules\typeorm\node_modules\tslib\tslib.js:124:57)
-    at rejected (D:\drive\nodejs\www\feedbackio\api\node_modules\typeorm\node_modules\tslib\tslib.js:115:69)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-
