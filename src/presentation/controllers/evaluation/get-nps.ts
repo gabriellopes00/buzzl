@@ -13,7 +13,7 @@ export class GetNPS implements Controller {
     private readonly npsService: CalculateNPS
   ) {}
 
-  public async handle(request: { service: string }): Promise<HttpResponse> {
+  public async handle(request: { service: string; userId: string }): Promise<HttpResponse> {
     try {
       const validationResult = this.validator.validate(request)
       if (validationResult instanceof Error) return badRequest(validationResult)

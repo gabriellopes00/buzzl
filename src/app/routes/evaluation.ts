@@ -2,6 +2,7 @@ import { Router } from 'express'
 import rateLimit from 'express-rate-limit'
 import { routerAdapter } from '../adapters/express-router'
 import { addEvaluationController } from '../builds/controllers/evaluation/add-evaluation'
+import { getNPSController } from '../builds/controllers/evaluation/get-nps'
 
 const router = Router()
 
@@ -14,5 +15,6 @@ const rateLimiter = rateLimit({
 })
 
 router.post('/', rateLimiter, routerAdapter(addEvaluationController))
+router.get('/nps', routerAdapter(getNPSController))
 
 export default router
