@@ -5,15 +5,15 @@ import helmet from 'helmet'
 import pinoLogger from '../config/logger'
 
 export const secureHeaders = helmet()
+
 export const bodyParser = json()
+
 export const logger = expressPino({ logger: pinoLogger })
-export const rateLimiter = rateLimit({
-  windowMs: 60 * 1000,
-  max: 50,
-  headers: true,
-  skipFailedRequests: true,
-  message: 'Too many requests'
-})
+
+export const rateLimiter = rateLimit({ windowMs: 60 * 1000, max: 40, headers: true })
+
+const max = Number(process.env.MAX_SERVICE_REQUESTS)
+export const serviceRateLimiter = rateLimit({ windowMs: 60 * 1000, max, headers: true })
 
 export const contentType = (_: Request, res: Response, next: NextFunction) => {
   res.type('json')
