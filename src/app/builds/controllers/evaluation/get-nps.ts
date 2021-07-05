@@ -6,7 +6,6 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { CalculateNPService } from '@/services/nps/calculate-nps'
 import { DbListEvaluationByService } from '@/usecases/evaluation/list-evaluation-by-service'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['service'])
 const apiKeyValidator = new ApiKeyValidator()
@@ -19,6 +18,4 @@ const dbListEvaluation = new DbListEvaluationByService(
 
 const calculateNPS = new CalculateNPService()
 
-export const getNPSController = makeDecorator(
-  new GetNPSController(validator, dbListEvaluation, calculateNPS)
-)
+export const getNPSController = new GetNPSController(validator, dbListEvaluation, calculateNPS)

@@ -5,7 +5,6 @@ import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbListFeedbackByService } from '@/usecases/feedback/list-feedback-by-service'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['service'])
 const apiKeyValidator = new ApiKeyValidator()
@@ -16,6 +15,4 @@ const dbListFeedback = new DbListFeedbackByService(
   new PgFeedbackRepository()
 )
 
-export const listFeedbackController = makeDecorator(
-  new ListFeedbackByServiceController(validator, dbListFeedback)
-)
+export const listFeedbackController = new ListFeedbackByServiceController(validator, dbListFeedback)

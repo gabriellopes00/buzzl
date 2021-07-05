@@ -7,7 +7,6 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RatingValidator } from '@/presentation/validation/rating-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddEvaluation } from '@/usecases/evaluation/add-evaluation'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['rating', 'service'])
 const apiKeyValidator = new ApiKeyValidator()
@@ -24,6 +23,4 @@ const dbAddEvaluation = new DbAddEvaluation(
   new PgEvaluationRepository()
 )
 
-export const addEvaluationController = makeDecorator(
-  new AddEvaluationController(validator, dbAddEvaluation)
-)
+export const addEvaluationController = new AddEvaluationController(validator, dbAddEvaluation)

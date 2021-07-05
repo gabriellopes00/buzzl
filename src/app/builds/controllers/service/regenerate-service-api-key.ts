@@ -5,7 +5,6 @@ import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbRegenerateServiceApiKey } from '@/usecases/service/regenerate-service-api-key'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['apiKey'])
 const apiKeyValidator = new ApiKeyValidator()
@@ -16,6 +15,4 @@ const dbRegenerateKey = new DbRegenerateServiceApiKey(
   new ServiceAPIKeyGenerator()
 )
 
-export const regenerateKeyController = makeDecorator(
-  new RegenerateApiKeyController(validator, dbRegenerateKey)
-)
+export const regenerateKeyController = new RegenerateApiKeyController(validator, dbRegenerateKey)

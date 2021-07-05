@@ -9,7 +9,6 @@ import { PasswordValidator } from '@/presentation/validation/password-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddUser } from '@/usecases/user/add-user'
 import { signIn } from '../../usecases/sign-in'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
 const nameValidator = new NameValidator()
@@ -22,7 +21,5 @@ const validator = new ValidatorCompositor([
   passValidator
 ])
 
-// const mailService = new UserGreetingsMailService(bullMailQueue)
-
 const dbAddUser = new DbAddUser(new PgUserRepository(), new IDGenerator(), new Argon2Hasher())
-export const addUserController = makeDecorator(new AddUserController(validator, dbAddUser, signIn))
+export const addUserController = new AddUserController(validator, dbAddUser, signIn)

@@ -6,7 +6,6 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbTransferService } from '@/usecases/service/transfer-service'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['apiKey', 'newMaintainerEmail'])
 const emailValidator = new EmailValidator()
@@ -18,6 +17,4 @@ const validator = new ValidatorCompositor([
 ])
 
 const dbTransferService = new DbTransferService(new PgUserRepository(), new PgServiceRepository())
-export const transferServiceController = makeDecorator(
-  new TransferServiceController(validator, dbTransferService)
-)
+export const transferServiceController = new TransferServiceController(validator, dbTransferService)

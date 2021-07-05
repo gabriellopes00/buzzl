@@ -4,7 +4,6 @@ import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbUpdateService } from '@/usecases/service/update-service'
-import { makeDecorator } from '../factory'
 
 const requiredFieldsValidation = new RequiredFieldValidation(['apiKey', 'data'])
 const apiKeyValidator = new ApiKeyValidator()
@@ -12,6 +11,4 @@ const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValid
 
 const dbUpdateService = new DbUpdateService(new PgServiceRepository())
 
-export const updateServiceController = makeDecorator(
-  new UpdateServiceController(validator, dbUpdateService)
-)
+export const updateServiceController = new UpdateServiceController(validator, dbUpdateService)
