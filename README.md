@@ -18,11 +18,9 @@
   <img src="https://cdn.svgporn.com/logos/typescript-icon.svg" alt="typescript" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/javascript.svg" alt="javascript" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/nodejs-icon.svg" alt="nodejs" width="30" height="30"/>
-  <img src="https://cdn.svgporn.com/logos/graphql.svg" alt="graphql" width="30" height="30"/>
   <img src="https://jwt.io/img/pic_logo.svg" alt="jwt" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/docker-icon.svg" alt="docker" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/postgresql.svg" alt="postgres" width="30" height="30"/>
-  <img src="https://cdn.svgporn.com/logos/redis.svg" alt="redis" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
   <img src="https://cdn.svgporn.com/logos/heroku-icon.svg" alt="heroku" height="30">
@@ -63,7 +61,8 @@ root
 │    ├── domain             → Business rules and entities definition
 │    ├── infra              → External frameworks and libs ports implementation (orm, encrypter)
 │    ├── presentation       → External api communication layer (controllers, validators)
-│    └── usecases           → Usecases implementation
+│    ├── usecases           → Usecases implementation
+│    └── services           → Services implementation
 └─── tests                  → Application tests code
       └── e2e
       └── unit
@@ -73,10 +72,6 @@ root
 
 Users password are hashed with [Argon2](https://github.com/P-H-C/phc-winner-argon2) hasher, winner of the [Password Hashing Competition (PHC)](https://www.password-hashing.net/), the most recommended and secure hashing algorithm option.
 Authentications tokens are generated using [JWT](https://jwt.io/), most used tool to generate authentication tokens for web applications, which are encoded with a key pair of [RSA](<https://en.wikipedia.org/wiki/RSA_(cryptosystem)>) keys using RS256 asymmetric cryptography algorithm, increasing token's authenticity.
-
-#### Logs 📜
-
-All controllers, middlewares, usecases and frameworks unexpected errors are stored in a log file, becoming available for future analysis and corrections.
 
 ## Building and running 🛠
 
@@ -102,7 +97,7 @@ openssl rsa -pubout -in <private_key_name>.pem -out <public_key_name>.pem
 ###### Running with Docker
 
 ```bash
-docker-compose up
+docker-compose up -d
 ```
 
 ###### Running locally

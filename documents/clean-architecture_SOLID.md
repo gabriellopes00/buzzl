@@ -1,3 +1,0 @@
-- layers
-- concepts
-- SOLID principles
