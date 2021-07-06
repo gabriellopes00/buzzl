@@ -75,7 +75,7 @@ Authentications tokens are generated using [JWT](https://jwt.io/), most used too
 
 ## Building and running 🛠
 
-To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker and docker-compose. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_** only, filling all the properties in the file with your information _(api port, db credentials...)_. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` and _no spaces_ after each line.
+To run this project locally, you will have to install Nodejs and PostgreSQL on the machine, or run everything with Docker and docker-compose. Before run the project, go to **_.env.example_** file, on project root, and rename it to **_.env_** only, filling all the properties in the file with your information _(api port, db credentials...)_. Public and private keys must be generated with the commands below, and pasted in ._.env_ file, with `\n` and _no spaces_ after each line; something like this: `TOKEN_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBiYJxPJIC/XiBo50AKFcSmHlZ\nS9lVPBTFk7c4rP/4cIt9dtLYms3eOVWLZem8/KW48u1P6tcbdfQx7kuuXonDYoWx\nUm2paTlQ6+eB4ffjNp2gtuXndab0WgUc93700Wn5H1edqT90eP5Z2Xp44Cgr33Gf\n6YdJ0I8Yb8E9uRSTkwIDAQAB\n-----END PUBLIC KEY-----\n"`.
 
 ###### Cloning Repository
 

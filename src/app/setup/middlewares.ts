@@ -1,14 +1,10 @@
 import { json, NextFunction, Request, Response } from 'express'
-import expressPino from 'express-pino-logger'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
-import pinoLogger from '../config/logger'
 
 export const secureHeaders = helmet()
 
 export const bodyParser = json()
-
-export const logger = expressPino({ logger: pinoLogger })
 
 export const rateLimiter = rateLimit({ windowMs: 60 * 1000, max: 40, headers: true })
 
