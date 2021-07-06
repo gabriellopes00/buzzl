@@ -5,8 +5,7 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbChangePassword } from '@/usecases/user/change-password'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['newPass', 'currentPass'])
-const validator = new ValidatorCompositor([requiredFieldsValidation])
+const validator = new ValidatorCompositor([new RequiredFieldValidation(['newPass', 'currentPass'])])
 
 const dbChangePass = new DbChangePassword(new PgUserRepository(), new Argon2Hasher())
 

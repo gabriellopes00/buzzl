@@ -7,9 +7,10 @@ import { RequiredFieldValidation } from '@/presentation/validation/required-fiel
 import { CalculateNPService } from '@/services/nps/calculate-nps'
 import { DbListEvaluationByService } from '@/usecases/evaluation/list-evaluation-by-service'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['service'])
-const apiKeyValidator = new ApiKeyValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['service']),
+  new ApiKeyValidator()
+])
 
 const dbListEvaluation = new DbListEvaluationByService(
   new PgServiceRepository(),

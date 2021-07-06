@@ -10,15 +10,11 @@ import { RequiredFieldValidation } from '@/presentation/validation/required-fiel
 import { DbAddUser } from '@/usecases/user/add-user'
 import { signIn } from '../../usecases/sign-in'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['name', 'email', 'password'])
-const nameValidator = new NameValidator()
-const passValidator = new PasswordValidator()
-const emailValidator = new EmailValidator()
 const validator = new ValidatorCompositor([
-  requiredFieldsValidation,
-  nameValidator,
-  emailValidator,
-  passValidator
+  new RequiredFieldValidation(['name', 'email', 'password']),
+  new NameValidator(),
+  new PasswordValidator(),
+  new EmailValidator()
 ])
 
 const dbAddUser = new DbAddUser(new PgUserRepository(), new IDGenerator(), new Argon2Hasher())

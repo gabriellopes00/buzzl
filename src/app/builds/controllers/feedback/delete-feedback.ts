@@ -6,9 +6,10 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbDeleteFeedback } from '@/usecases/feedback/delete-feedback'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['service', 'id'])
-const apiKeyValidator = new ApiKeyValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['service', 'id']),
+  new ApiKeyValidator()
+])
 
 const dbDeleteFeedback = new DbDeleteFeedback(new PgServiceRepository(), new PgFeedbackRepository())
 export const deleteFeedbackController = new DeleteFeedbackController(validator, dbDeleteFeedback)

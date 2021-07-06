@@ -3,7 +3,6 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { JWTFormatValidator } from '@/presentation/validation/jwt-format'
 import { authentication } from '../usecases/authentication'
 
-const jwtFormatValidator = new JWTFormatValidator()
-const validator = new ValidatorCompositor([jwtFormatValidator])
+const validator = new ValidatorCompositor([new JWTFormatValidator()])
 
 export const authMiddleware = new AuthUserMiddleware(validator, authentication)

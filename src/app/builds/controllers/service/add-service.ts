@@ -7,9 +7,10 @@ import { NameValidator } from '@/presentation/validation/name-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddService } from '@/usecases/service/add-service'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['name'])
-const nameValidator = new NameValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, nameValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['name']),
+  new NameValidator()
+])
 
 const dbAddService = new DbAddService(
   new IDGenerator(),

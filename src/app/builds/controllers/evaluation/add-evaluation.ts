@@ -8,13 +8,10 @@ import { RatingValidator } from '@/presentation/validation/rating-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddEvaluation } from '@/usecases/evaluation/add-evaluation'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['rating', 'service'])
-const apiKeyValidator = new ApiKeyValidator()
-const ratingValidator = new RatingValidator()
 const validator = new ValidatorCompositor([
-  requiredFieldsValidation,
-  ratingValidator,
-  apiKeyValidator
+  new RequiredFieldValidation(['rating', 'service']),
+  new ApiKeyValidator(),
+  new RatingValidator()
 ])
 
 const dbAddEvaluation = new DbAddEvaluation(

@@ -6,9 +6,10 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbListFeedbackByService } from '@/usecases/feedback/list-feedback-by-service'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['service'])
-const apiKeyValidator = new ApiKeyValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['service']),
+  new ApiKeyValidator()
+])
 
 const dbListFeedback = new DbListFeedbackByService(
   new PgServiceRepository(),

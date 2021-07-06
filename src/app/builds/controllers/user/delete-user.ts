@@ -5,9 +5,10 @@ import { EmailValidator } from '@/presentation/validation/email-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbDeleteUser } from '@/usecases/user/delete-user'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['email'])
-const emailValidator = new EmailValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, emailValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['email']),
+  new EmailValidator()
+])
 
 const dbDeleteUser = new DbDeleteUser(new PgUserRepository())
 

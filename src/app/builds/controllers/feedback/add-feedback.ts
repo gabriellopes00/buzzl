@@ -8,13 +8,10 @@ import { FeedbackCategoryValidator } from '@/presentation/validation/feedback-ca
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbAddFeedback } from '@/usecases/feedback/add-feedback'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['category', 'content', 'service'])
-const apiKeyValidator = new ApiKeyValidator()
-const feedbackCategory = new FeedbackCategoryValidator()
 const validator = new ValidatorCompositor([
-  requiredFieldsValidation,
-  apiKeyValidator,
-  feedbackCategory
+  new RequiredFieldValidation(['category', 'content', 'service']),
+  new ApiKeyValidator(),
+  new FeedbackCategoryValidator()
 ])
 
 const dbAddFeedback = new DbAddFeedback(

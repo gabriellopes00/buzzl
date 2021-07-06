@@ -5,9 +5,10 @@ import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbUpdateService } from '@/usecases/service/update-service'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['apiKey', 'data'])
-const apiKeyValidator = new ApiKeyValidator()
-const validator = new ValidatorCompositor([requiredFieldsValidation, apiKeyValidator])
+const validator = new ValidatorCompositor([
+  new RequiredFieldValidation(['apiKey', 'data']),
+  new ApiKeyValidator()
+])
 
 const dbUpdateService = new DbUpdateService(new PgServiceRepository())
 

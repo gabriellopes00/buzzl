@@ -7,13 +7,10 @@ import { EmailValidator } from '@/presentation/validation/email-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 import { DbTransferService } from '@/usecases/service/transfer-service'
 
-const requiredFieldsValidation = new RequiredFieldValidation(['apiKey', 'newMaintainerEmail'])
-const emailValidator = new EmailValidator()
-const apiKeyValidator = new ApiKeyValidator()
 const validator = new ValidatorCompositor([
-  requiredFieldsValidation,
-  emailValidator,
-  apiKeyValidator
+  new RequiredFieldValidation(['apiKey', 'newMaintainerEmail']),
+  new EmailValidator(),
+  new ApiKeyValidator()
 ])
 
 const dbTransferService = new DbTransferService(new PgUserRepository(), new PgServiceRepository())
