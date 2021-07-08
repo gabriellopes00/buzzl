@@ -24,13 +24,14 @@
   <img src="https://cdn.svgporn.com/logos/eslint.svg" alt="eslint" width="30" height="30"/>
   <img src="https://cdn.svgporn.com/logos/jest.svg" alt="jest" height="30">
   <img src="https://cdn.svgporn.com/logos/heroku-icon.svg" alt="heroku" height="30">
+  <img src="https://cdn.svgporn.com/logos/swagger.svg" alt="swagger" height="30">
   <img src="https://coveralls.io/favicon.png" alt="coveralls" height="30">
   <img src="https://github.com/typeorm/typeorm/raw/master/resources/logo_big.png" alt="typeorm" height="30">
 </p>
 
 ##### Application hosted at _[heroku](https://www.heroku.com/)_.
 
-##### API url: _https://feedbackio-api.herokuapp.com_.
+##### See docs: _https://feedbackio-api.herokuapp.com/docs_.
 
 <h2> About Feedback.io 📚 </h2>
 
