@@ -1,3 +1,4 @@
+import { addFeedbackCredentials } from './feedback'
 import {
   signinResponse,
   signupResponse,
@@ -20,5 +21,7 @@ export default {
 
   userDeletionCredentials: userDeletionCredentials,
 
-  updatePasswdCredentials: updatePasswdCredentials
+  updatePasswdCredentials: updatePasswdCredentials,
+
+  addFeedbackCredentials: addFeedbackCredentials
 }
