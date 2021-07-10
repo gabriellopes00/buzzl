@@ -1,4 +1,10 @@
-import { addFeedbackCredentials } from './feedback'
+import {
+  addFeedbackCredentials,
+  deleteFeedbackCredentials,
+  feedback,
+  listFeedbackCredentials,
+  listFeedbackResponse
+} from './feedback'
 import {
   signinResponse,
   signupResponse,
@@ -15,13 +21,14 @@ import {
 export default {
   signupCredentials: signupCredentials,
   signupResponse: signupResponse,
-
   signinResponse: signinResponse,
   signinCredentials: signinCredentials,
-
   userDeletionCredentials: userDeletionCredentials,
-
   updatePasswdCredentials: updatePasswdCredentials,
 
-  addFeedbackCredentials: addFeedbackCredentials
+  addFeedbackCredentials: addFeedbackCredentials,
+  feedback: feedback,
+  listFeedbackResponse: listFeedbackResponse,
+  listFeedbackCredentials: listFeedbackCredentials,
+  deleteFeedbackCredentials: deleteFeedbackCredentials
 }

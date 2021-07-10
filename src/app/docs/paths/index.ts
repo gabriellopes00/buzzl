@@ -1,4 +1,4 @@
-import { addFeedbackPath } from './feedback'
+import { feedbackPath } from './feedback'
 import { deleteUserPath, signinPath, signupPath, updatePasswdPath } from './user'
 
 /**
@@ -11,5 +11,5 @@ export default {
   '/user': deleteUserPath,
   '/user/password': updatePasswdPath,
 
-  '/feedback': addFeedbackPath
+  '/feedback': feedbackPath
 }
