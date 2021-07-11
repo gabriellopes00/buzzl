@@ -1,3 +1,4 @@
+import { evaluationPath, getNPSPath } from './evaluation'
 import { feedbackPath } from './feedback'
 import { deleteUserPath, signinPath, signupPath, updatePasswdPath } from './user'
 
@@ -11,5 +12,8 @@ export default {
   '/user': deleteUserPath,
   '/user/password': updatePasswdPath,
 
-  '/feedback': feedbackPath
+  '/feedback': feedbackPath,
+
+  '/evaluation': evaluationPath,
+  '/evaluation/nps': getNPSPath
 }

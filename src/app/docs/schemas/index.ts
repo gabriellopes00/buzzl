@@ -1,3 +1,4 @@
+import { addEvaluationCredentials, getNPSResponse } from './evaluation'
 import {
   addFeedbackCredentials,
   deleteFeedbackCredentials,
@@ -6,12 +7,12 @@ import {
   listFeedbackResponse
 } from './feedback'
 import {
-  signinResponse,
-  signupResponse,
-  signupCredentials,
   signinCredentials,
-  userDeletionCredentials,
-  updatePasswdCredentials
+  signinResponse,
+  signupCredentials,
+  signupResponse,
+  updatePasswdCredentials,
+  userDeletionCredentials
 } from './user'
 
 /**
@@ -30,5 +31,8 @@ export default {
   feedback: feedback,
   listFeedbackResponse: listFeedbackResponse,
   listFeedbackCredentials: listFeedbackCredentials,
-  deleteFeedbackCredentials: deleteFeedbackCredentials
+  deleteFeedbackCredentials: deleteFeedbackCredentials,
+
+  addEvaluationCredentials: addEvaluationCredentials,
+  getNPSResponse: getNPSResponse
 }
