@@ -8,14 +8,16 @@ export const signupPath = {
     requestBody: {
       required: true,
       description: "Sign Up path must receive the user's data to register them in the API",
-      content: { 'application/json': { schema: { $ref: '#/schemas/signupCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/signupCredentials' } }
+      }
     },
     responses: {
       201: {
         description: 'User successfully registered and authenticated',
         content: {
           'application/json': {
-            schema: { $ref: '#/schemas/signupResponse' }
+            schema: { $ref: '#/components/schemas/signupResponse' }
           }
         }
       },
@@ -79,14 +81,16 @@ export const signinPath = {
       required: true,
       description:
         "Sign In path must receive the user's credentials to generate the authentication token",
-      content: { 'application/json': { schema: { $ref: '#/schemas/signinCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/signinCredentials' } }
+      }
     },
     responses: {
       200: {
         description: 'User successfully authenticated',
         content: {
           'application/json': {
-            schema: { $ref: '#/schemas/signinResponse' }
+            schema: { $ref: '#/components/schemas/signinResponse' }
           }
         }
       },
@@ -155,7 +159,9 @@ export const deleteUserPath = {
       required: true,
       description:
         "User Deletion route must receive respective user's email and requires authentication",
-      content: { 'application/json': { schema: { $ref: '#/schemas/userDeletionCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/userDeletionCredentials' } }
+      }
     },
     responses: {
       204: {
@@ -227,7 +233,9 @@ export const updatePasswdPath = {
       required: true,
       description:
         "User update password route must receive respective user's current password and the new password and requires authentication",
-      content: { 'application/json': { schema: { $ref: '#/schemas/updatePasswdCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/updatePasswdCredentials' } }
+      }
     },
     responses: {
       204: {

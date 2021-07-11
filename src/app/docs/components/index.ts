@@ -1,3 +1,4 @@
+import schemas from '../schemas'
 import { authTokenComponent } from './auth-token'
 import { acessToken } from './params'
 
@@ -11,5 +12,6 @@ export default {
   },
   parameters: {
     accessToken: acessToken
-  }
+  },
+  schemas: schemas
 }

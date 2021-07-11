@@ -4,7 +4,6 @@ import servers from './metadata/servers'
 import tags from './metadata/tags'
 
 import paths from './paths'
-import schemas from './schemas'
 
 export default {
   openapi: '3.0.0',
@@ -12,6 +11,5 @@ export default {
   servers: servers,
   tags: tags,
   paths: paths,
-  schemas: schemas,
   components: components
 }

@@ -8,7 +8,9 @@ export const feedbackPath = {
       required: true,
       description:
         "Add Feedback route must received feedback data, and the respective service api-key in the field `service`. Customer's email is optional.",
-      content: { 'application/json': { schema: { $ref: '#/schemas/addFeedbackCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/addFeedbackCredentials' } }
+      }
     },
     responses: {
       204: {
@@ -65,13 +67,17 @@ export const feedbackPath = {
       required: true,
       description:
         'List Feedback route must receive the api-key of the service from which feedbacks will be sought.',
-      content: { 'application/json': { schema: { $ref: '#/schemas/listFeedbackCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/listFeedbackCredentials' } }
+      }
     },
     responses: {
       200: {
         description:
           'In the response, the feedback data came already formatted. It contains the total amount of the feedbacks; the amount by category, the percentage that the quantity of each category represents of the total and the list with a list of the feedbacks themselves.',
-        content: { 'application/json': { schema: { $ref: '#/schemas/listFeedbackResponse' } } }
+        content: {
+          'application/json': { schema: { $ref: '#/components/schemas/listFeedbackResponse' } }
+        }
       },
       400: {
         description:
@@ -123,7 +129,9 @@ export const feedbackPath = {
       required: true,
       description:
         'Delete Feedback route must receive the id of the feedback to be deleted, and and the service that this feedback belongs to.',
-      content: { 'application/json': { schema: { $ref: '#/schemas/deleteFeedbackCredentials' } } }
+      content: {
+        'application/json': { schema: { $ref: '#/components/schemas/deleteFeedbackCredentials' } }
+      }
     },
     responses: {
       204: {

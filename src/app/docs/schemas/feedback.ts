@@ -72,7 +72,7 @@ export const listFeedbackResponse = {
         }
       }
     },
-    feedbacks: { type: 'array', items: { $ref: '#/schemas/feedback' } }
+    feedbacks: { type: 'array', items: { $ref: '#/component/schemas/feedback' } }
   },
   required: ['count', 'categories', 'feedbacks']
 }
