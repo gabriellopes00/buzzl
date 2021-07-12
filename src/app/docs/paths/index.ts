@@ -1,5 +1,6 @@
 import { evaluationPath, getNPSPath } from './evaluation'
 import { feedbackPath } from './feedback'
+import { newServiceApiKeyPath, servicePath, transferServicePath } from './service'
 import { deleteUserPath, signinPath, signupPath, updatePasswdPath } from './user'
 
 /**
@@ -15,5 +16,9 @@ export default {
   '/feedback': feedbackPath,
 
   '/evaluation': evaluationPath,
-  '/evaluation/nps': getNPSPath
+  '/evaluation/nps': getNPSPath,
+
+  '/service': servicePath,
+  '/service/api-key/new': newServiceApiKeyPath,
+  '/service/transfer': transferServicePath
 }
