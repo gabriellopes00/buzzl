@@ -1,3 +1,3 @@
-import { EmailSender } from '../email-sender'
+// import { EmailSender } from '../email-sender'
 
-export class CreateUserMail implements EmailSender {}
+// export class CreateUserMail implements EmailSender {}
