@@ -37,7 +37,7 @@
   "dependencies": {
     "@sentry/node": "^6.9.0",
     "argon2": "^0.27.2",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "helmet": "^4.6.0",
