@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 0
 
       - name: Check commit message
-        uses: wagoid/commitlint-github-action@v3
+        uses: wagoid/commitlint-github-action@v4.1.1
 
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v2
