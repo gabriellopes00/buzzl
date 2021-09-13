@@ -44,7 +44,7 @@
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "pg": "^8.5.1",
-    "pino": "^6.13.1",
+    "pino": "^6.13.2",
     "pino-pretty": "^4.7.1",
     "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.37",
