@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  tags:
+    - v*
+
+jobs:
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_email: 'gabrielluislopes00@gmail.com'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.APP_NAME}}
+          branch: 'main'
