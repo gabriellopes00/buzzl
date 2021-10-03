@@ -1,7 +1,7 @@
 *
 .*
 !.env
-!dist/
-!etc/
+!src/
 !ormconfig.js
-!package.json
+!tsconfig.json
+!tsconfig-build.json
