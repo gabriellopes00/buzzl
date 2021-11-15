@@ -1,16 +1,16 @@
 <p align="center"> <img src="./.github/assets/logo.svg" width="200" /> </p>
-<h1 align="center"> Feedback.io </h1>
+<h1 align="center"> Buzzl </h1>
 
-[![Main Workflow](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/gabriellopes00/feedbackio-api/actions/workflows/main.yml)
-[![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/feedbackio-api/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/feedbackio-api?branch=main)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md)
-![Stars](https://img.shields.io/github/stars/gabriellopes00/feedbackio-api.svg)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/gabriellopes00/feedbackio-api)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=ncloc)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_feedbackio-api&metric=security_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_feedbackio-api)
+[![Main Workflow](https://github.com/gabriellopes00/buzzl/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/gabriellopes00/buzzl/actions/workflows/main.yml)
+[![Coverage Status](https://coveralls.io/repos/github/gabriellopes00/buzzl/badge.svg?branch=main)](https://coveralls.io/github/gabriellopes00/buzzl?branch=main)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/gabriellopes00/buzzl/blob/main/LICENSE.md)
+![Stars](https://img.shields.io/github/stars/gabriellopes00/buzzl.svg)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/gabriellopes00/buzzl)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_buzzl&metric=ncloc)](https://sonarcloud.io/dashboard?id=gabriellopes00_buzzl)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_buzzl&metric=alert_status)](https://sonarcloud.io/dashboard?id=gabriellopes00_buzzl)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_buzzl&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_buzzl)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_buzzl&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_buzzl)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=gabriellopes00_buzzl&metric=security_rating)](https://sonarcloud.io/dashboard?id=gabriellopes00_buzzl)
 
 ###### An API built with
 
@@ -31,12 +31,12 @@
 
 ##### Application hosted at _[heroku](https://www.heroku.com/)_.
 
-##### See docs: _https://feedbackio-api.herokuapp.com/docs_.
+##### See docs: _https://buzzl.herokuapp.com/docs_.
 
-<h2> About Feedback.io 📚 </h2>
+<h2> About Buzzl 📚 </h2>
 
 <p>
-  Feedback.io is being built to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, that will be able to receive feedbacks and rates from your customers. This will allow you have a contact with customers feedbacks, which can be a ISSUE, an IDEA, or OTHERS, and calculate your services NPS, knowing how your customers are evaluating your services. This is an open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL, Redis...
+  Buzzl is being built to offer a complete platform for everyone seeing have a better control over their services, and their customers opinion about them. Here you can register yourself on the platform and create services, that will be able to receive feedbacks and rates from your customers. This will allow you have a contact with customers feedbacks, which can be a ISSUE, an IDEA, or OTHERS, and calculate your services NPS, knowing how your customers are evaluating your services. This is an open source application, which is begin built using Nodejs, including a lot of other concepts and new technologies such as Typescript, SOLID principles, Clean Architecture, DDD, TDD, Docker, PostgreSQL, Redis...
 </p>
 
 ## Api Structure
@@ -81,9 +81,9 @@ To run this project locally, you will have to install Nodejs and PostgreSQL on t
 ###### Cloning Repository
 
 ```git
-git clone https://github.com/gabriellopes00/feedbackio-api.git
+git clone https://github.com/gabriellopes00/buzzl.git
 or
-git clone git@github.com:gabriellopes00/feedbackio-api.git
+git clone git@github.com:gabriellopes00/buzzl.git
 ```
 
 ###### Generating RSA key pair
@@ -134,7 +134,7 @@ Following the standard of the [Conventional Commits](https://www.conventionalcom
 
 ## License ✒
 
-This project uses [GPL-3.0](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) license, which allows anyone modify, distribute and use the application code in many different ways. However there are many conditions, such as **License and copyright notice**, **State changes**, **Disclose source** and **Use the same license**. [Read complete license](https://github.com/gabriellopes00/feedbackio-api/blob/main/LICENSE.md) to know more about permissions and copyright.
+This project uses [GPL-3.0](https://github.com/gabriellopes00/buzzl/blob/main/LICENSE.md) license, which allows anyone modify, distribute and use the application code in many different ways. However there are many conditions, such as **License and copyright notice**, **State changes**, **Disclose source** and **Use the same license**. [Read complete license](https://github.com/gabriellopes00/buzzl/blob/main/LICENSE.md) to know more about permissions and copyright.
 
 ## Contact 📱
 

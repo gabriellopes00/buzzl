@@ -1,13 +1,13 @@
 {
-  "name": "feedbackio-api",
+  "name": "buzzl",
   "version": "2.0.0",
   "description": "A easy way to get and manage your services feedbacks and evaluations.",
-  "homepage": "https://github.com/gabriellopes00/feedbackio-api#readme",
+  "homepage": "https://github.com/gabriellopes00/buzzl#readme",
   "main": "src/app/server.ts",
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gabriellopes00/feedbackio-api.git"
+    "url": "https://github.com/gabriellopes00/buzzl.git"
   },
   "author": {
     "name": "Gabriel Luis Lopes",
@@ -16,7 +16,7 @@
   },
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/gabriellopes00/feedbackio-api/issues"
+    "url": "https://github.com/gabriellopes00/buzzl/issues"
   },
   "scripts": {
     "build": "rimraf dist/ && tsc -p tsconfig-build.json --skipLibCheck",
