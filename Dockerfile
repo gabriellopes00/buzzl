@@ -1,13 +1,8 @@
-FROM node:14
-WORKDIR /usr/src/feedbackio/
+FROM node:16-alpine3.13
+WORKDIR /usr/src/buzzl/
 
-ENV PATH /usr/src/feedbackio/node_modules/.bin:$PATH
+ENV PATH /usr/src/buzzl/node_modules/.bin:$PATH
 ENV NODE_ENV=production
-
-LABEL manteiner="gabrielluislopes00@gmail.com"
-LABEL version="2.0.0"
-LABEL url="https://api-feedbackio.herokuapp.com"
-LABEL documentation="https://api-feedbackio.herokuapp.com/docs"
 
 COPY package.json .
 COPY yarn.lock .
