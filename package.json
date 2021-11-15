@@ -46,7 +46,7 @@
     "pino": "^6.13.3",
     "pino-pretty": "^7.0.1",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.37",
+    "typeorm": "^0.2.40",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
