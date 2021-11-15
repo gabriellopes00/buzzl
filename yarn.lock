@@ -687,11 +687,12 @@
   resolved "https://registry.yarnpkg.com/@types/cookiejar/-/cookiejar-2.1.2.tgz#66ad9331f63fe8a3d3d9d8c6e3906dd10f6446e8"
   integrity sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==
 
-"@types/express-pino-logger@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@types/express-pino-logger/-/express-pino-logger-4.0.2.tgz#0ac505e0e597ecb42a88e21bbe7cd6bfecfd2f42"
-  integrity sha512-pjFbznTQ/h9Dht4YP1Zqfj2+4S8K4u7K+EowklXhf0aL43KUIYo126w2h8mtwoHfa91Z3BYA8w2wfUfwNAHroA==
+"@types/express-pino-logger@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/express-pino-logger/-/express-pino-logger-4.0.3.tgz#e7cd14723fc0b4ae24c1fc7e764b8f4c75b4ef73"
+  integrity sha512-qdx2MZACwyopWYVOF759/vO5B7DLYIqoub5jasjih13lTfk31VnD/DI5Y6G2GrGrY1Z4XPwZke9it2f/oq8pcw==
   dependencies:
+    "@types/pino" "6.3"
     "@types/pino-http" "*"
 
 "@types/express-rate-limit@^5.1.3":
@@ -817,10 +818,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/pino@*", "@types/pino@^6.3.11":
-  version "6.3.11"
-  resolved "https://registry.yarnpkg.com/@types/pino/-/pino-6.3.11.tgz#83652799e76b3ad692aaf68f6fbf994e83af5db2"
-  integrity sha512-S7+fLONqSpHeW9d7TApUqO6VN47KYgOXhCNKwGBVLHObq8HhaAYlVqUNdfnvoXjCMiwE5xcPm/5R2ZUh8bgaXQ==
+"@types/pino@*", "@types/pino@6.3", "@types/pino@^6.3.11":
+  version "6.3.12"
+  resolved "https://registry.yarnpkg.com/@types/pino/-/pino-6.3.12.tgz#4425db6ced806109c3df957100cba9dfcd73c228"
+  integrity sha512-dsLRTq8/4UtVSpJgl9aeqHvbh6pzdmjYD3C092SYgLD2TyoCqHpTJk6vp8DvCTGGc7iowZ2MoiYiVUUCcu7muw==
   dependencies:
     "@types/node" "*"
     "@types/pino-pretty" "*"
