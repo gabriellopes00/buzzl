@@ -32,6 +32,10 @@ export class Account extends Entity<AccountData> {
     return this.data.password
   }
 
+  set password(hash: string) {
+    this.data.password = hash
+  }
+
   get createdAt() {
     return this._createdAt
   }
@@ -40,7 +44,7 @@ export class Account extends Entity<AccountData> {
     super(data, id)
   }
 
-  static create(data: AccountData, id: string): Either<AccountErrors, AccountData> {
+  static create(data: AccountData, id: string): Either<AccountErrors, Account> {
     const nameResult = Name.create(data.name)
     if (nameResult.isLeft()) return left(nameResult.value)
 
