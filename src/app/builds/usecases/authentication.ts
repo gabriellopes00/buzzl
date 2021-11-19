@@ -1,4 +1,4 @@
-import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { PgUserRepository } from '@/infra/database/repositories/account-repository'
 import { JWTEncrypter } from '@/infra/utils/jwt-encrypter'
 import { UserAuthentication } from '@/usecases/user/authentication'
 

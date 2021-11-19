@@ -1,6 +1,6 @@
 import { FeedbackModel } from '@/infra/database/models/feedback'
 import { ServiceModel } from '@/infra/database/models/service'
-import { UserModel } from '@/infra/database/models/user'
+import { UserModel } from '@/infra/database/models/account'
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import { fakeFeedback } from '@t/mocks/feedback/feedback'
 import { fakeService } from '@t/mocks/service/service'

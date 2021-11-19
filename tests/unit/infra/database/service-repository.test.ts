@@ -1,6 +1,6 @@
 import { Service } from '@/domain/service/service'
 import { ServiceModel } from '@/infra/database/models/service'
-import { UserModel } from '@/infra/database/models/user'
+import { UserModel } from '@/infra/database/models/account'
 import pgConnectionHelper from '@/infra/database/pg-helper'
 import { PgServiceRepository } from '@/infra/database/repositories/service-repository'
 import { resolve } from 'path'

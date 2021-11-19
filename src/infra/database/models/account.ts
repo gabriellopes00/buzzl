@@ -1,8 +1,7 @@
-import { User } from '@/domain/user/user'
 import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 
-@Entity('user')
-export class UserModel implements User {
+@Entity('account')
+export class AccountModel {
   @PrimaryColumn()
   public id: string
 
@@ -15,9 +14,9 @@ export class UserModel implements User {
   @Column()
   public password: string
 
-  @CreateDateColumn()
-  public created_at: Date
+  @CreateDateColumn({ name: 'created_at' })
+  public createdAt: Date
 
-  @UpdateDateColumn()
-  public updated_at: Date
+  @UpdateDateColumn({ name: 'updated_at' })
+  public updatedAt: Date
 }

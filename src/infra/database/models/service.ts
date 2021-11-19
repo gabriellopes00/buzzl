@@ -8,7 +8,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn
 } from 'typeorm'
-import { UserModel } from './user'
+import { UserModel } from './account'
 
 @Entity('service')
 export class ServiceModel implements Service {

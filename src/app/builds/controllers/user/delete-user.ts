@@ -1,4 +1,4 @@
-import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { PgUserRepository } from '@/infra/database/repositories/account-repository'
 import { DeleteUserController } from '@/presentation/controllers/user/delete-user'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
 import { EmailValidator } from '@/presentation/validation/email-validator'

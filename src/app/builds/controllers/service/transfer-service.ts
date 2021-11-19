@@ -1,5 +1,5 @@
 import { PgServiceRepository } from '@/infra/database/repositories/service-repository'
-import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { PgUserRepository } from '@/infra/database/repositories/account-repository'
 import { TransferServiceController } from '@/presentation/controllers/service/transfer-service'
 import { ApiKeyValidator } from '@/presentation/validation/api-key-validator'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'

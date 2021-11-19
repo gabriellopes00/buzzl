@@ -1,7 +1,6 @@
-import { Hasher } from '@/usecases/ports/hasher'
-
-import { randomBytes } from 'crypto'
+import { Hasher } from '@/core/infra/hasher'
 import { hash, verify } from 'argon2'
+import { randomBytes } from 'crypto'
 
 export class Argon2Hasher implements Hasher {
   private readonly salt = randomBytes(12)

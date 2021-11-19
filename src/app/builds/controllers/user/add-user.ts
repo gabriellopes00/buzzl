@@ -1,4 +1,4 @@
-import { PgUserRepository } from '@/infra/database/repositories/user-repository'
+import { PgUserRepository } from '@/infra/database/repositories/account-repository'
 import { Argon2Hasher } from '@/infra/utils/argon2-hasher'
 import { IDGenerator } from '@/infra/utils/uuid-generator'
 import { AddUserController } from '@/presentation/controllers/user/add-user'
