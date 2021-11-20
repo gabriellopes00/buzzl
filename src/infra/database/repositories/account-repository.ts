@@ -4,16 +4,30 @@ import { LoadAccountRepository } from '@/modules/accounts/repositories/load-acco
 import { getRepository } from 'typeorm'
 import { AccountModel } from '../models/account'
 
+/**
+ * PgAccountRepository is the real implementation for the account's repositories interfaces.
+ * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
+ */
 export class PgAccountRepository implements CreateAccountRepository, LoadAccountRepository {
+  /**
+   * Create method is implemented from CreateAccountRepository. It adapt Account credentials to
+   * the credentials TypeORM model and store it.
+   * @param data Account credentials
+   */
   public async create(data: Account): Promise<void> {
     const repository = getRepository(AccountModel)
     await repository.save(repository.create(data))
   }
 
+  /**
+   * ExistsEmail method is implemented from LoadAccountRepository. It find in the database
+   * if exists an account with given email.
+   * @param email Search argument
+   * @returns {PromiseLike<boolean>} Returns either an account was found with give email or not.
+   */
   public async existsEmail(email: string): Promise<boolean> {
     const repository = getRepository(AccountModel)
-    const account = await repository.findOne({ where: { email } })
-    return !!account
+    return !!(await repository.findOne({ where: { email } }))
   }
 
   // public async exists(criteria: { id?: string; email?: string }): Promise<boolean> {
