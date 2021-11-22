@@ -2,7 +2,7 @@ import { AddFeedback, FeedbackParams } from '@/domain/feedback/add-feedback'
 import { InactiveServiceError } from '@/domain/service/errors/inactive-service'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { badRequest, noContent, serverError } from '@/presentation/helpers/http'
-import { Controller } from '@/presentation/ports/controllers'
+import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 

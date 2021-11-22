@@ -2,7 +2,7 @@ import { DeleteUser } from '@/domain/user/delete-user'
 import { UnauthorizedUserDeletionError } from '@/domain/user/errors/unauthorized-deletion'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { badRequest, conflict, noContent, serverError, unauthorized } from '../../helpers/http'
-import { Controller } from '../../ports/controllers'
+import { Controller } from '../../../core/presentation/controllers'
 import { HttpResponse } from '../../ports/http'
 import { Validator } from '../../ports/validator'
 

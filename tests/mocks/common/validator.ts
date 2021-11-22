@@ -1,6 +1,6 @@
-import { Validator } from '@/presentation/ports/validator'
+import { Validator } from '@/core/presentation/validator'
 
-export class MockValidator implements Validator {
+export class MockedValidator implements Validator {
   validate(input: any): Error {
     return null
   }

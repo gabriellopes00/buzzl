@@ -2,7 +2,7 @@ import { UnauthorizedMaintainerError } from '@/domain/service/errors/unauthorize
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { UpdateService } from '@/domain/service/update-service'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { Controller } from '@/presentation/ports/controllers'
+import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 

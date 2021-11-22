@@ -1,4 +1,4 @@
-import { InvalidParamError } from '@/presentation/errors/invalid-param-error'
+import { InvalidParamError } from '@/presentation/validation/errors/invalid-param-error'
 import { FeedbackCategoryValidator } from '@/presentation/validation/feedback-category'
 
 describe('Feedback Category Validation', () => {

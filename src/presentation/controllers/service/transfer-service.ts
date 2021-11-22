@@ -4,7 +4,7 @@ import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-ap
 import { TransferService } from '@/domain/service/transfer-service'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { badRequest, conflict, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { Controller } from '@/presentation/ports/controllers'
+import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 

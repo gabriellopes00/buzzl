@@ -1,4 +1,4 @@
-import { InvalidParamError } from '../errors/invalid-param-error'
+import { InvalidParamError } from './errors/invalid-param-error'
 import { Validator } from '../ports/validator'
 
 export class EvaluationRatingValidator implements Validator {

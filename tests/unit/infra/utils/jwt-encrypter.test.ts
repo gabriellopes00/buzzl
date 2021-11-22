@@ -12,20 +12,20 @@ jest.mock('jsonwebtoken', () => ({
 }))
 
 describe('Jwt Encrypter', () => {
-  const fakePrivateKey = 'private_key'
-  const fakePublicKey = 'public_key'
-  const fakeExpiration = '15m'
+  const privateKey = 'private_key'
+  const publicKey = 'public_key'
+  const expiration = '15m'
 
   const mockJwt = jwt as jest.Mocked<typeof jwt>
-  const sut = new JWTEncrypter(fakePrivateKey, fakePublicKey, fakeExpiration)
+  const sut = new JWTEncrypter(privateKey, publicKey, expiration)
 
   describe('Encrypt', () => {
     it('Should call sign with correct values', async () => {
       const sign = jest.spyOn(jwt, 'sign')
       await sut.encrypt({ payload: 'any_value' })
-      expect(sign).toHaveBeenCalledWith({ payload: 'any_value' }, fakePrivateKey, {
+      expect(sign).toHaveBeenCalledWith({ payload: 'any_value' }, privateKey, {
         algorithm: 'RS256',
-        expiresIn: fakeExpiration
+        expiresIn: expiration
       })
     })
 
@@ -44,23 +44,15 @@ describe('Jwt Encrypter', () => {
   })
 
   describe('Decrypt', () => {
-    test('Should call verify with correct values', async () => {
+    test('Should call verify method with correct values', async () => {
       const verify = jest.spyOn(jwt, 'verify')
       await sut.decrypt('any_token')
-      expect(verify).toHaveBeenCalledWith('any_token', fakePublicKey, { algorithms: ['RS256'] })
+      expect(verify).toHaveBeenCalledWith('any_token', publicKey, { algorithms: ['RS256'] })
     })
 
-    test('Should return a value on verify success', async () => {
+    test('Should return decrypted value if decryption succeeded', async () => {
       const value = await sut.decrypt('any_token')
       expect(value).toBe('payload')
-    })
-
-    it('Should return null if receive an expired token', async () => {
-      mockJwt.verify.mockImplementationOnce(() => {
-        throw new Error()
-      })
-      const error = await sut.decrypt('any_token')
-      expect(error).toBeNull()
     })
   })
 })

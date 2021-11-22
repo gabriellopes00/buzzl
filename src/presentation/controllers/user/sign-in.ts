@@ -2,7 +2,7 @@ import { UnmatchedPasswordError } from '@/domain/user/errors/unmatched-password'
 import { UnregisteredEmailError } from '@/domain/user/errors/unregistered-email'
 import { SignInParams, SignIn } from '@/domain/user/sign-in'
 import { badRequest, ok, serverError, unauthorized } from '../../helpers/http'
-import { Controller } from '../../ports/controllers'
+import { Controller } from '../../../core/presentation/controllers'
 import { HttpResponse } from '../../ports/http'
 import { Validator } from '../../ports/validator'
 

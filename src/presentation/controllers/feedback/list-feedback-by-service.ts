@@ -2,7 +2,7 @@ import { Feedback } from '@/domain/feedback/feedback'
 import { ListFeedbackByService } from '@/domain/feedback/list-feedback-by-service'
 import { UnregisteredApiKeyError } from '@/domain/service/errors/unregistered-api-key'
 import { badRequest, noContent, ok, serverError } from '@/presentation/helpers/http'
-import { Controller } from '@/presentation/ports/controllers'
+import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 import { Validator } from '@/presentation/ports/validator'
 

@@ -1,6 +1,6 @@
 import { ListServiceByUser } from '@/domain/service/list-service-by-user'
 import { noContent, ok, serverError } from '@/presentation/helpers/http'
-import { Controller } from '@/presentation/ports/controllers'
+import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/presentation/ports/http'
 
 export interface ListServiceParams {

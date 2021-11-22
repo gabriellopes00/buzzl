@@ -1,13 +1,11 @@
-import { MissingParamError } from '../errors/missing-param-error'
-import { Validator } from '../ports/validator'
+import { Validator } from '@/core/presentation/validator'
+import { MissingParamError } from './errors/missing-param-error'
 
 export class RequiredFieldValidation implements Validator {
-  constructor(private readonly requiredFields: string[]) {}
+  constructor(private readonly field: string) {}
 
   validate(input: any): Error {
-    for (const field of this.requiredFields) {
-      if (!input[field]) return new MissingParamError(field)
-    }
+    if (input[this.field] === undefined) return new MissingParamError(this.field)
     return null
   }
 }

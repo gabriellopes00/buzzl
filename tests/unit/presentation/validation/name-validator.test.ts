@@ -1,4 +1,4 @@
-import { InvalidParamError } from '@/presentation/errors/invalid-param-error'
+import { InvalidParamError } from '@/presentation/validation/errors/invalid-param-error'
 import { NameValidator } from '@/presentation/validation/name-validator'
 
 describe('Name Validation', () => {
