@@ -21,5 +21,6 @@ module.exports = {
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',
     '@t/(.*)': '<rootDir>/tests/$1'
-  }
+  },
+  setupFiles: ['dotenv/config']
 }

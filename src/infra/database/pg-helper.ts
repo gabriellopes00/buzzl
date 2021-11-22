@@ -1,17 +1,45 @@
-import { Connection, createConnection, getConnection } from 'typeorm'
+import {
+  Connection,
+  createConnection,
+  getConnection,
+  getConnectionManager,
+  getRepository,
+  ObjectType,
+  Repository
+} from 'typeorm'
 
-class PgConnectionHelper {
-  async connect(): Promise<void> {
-    await createConnection() // connection options in <root>/ormconfig.js
-  }
-
-  getConnection(): Connection {
-    return getConnection()
-  }
-
-  async close(): Promise<void> {
-    await this.getConnection().close()
+export class ConnectionNotFoundError extends Error {
+  constructor() {
+    super('No pg connection was found')
+    this.name = 'ConnectionNotFoundError'
   }
 }
 
-export default new PgConnectionHelper()
+export class PgConnection {
+  private static instance?: PgConnection
+  private connection?: Connection
+
+  private constructor() {}
+
+  static getInstance(): PgConnection {
+    if (PgConnection.instance === undefined) PgConnection.instance = new PgConnection()
+    return PgConnection.instance
+  }
+
+  async connect(): Promise<void> {
+    this.connection = getConnectionManager().has('default')
+      ? getConnection()
+      : await createConnection()
+  }
+
+  async disconnect(): Promise<void> {
+    if (this.connection === undefined) throw new ConnectionNotFoundError()
+    await getConnection().close()
+    this.connection = undefined
+  }
+
+  getRepository<Entity>(entity: ObjectType<Entity>): Repository<Entity> {
+    if (this.connection === undefined) throw new ConnectionNotFoundError()
+    return getRepository(entity)
+  }
+}

@@ -21,7 +21,7 @@ export class createService1620479410095 implements MigrationInterface {
       'service',
       new TableForeignKey({
         name: 'fkMaintainer',
-        referencedTableName: 'user',
+        referencedTableName: 'accounts',
         referencedColumnNames: ['id'],
         columnNames: ['maintainer'],
         onDelete: 'cascade',

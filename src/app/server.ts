@@ -1,7 +1,7 @@
 import 'module-alias/register'
 import 'dotenv/config'
 
-import pgConnectionHelper from '@/infra/database/pg-helper'
+import { PgConnection } from '@/infra/database/pg-helper'
 import logger from '@/app/config/logger'
 import app from './setup/app'
 
@@ -9,7 +9,7 @@ import app from './setup/app'
 ;(async () => {
   const { PORT } = process.env
   try {
-    await pgConnectionHelper.connect()
+    await PgConnection.getInstance().connect()
     logger.info('PostgreSQL connected successfully')
 
     const server = app.listen(PORT, () => {
@@ -21,7 +21,7 @@ import app from './setup/app'
     for (const signal of exitSignals) {
       process.on(signal, async () => {
         try {
-          await pgConnectionHelper.close()
+          await PgConnection.getInstance().disconnect()
           server.close()
           logger.info('Server stopped successfully')
           process.exit(0)

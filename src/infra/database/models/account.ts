@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 
-@Entity('account')
+@Entity({ name: 'accounts' })
 export class AccountModel {
   @PrimaryColumn()
   public id: string
@@ -16,7 +16,4 @@ export class AccountModel {
 
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  public updatedAt: Date
 }

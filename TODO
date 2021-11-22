@@ -1,0 +1,4 @@
+- improve server graceful shutdown
+- e2e tests with supertest
+- set up sentry
+- test pg repository (set up pg-mem or real postgres db- fake data)

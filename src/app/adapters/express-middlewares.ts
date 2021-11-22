@@ -1,6 +1,6 @@
-import { Middleware } from '@/presentation/ports/middleware'
-import { Request, Response, NextFunction } from 'express'
-import { Sentry } from '../config/sentry'
+import { Middleware } from '@/core/presentation/middleware'
+import { NextFunction, Request, Response } from 'express'
+import logger from '../config/logger'
 
 export const middlewareAdapter = (middleware: Middleware) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -10,8 +10,7 @@ export const middlewareAdapter = (middleware: Middleware) => {
       next()
     } else {
       if (response.code === 500) {
-        Sentry.captureException(response.error)
-        Sentry.captureMessage(response.error.stack)
+        logger.error(response.error)
       }
       res.status(response.code).json({ error: response.body.message })
     }
