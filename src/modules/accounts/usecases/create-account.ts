@@ -2,12 +2,14 @@ import { Hasher } from '@/core/infra/hasher'
 import { UUIDGenerator } from '@/core/infra/uuid-generator'
 import { Either, left, right } from '@/shared/either'
 import { Account, AccountErrors } from '../domain/entities/account'
-import { CreateAccount, CreateAccountParams } from '../domain/usecases/create-account'
+import {
+  CreateAccount,
+  CreateAccountErrors,
+  CreateAccountParams
+} from '../domain/usecases/create-account'
 import { ExistingEmailError } from '../domain/usecases/errors/existing-email'
 import { CreateAccountRepository } from '../repositories/create-account-repository'
 import { LoadAccountRepository } from '../repositories/load-account-repository'
-
-export interface CreateAccountErrors extends AccountErrors, ExistingEmailError {}
 
 export class DbCreateAccount implements CreateAccount {
   constructor(
