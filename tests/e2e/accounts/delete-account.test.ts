@@ -1,6 +1,3 @@
-/**
- * @jest-environment ./tests/mocks/postgres-environment.js
- */
 import app from '@/app/setup/app'
 import { AccountModel } from '@/infra/database/models/account'
 import { PgConnection } from '@/infra/database/pg-helper'
@@ -23,7 +20,7 @@ describe('Delete Account', () => {
 
     const { status } = await request(app)
       .delete(`/accounts/${id}`)
-      .set('access-token', access_token)
+      .auth(access_token, { type: 'bearer' })
 
     expect(status).toBe(204)
 
@@ -43,7 +40,7 @@ describe('Delete Account', () => {
 
     const { status, body } = await request(app)
       .delete('/accounts/invalid_uuid')
-      .set('access-token', access_token)
+      .auth(access_token, { type: 'bearer' })
 
     expect(status).toBe(403)
     expect(body.error).toEqual(expect.any(String))

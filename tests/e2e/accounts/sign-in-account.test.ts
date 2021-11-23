@@ -1,6 +1,3 @@
-/**
- * @jest-environment ./tests/mocks/postgres-environment.js
- */
 import app from '@/app/setup/app'
 import { AccountModel } from '@/infra/database/models/account'
 import { PgConnection } from '@/infra/database/pg-helper'
