@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: node:16-alpine
 
     services:
       database:
@@ -23,15 +24,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Check commit message
-        uses: wagoid/commitlint-github-action@v4.1.9
+      # - name: Check commit message
+      #   uses: wagoid/commitlint-github-action@v4.1.9
 
       - name: Use Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v2
@@ -57,7 +58,7 @@ jobs:
         run: yarn style
 
       - name: Run tests
-        run: yarn test:ci
+        run: yarn typeorm migration:run && yarn test:ci
         env:
           NODE_ENV: 'test'
           DATABASE_URL: 'postgres://postgres:buzzl@database:5432/buzzl'
