@@ -1,7 +1,7 @@
 import { Hasher } from '@/core/infra/hasher'
 import { UUIDGenerator } from '@/core/infra/uuid-generator'
 import { Either, left, right } from '@/shared/either'
-import { Account, AccountErrors } from '../domain/entities/account'
+import { Account } from '../domain/entities/account'
 import {
   CreateAccount,
   CreateAccountErrors,
