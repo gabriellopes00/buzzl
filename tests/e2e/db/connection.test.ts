@@ -15,7 +15,7 @@ jest.mock('typeorm', () => ({
   getRepository: jest.fn()
 }))
 
-describe('PgConnection', () => {
+describe('Postgres Connection', () => {
   let getConnectionManagerSpy: jest.Mock
   let createQueryRunnerSpy: jest.Mock
   let createConnectionSpy: jest.Mock
@@ -60,33 +60,29 @@ describe('PgConnection', () => {
     mocked(getRepository).mockImplementation(getRepositorySpy)
   })
 
-  beforeEach(() => {
-    sut = PgConnection.getInstance()
-  })
+  beforeEach(() => (sut = PgConnection.getInstance()))
 
-  it('should have only one instance', () => {
+  it('Should have only one instance', () => {
     const sut2 = PgConnection.getInstance()
-
     expect(sut).toBe(sut2)
   })
 
-  it('should create a new connection', async () => {
+  it('Should create a new connection', async () => {
     hasSpy.mockReturnValueOnce(false)
-
     await sut.connect()
 
     expect(createConnectionSpy).toHaveBeenCalledWith()
     expect(createConnectionSpy).toHaveBeenCalledTimes(1)
   })
 
-  it('should use an existing connection', async () => {
+  it('Should use an existing connection', async () => {
     await sut.connect()
 
     expect(getConnectionSpy).toHaveBeenCalledWith()
     expect(getConnectionSpy).toHaveBeenCalledTimes(1)
   })
 
-  it('should close connection', async () => {
+  it('Should close connection', async () => {
     await sut.connect()
     await sut.disconnect()
 
@@ -94,14 +90,13 @@ describe('PgConnection', () => {
     expect(closeSpy).toHaveBeenCalledTimes(1)
   })
 
-  it('should return ConnectionNotFoundError on disconnect if connection is not found', async () => {
+  it('Should return ConnectionNotFoundError on disconnect if connection is not found', async () => {
     const promise = sut.disconnect()
-
     expect(closeSpy).not.toHaveBeenCalled()
     await expect(promise).rejects.toThrow(new ConnectionNotFoundError())
   })
 
-  it('should get repository', async () => {
+  it('Should get a repository', async () => {
     await sut.connect()
     const repository = sut.getRepository(AccountModel)
 
@@ -112,7 +107,7 @@ describe('PgConnection', () => {
     await sut.disconnect()
   })
 
-  it('should return ConnectionNotFoundError on getRepository if connection is not found', async () => {
+  it('Should return ConnectionNotFoundError on getRepository if connection is not found', async () => {
     expect(getRepositorySpy).not.toHaveBeenCalled()
     expect(() => sut.getRepository(AccountModel)).toThrow(new ConnectionNotFoundError())
   })

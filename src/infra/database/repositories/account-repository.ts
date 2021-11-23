@@ -23,7 +23,7 @@ export class PgAccountRepository implements CreateAccountRepository, LoadAccount
    * ExistsEmail method is implemented from LoadAccountRepository. It find in the database
    * if exists an account with given email.
    * @param email Search argument
-   * @returns {PromiseLike<boolean>} Returns either an account was found with give email or not.
+   * @returns {Promise<boolean>} Returns either an account was found with give email or not.
    */
   public async existsEmail(email: string): Promise<boolean> {
     const repository = getRepository(AccountModel)
