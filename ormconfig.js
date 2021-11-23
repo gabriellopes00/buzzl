@@ -5,7 +5,10 @@ module.exports = {
   synchronize: false,
   logging: false,
 
-  migrations: [__dirname + '/dist/infra/database/migrations/*.js'],
+  migrations: [
+    __dirname + '/dist/infra/database/migrations/*.js',
+    __dirname + '/src/infra/database/migrations/*.ts'
+  ],
   entities: ['./src/infra/database/models/account.ts', './dist/infra/database/models/account.js'],
   cli: {
     migrationsDir: './src/infra/database/migrations/',

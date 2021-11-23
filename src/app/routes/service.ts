@@ -7,22 +7,38 @@ import { listServiceByUserController } from '../builds/controllers/service/list-
 import { regenerateKeyController } from '../builds/controllers/service/regenerate-service-api-key'
 import { transferServiceController } from '../builds/controllers/service/transfer-service'
 import { updateServiceController } from '../builds/controllers/service/update-service'
-import { authMiddleware } from '../builds/middlewares/auth-user'
+import { makeAuthAccountMiddleware } from '../factory/middlewares/auth-account-middleware'
 
 const router = Router()
 
-router.post('/', middlewareAdapter(authMiddleware), routerAdapter(addServiceController))
-router.put('/', middlewareAdapter(authMiddleware), routerAdapter(updateServiceController))
-router.delete('/', middlewareAdapter(authMiddleware), routerAdapter(deleteServiceController))
-router.get('/', middlewareAdapter(authMiddleware), routerAdapter(listServiceByUserController))
+router.post(
+  '/',
+  middlewareAdapter(makeAuthAccountMiddleware()),
+  routerAdapter(addServiceController)
+)
+router.put(
+  '/',
+  middlewareAdapter(makeAuthAccountMiddleware()),
+  routerAdapter(updateServiceController)
+)
+router.delete(
+  '/',
+  middlewareAdapter(makeAuthAccountMiddleware()),
+  routerAdapter(deleteServiceController)
+)
+router.get(
+  '/',
+  middlewareAdapter(makeAuthAccountMiddleware()),
+  routerAdapter(listServiceByUserController)
+)
 router.post(
   '/api-key/new',
-  middlewareAdapter(authMiddleware),
+  middlewareAdapter(makeAuthAccountMiddleware()),
   routerAdapter(regenerateKeyController)
 )
 router.post(
   '/transfer',
-  middlewareAdapter(authMiddleware),
+  middlewareAdapter(makeAuthAccountMiddleware()),
   routerAdapter(transferServiceController)
 )
 

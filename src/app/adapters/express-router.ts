@@ -4,7 +4,7 @@ import logger from '../config/logger'
 
 export const routerAdapter = (controller: Controller) => {
   return async (req: Request, res: Response) => {
-    const response = await controller.handle({ ...req.body, ...req.headers })
+    const response = await controller.handle({ ...req.body, ...req.headers, ...req.params })
     if (response.code >= 200 && response.code <= 299) res.status(response.code).json(response.body)
     else {
       if (response.code === 500) {

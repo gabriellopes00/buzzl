@@ -9,9 +9,7 @@ export const middlewareAdapter = (middleware: Middleware) => {
       Object.assign(req.headers, response.body) // assign middleware response with other headers
       next()
     } else {
-      if (response.code === 500) {
-        logger.error(response.error)
-      }
+      if (response.code === 500) logger.error(response.error)
       res.status(response.code).json({ error: response.body.message })
     }
   }
