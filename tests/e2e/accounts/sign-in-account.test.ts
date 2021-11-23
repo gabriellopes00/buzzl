@@ -4,7 +4,6 @@
 import app from '@/app/setup/app'
 import { AccountModel } from '@/infra/database/models/account'
 import { PgConnection } from '@/infra/database/pg-helper'
-import { MockedUUIDGenerator } from '@t/mocks/infra/uuid-generator'
 import request from 'supertest'
 import { getRepository } from 'typeorm'
 
@@ -25,7 +24,7 @@ describe('Sign In Account', () => {
   })
 
   it('Should not sign in an account if email or password is invalid', async () => {
-    const { status, body } = await request(app).post('/accounts/sign-in').send(params)
+    const { status } = await request(app).post('/accounts/sign-in').send(params)
     expect(status).toBe(401)
   })
 })

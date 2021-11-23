@@ -4,7 +4,7 @@ import {
 } from '@/modules/accounts/controllers/sign-in-account-controller'
 import { SignInError } from '@/modules/accounts/domain/usecases/errors/sign-in-error'
 import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
-import { badRequest, created, serverError, unauthorized } from '@/presentation/helpers/http'
+import { badRequest, serverError, unauthorized } from '@/presentation/helpers/http'
 import { left } from '@/shared/either'
 import { MockedEncrypter } from '@t/mocks/common/encrypter'
 import { MockedValidator } from '@t/mocks/common/validator'
