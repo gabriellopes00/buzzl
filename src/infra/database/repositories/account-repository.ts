@@ -9,9 +9,11 @@ import { AccountModel } from '../models/account'
  * PgAccountRepository is the real implementation for the account's repositories interfaces.
  * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
  */
-// eslint-disable-next-line
+/* eslint-disable */
 export class PgAccountRepository
-implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository {
+  implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository
+{
+  /* eslint-enable */
   /**
    * Create method is implemented from CreateAccountRepository. It adapt Account credentials to
    * the credentials TypeORM model and store it.
@@ -53,6 +55,19 @@ implements CreateAccountRepository, LoadAccountRepository, DeleteAccountReposito
   public async findById(id: string): Promise<Account> {
     const repository = getRepository(AccountModel)
     const account = await repository.findOne({ where: { id } })
+    if (!account) return null
+    return Account.create(account, account.id).value as Account
+  }
+
+  /**
+   * FindByEmail method is implemented from LoadAccountRepository. It find in the database
+   * and return an account with given email.
+   * @param email Search argument
+   * @returns {Promise<Account>} Returns an account with given email.
+   */
+  public async findByEmail(email: string): Promise<Account> {
+    const repository = getRepository(AccountModel)
+    const account = await repository.findOne({ where: { email } })
     if (!account) return null
     return Account.create(account, account.id).value as Account
   }

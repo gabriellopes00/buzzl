@@ -77,6 +77,19 @@ describe('Pg Account Repository', () => {
       const found = await sut.findById(account.id)
       expect(found).toBeNull()
     })
+
+    it('Should return account data if find one with given email', async () => {
+      const data = getRepository(AccountModel).create(account)
+      await getRepository(AccountModel).save(data)
+
+      const found = await sut.findByEmail(account.email)
+      expect(found).toBeTruthy()
+    })
+
+    it('Should return null if does not find any account with given email', async () => {
+      const found = await sut.findByEmail(account.email)
+      expect(found).toBeNull()
+    })
   })
 
   describe('Delete Account', () => {

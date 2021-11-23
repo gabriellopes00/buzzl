@@ -7,8 +7,12 @@ import { LoadAccountRepository } from '@/modules/accounts/repositories/load-acco
  * InMemoryAccountsRepository is a fake implementation for the repositories interfaces.
  * All the register are stored in an array in memory.
  */
+/* eslint-disable */
 export class InMemoryAccountsRepository
-implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository {
+  implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository
+{
+  /* eslint-enable */
+
   constructor(public rows: Account[] = []) {}
 
   /**
@@ -45,6 +49,16 @@ implements CreateAccountRepository, LoadAccountRepository, DeleteAccountReposito
    */
   public async findById(accountId: string): Promise<Account> {
     const index = this.rows.findIndex(row => row.id === accountId)
+    return this.rows.slice(index, 1)[0]
+  }
+
+  /**
+   * Implemented from LoadAccountRepository.
+   * This method returns an account data found by a given id.
+   * @param id Search argument
+   */
+  public async findByEmail(email: string): Promise<Account> {
+    const index = this.rows.findIndex(row => row.email === email)
     return this.rows.slice(index, 1)[0]
   }
 
