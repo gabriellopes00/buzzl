@@ -9,9 +9,9 @@ import { AccountModel } from '../models/account'
  * PgAccountRepository is the real implementation for the account's repositories interfaces.
  * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
  */
+// eslint-disable-next-line
 export class PgAccountRepository
-  implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository
-{
+implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository {
   /**
    * Create method is implemented from CreateAccountRepository. It adapt Account credentials to
    * the credentials TypeORM model and store it.

@@ -8,8 +8,7 @@ import { LoadAccountRepository } from '@/modules/accounts/repositories/load-acco
  * All the register are stored in an array in memory.
  */
 export class InMemoryAccountsRepository
-  implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository
-{
+implements CreateAccountRepository, LoadAccountRepository, DeleteAccountRepository {
   constructor(public rows: Account[] = []) {}
 
   /**

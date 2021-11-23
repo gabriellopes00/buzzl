@@ -1,11 +1,8 @@
 import { Account } from '@/modules/accounts/domain/entities/account'
 import { CreateAccountParams } from '@/modules/accounts/domain/usecases/create-account'
-import { ExistingEmailError } from '@/modules/accounts/domain/usecases/errors/existing-email'
 import { InvalidAccessToken } from '@/modules/accounts/domain/usecases/errors/invalid-access-token'
 import { DbAuthAccount } from '@/modules/accounts/usecases/auth-account'
-import { DbCreateAccount } from '@/modules/accounts/usecases/create-account'
 import { MockedEncrypter } from '@t/mocks/common/encrypter'
-import mockedHasher from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
 
