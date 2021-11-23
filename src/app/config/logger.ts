@@ -1,7 +1,12 @@
 import pino from 'pino'
 
 export default pino({
-  prettyPrint: { colorize: true },
+  transport: {
+    target: 'pino-pretty',
+    options: {
+      colorize: true
+    }
+  },
   timestamp: true,
   enabled: true,
   level: 'info'
