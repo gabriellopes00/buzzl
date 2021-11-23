@@ -6,8 +6,8 @@ import { SignInError } from '@/modules/accounts/domain/usecases/errors/sign-in-e
 import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
 import { badRequest, serverError, unauthorized } from '@/presentation/helpers/http'
 import { left } from '@/shared/either'
-import { MockedEncrypter } from '@t/mocks/common/encrypter'
-import { MockedValidator } from '@t/mocks/common/validator'
+import { MockedEncrypter } from '@t/mocks/infra/encrypter'
+import { MockedValidator } from '@t/mocks/infra/validator'
 import { MockedHasher } from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 

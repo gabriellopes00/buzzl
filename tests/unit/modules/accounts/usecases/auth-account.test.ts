@@ -2,7 +2,7 @@ import { Account } from '@/modules/accounts/domain/entities/account'
 import { CreateAccountParams } from '@/modules/accounts/domain/usecases/create-account'
 import { InvalidAccessToken } from '@/modules/accounts/domain/usecases/errors/invalid-access-token'
 import { DbAuthAccount } from '@/modules/accounts/usecases/auth-account'
-import { MockedEncrypter } from '@t/mocks/common/encrypter'
+import { MockedEncrypter } from '@t/mocks/infra/encrypter'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
 

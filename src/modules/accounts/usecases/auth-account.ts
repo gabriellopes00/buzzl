@@ -1,5 +1,5 @@
+import { Encrypter } from '@/core/infra/encrypter'
 import { Either, left, right } from '@/shared/either'
-import { Encrypter } from '@/usecases/ports/encrypter'
 import { Account } from '../domain/entities/account'
 import { AuthAccount, AuthAccountErrors } from '../domain/usecases/auth-account'
 import { InvalidAccessToken } from '../domain/usecases/errors/invalid-access-token'

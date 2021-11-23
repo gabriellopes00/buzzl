@@ -13,7 +13,7 @@ import {
   serverError
 } from '@/presentation/helpers/http'
 import { left, right } from '@/shared/either'
-import { MockedValidator } from '@t/mocks/common/validator'
+import { MockedValidator } from '@t/mocks/infra/validator'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 
 describe('Delete Account Controller', () => {

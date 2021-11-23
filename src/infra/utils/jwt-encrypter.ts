@@ -1,4 +1,4 @@
-import { Encrypter } from '@/usecases/ports/encrypter'
+import { Encrypter } from '@/core/infra/encrypter'
 import { sign, verify } from 'jsonwebtoken'
 
 export class JWTEncrypter implements Encrypter {

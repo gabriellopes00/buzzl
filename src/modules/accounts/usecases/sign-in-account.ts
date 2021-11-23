@@ -1,6 +1,6 @@
+import { Encrypter } from '@/core/infra/encrypter'
 import { Hasher } from '@/core/infra/hasher'
 import { Either, left, right } from '@/shared/either'
-import { Encrypter } from '@/usecases/ports/encrypter'
 import { SignInError } from '../domain/usecases/errors/sign-in-error'
 import { SignInAccount, SignInParams, SignInResult } from '../domain/usecases/sign-in-account'
 import { CreateAccountRepository } from '../repositories/create-account-repository'

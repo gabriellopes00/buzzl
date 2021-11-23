@@ -1,4 +1,4 @@
-import { Encrypter } from '@/usecases/ports/encrypter'
+import { Encrypter } from '@/core/infra/encrypter'
 
 export class MockedEncrypter implements Encrypter {
   async encrypt(payload: Object): Promise<string> {
