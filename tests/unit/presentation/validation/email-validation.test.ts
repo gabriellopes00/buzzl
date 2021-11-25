@@ -1,6 +1,5 @@
 import { EmailValidator } from '@/presentation/validation/email-validator'
 import { InvalidParamError } from '@/presentation/validation/errors/invalid-param-error'
-import { MissingParamError } from '@/presentation/validation/errors/missing-param-error'
 
 describe('Email Validation', () => {
   const sut = new EmailValidator('email')
