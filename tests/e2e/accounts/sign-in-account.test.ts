@@ -24,4 +24,11 @@ describe('Sign In Account', () => {
     const { status } = await request(app).post('/accounts/sign-in').send(params)
     expect(status).toBe(401)
   })
+
+  it('Should return 400 if receive an invalid email', async () => {
+    const { status } = await request(app)
+      .post('/accounts/sign-in')
+      .send({ ...params, email: 'johndoe' })
+    expect(status).toBe(401)
+  })
 })
