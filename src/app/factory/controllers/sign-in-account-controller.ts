@@ -5,6 +5,7 @@ import { JWTEncrypter } from '@/infra/utils/jwt-encrypter'
 import { SignInAccountController } from '@/modules/accounts/controllers/sign-in-account-controller'
 import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
 import { ValidatorCompositor } from '@/presentation/validation/compositor'
+import { EmailValidator } from '@/presentation/validation/email-validator'
 import { RequiredFieldValidation } from '@/presentation/validation/required-fields'
 
 const { ACCESS_TOKEN_PRIVATE_KEY, ACCESS_TOKEN_PUBLIC_KEY, ACCESS_TOKEN_EXPIRATION } = process.env
@@ -21,7 +22,8 @@ export function makeSignInController(): Controller {
 
   const validator = new ValidatorCompositor([
     new RequiredFieldValidation('email'),
-    new RequiredFieldValidation('password')
+    new RequiredFieldValidation('password'),
+    new EmailValidator('email')
   ])
 
   const controller = new SignInAccountController(validator, signInAccount)

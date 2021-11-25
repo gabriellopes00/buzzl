@@ -20,13 +20,13 @@ export class DbCreateAccount implements CreateAccount {
 
   public async create(data: CreateAccountParams): Promise<Either<CreateAccountErrors, Account>> {
     const { email, password } = data
-    const emailExists = await this.repository.existsEmail(email)
-    if (emailExists) return left(new ExistingEmailError(email))
 
     const uuid = this.uuidGenerator.generate()
-
     const accountResult = Account.create(data, uuid)
     if (accountResult.isLeft()) return left(accountResult.value)
+
+    const emailExists = await this.repository.existsEmail(email)
+    if (emailExists) return left(new ExistingEmailError(email))
 
     const hashPassword = await this.hasher.generate(password)
     accountResult.value.password = hashPassword

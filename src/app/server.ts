@@ -22,7 +22,7 @@ import app from './setup/app'
       process.on(signal, async () => {
         try {
           await PgConnection.getInstance().disconnect()
-          server.close()
+          server.close(err => err && logger.error(`Server stopped with error: ${err}`))
           logger.info('Server stopped successfully')
           process.exit(0)
         } catch (error) {

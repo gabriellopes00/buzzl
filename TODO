@@ -6,7 +6,7 @@
 - calculate nps using 5 stars either (https://miro.medium.com/max/1400/0*NaLcMM8PmHi1osSi.png)
 - search for specific words in the feedbacks content (sonic search)
 - acl for advanced resources access
-- feedbacks (title, content)
+- feedbacks (title, content, author(name?,email?), isPublic)
 - feedbacks can b public or not, when public, it will be able to be shown in pages like this https://refiner.io/ as testimonies
 - relevance service ("was it useful for u?" y or n)
 - user sign in/up with google email

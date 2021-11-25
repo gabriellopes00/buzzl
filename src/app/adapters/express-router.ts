@@ -7,9 +7,7 @@ export const routerAdapter = (controller: Controller) => {
     const response = await controller.handle({ ...req.body, ...req.headers, ...req.params })
     if (response.code >= 200 && response.code <= 299) res.status(response.code).json(response.body)
     else {
-      if (response.code === 500) {
-        logger.error(response.error)
-      }
+      if (response.code === 500) logger.error(response.error)
       res.status(response.code).json({ error: response.body.message })
     }
   }
