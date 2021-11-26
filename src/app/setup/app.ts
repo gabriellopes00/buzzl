@@ -5,6 +5,7 @@ import passport from 'passport'
 import { serve, setup } from 'swagger-ui-express'
 import docs from '../docs'
 import { AccountRoutes } from '../routes/account'
+import { ServiceRoutes } from '../routes/service'
 import { bodyParser, contentType, cors, noCache, rateLimiter, secureHeaders } from './middlewares'
 
 const app = express()
@@ -24,5 +25,6 @@ app.use('/docs', serve, setup(docs))
 app.use([secureHeaders, bodyParser, contentType, noCache, cors, rateLimiter])
 
 app.use('/accounts', AccountRoutes)
+app.use('/services', ServiceRoutes)
 
 export default app
