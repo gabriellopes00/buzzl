@@ -7,7 +7,8 @@ export class FieldTypeValidation implements Validator {
   constructor(private readonly field: string, private readonly type: FieldTypes) {}
 
   validate(input: any): Error {
-    if (typeof input[this.field] == this.type) {
+    // eslint-disable-next-line
+    if (typeof input[this.field] === this.type) {
       return new InvalidParamTypeError(this.field, typeof input[this.field], this.type)
     }
 
