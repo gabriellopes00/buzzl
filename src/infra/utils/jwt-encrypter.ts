@@ -16,6 +16,10 @@ export class JWTEncrypter implements Encrypter {
   }
 
   async decrypt<T = Object>(token: string): Promise<T> {
-    return verify(token, this.publicKey, { algorithms: ['RS256'] }) as T
+    try {
+      return verify(token, this.publicKey, { algorithms: ['RS256'] }) as T
+    } catch (error) {
+      return null
+    }
   }
 }

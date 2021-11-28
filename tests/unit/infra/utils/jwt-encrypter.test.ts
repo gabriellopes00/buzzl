@@ -50,6 +50,14 @@ describe('Jwt Encrypter', () => {
       expect(verify).toHaveBeenCalledWith('any_token', publicKey, { algorithms: ['RS256'] })
     })
 
+    test('Should return null if decryption throws', async () => {
+      jest.spyOn(jwt, 'verify').mockImplementationOnce(() => {
+        throw new Error('invalid token')
+      })
+      const value = await sut.decrypt('any_token')
+      expect(value).toBeNull()
+    })
+
     test('Should return decrypted value if decryption succeeded', async () => {
       const value = await sut.decrypt('any_token')
       expect(value).toBe('payload')
