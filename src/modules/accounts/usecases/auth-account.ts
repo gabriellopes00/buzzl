@@ -19,7 +19,7 @@ export class DbAuthAccount implements AuthAccount {
 
   public async auth(token: string): Promise<Either<AuthAccountErrors, Account>> {
     const payload = await this.encrypter.decrypt<AccessTokenPayload>(token)
-    if (!payload) return left(new InvalidAccessToken(token))
+    if (!payload) return left(new InvalidAccessToken())
 
     const account = await this.repository.findById(payload.id)
     return right(account)

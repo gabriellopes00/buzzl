@@ -24,11 +24,11 @@ export class DeleteAccountController implements Controller {
 
   async handle(params: DeleteAccountControllerParams): Promise<HttpResponse> {
     try {
-      const { id, accountId } = params
-      if (id !== accountId) return forbidden(new ForbiddenError('Forbidden account deletion'))
-
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
+
+      const { id, accountId } = params
+      if (id !== accountId) return forbidden(new ForbiddenError('Forbidden account deletion'))
 
       const result = await this.deleteAccount.delete(id)
       if (result.isLeft()) return notFound(result.value)

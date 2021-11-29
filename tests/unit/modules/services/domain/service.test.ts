@@ -1,4 +1,4 @@
-import { InvalidEmailError } from '@/modules/accounts/domain/value-objects/errors/invalid-email-error'
+import { InvalidNameError } from '@/modules/services/domain/value-objects/errors/invalid-name-error'
 import { Name } from '@/modules/accounts/domain/value-objects/name'
 import { Service, ServiceData } from '@/modules/services/domain/entities/service'
 
@@ -17,14 +17,14 @@ describe('Service Entity', () => {
 
   test('Should reject account creation if receive some invalid property', () => {
     const properties: ServiceData = {
-      name: 'My Service',
+      name: undefined,
       isActive: true,
       description: 'lorem ipsum dolor sit amet...',
       maintainerAccountId: '0e2d963c-75bb-450a-9aa1-2f9856346a6b'
     }
     const accountResult = Service.create(properties, 'uuid')
     expect(accountResult.isLeft()).toBeTruthy()
-    expect(accountResult.value).toBeInstanceOf(InvalidEmailError)
+    expect(accountResult.value).toBeInstanceOf(InvalidNameError)
   })
 
   describe('Name', () => {

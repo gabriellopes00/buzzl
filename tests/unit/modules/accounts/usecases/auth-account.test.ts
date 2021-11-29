@@ -26,7 +26,7 @@ describe('Auth Account Usecase', () => {
       jest.spyOn(mockedEncrypter, 'decrypt').mockResolvedValueOnce(null)
       const result = await sut.auth('invalid_token')
       expect(result.isLeft()).toBeTruthy()
-      expect(result.value).toEqual(new InvalidAccessToken('invalid_token'))
+      expect(result.value).toEqual(new InvalidAccessToken())
     })
 
     it('Should not call findAccount method if token is invalid', async () => {

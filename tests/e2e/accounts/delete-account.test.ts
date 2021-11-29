@@ -39,7 +39,7 @@ describe('Delete Account', () => {
     } = await request(app).post('/accounts').send(params)
 
     const { status, body } = await request(app)
-      .delete('/accounts/invalid_uuid')
+      .delete('/accounts/4ed44738-41e8-4837-a8aa-4a4ea1d2436f')
       .auth(access_token, { type: 'bearer' })
 
     expect(status).toBe(403)

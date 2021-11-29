@@ -29,6 +29,6 @@ describe('Sign In Account', () => {
     const { status } = await request(app)
       .post('/accounts/sign-in')
       .send({ ...params, email: 'johndoe' })
-    expect(status).toBe(401)
+    expect(status).toBe(400)
   })
 })
