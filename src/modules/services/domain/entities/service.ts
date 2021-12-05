@@ -23,8 +23,16 @@ export class Service extends Entity<ServiceData> {
     return this.data.name
   }
 
+  set name(value: string) {
+    this.data.name = value
+  }
+
   get description() {
     return this.data?.description
+  }
+
+  set description(value: string) {
+    this.data.description = value
   }
 
   get maintainerAccountId() {
@@ -33,6 +41,10 @@ export class Service extends Entity<ServiceData> {
 
   get isActive() {
     return this.data.isActive
+  }
+
+  set isActive(value: boolean) {
+    this.data.isActive = value
   }
 
   get apiKey() {
