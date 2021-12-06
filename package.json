@@ -61,7 +61,7 @@
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/module-alias": "^2.0.1",
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.11.11",
     "@types/passport": "^1.0.7",
     "@types/passport-google-oauth20": "^2.0.11",
     "@types/pino": "^7.0.5",
