@@ -32,16 +32,13 @@ describe('Create Accounts', () => {
     const uuid = new MockedUUIDGenerator().generate()
     await repo.save(repo.create({ id: uuid, ...params }))
 
-    const _params = { ...params, name: 'John Doe 2' }
-    console.log(_params)
-
+    const _params = { ...params, name: 'John Doe Doe' }
     const { status, body } = await request(app).post('/accounts').send(_params)
-    console.log(body)
 
     expect(status).toBe(409)
     expect(body.error).toEqual(expect.any(String))
 
-    const exists = !!(await repo.findOne({ name: 'John Doe 2' }))
+    const exists = !!(await repo.findOne({ name: 'John Doe Doe' }))
     expect(exists).toBeFalsy()
   })
 

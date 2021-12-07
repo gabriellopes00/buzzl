@@ -21,13 +21,15 @@ export class CreateAccountController implements Controller {
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
 
-      const result = await this.createAccount.create(params)
+      const { name, email, password } = params
+
+      const result = await this.createAccount.create({ name, email, password })
       if (result.isLeft()) {
         if (result.value instanceof ExistingEmailError) return conflict(result.value)
         else return badRequest(result.value)
       }
 
-      const { id, name, email, createdAt } = result.value
+      const { id, createdAt } = result.value
       const token = await this.encrypter.encrypt({ id, name, email })
 
       return created({ account: { id, name, email, created_at: createdAt }, access_token: token })
