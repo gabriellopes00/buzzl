@@ -6,6 +6,7 @@ import { CreateService, CreateServiceParams } from '../domain/usecases/create-se
 
 export interface CreateServiceControllerParams extends CreateServiceParams {
   accountId: string
+  is_active: boolean
 }
 
 export class CreateServiceController implements Controller {
@@ -18,7 +19,7 @@ export class CreateServiceController implements Controller {
     try {
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
-      const { name, isActive, description, accountId } = params
+      const { name, is_active: isActive, description, accountId } = params
 
       const result = await this.createService.create({ name, isActive, description }, accountId)
       if (result.isLeft()) return badRequest(result.value)
