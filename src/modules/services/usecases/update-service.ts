@@ -7,11 +7,11 @@ import {
   UpdateServiceParams
 } from '../domain/usecases/update-service'
 import { Name } from '../domain/value-objects/name'
-import { CreateServiceRepository } from '../repositories/create-service-repository'
-import { LoadServiceRepository } from '../repositories/load-service-repository'
+import { SaveServiceRepository } from '../repositories/save-service-repository'
+import { LoadServiceRepository } from '../repositories/find-service-repository'
 
 export class DbUpdateService implements UpdateService {
-  constructor(private readonly repository: CreateServiceRepository & LoadServiceRepository) {}
+  constructor(private readonly repository: SaveServiceRepository & LoadServiceRepository) {}
 
   public async update(
     serviceId: string,
@@ -29,7 +29,7 @@ export class DbUpdateService implements UpdateService {
     service.isActive = data.isActive === undefined ? service.isActive : data.isActive
     service.description = data.description || service.description
 
-    await this.repository.create(service)
+    await this.repository.save(service)
     return right(service)
   }
 }

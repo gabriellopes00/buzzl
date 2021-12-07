@@ -30,11 +30,13 @@ describe('Create Accounts', () => {
   it('Should not create an account if email is already in use', async () => {
     const repo = getRepository(AccountModel)
     const uuid = new MockedUUIDGenerator().generate()
-    const model = repo.create({ id: uuid, ...params })
-    await repo.save(model)
+    await repo.save(repo.create({ id: uuid, ...params }))
 
     const _params = { ...params, name: 'John Doe 2' }
+    console.log(_params)
+
     const { status, body } = await request(app).post('/accounts').send(_params)
+    console.log(body)
 
     expect(status).toBe(409)
     expect(body.error).toEqual(expect.any(String))

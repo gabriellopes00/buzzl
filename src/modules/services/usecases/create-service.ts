@@ -1,7 +1,7 @@
 import { UUIDGenerator } from '@/core/infra/uuid-generator'
 import { Either, left, right } from '@/shared/either'
 import { Service } from '../domain/entities/service'
-import { CreateServiceRepository } from '../repositories/create-service-repository'
+import { SaveServiceRepository } from '../repositories/save-service-repository'
 import {
   CreateService,
   CreateServiceErrors,
@@ -10,7 +10,7 @@ import {
 
 export class DbCreateService implements CreateService {
   constructor(
-    private readonly repository: CreateServiceRepository,
+    private readonly repository: SaveServiceRepository,
     private readonly uuidGenerator: UUIDGenerator
   ) {}
 
@@ -23,7 +23,7 @@ export class DbCreateService implements CreateService {
     const serviceResult = Service.create({ ...params, maintainerAccountId }, uuid)
     if (serviceResult.isLeft()) return left(serviceResult.value)
 
-    await this.repository.create(serviceResult.value)
+    await this.repository.save(serviceResult.value)
     return right(serviceResult.value)
   }
 }

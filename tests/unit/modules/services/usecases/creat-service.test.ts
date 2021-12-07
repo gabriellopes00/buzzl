@@ -14,7 +14,7 @@ describe('Create Service Usecase', () => {
 
   describe('Repository', () => {
     it('Should call service repository with correct values', async () => {
-      const createSpy = jest.spyOn(inMemoryServiceRepository, 'create')
+      const createSpy = jest.spyOn(inMemoryServiceRepository, 'save')
       await sut.create(data, maintainerAccountId)
       expect(createSpy).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -26,7 +26,7 @@ describe('Create Service Usecase', () => {
     })
 
     it('Should throw if repository throws', async () => {
-      jest.spyOn(inMemoryServiceRepository, 'create').mockRejectedValueOnce(new Error())
+      jest.spyOn(inMemoryServiceRepository, 'save').mockRejectedValueOnce(new Error())
       const promise = sut.create(data, maintainerAccountId)
       await expect(promise).rejects.toThrow()
     })

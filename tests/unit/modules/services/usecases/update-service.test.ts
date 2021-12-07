@@ -39,15 +39,15 @@ describe('Update Service Usecase', () => {
 
   describe('Assign New Properties', () => {
     it('Should not update the service if receive an invalid name', async () => {
-      await inMemoryServiceRepository.create(service)
+      await inMemoryServiceRepository.save(service)
       const result = await sut.update(serviceId, { name: 'a' })
       expect(result.isLeft()).toBeTruthy()
       expect(result.value).toBeInstanceOf(InvalidNameError)
     })
 
     it('Should call repository > save with updated service properties', async () => {
-      await inMemoryServiceRepository.create(service)
-      const saveSpy = jest.spyOn(inMemoryServiceRepository, 'create')
+      await inMemoryServiceRepository.save(service)
+      const saveSpy = jest.spyOn(inMemoryServiceRepository, 'save')
       await sut.update(serviceId, { name: 'New Name' })
       expect(saveSpy).toHaveBeenCalledWith({
         ...service,
@@ -56,7 +56,7 @@ describe('Update Service Usecase', () => {
     })
 
     it('Should update only received service properties', async () => {
-      await inMemoryServiceRepository.create(service)
+      await inMemoryServiceRepository.save(service)
 
       const svc = await inMemoryServiceRepository.findById(serviceId)
       expect(svc.description).toBeUndefined()
@@ -70,7 +70,7 @@ describe('Update Service Usecase', () => {
   })
 
   it('Should return a service with updated properties on success', async () => {
-    await inMemoryServiceRepository.create(service)
+    await inMemoryServiceRepository.save(service)
     const result = await sut.update(serviceId, { name: 'New Name', description: 'lorem ipsum' })
     expect(result.isRight()).toBeTruthy()
     const svc = result.value as Service

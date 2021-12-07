@@ -1,5 +1,5 @@
 import { Service } from '@/modules/services/domain/entities/service'
-import { CreateServiceRepository } from '@/modules/services/repositories/create-service-repository'
+import { SaveServiceRepository } from '@/modules/services/repositories/save-service-repository'
 import { getRepository } from 'typeorm'
 import { ServiceModel } from '../models/service'
 
@@ -7,13 +7,14 @@ import { ServiceModel } from '../models/service'
  * PgServiceRepository is the real implementation for the services' repositories interfaces.
  * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
  */
-export class PgServiceRepository implements CreateServiceRepository {
+export class PgServiceRepository implements SaveServiceRepository {
   /**
-   * Create method is implemented from CreateServiceRepository. It adapt Service credentials to
-   * the credentials TypeORM model and store it.
+   * Save method is implemented from SaveServiceRepository. It adapt Service credentials to
+   * the credentials TypeORM model and store it in the db. If the service is already registered in the db,
+   * it's credentials will be updated.
    * @param data Service credentials
    */
-  public async create(data: Service): Promise<void> {
+  public async save(data: Service): Promise<void> {
     const repository = getRepository(ServiceModel)
     await repository.save(repository.create(data))
   }
