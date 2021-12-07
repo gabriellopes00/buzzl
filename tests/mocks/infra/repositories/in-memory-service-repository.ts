@@ -1,12 +1,12 @@
 import { Service } from '@/modules/services/domain/entities/service'
 import { SaveServiceRepository } from '@/modules/services/repositories/save-service-repository'
-import { LoadServiceRepository } from '@/modules/services/repositories/find-service-repository'
+import { FindServiceRepository } from '@/modules/services/repositories/find-service-repository'
 
 /**
  * InMemoryServiceRepository is a fake implementation for the repositories interfaces.
  * All the register are stored in an array in memory.
  */
-export class InMemoryServiceRepository implements SaveServiceRepository, LoadServiceRepository {
+export class InMemoryServiceRepository implements SaveServiceRepository, FindServiceRepository {
   constructor(public rows: Service[] = []) {}
 
   /**
@@ -30,6 +30,17 @@ export class InMemoryServiceRepository implements SaveServiceRepository, LoadSer
     const index = this.rows.findIndex(row => row.id === id)
     if (index === -1) return null
     return this.rows.slice(index, 1)[0]
+  }
+
+  /**
+   * Implemented from LoadServiceRepository.
+   * This method finds a service by a given id.
+   * @param id Search argument
+   */
+  public async findAll(criteria?: { maintainerAccountId: string }): Promise<Service[]> {
+    if (criteria) {
+      return this.rows.filter(row => row.maintainerAccountId === criteria.maintainerAccountId)
+    } else return this.rows
   }
 
   /**

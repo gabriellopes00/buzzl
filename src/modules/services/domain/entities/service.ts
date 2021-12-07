@@ -8,7 +8,7 @@ export interface ServiceData {
   name: string
   description?: string
   maintainerAccountId: string
-  isActive: boolean
+  isActive?: boolean
 }
 
 export interface ServiceErrors extends InvalidNameError {}
@@ -63,9 +63,17 @@ export class Service extends Entity<ServiceData> {
     const nameResult = Name.create(data.name)
     if (nameResult.isLeft()) return left(nameResult.value)
 
+    if (data.isActive !== false && data.isActive !== true) data.isActive = true
+
     this._apiKey = ApiKey.generate()
 
     const service = new Service(data, id)
     return right(service)
+  }
+
+  static adapt(data: ServiceData & { id: string; apiKey: string }): Service {
+    const service = new Service(data, data.id)
+    this._apiKey = data.apiKey
+    return service
   }
 }

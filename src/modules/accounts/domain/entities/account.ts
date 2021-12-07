@@ -57,4 +57,8 @@ export class Account extends Entity<AccountData> {
     const account = new Account(data, id)
     return right(account)
   }
+
+  static adapt(data: AccountData & { id: string }): Account {
+    return new Account(data, data.id)
+  }
 }

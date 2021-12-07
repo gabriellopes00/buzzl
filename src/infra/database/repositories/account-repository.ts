@@ -68,8 +68,7 @@ export class PgAccountRepository
   public async findByEmail(email: string): Promise<Account> {
     const repository = getRepository(AccountModel)
     const account = await repository.findOne({ where: { email } })
-    if (!account) return null
-    return Account.create(account, account.id).value as Account
+    return !account ? null : Account.adapt(account)
   }
 
   /**

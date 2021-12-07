@@ -17,20 +17,4 @@ export abstract class Entity<T> {
   get createdAt() {
     return this._createdAt
   }
-
-  public equals(object?: Entity<T>): boolean {
-    if (object === null || object === undefined) {
-      return false
-    }
-
-    if (this === object) {
-      return true
-    }
-
-    if (!(object instanceof Entity)) {
-      return false
-    }
-
-    return this._id === object._id
-  }
 }

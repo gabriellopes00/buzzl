@@ -8,10 +8,10 @@ import {
 } from '../domain/usecases/update-service'
 import { Name } from '../domain/value-objects/name'
 import { SaveServiceRepository } from '../repositories/save-service-repository'
-import { LoadServiceRepository } from '../repositories/find-service-repository'
+import { FindServiceRepository } from '../repositories/find-service-repository'
 
 export class DbUpdateService implements UpdateService {
-  constructor(private readonly repository: SaveServiceRepository & LoadServiceRepository) {}
+  constructor(private readonly repository: SaveServiceRepository & FindServiceRepository) {}
 
   public async update(
     serviceId: string,
