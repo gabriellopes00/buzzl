@@ -7,7 +7,6 @@ on:
 
 jobs:
   merge:
-    needs: [build, analyze]
     if: ${{ github.actor == 'dependabot[bot]' && success() }}
     runs-on: ubuntu-latest
     steps:
