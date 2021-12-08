@@ -64,7 +64,7 @@
     "@types/express-session": "^1.17.4",
     "@types/jest": "^27.0.3",
     "@types/joi": "^17.2.3",
-    "@types/jsonwebtoken": "^8.5.5",
+    "@types/jsonwebtoken": "^8.5.6",
     "@types/module-alias": "^2.0.1",
     "@types/node": "^16.11.12",
     "@types/passport": "^1.0.7",
