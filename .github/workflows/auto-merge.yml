@@ -7,7 +7,8 @@ on:
 
 jobs:
   merge:
-    if: github.actor == 'dependabot[bot]'
+    needs: [build, analyze]
+    if: ${{ github.actor == 'dependabot[bot]' && success() }}
     runs-on: ubuntu-latest
     steps:
       - name: Automerge

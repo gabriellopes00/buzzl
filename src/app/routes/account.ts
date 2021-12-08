@@ -1,4 +1,3 @@
-import { passport } from '@/infra/oauth/passport-google'
 import { Router } from 'express'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
