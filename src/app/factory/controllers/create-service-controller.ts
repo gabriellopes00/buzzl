@@ -9,9 +9,6 @@ import { RequiredFieldValidation } from '@/presentation/validation/required-fiel
 export function makeCreateServiceController(): Controller {
   const repository = new PgServiceRepository()
   const createService = new DbCreateService(repository, new UUIDV4Generator())
-  const validator = new ValidatorCompositor([
-    new RequiredFieldValidation('name'),
-    new RequiredFieldValidation('is_active')
-  ])
+  const validator = new ValidatorCompositor([new RequiredFieldValidation('name')])
   return new CreateServiceController(validator, createService)
 }
