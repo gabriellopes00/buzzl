@@ -13,10 +13,13 @@ export class UpdateService {
 
   public async update(
     serviceId: string,
+    accountId: string,
     data: UpdateServiceParams
   ): Promise<Either<UpdateServiceErrors, Service>> {
     const service = await this.repository.findById(serviceId)
     if (!service) return left(new ServiceIdNotFound(serviceId))
+
+    if (accountId !== service.maintainerAccountId) throw new Error('unauthorized service update')
 
     if (data.name) {
       const nameResult = Name.create(data.name)

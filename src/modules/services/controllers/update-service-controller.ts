@@ -6,6 +6,7 @@ import { UpdateService, UpdateServiceParams } from '../usecases/update-service'
 
 export interface UpdateServiceControllerParams extends UpdateServiceParams {
   id: string
+  accountId: string
 }
 
 export class UpdateServiceController implements Controller {
@@ -19,9 +20,11 @@ export class UpdateServiceController implements Controller {
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
 
-      const { name, description, isActive, id } = params
+      const { name, description, isActive, id, accountId } = params
 
-      const result = (await this.updateService.update(id, { name, description, isActive })).value
+      const result = (
+        await this.updateService.update(id, accountId, { name, description, isActive })
+      ).value
       return ok({ services: result })
     } catch (error) {
       return serverError(error)
