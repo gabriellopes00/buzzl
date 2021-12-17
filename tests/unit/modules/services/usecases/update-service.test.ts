@@ -1,12 +1,12 @@
 import { Service } from '@/modules/services/domain/entities/service'
 import { ServiceIdNotFound } from '@/modules/services/domain/usecases/errors/service-id-not-found'
 import { InvalidNameError } from '@/modules/services/domain/value-objects/errors/invalid-name-error'
-import { DbUpdateService } from '@/modules/services/usecases/update-service'
+import { UpdateService } from '@/modules/services/usecases/update-service'
 import { InMemoryServiceRepository } from '@t/mocks/infra/repositories/in-memory-service-repository'
 
 describe('Update Service Usecase', () => {
   const inMemoryServiceRepository = new InMemoryServiceRepository()
-  const sut = new DbUpdateService(inMemoryServiceRepository)
+  const sut = new UpdateService(inMemoryServiceRepository)
 
   const maintainerAccountId = 'd1680749-892a-4417-9648-4dce4aabffe8'
   const serviceId = 'de384b4fa-cf56-4ab0-a54d-e293a30f6ab7'

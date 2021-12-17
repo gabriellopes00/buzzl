@@ -1,16 +1,14 @@
 import { Either, left, right } from '@/shared/either'
-import { Service } from '../domain/entities/service'
+import { Service, ServiceData, ServiceErrors } from '../domain/entities/service'
 import { ServiceIdNotFound } from '../domain/usecases/errors/service-id-not-found'
-import {
-  UpdateService,
-  UpdateServiceErrors,
-  UpdateServiceParams
-} from '../domain/usecases/update-service'
 import { Name } from '../domain/value-objects/name'
-import { SaveServiceRepository } from '../repositories/save-service-repository'
 import { FindServiceRepository } from '../repositories/find-service-repository'
+import { SaveServiceRepository } from '../repositories/save-service-repository'
 
-export class DbUpdateService implements UpdateService {
+export interface UpdateServiceParams extends Partial<Omit<ServiceData, 'maintainerAccountId'>> {}
+export interface UpdateServiceErrors extends ServiceErrors, ServiceIdNotFound {}
+
+export class UpdateService {
   constructor(private readonly repository: SaveServiceRepository & FindServiceRepository) {}
 
   public async update(
@@ -23,11 +21,11 @@ export class DbUpdateService implements UpdateService {
     if (data.name) {
       const nameResult = Name.create(data.name)
       if (nameResult.isLeft()) return left(nameResult.value)
+      service.name = data.name
     }
 
-    service.name = data.name || service.name
-    service.isActive = data.isActive === undefined ? service.isActive : data.isActive
-    service.description = data.description || service.description
+    if (data.isActive !== undefined) service.isActive = data.isActive
+    if (data.description) service.description = data.description
 
     await this.repository.save(service)
     return right(service)
