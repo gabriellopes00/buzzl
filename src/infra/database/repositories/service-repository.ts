@@ -10,8 +10,7 @@ import { ServiceModel } from '../models/service'
  * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
  */
 export class PgServiceRepository
-  implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository
-{
+implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository {
   /**
    * Save method is implemented from SaveServiceRepository. It adapt Service credentials to
    * the credentials TypeORM model and store it in the db. If the service is already registered in the db,
