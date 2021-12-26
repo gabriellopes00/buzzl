@@ -1,7 +1,6 @@
 import { Encrypter } from '@/core/infra/encrypter'
 import { Either, left, right } from '@/shared/either'
 import { Account } from '../domain/entities/account'
-import { AuthAccount, AuthAccountErrors } from '../domain/usecases/auth-account'
 import { InvalidAccessToken } from '../domain/usecases/errors/invalid-access-token'
 import { LoadAccountRepository } from '../repositories/load-account-repository'
 
@@ -11,7 +10,9 @@ export interface AccessTokenPayload {
   email: string
 }
 
-export class DbAuthAccount implements AuthAccount {
+export interface AuthAccountErrors extends InvalidAccessToken {}
+
+export class DbAuthAccount {
   constructor(
     private readonly encrypter: Encrypter,
     private readonly repository: LoadAccountRepository

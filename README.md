@@ -59,11 +59,13 @@ root
 ├── src                     → Application main code
 │    │── app                → Composition layer, entry point code, server setup...
 │    │    └── server.ts     → Server entry point
-│    ├── domain             → Business rules and entities definition
+│    ├── modules            → App modules
+│    │    ├── domain        → Module's entities
+│    │    ├── usecases      → Business rules
+│    │    ├── controllers   → Controllers
+│    │    └── repositories  → Module's repository interface
 │    ├── infra              → External frameworks and libs ports implementation (orm, encrypter)
 │    ├── presentation       → External api communication layer (controllers, validators)
-│    ├── usecases           → Usecases implementation
-│    └── services           → Services implementation
 └─── tests                  → Application tests code
       └── e2e
       └── unit
@@ -89,16 +91,14 @@ git clone git@github.com:gabriellopes00/buzzl.git
 ###### Generating RSA key pair
 
 ```bash
-npm run gen:key:pair
-or
-openssl genrsa -out <private_key_name>.pem 1024 &&
-openssl rsa -pubout -in <private_key_name>.pem -out <public_key_name>.pem
+openssl genrsa -out private_key.pem 1024 && \
+openssl rsa -pubout -in private_key.pem -out public_key.pem
 ```
 
 ###### Running with Docker
 
 ```bash
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ###### Running locally
@@ -116,7 +116,7 @@ npm run start
 - _**Unit**_ ❯ `yarn test:unit`
 - _**e2e**_ ❯ `yarn test:e2e`
 
-###### Linting (eslint and prettier) 🎭
+###### Linting 🎭
 
 - _**Lint**(eslint)_ ❯ `yarn lint`
 - _**Style**(prettier)_ ❯ `yarn style`
