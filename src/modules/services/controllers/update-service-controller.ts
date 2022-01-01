@@ -1,7 +1,8 @@
 import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/core/presentation/http'
 import { Validator } from '@/core/presentation/validator'
-import { badRequest, ok, serverError } from '@/presentation/helpers/http'
+import { badRequest, forbidden, ok, serverError } from '@/presentation/helpers/http'
+import { ForbiddenServiceUpdateError } from '../usecases/errors/forbidden-service-update-error'
 import { UpdateService, UpdateServiceParams } from '../usecases/update-service'
 
 export interface UpdateServiceControllerParams extends UpdateServiceParams {
@@ -22,9 +23,15 @@ export class UpdateServiceController implements Controller {
 
       const { name, description, isActive, id, accountId } = params
 
-      const result = (
-        await this.updateService.update(id, accountId, { name, description, isActive })
-      ).value
+      const result = await this.updateService.update(id, accountId, { name, description, isActive })
+      if (result.isLeft()) {
+        switch (result.value.constructor) {
+          case ForbiddenServiceUpdateError:
+            return forbidden(result.value as Error)
+          default:
+            return badRequest(result.value as Error)
+        }
+      }
       return ok({ services: result })
     } catch (error) {
       return serverError(error)
