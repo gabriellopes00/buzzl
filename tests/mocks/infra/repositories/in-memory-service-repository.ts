@@ -32,6 +32,10 @@ export class InMemoryServiceRepository implements SaveServiceRepository, FindSer
     return this.rows.slice(index, 1)[0]
   }
 
+  public async existsId(id: string): Promise<boolean> {
+    return this.rows.some(s => s.id === id)
+  }
+
   /**
    * Implemented from LoadServiceRepository.
    * This method finds a service by a given id.

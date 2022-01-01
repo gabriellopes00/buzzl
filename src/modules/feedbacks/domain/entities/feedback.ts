@@ -55,7 +55,7 @@ export class Feedback extends Entity<FeedbackData> {
   static create(data: FeedbackData, id: string): Either<FeedbackErrors, Feedback> {
     if (data.author) {
       const authorResult = Author.create({ name: data.author.name, email: data.author.email })
-      if (authorResult.isLeft()) return left(authorResult.value)
+      if (authorResult.isLeft()) data.author = null
     }
 
     data.isPrivate = data.isPrivate ?? true
