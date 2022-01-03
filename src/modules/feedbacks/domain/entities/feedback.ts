@@ -68,9 +68,7 @@ export class Feedback extends Entity<FeedbackData> {
     return right(feedback)
   }
 
-  // static adapt(data: ServiceData & { id: string; apiKey: string }): Service {
-  //   const service = new Service(data, data.id)
-  //   this._apiKey = data.apiKey
-  //   return service
-  // }
+  static adapt(data: FeedbackData & { id: string }): Feedback {
+    return new Feedback(data, data.id)
+  }
 }
