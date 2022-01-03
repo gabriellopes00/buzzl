@@ -10,11 +10,10 @@ import { ServiceModel } from '../models/service'
  * The [TypeORM]{@link https://typeorm.io/} is being used in the communication with Postgres.
  */
 export class PgServiceRepository
-implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository {
+  implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository
+{
   /**
-   * Save method is implemented from SaveServiceRepository. It adapt Service credentials to
-   * the credentials TypeORM model and store it in the db. If the service is already registered in the db,
-   * it's credentials will be updated.
+   * Implemented from SaveServiceRepository. It stores a new register in the db. If given service is already registered in the * db, it's credentials will be updated.
    * @param data Service credentials
    */
   public async save(data: Service): Promise<void> {
@@ -23,10 +22,8 @@ implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository
   }
 
   /**
-   * Save method is implemented from SaveServiceRepository. It adapt Service credentials to
-   * the credentials TypeORM model and store it in the db. If the service is already registered in the db,
-   * it's credentials will be updated.
-   * @param data Service credentials
+   * Implemented from FindServiceRepository. It returns one register found by a given id
+   * @param id Search argument
    */
   public async findById(id: string): Promise<Service> {
     const repository = getRepository(ServiceModel)
@@ -35,10 +32,8 @@ implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository
   }
 
   /**
-   * Save method is implemented from SaveServiceRepository. It adapt Service credentials to
-   * the credentials TypeORM model and store it in the db. If the service is already registered in the db,
-   * it's credentials will be updated.
-   * @param data Service credentials
+   * Implemented from FindServiceRepository. It returns all register from the db
+   * @param criteria Search argument
    */
   public async findAll(criteria?: { maintainerAccountId: string }): Promise<Service[]> {
     const repository = getRepository(ServiceModel)
@@ -47,6 +42,20 @@ implements SaveServiceRepository, FindServiceRepository, DeleteServiceRepository
     return data.length === 0 ? null : data.map(s => Service.adapt(s))
   }
 
+  /**
+   * Implemented from FindServiceRepository. It looks if a given id is registered in the db.
+   * @param id Search argument
+   */
+  public async existsId(id: string): Promise<boolean> {
+    const repository = getRepository(ServiceModel)
+    const data = await repository.findOne(id)
+    return !!data
+  }
+
+  /**
+   * Implemented from DeleteServiceRepository. It deletes a register in the database by a given id
+   * @param id Deletion argument
+   */
   public async delete(serviceId: string): Promise<void> {
     const repository = getRepository(ServiceModel)
     await repository.delete(serviceId)

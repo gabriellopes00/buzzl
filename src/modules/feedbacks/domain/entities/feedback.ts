@@ -4,12 +4,13 @@ import { Category } from '../value-objects/category'
 import { InvalidCategoryError } from '../value-objects/errors/invalid-category'
 import { Author, AuthorData, AuthorErrors } from './author'
 
+export type FeedbackCategory = 'COMMENT' | 'ISSUE' | 'IDEA' | 'OTHER'
 export interface FeedbackData {
   title?: string
   content: string
   author?: AuthorData
   isPrivate?: boolean
-  category: 'COMMENT' | 'ISSUE' | 'IDEA' | 'OTHER'
+  category: FeedbackCategory
   serviceId: string
 }
 
