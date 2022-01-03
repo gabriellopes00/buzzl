@@ -13,7 +13,7 @@ router.post('/', routerAdapter(makeCreateAccountController()))
 router.post('/sign-in', routerAdapter(makeSignInController()))
 router.get(
   '/:id/services',
-  middlewareAdapter(makeAuthAccountMiddleware()),
+  middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeFindAccountServiceController())
 )
 // router.get(
@@ -33,7 +33,7 @@ router.get(
 // router.get('/failure', (_, res) => res.send('failure'))
 router.delete(
   '/:id',
-  middlewareAdapter(makeAuthAccountMiddleware()),
+  middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeDeleteAccountController())
 )
 

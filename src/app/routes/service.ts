@@ -10,19 +10,19 @@ const router = Router()
 
 router.post(
   '/',
-  middlewareAdapter(makeAuthAccountMiddleware()),
+  middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeCreateServiceController())
 )
 
 router.put(
   '/:id',
-  middlewareAdapter(makeAuthAccountMiddleware()),
+  middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeUpdateServiceController())
 )
 
 router.delete(
   '/:id',
-  middlewareAdapter(makeAuthAccountMiddleware()),
+  middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeDeleteServiceController())
 )
 
