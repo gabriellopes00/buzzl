@@ -1,6 +1,8 @@
-import { Feedback, FeedbackData } from '@/modules/feedbacks/domain/entities/feedback'
-import { InvalidAuthorEmailError } from '@/modules/feedbacks/domain/value-objects/errors/invalid-author-email-error'
-import { InvalidAuthorNameError } from '@/modules/feedbacks/domain/value-objects/errors/invalid-author-name-error'
+import {
+  Feedback,
+  FeedbackCategory,
+  FeedbackData
+} from '@/modules/feedbacks/domain/entities/feedback'
 
 describe('Feedback Entity', () => {
   const uuid = '8ca55664-b59b-47bc-a402-efbe48b72f1b'
@@ -13,33 +15,32 @@ describe('Feedback Entity', () => {
   }
 
   describe('Author', () => {
-    it('Should not create a feedback if author credentials are invalid', () => {
+    it('Should create a feedback setting null in author credentials if receive invalid ones', () => {
       let result = Feedback.create({ ...feedback, author: { email: 'invalid' } }, uuid)
-      expect(result.isLeft()).toBeTruthy()
-      expect(result.value).toBeInstanceOf(InvalidAuthorEmailError)
+      expect(result.isRight()).toBeTruthy()
+      let f = result.value as Feedback
+      expect(f.author).toBeNull()
 
       result = Feedback.create(
         { ...feedback, author: { name: 'ab', email: 'johndoe@mail.com' } },
         uuid
       )
-      expect(result.isLeft()).toBeTruthy()
-      expect(result.value).toBeInstanceOf(InvalidAuthorNameError)
+      expect(result.isRight()).toBeTruthy()
+      f = result.value as Feedback
+      expect(f.author).toBeNull()
     })
-  })
 
-  describe('Category', () => {
-    it('Should not create a feedback if category is invalid', () => {
-      let result = Feedback.create(
-        { ...feedback, category: 'invalid' as 'COMMENT' | 'ISSUE' | 'IDEA' | 'OTHER' },
-        uuid
-      )
-      expect(result.isLeft()).toBeTruthy()
+    describe('Category', () => {
+      it('Should not create a feedback if category is invalid', () => {
+        let result = Feedback.create({ ...feedback, category: 'invalid' as FeedbackCategory }, uuid)
+        expect(result.isLeft()).toBeTruthy()
+      })
     })
-  })
 
-  it('Should create a feedback if receive all valid credentials', () => {
-    const result = Feedback.create(feedback, uuid)
-    expect(result.isRight()).toBeTruthy()
-    expect(result.value).toEqual(expect.objectContaining(feedback))
+    it('Should create a feedback if receive all valid credentials', () => {
+      const result = Feedback.create(feedback, uuid)
+      expect(result.isRight()).toBeTruthy()
+      expect(result.value).toEqual(expect.objectContaining(feedback))
+    })
   })
 })
