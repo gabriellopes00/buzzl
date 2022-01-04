@@ -27,7 +27,7 @@ export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'feedbacks',
       new TableForeignKey({
-        name: 'fk_service_feedback',
+        name: 'fk_feedback_service',
         referencedTableName: 'service',
         referencedColumnNames: ['id'],
         columnNames: ['service_id'],
@@ -38,7 +38,7 @@ export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('feedback', 'fk_service_feedback')
+    await queryRunner.dropForeignKey('feedback', 'fk_feedback_service')
     await queryRunner.dropTable('feedback', true)
   }
 }

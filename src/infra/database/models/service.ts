@@ -23,9 +23,6 @@ export class ServiceModel implements ServiceData {
   @ManyToOne(() => AccountModel)
   account: AccountModel
 
-  @Column({ name: 'api_key' })
-  public apiKey: string
-
   @CreateDateColumn({ name: 'created_at' })
   public createdAt: Date
 }

@@ -12,3 +12,10 @@
 - service owners will receive weekly emails reporting week feedbacks
 
 - getfeedback.com
+
+
+
+
+
+remove service api key (use id instead)
+remove usecases interfaces from all modules

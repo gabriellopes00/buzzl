@@ -1,6 +1,5 @@
 import { Either, left, right } from '@/shared/either'
 import { Entity } from '@/shared/entity'
-import { ApiKey } from '../value-objects/api-key'
 import { InvalidNameError } from '../value-objects/errors/invalid-name-error'
 import { Name } from '../value-objects/name'
 
@@ -14,7 +13,6 @@ export interface ServiceData {
 export interface ServiceErrors extends InvalidNameError {}
 
 export class Service extends Entity<ServiceData> {
-  private static _apiKey: string = null
   get id() {
     return this._id
   }
@@ -47,10 +45,6 @@ export class Service extends Entity<ServiceData> {
     this.data.isActive = value
   }
 
-  get apiKey() {
-    return Service._apiKey
-  }
-
   get createdAt() {
     return this._createdAt
   }
@@ -65,15 +59,12 @@ export class Service extends Entity<ServiceData> {
 
     if (data.isActive !== false && data.isActive !== true) data.isActive = true
 
-    this._apiKey = ApiKey.generate()
-
     const service = new Service(data, id)
     return right(service)
   }
 
-  static adapt(data: ServiceData & { id: string; apiKey: string }): Service {
+  static adapt(data: ServiceData & { id: string }): Service {
     const service = new Service(data, data.id)
-    this._apiKey = data.apiKey
     return service
   }
 }

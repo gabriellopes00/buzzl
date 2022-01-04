@@ -1,7 +1,7 @@
 import { Service } from '@/modules/services/domain/entities/service'
 import { ServiceIdNotFound } from '@/modules/services/domain/usecases/errors/service-id-not-found'
 import { InvalidNameError } from '@/modules/services/domain/value-objects/errors/invalid-name-error'
-import { ForbiddenServiceUpdate } from '@/modules/services/usecases/errors/forbidden-service-update-error'
+import { ForbiddenServiceUpdateError } from '@/modules/services/usecases/errors/forbidden-service-update-error'
 import { UpdateService } from '@/modules/services/usecases/update-service'
 import { InMemoryServiceRepository } from '@t/mocks/infra/repositories/in-memory-service-repository'
 
@@ -52,7 +52,7 @@ describe('Update Service Usecase', () => {
         name: 'New Name'
       })
       expect(result.isLeft()).toBeTruthy()
-      expect(result.value).toBeInstanceOf(ForbiddenServiceUpdate)
+      expect(result.value).toBeInstanceOf(ForbiddenServiceUpdateError)
     })
 
     it('Should call repository > save with updated service properties', async () => {

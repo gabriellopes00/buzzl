@@ -13,7 +13,6 @@ export class CreateServicesTable1637947967725 implements MigrationInterface {
           { name: 'description', type: 'text', isNullable: true },
           { name: 'maintainer_account_id', type: 'uuid', isNullable: false },
           { name: 'is_active', type: 'boolean', default: true },
-          { name: 'api_key', type: 'varchar', isUnique: true, length: '30' },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
       }),
@@ -22,7 +21,7 @@ export class CreateServicesTable1637947967725 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'services',
       new TableForeignKey({
-        name: 'fkMaintainer',
+        name: 'fk_service_maintainer',
         referencedTableName: 'accounts',
         referencedColumnNames: ['id'],
         columnNames: ['maintainer_account_id'],
@@ -33,7 +32,7 @@ export class CreateServicesTable1637947967725 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('services', 'fkMaintainer')
+    await queryRunner.dropForeignKey('services', 'fk_service_maintainer')
     await queryRunner.dropTable('services', true)
   }
 }

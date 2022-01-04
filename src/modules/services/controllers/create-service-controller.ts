@@ -24,7 +24,7 @@ export class CreateServiceController implements Controller {
       const result = await this.createService.create({ name, isActive, description }, accountId)
       if (result.isLeft()) return badRequest(result.value)
 
-      const { id, maintainerAccountId, createdAt, apiKey } = result.value
+      const { id, maintainerAccountId, createdAt } = result.value
 
       return created({
         service: {
@@ -32,7 +32,6 @@ export class CreateServiceController implements Controller {
           name,
           description,
           is_active: isActive,
-          api_key: apiKey,
           maintainer_account_id: maintainerAccountId,
           created_at: createdAt
         }
