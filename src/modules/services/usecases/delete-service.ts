@@ -1,7 +1,7 @@
 import { Either, left } from '@/shared/either'
-import { ServiceIdNotFound } from '../domain/usecases/errors/service-id-not-found'
 import { DeleteServiceRepository } from '../repositories/delete-service-repository'
 import { FindServiceRepository } from '../repositories/find-service-repository'
+import { ServiceIdNotFound } from './errors/service-id-not-found'
 
 export interface DeleteServiceErrors extends ServiceIdNotFound {}
 

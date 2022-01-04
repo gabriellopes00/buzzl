@@ -1,7 +1,7 @@
 import { Service } from '@/modules/services/domain/entities/service'
-import { ServiceIdNotFound } from '@/modules/services/domain/usecases/errors/service-id-not-found'
 import { InvalidNameError } from '@/modules/services/domain/value-objects/errors/invalid-name-error'
 import { ForbiddenServiceUpdateError } from '@/modules/services/usecases/errors/forbidden-service-update-error'
+import { ServiceIdNotFound } from '@/modules/services/usecases/errors/service-id-not-found'
 import { UpdateService } from '@/modules/services/usecases/update-service'
 import { InMemoryServiceRepository } from '@t/mocks/infra/repositories/in-memory-service-repository'
 

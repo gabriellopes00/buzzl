@@ -1,10 +1,10 @@
 import { Either, left, right } from '@/shared/either'
 import { Service, ServiceData, ServiceErrors } from '../domain/entities/service'
-import { ServiceIdNotFound } from '../domain/usecases/errors/service-id-not-found'
 import { Name } from '../domain/value-objects/name'
 import { FindServiceRepository } from '../repositories/find-service-repository'
 import { SaveServiceRepository } from '../repositories/save-service-repository'
 import { ForbiddenServiceUpdateError } from './errors/forbidden-service-update-error'
+import { ServiceIdNotFound } from './errors/service-id-not-found'
 
 export interface UpdateServiceParams extends Partial<Omit<ServiceData, 'maintainerAccountId'>> {}
 export interface UpdateServiceErrors
