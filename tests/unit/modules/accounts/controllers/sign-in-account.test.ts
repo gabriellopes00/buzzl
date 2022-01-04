@@ -2,14 +2,14 @@ import {
   SignInAccountController,
   SignInAccountControllerParams
 } from '@/modules/accounts/controllers/sign-in-account-controller'
-import { SignInError } from '@/modules/accounts/domain/usecases/errors/sign-in-error'
-import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
 import { badRequest, serverError, unauthorized } from '@/presentation/helpers/http'
 import { left } from '@/shared/either'
 import { MockedEncrypter } from '@t/mocks/infra/encrypter'
 import { MockedValidator } from '@t/mocks/infra/validator'
 import { MockedHasher } from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
+import { SignInAccount } from '@/modules/accounts/usecases/sign-in-account'
+import { SignInError } from '@/modules/accounts/usecases/errors/sign-in-error'
 
 describe('Sign In Account Controller', () => {
   const mockedValidator = new MockedValidator()
@@ -17,7 +17,7 @@ describe('Sign In Account Controller', () => {
   const mockedHasher = new MockedHasher()
   const inMemoryRepository = new InMemoryAccountsRepository()
 
-  const signInAccount = new DbSignInAccount(inMemoryRepository, mockedHasher, mockedEncrypter)
+  const signInAccount = new SignInAccount(inMemoryRepository, mockedHasher, mockedEncrypter)
   const sut = new SignInAccountController(mockedValidator, signInAccount)
 
   const params: SignInAccountControllerParams = {

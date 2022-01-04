@@ -1,7 +1,7 @@
 import { Account } from '@/modules/accounts/domain/entities/account'
-import { CreateAccountParams } from '@/modules/accounts/domain/usecases/create-account'
-import { InvalidAccessToken } from '@/modules/accounts/domain/usecases/errors/invalid-access-token'
-import { DbAuthAccount } from '@/modules/accounts/usecases/auth-account'
+import { AuthAccount } from '@/modules/accounts/usecases/auth-account'
+import { CreateAccountParams } from '@/modules/accounts/usecases/create-account'
+import { InvalidAccessToken } from '@/modules/accounts/usecases/errors/invalid-access-token'
 import { MockedEncrypter } from '@t/mocks/infra/encrypter'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
@@ -9,7 +9,7 @@ import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
 describe('Auth Account Usecase', () => {
   const inMemoryAccountRepository = new InMemoryAccountsRepository()
   const mockedEncrypter = new MockedEncrypter()
-  const sut = new DbAuthAccount(mockedEncrypter, inMemoryAccountRepository)
+  const sut = new AuthAccount(mockedEncrypter, inMemoryAccountRepository)
 
   const fakeUUID = mockedUUIDGenerator.generate()
   const fakeAccountParams: CreateAccountParams = {

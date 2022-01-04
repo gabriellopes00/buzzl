@@ -2,7 +2,7 @@ import { Controller } from '@/core/presentation/controllers'
 import { HttpResponse } from '@/core/presentation/http'
 import { Validator } from '@/core/presentation/validator'
 import { badRequest, ok, serverError, unauthorized } from '@/presentation/helpers/http'
-import { SignInAccount, SignInParams } from '../domain/usecases/sign-in-account'
+import { SignInAccount, SignInParams } from '../usecases/sign-in-account'
 
 export interface SignInAccountControllerParams extends SignInParams {}
 

@@ -1,14 +1,13 @@
 import { Account } from '@/modules/accounts/domain/entities/account'
-import { CreateAccountParams } from '@/modules/accounts/domain/usecases/create-account'
-import { ExistingEmailError } from '@/modules/accounts/domain/usecases/errors/existing-email'
-import { DbCreateAccount } from '@/modules/accounts/usecases/create-account'
+import { CreateAccount, CreateAccountParams } from '@/modules/accounts/usecases/create-account'
+import { ExistingEmailError } from '@/modules/accounts/usecases/errors/existing-email'
 import mockedHasher from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
 
 describe('Create Account Usecase', () => {
   const inMemoryAccountRepository = new InMemoryAccountsRepository()
-  const sut = new DbCreateAccount(inMemoryAccountRepository, mockedUUIDGenerator, mockedHasher)
+  const sut = new CreateAccount(inMemoryAccountRepository, mockedUUIDGenerator, mockedHasher)
 
   const fakeUUID = mockedUUIDGenerator.generate()
   const fakeAccountParams: CreateAccountParams = {

@@ -1,7 +1,6 @@
 import { Account } from '@/modules/accounts/domain/entities/account'
-import { SignInError } from '@/modules/accounts/domain/usecases/errors/sign-in-error'
-import { SignInParams } from '@/modules/accounts/domain/usecases/sign-in-account'
-import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
+import { SignInError } from '@/modules/accounts/usecases/errors/sign-in-error'
+import { SignInAccount, SignInParams } from '@/modules/accounts/usecases/sign-in-account'
 import { MockedEncrypter } from '@t/mocks/infra/encrypter'
 import { MockedHasher } from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
@@ -11,7 +10,7 @@ describe('Sign In Account Usecase', () => {
   const inMemoryAccountRepository = new InMemoryAccountsRepository()
   const mockedEncrypter = new MockedEncrypter()
   const mockedHasher = new MockedHasher()
-  const sut = new DbSignInAccount(inMemoryAccountRepository, mockedHasher, mockedEncrypter)
+  const sut = new SignInAccount(inMemoryAccountRepository, mockedHasher, mockedEncrypter)
 
   const signInParams: SignInParams = {
     email: 'johndoe@mail.com',

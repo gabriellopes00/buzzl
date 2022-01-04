@@ -1,12 +1,21 @@
 import { Encrypter } from '@/core/infra/encrypter'
 import { Hasher } from '@/core/infra/hasher'
 import { Either, left, right } from '@/shared/either'
-import { SignInError } from '../domain/usecases/errors/sign-in-error'
-import { SignInAccount, SignInParams, SignInResult } from '../domain/usecases/sign-in-account'
+import { SignInError } from './errors/sign-in-error'
 import { CreateAccountRepository } from '../repositories/create-account-repository'
 import { LoadAccountRepository } from '../repositories/load-account-repository'
 
-export class DbSignInAccount implements SignInAccount {
+export interface SignInParams {
+  email: string
+  password: string
+}
+
+export interface SignInResult {
+  accessToken: string
+  refreshToken: string
+}
+
+export class SignInAccount {
   constructor(
     private readonly repository: CreateAccountRepository & LoadAccountRepository,
     private readonly hasher: Hasher,

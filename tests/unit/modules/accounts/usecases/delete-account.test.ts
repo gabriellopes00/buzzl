@@ -1,13 +1,13 @@
 import { Account } from '@/modules/accounts/domain/entities/account'
-import { CreateAccountParams } from '@/modules/accounts/domain/usecases/create-account'
-import { IdNotFoundError } from '@/modules/accounts/domain/usecases/errors/id-not-found'
-import { DbDeleteAccount } from '@/modules/accounts/usecases/delete-account'
+import { CreateAccountParams } from '@/modules/accounts/usecases/create-account'
+import { DeleteAccount } from '@/modules/accounts/usecases/delete-account'
+import { IdNotFoundError } from '@/modules/accounts/usecases/errors/id-not-found'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import mockedUUIDGenerator from '@t/mocks/infra/uuid-generator'
 
 describe('Delete Account Usecase', () => {
   const inMemoryAccountRepository = new InMemoryAccountsRepository()
-  const sut = new DbDeleteAccount(inMemoryAccountRepository)
+  const sut = new DeleteAccount(inMemoryAccountRepository)
 
   const fakeUUID = mockedUUIDGenerator.generate()
   const fakeAccountParams: CreateAccountParams = {

@@ -2,8 +2,6 @@ import {
   CreateAccountController,
   CreateAccountControllerParams
 } from '@/modules/accounts/controllers/create-account-controller'
-import { ExistingEmailError } from '@/modules/accounts/domain/usecases/errors/existing-email'
-import { DbCreateAccount } from '@/modules/accounts/usecases/create-account'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { left } from '@/shared/either'
 import { MockedEncrypter } from '@t/mocks/infra/encrypter'
@@ -11,12 +9,14 @@ import { MockedValidator } from '@t/mocks/infra/validator'
 import { MockedHasher } from '@t/mocks/infra/hasher'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
 import { MockedUUIDGenerator } from '@t/mocks/infra/uuid-generator'
+import { CreateAccount } from '@/modules/accounts/usecases/create-account'
+import { ExistingEmailError } from '@/modules/accounts/usecases/errors/existing-email'
 
 describe('Create Account Controller', () => {
   const mockedValidator = new MockedValidator()
   const inMemoryRepository = new InMemoryAccountsRepository()
 
-  const createAccount = new DbCreateAccount(
+  const createAccount = new CreateAccount(
     inMemoryRepository,
     new MockedUUIDGenerator(),
     new MockedHasher()

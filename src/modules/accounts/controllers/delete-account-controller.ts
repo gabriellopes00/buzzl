@@ -9,7 +9,7 @@ import {
   notFound,
   serverError
 } from '@/presentation/helpers/http'
-import { DeleteAccount } from '../domain/usecases/delete-account'
+import { DeleteAccount } from '../usecases/delete-account'
 
 export interface DeleteAccountControllerParams {
   id: string

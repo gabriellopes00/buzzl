@@ -4,8 +4,8 @@ import { HttpResponse } from '@/core/presentation/http'
 import { Validator } from '@/core/presentation/validator'
 import { badRequest, conflict, created, serverError } from '@/presentation/helpers/http'
 import { AccountData } from '../domain/entities/account'
-import { CreateAccount } from '../domain/usecases/create-account'
-import { ExistingEmailError } from '../domain/usecases/errors/existing-email'
+import { CreateAccount } from '../usecases/create-account'
+import { ExistingEmailError } from '../usecases/errors/existing-email'
 
 export interface CreateAccountControllerParams extends AccountData {}
 

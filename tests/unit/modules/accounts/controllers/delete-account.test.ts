@@ -2,8 +2,6 @@ import {
   DeleteAccountController,
   DeleteAccountControllerParams
 } from '@/modules/accounts/controllers/delete-account-controller'
-import { IdNotFoundError } from '@/modules/accounts/domain/usecases/errors/id-not-found'
-import { DbDeleteAccount } from '@/modules/accounts/usecases/delete-account'
 import { ForbiddenError } from '@/presentation/errors/forbidden'
 import {
   badRequest,
@@ -15,11 +13,13 @@ import {
 import { left, right } from '@/shared/either'
 import { MockedValidator } from '@t/mocks/infra/validator'
 import { InMemoryAccountsRepository } from '@t/mocks/infra/repositories/in-memory-account-repository'
+import { DeleteAccount } from '@/modules/accounts/usecases/delete-account'
+import { IdNotFoundError } from '@/modules/accounts/usecases/errors/id-not-found'
 
 describe('Delete Account Controller', () => {
   const mockedValidator = new MockedValidator()
   const inMemoryRepository = new InMemoryAccountsRepository()
-  const deleteAccount = new DbDeleteAccount(inMemoryRepository)
+  const deleteAccount = new DeleteAccount(inMemoryRepository)
   const sut = new DeleteAccountController(mockedValidator, deleteAccount)
 
   const DeleteAccountParams: DeleteAccountControllerParams = {
