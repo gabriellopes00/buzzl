@@ -4,7 +4,11 @@ import { Validator } from '@/core/presentation/validator'
 import { badRequest, created, serverError } from '@/presentation/helpers/http'
 import { CreateFeedback, CreateFeedbackParams } from '../usecases/create-feedback'
 
-export interface CreateFeedbackControllerParams extends CreateFeedbackParams {}
+export interface CreateFeedbackControllerParams
+  extends Omit<CreateFeedbackParams, 'isPrivate' | 'serviceId'> {
+  service_id: string
+  is_private: boolean
+}
 
 export class CreateFeedbackController implements Controller {
   constructor(
@@ -17,7 +21,14 @@ export class CreateFeedbackController implements Controller {
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
 
-      const { category, title, isPrivate, content, serviceId, author } = params // TODO: adapt camel case
+      const {
+        category,
+        title,
+        is_private: isPrivate,
+        content,
+        service_id: serviceId,
+        author
+      } = params
       const feedback = await this.createFeedback.execute({
         category,
         title,

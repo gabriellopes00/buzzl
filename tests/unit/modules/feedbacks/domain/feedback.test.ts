@@ -40,7 +40,9 @@ describe('Feedback Entity', () => {
     it('Should create a feedback if receive all valid credentials', () => {
       const result = Feedback.create(feedback, uuid)
       expect(result.isRight()).toBeTruthy()
-      expect(result.value).toEqual(expect.objectContaining(feedback))
+      expect(result.value).toEqual(
+        expect.objectContaining({ data: expect.objectContaining(feedback) })
+      )
     })
   })
 })

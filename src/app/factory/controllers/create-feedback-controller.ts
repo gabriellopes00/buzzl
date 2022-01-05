@@ -20,9 +20,9 @@ export function makeCreateFeedbackController(): Controller {
     Joi.object<CreateFeedbackControllerParams>({
       title: Joi.string().min(4).max(400).optional().trim(),
       content: Joi.string().required().trim(),
-      isPrivate: Joi.bool().required(),
+      is_private: Joi.bool().required(),
       category: Joi.string().valid('COMMENT', 'ISSUE', 'IDEA', 'OTHER').required().trim(),
-      serviceId: Joi.string().guid({ version: 'uuidv4' })
+      service_id: Joi.string().guid({ version: 'uuidv4' })
       // author: Joi.object<CreateFeedbackControllerParams['author']>({
       //   name: Joi.string().min(4).max(255).required().trim(),
       //   email: Joi.string().email().required().trim()
