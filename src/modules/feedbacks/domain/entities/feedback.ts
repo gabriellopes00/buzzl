@@ -59,7 +59,7 @@ export class Feedback extends Entity<FeedbackData> {
     if (data.author) {
       const authorResult = Author.create({ name: data.author.name, email: data.author.email })
       if (authorResult.isLeft()) Feedback._author = null
-      Feedback._author = authorResult.value as Author
+      else Feedback._author = authorResult.value as Author
     }
 
     data.isPrivate = data.isPrivate ?? true
