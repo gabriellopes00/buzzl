@@ -17,7 +17,7 @@ export class CreateFeedbackController implements Controller {
       const error = this.validator.validate(params)
       if (error) return badRequest(error)
 
-      const { category, title, isPrivate, content, serviceId, author } = params
+      const { category, title, isPrivate, content, serviceId, author } = params // TODO: adapt camel case
       const feedback = await this.createFeedback.execute({
         category,
         title,

@@ -8,7 +8,7 @@ import {
   CreateAccountController,
   CreateAccountControllerParams
 } from '@/modules/accounts/controllers/create-account-controller'
-import { DbCreateAccount } from '@/modules/accounts/usecases/create-account'
+import { CreateAccount } from '@/modules/accounts/usecases/create-account'
 import Joi from 'joi'
 
 const { ACCESS_TOKEN_PRIVATE_KEY, ACCESS_TOKEN_PUBLIC_KEY, ACCESS_TOKEN_EXPIRATION } = process.env
@@ -17,7 +17,7 @@ export function makeCreateAccountController(): Controller {
   const accountRepository = new PgAccountRepository()
   const uuidGenerator = new UUIDV4Generator()
   const argon2Hasher = new Argon2Hasher()
-  const createAccount = new DbCreateAccount(accountRepository, uuidGenerator, argon2Hasher)
+  const createAccount = new CreateAccount(accountRepository, uuidGenerator, argon2Hasher)
 
   const validator = new JoiValidator(
     Joi.object<CreateAccountControllerParams>({

@@ -1,11 +1,8 @@
-import 'module-alias/register'
 import 'dotenv/config'
-
-import { PgConnection } from '@/infra/database/pg-helper'
+import 'module-alias/register'
 import logger from '@/app/config/logger'
+import { PgConnection } from '@/infra/database/pg-helper'
 import app from './setup/app'
-
-//
 ;(async () => {
   const { PORT } = process.env
   try {

@@ -19,7 +19,7 @@ export class Name {
   }
 
   static isValid(name: string): boolean {
-    const pattern = /^[a-z '-]+$/i
+    const pattern = /^[a-z 0-9'-]+$/i
     return name.length < 256 && name.length > 2 && pattern.test(name)
   }
 }

@@ -7,7 +7,7 @@ import {
   SignInAccountController,
   SignInAccountControllerParams
 } from '@/modules/accounts/controllers/sign-in-account-controller'
-import { DbSignInAccount } from '@/modules/accounts/usecases/sign-in-account'
+import { SignInAccount } from '@/modules/accounts/usecases/sign-in-account'
 import Joi from 'joi'
 
 const { ACCESS_TOKEN_PRIVATE_KEY, ACCESS_TOKEN_PUBLIC_KEY, ACCESS_TOKEN_EXPIRATION } = process.env
@@ -20,7 +20,7 @@ export function makeSignInController(): Controller {
     ACCESS_TOKEN_EXPIRATION
   )
   const argon2Hasher = new Argon2Hasher()
-  const signInAccount = new DbSignInAccount(accountRepository, argon2Hasher, jwtEncrypter)
+  const signInAccount = new SignInAccount(accountRepository, argon2Hasher, jwtEncrypter)
 
   const validator = new JoiValidator(
     Joi.object<SignInAccountControllerParams>({

@@ -5,12 +5,12 @@ import {
   DeleteAccountController,
   DeleteAccountControllerParams
 } from '@/modules/accounts/controllers/delete-account-controller'
-import { DbDeleteAccount } from '@/modules/accounts/usecases/delete-account'
+import { DeleteAccount } from '@/modules/accounts/usecases/delete-account'
 import Joi from 'joi'
 
 export function makeDeleteAccountController(): Controller {
   const accountRepository = new PgAccountRepository()
-  const deleteAccount = new DbDeleteAccount(accountRepository)
+  const deleteAccount = new DeleteAccount(accountRepository)
 
   const validator = new JoiValidator(
     Joi.object<DeleteAccountControllerParams>({

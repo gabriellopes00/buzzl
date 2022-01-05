@@ -1,6 +1,6 @@
 import { HttpResponse } from '@/core/presentation/http'
 import { Middleware } from '@/core/presentation/middleware'
-import { AuthAccount } from '@/modules/accounts/domain/usecases/auth-account'
+import { AuthAccount } from '@/modules/accounts/usecases/auth-account'
 import { UnauthorizedError } from '../errors/unauthorized'
 import { ok, serverError, unauthorized } from '../helpers/http'
 
