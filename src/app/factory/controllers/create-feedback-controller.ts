@@ -22,11 +22,11 @@ export function makeCreateFeedbackController(): Controller {
       content: Joi.string().required().trim(),
       is_private: Joi.bool().required(),
       category: Joi.string().valid('COMMENT', 'ISSUE', 'IDEA', 'OTHER').required().trim(),
-      service_id: Joi.string().guid({ version: 'uuidv4' })
-      // author: Joi.object<CreateFeedbackControllerParams['author']>({
-      //   name: Joi.string().min(4).max(255).required().trim(),
-      //   email: Joi.string().email().required().trim()
-      // })
+      service_id: Joi.string().guid({ version: 'uuidv4' }),
+      author: Joi.object<CreateFeedbackControllerParams['author']>({
+        name: Joi.string().min(4).max(255).required().trim(),
+        email: Joi.string().email().required().trim()
+      }).optional()
     })
   )
   return new CreateFeedbackController(validator, createFeedback)
