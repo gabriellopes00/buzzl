@@ -17,12 +17,10 @@ export class PgFeedbackRepository implements SaveFeedbackRepository, FindFeedbac
    * @param data Account credentials
    */
   public async save(data: Feedback): Promise<void> {
+    // FIX: set null in table if not receive any author data
+    // FIX: ignore author creation if receive an existing one
     const repository = getRepository(FeedbackModel)
-    const feedback = repository.create({
-      ...data,
-      authorEmail: data.author.email,
-      authorName: data.author.name
-    })
+    const feedback = repository.create(data)
     await repository.save(feedback)
   }
 

@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from 'typeorm'
 
-export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
+export class CreateFeedbacksTable1641399874538 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -16,8 +16,7 @@ export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
             enum: ['COMMENT', 'ISSUE', 'IDEA', 'OTHER']
           },
           { name: 'service_id', type: 'uuid', isNullable: false },
-          { name: 'author_name', type: 'varchar', isNullable: true },
-          { name: 'author_email', type: 'varchar', isNullable: true },
+          { name: 'author_id', type: 'uuid', isNullable: true },
           { name: 'is_private', type: 'boolean', isNullable: false },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
@@ -28,9 +27,20 @@ export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
       'feedbacks',
       new TableForeignKey({
         name: 'fk_feedback_service',
-        referencedTableName: 'service',
+        referencedTableName: 'services',
         referencedColumnNames: ['id'],
         columnNames: ['service_id'],
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
+      })
+    )
+    await queryRunner.createForeignKey(
+      'feedbacks',
+      new TableForeignKey({
+        name: 'fk_feedback_author',
+        referencedTableName: 'authors',
+        referencedColumnNames: ['id'],
+        columnNames: ['author_id'],
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })
@@ -39,6 +49,7 @@ export class CreateFeedbacksTable1641235777828 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('feedback', 'fk_feedback_service')
+    await queryRunner.dropForeignKey('feedback', 'fk_feedback_author')
     await queryRunner.dropTable('feedback', true)
   }
 }
