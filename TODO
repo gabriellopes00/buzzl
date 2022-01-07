@@ -20,3 +20,5 @@
 remove service api key (use id instead)
 remove usecases interfaces from all modules
 update comments in repository methods
+fix feedbacks author duplication when it is null
+ignore feedbacks author creation when it's email already registered
