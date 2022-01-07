@@ -16,7 +16,7 @@ export class CreateFeedbacksTable1641399874538 implements MigrationInterface {
             enum: ['COMMENT', 'ISSUE', 'IDEA', 'OTHER']
           },
           { name: 'service_id', type: 'uuid', isNullable: false },
-          { name: 'author_id', type: 'uuid', isNullable: true },
+          { name: 'author_email', type: 'varchar', isNullable: true },
           { name: 'is_private', type: 'boolean', isNullable: false },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
@@ -39,8 +39,8 @@ export class CreateFeedbacksTable1641399874538 implements MigrationInterface {
       new TableForeignKey({
         name: 'fk_feedback_author',
         referencedTableName: 'authors',
-        referencedColumnNames: ['id'],
-        columnNames: ['author_id'],
+        referencedColumnNames: ['email'],
+        columnNames: ['author_email'],
         onDelete: 'cascade',
         onUpdate: 'cascade'
       })

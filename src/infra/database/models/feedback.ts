@@ -28,7 +28,7 @@ export class FeedbackModel {
   service: ServiceModel
 
   @ManyToOne(() => AuthorModel, { cascade: ['insert', 'update'] })
-  @JoinColumn({ name: 'author_id' })
+  @JoinColumn({ name: 'author_email' })
   author: AuthorModel
 
   @CreateDateColumn({ name: 'created_at' })

@@ -1,7 +1,6 @@
 import { InvalidAuthorNameError } from '@/modules/feedbacks/domain/value-objects/errors/invalid-author-name-error'
 import { Either, left, right } from '@/shared/either'
 import { Entity } from '@/shared/entity'
-import { randomUUID } from 'crypto'
 import { AuthorEmail } from '../value-objects/author-email'
 import { AuthorName } from '../value-objects/author-name'
 import { InvalidAuthorEmailError } from '../value-objects/errors/invalid-author-email-error'
@@ -22,8 +21,8 @@ export class Author extends Entity<AuthorData> {
     return this.data.email
   }
 
-  private constructor(data: AuthorData, id: string) {
-    super(data, id)
+  private constructor(data: AuthorData) {
+    super(data, '')
   }
 
   static create(data: AuthorData): Either<AuthorErrors, Author> {
@@ -35,13 +34,7 @@ export class Author extends Entity<AuthorData> {
     const emailResult = AuthorEmail.create(data.email)
     if (emailResult.isLeft()) return left(emailResult.value)
 
-    const service = new Author(data, randomUUID())
+    const service = new Author(data)
     return right(service)
   }
-
-  // static adapt(data: AuthorData & { id: string; apiKey: string }): Service {
-  //   const service = new Service(data, data.id)
-  //   this._apiKey = data.apiKey
-  //   return service
-  // }
 }

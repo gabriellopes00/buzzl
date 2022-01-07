@@ -3,17 +3,14 @@ import { FeedbackModel } from './feedback'
 
 @Entity('authors')
 export class AuthorModel {
-  @PrimaryColumn()
-  public id: string
-
   @Column()
   public name: string
 
-  @Column()
+  @PrimaryColumn()
   public email: string
 
   @OneToMany(() => FeedbackModel, feedback => feedback.author)
-  @JoinColumn({ name: 'author_id' })
+  @JoinColumn({ name: 'author_email' })
   feedbacks: FeedbackModel[]
 
   @CreateDateColumn({ name: 'created_at' })

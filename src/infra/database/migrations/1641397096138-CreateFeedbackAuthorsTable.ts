@@ -6,9 +6,8 @@ export class CreateFeedbackAuthorTable1641397096138 implements MigrationInterfac
       new Table({
         name: 'authors',
         columns: [
-          { name: 'id', type: 'uuid', isPrimary: true },
           { name: 'name', type: 'varchar', isNullable: true },
-          { name: 'email', type: 'varchar', isUnique: true, isNullable: false },
+          { name: 'email', type: 'varchar', isPrimary: true },
           { name: 'created_at', type: 'timestamp', default: 'now()' }
         ]
       }),
