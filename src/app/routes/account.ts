@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { passport } from '@/infra/oauth/passport-google'
 import { middlewareAdapter } from '../adapters/express-middlewares'
 import { routerAdapter } from '../adapters/express-router'
 import { makeCreateAccountController } from '../factory/controllers/create-account-controller'
@@ -16,25 +17,26 @@ router.get(
   middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeFindAccountServiceController())
 )
-// router.get(
-//   '/sign-in/google',
-//   passport.authenticate('google', { scope: ['profile', 'email'], accessType: 'offline' })
-// )
-// router.get(
-//   '/sign-in/google/callback',
-//   passport.authenticate('google', {
-//     assignProperty: 'googleAccount',
-//     failureRedirect: '/accounts/failure'
-//   }),
-//   (_, res) => res.redirect('/accounts/success')
-// )
-
-// router.get('/success', (_, res) => res.send('success'))
-// router.get('/failure', (_, res) => res.send('failure'))
 router.delete(
   '/:id',
   middlewareAdapter([makeAuthAccountMiddleware()]),
   routerAdapter(makeDeleteAccountController())
+)
+
+router.get(
+  '/sign-in/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    accessType: 'offline',
+    passReqToCallback: true
+  })
+)
+router.get(
+  '/sign-in/google/callback',
+  passport.authenticate('google', { assignProperty: 'googleAccount' }),
+  (req, res) => {
+    res.status(200).json({ google_account: req.googleAccount })
+  }
 )
 
 export { router as AccountRoutes }
