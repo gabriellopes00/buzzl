@@ -51,7 +51,7 @@
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
     "pg": "^8.7.1",
-    "pino": "^7.6.2",
+    "pino": "^7.6.3",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2"
