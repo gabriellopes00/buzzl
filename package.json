@@ -50,7 +50,7 @@
     "module-alias": "^2.2.2",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
-    "pg": "^8.7.1",
+    "pg": "^8.7.3",
     "pino": "^7.6.4",
     "swagger-ui-express": "^4.3.0",
     "typeorm": "^0.2.41",
