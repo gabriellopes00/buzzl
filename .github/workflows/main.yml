@@ -35,7 +35,7 @@ jobs:
       #   uses: wagoid/commitlint-github-action@v4.1.9
 
       - name: Use Node.js ${{matrix.node-version}}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3.1.0
         with:
           node-version: ${{matrix.node-version}}
 
