@@ -42,7 +42,7 @@
     "argon2": "^0.28.4",
     "dotenv": "^13.0.1",
     "express": "^4.17.2",
-    "express-rate-limit": "^6.2.1",
+    "express-rate-limit": "^6.5.2",
     "express-session": "^1.17.2",
     "helmet": "^5.0.2",
     "joi": "^17.6.0",
