@@ -46,7 +46,7 @@
     "express-session": "^1.17.2",
     "helmet": "^5.0.2",
     "joi": "^17.6.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "module-alias": "^2.2.2",
     "passport": "^0.5.2",
     "passport-google-oauth20": "^2.0.0",
